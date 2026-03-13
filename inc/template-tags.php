@@ -208,26 +208,68 @@ function gtalobby_confidence_badge( $post_id = null ) {
 /**
  * Display taxonomy terms as tag pills.
  *
- * @param string   $taxonomy Taxonomy slug.
- * @param int|null $post_id  Optional.
+ * When called without arguments it renders pills for every
+ * non-hierarchical public taxonomy attached to the current post,
+ * plus the standard 'post_tag' and 'category' taxonomies.
+ *
+ * @param string|null $taxonomy Optional. A single taxonomy slug.
+ * @param int|null    $post_id  Optional.
  */
-function gtalobby_taxonomy_tags( $taxonomy, $post_id = null ) {
+function gtalobby_taxonomy_tags( $taxonomy = null, $post_id = null ) {
     $post_id = $post_id ?: get_the_ID();
-    $terms   = get_the_terms( $post_id, $taxonomy );
 
-    if ( ! $terms || is_wp_error( $terms ) ) {
+    // If a specific taxonomy was requested, render just that one.
+    if ( $taxonomy ) {
+        $terms = get_the_terms( $post_id, $taxonomy );
+        if ( ! $terms || is_wp_error( $terms ) ) {
+            return;
+        }
+        echo '<div class="gl-tags gl-tags--' . esc_attr( $taxonomy ) . '">';
+        foreach ( $terms as $term ) {
+            printf(
+                '<a href="%s" class="gl-tag">%s</a>',
+                esc_url( get_term_link( $term ) ),
+                esc_html( $term->name )
+            );
+        }
+        echo '</div>';
         return;
     }
 
-    echo '<div class="gl-tags gl-tags--' . esc_attr( $taxonomy ) . '">';
-    foreach ( $terms as $term ) {
-        printf(
-            '<a href="%s" class="gl-tag">%s</a>',
-            esc_url( get_term_link( $term ) ),
-            esc_html( $term->name )
-        );
+    // Auto-detect: gather terms from all relevant taxonomies.
+    $post_type  = get_post_type( $post_id );
+    $taxonomies = get_object_taxonomies( $post_type, 'objects' );
+    $has_output = false;
+
+    foreach ( $taxonomies as $tax ) {
+        if ( ! $tax->public ) {
+            continue;
+        }
+        // Skip 'category' — it is shown elsewhere (breadcrumbs, meta).
+        if ( 'category' === $tax->name ) {
+            continue;
+        }
+        $terms = get_the_terms( $post_id, $tax->name );
+        if ( ! $terms || is_wp_error( $terms ) ) {
+            continue;
+        }
+        if ( ! $has_output ) {
+            echo '<div class="gl-tags">';
+            $has_output = true;
+        }
+        foreach ( $terms as $term ) {
+            printf(
+                '<a href="%s" class="gl-tag gl-tag--%s">%s</a>',
+                esc_url( get_term_link( $term ) ),
+                esc_attr( $tax->name ),
+                esc_html( $term->name )
+            );
+        }
     }
-    echo '</div>';
+
+    if ( $has_output ) {
+        echo '</div>';
+    }
 }
 
 /* ================================================================
