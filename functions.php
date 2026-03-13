@@ -234,21 +234,35 @@ function gtalobby_get_category_color( $slug ) {
 }
 
 /**
- * Get the emoji icon for a SAG category slug.
+ * Get the SVG icon sprite ID for a SAG category slug.
  */
 function gtalobby_get_category_icon( $slug ) {
     $icons = array(
-        'gta6'       => '🎮',
-        'cheats'     => '🔓',
-        'online'     => '🌐',
-        'mods'       => '🔧',
-        'cars'       => '🚗',
-        'characters' => '🎭',
-        'locations'  => '🗺️',
-        'money'      => '💰',
-        'news'       => '📰',
+        'gta6'       => 'icon-cat-gta6',
+        'cheats'     => 'icon-cat-cheats',
+        'online'     => 'icon-cat-online',
+        'mods'       => 'icon-cat-mods',
+        'cars'       => 'icon-cat-cars',
+        'characters' => 'icon-cat-characters',
+        'locations'  => 'icon-cat-locations',
+        'money'      => 'icon-cat-money',
+        'news'       => 'icon-cat-news',
     );
-    return isset( $icons[ $slug ] ) ? $icons[ $slug ] : '📁';
+    return isset( $icons[ $slug ] ) ? $icons[ $slug ] : 'icon-grid';
+}
+
+/**
+ * Render SVG icon from the sprite.
+ */
+function gtalobby_icon( $id, $size = 24, $class = '' ) {
+    $cls = 'gl-icon' . ( $class ? ' ' . esc_attr( $class ) : '' );
+    printf(
+        '<svg class="%s" width="%d" height="%d" aria-hidden="true"><use href="#%s"></use></svg>',
+        $cls,
+        (int) $size,
+        (int) $size,
+        esc_attr( $id )
+    );
 }
 
 /**

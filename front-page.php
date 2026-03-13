@@ -48,7 +48,9 @@ $sag_categories = gtalobby_get_sag_categories();
                     $icon  = gtalobby_get_category_icon( $slug );
                 ?>
                 <a href="<?php echo esc_url( get_category_link( $cat_obj->term_id ) ); ?>" class="gl-category-tile" style="--cat-accent: <?php echo esc_attr( $color ); ?>">
-                    <span class="gl-category-tile__icon"><?php echo esc_html( $icon ); ?></span>
+                    <span class="gl-category-tile__icon">
+                        <?php gtalobby_icon( $icon, 32 ); ?>
+                    </span>
                     <h3 class="gl-category-tile__name"><?php echo esc_html( $cat_obj->name ); ?></h3>
                     <span class="gl-category-tile__count"><?php echo esc_html( $cat_obj->count ); ?> <?php esc_html_e( 'articles', 'gtalobby' ); ?></span>
                 </a>

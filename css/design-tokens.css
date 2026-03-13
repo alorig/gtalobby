@@ -78,7 +78,9 @@
     --gl-font-body:       'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     --gl-font-mono:       'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
 
-    /* Font Sizes — Desktop (rem) */
+    /* Font Sizes — Desktop (rem)
+       Canonical names: --gl-text-*
+       Component aliases: --gl-font-size-* */
     --gl-text-xs:         0.75rem;    /* 12px */
     --gl-text-sm:         0.8125rem;  /* 13px */
     --gl-text-base:       1.0625rem;  /* 17px — optimized for long reads */
@@ -90,19 +92,47 @@
     --gl-text-4xl:        2.75rem;    /* 44px */
     --gl-text-5xl:        3.25rem;    /* 52px */
 
-    /* Font Weights */
+    --gl-font-size-xs:    var(--gl-text-xs);
+    --gl-font-size-sm:    var(--gl-text-sm);
+    --gl-font-size-base:  var(--gl-text-base);
+    --gl-font-size-md:    var(--gl-text-md);
+    --gl-font-size-lg:    var(--gl-text-lg);
+    --gl-font-size-xl:    var(--gl-text-xl);
+    --gl-font-size-2xl:   var(--gl-text-2xl);
+    --gl-font-size-3xl:   var(--gl-text-3xl);
+    --gl-font-size-4xl:   var(--gl-text-4xl);
+    --gl-font-size-5xl:   var(--gl-text-5xl);
+
+    /* Font Weights
+       Canonical: --gl-weight-*  Aliases: --gl-font-weight-* */
     --gl-weight-regular:  400;
     --gl-weight-medium:   500;
     --gl-weight-semibold: 600;
     --gl-weight-bold:     700;
+    --gl-weight-extrabold: 800;
 
-    /* Line Heights */
+    --gl-font-weight-regular:  var(--gl-weight-regular);
+    --gl-font-weight-medium:   var(--gl-weight-medium);
+    --gl-font-weight-semibold: var(--gl-weight-semibold);
+    --gl-font-weight-bold:     var(--gl-weight-bold);
+    --gl-font-weight-extrabold: var(--gl-weight-extrabold);
+
+    /* Line Heights
+       Canonical: --gl-leading-*  Aliases: --gl-line-height-* */
     --gl-leading-none:    1;
     --gl-leading-tight:   1.15;
     --gl-leading-snug:    1.35;
     --gl-leading-normal:  1.55;
     --gl-leading-relaxed: 1.7;
     --gl-leading-loose:   1.85;
+
+    --gl-line-height-heading: var(--gl-leading-snug);
+    --gl-line-height-body:    var(--gl-leading-relaxed);
+    --gl-line-height-tight:   var(--gl-leading-tight);
+
+    /* Text Color Aliases */
+    --gl-color-text-light:   var(--gl-color-text-secondary);
+    --gl-color-text-lighter: var(--gl-color-text-tertiary);
 
     /* Letter Spacing */
     --gl-tracking-tight:  -0.02em;

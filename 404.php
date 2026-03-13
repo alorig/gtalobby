@@ -31,8 +31,10 @@ get_header();
                         foreach ( $sag_categories as $slug => $data ) :
                             $cat_obj = get_category_by_slug( $slug );
                             if ( ! $cat_obj ) continue;
+                            $icon = gtalobby_get_category_icon( $slug );
                         ?>
                         <a href="<?php echo esc_url( get_category_link( $cat_obj->term_id ) ); ?>" class="gl-category-tile gl-category-tile--compact" style="--cat-accent: <?php echo esc_attr( gtalobby_get_category_color( $slug ) ); ?>">
+                            <span class="gl-category-tile__icon"><?php gtalobby_icon( $icon, 20 ); ?></span>
                             <span class="gl-category-tile__name"><?php echo esc_html( $cat_obj->name ); ?></span>
                         </a>
                         <?php endforeach; ?>
