@@ -26,6 +26,11 @@ function gtalobby_auto_internal_links( $content ) {
         return $content;
     }
 
+    // Guard against null content (e.g. hub pages with no post content).
+    if ( empty( $content ) ) {
+        return $content;
+    }
+
     $max_links   = gtalobby_get_seo_option( 'max_auto_links_per_post' );
     $post_id     = get_the_ID();
     $links_added = 0;
@@ -48,15 +53,20 @@ function gtalobby_auto_internal_links( $content ) {
 
         $keyword = preg_quote( $target['keyword'], '/' );
 
-        // Only link first occurrence, not inside existing links/headings
-        $pattern = '/(?<!["\'>\/])(?<!\<a[^>]*>)\b(' . $keyword . ')\b(?![^<]*<\/a>)(?![^<]*<\/h[1-6]>)/iu';
+        // Only link first occurrence, skip text already inside <a> tags or headings.
+        // Uses a fixed-length lookbehind (no variable quantifiers).
+        $pattern = '/(?<!["\'>\/a-zA-Z])\b(' . $keyword . ')\b(?![^<]*<\/a>)(?![^<]*<\/h[1-6]>)/iu';
 
         $replacement = '<a href="' . esc_url( $target['url'] ) . '" class="gl-autolink" title="' . esc_attr( $target['title'] ) . '">$1</a>';
 
-        $content = preg_replace( $pattern, $replacement, $content, 1, $count );
+        $result = preg_replace( $pattern, $replacement, $content, 1, $count );
 
-        if ( $count > 0 ) {
-            $links_added++;
+        // Only accept the replacement if preg_replace succeeded (non-null).
+        if ( null !== $result ) {
+            $content = $result;
+            if ( $count > 0 ) {
+                $links_added++;
+            }
         }
     }
 
