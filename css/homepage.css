@@ -11,6 +11,25 @@
    HERO
    ========================================================================== */
 
+.gl-home {
+    margin-top: calc(-1 * var(--gl-space-8)); /* negate .gl-main top padding so hero sits flush under header */
+}
+
+.gl-home > .gl-zone--breadcrumb {
+    background-color: #181B22;
+    padding-top: var(--gl-space-3);
+    padding-bottom: var(--gl-space-2);
+}
+
+.gl-home > .gl-zone--breadcrumb a,
+.gl-home > .gl-zone--breadcrumb span {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.gl-home > .gl-zone--breadcrumb a:hover {
+    color: rgba(255, 255, 255, 0.8);
+}
+
 .gl-home-hero {
     position: relative;
     padding: var(--gl-space-16) 0 var(--gl-space-12);
