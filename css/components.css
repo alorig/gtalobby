@@ -1,0 +1,445 @@
+/**
+ * UI Components
+ *
+ * Buttons, cards, badges, forms, alerts, and shared components
+ * used across all templates.
+ *
+ * @package GtaLobby
+ */
+
+/* ==========================================================================
+   CONTAINER
+   ========================================================================== */
+
+.gl-container {
+    width: 100%;
+    max-width: var(--gl-max-width);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--gl-space-4);
+    padding-right: var(--gl-space-4);
+}
+
+.gl-container--narrow {
+    max-width: var(--gl-narrow-width);
+}
+
+/* ==========================================================================
+   BUTTONS
+   ========================================================================== */
+
+.gl-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--gl-space-2);
+    padding: var(--gl-space-3) var(--gl-space-5);
+    font-family: var(--gl-font-display);
+    font-size: var(--gl-font-size-sm);
+    font-weight: var(--gl-font-weight-semibold);
+    line-height: 1;
+    text-decoration: none;
+    border: 2px solid transparent;
+    border-radius: var(--gl-radius-md);
+    cursor: pointer;
+    transition: all var(--gl-transition-fast);
+    white-space: nowrap;
+}
+
+.gl-btn--primary {
+    background-color: var(--gl-color-accent);
+    color: #fff;
+    border-color: var(--gl-color-accent);
+}
+
+.gl-btn--primary:hover {
+    background-color: var(--gl-color-accent-dark, var(--gl-color-accent));
+    transform: translateY(-1px);
+    box-shadow: var(--gl-shadow-md);
+}
+
+.gl-btn--outline {
+    background-color: transparent;
+    color: var(--gl-color-accent);
+    border-color: var(--gl-color-accent);
+}
+
+.gl-btn--outline:hover {
+    background-color: var(--gl-color-accent);
+    color: #fff;
+}
+
+.gl-btn--sm {
+    padding: var(--gl-space-2) var(--gl-space-3);
+    font-size: var(--gl-font-size-xs);
+}
+
+.gl-btn--ghost {
+    background: none;
+    border: none;
+    color: var(--gl-color-text-light);
+    padding: var(--gl-space-2);
+}
+
+.gl-btn--ghost:hover {
+    color: var(--gl-color-accent);
+}
+
+/* ==========================================================================
+   CARD SYSTEM
+   ========================================================================== */
+
+.gl-card {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--gl-color-bg);
+    border: 1px solid var(--gl-color-border);
+    border-radius: var(--gl-radius-lg);
+    overflow: hidden;
+    transition: transform var(--gl-transition-fast), box-shadow var(--gl-transition-fast);
+}
+
+.gl-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--gl-shadow-md);
+}
+
+.gl-card__thumb {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 16 / 9;
+}
+
+.gl-card__thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--gl-transition-base);
+}
+
+.gl-card:hover .gl-card__thumb img {
+    transform: scale(1.03);
+}
+
+.gl-card__body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: var(--gl-space-4);
+}
+
+.gl-card__meta {
+    display: flex;
+    align-items: center;
+    gap: var(--gl-space-2);
+    margin-bottom: var(--gl-space-2);
+    font-size: var(--gl-font-size-xs);
+    color: var(--gl-color-text-light);
+}
+
+.gl-card__title {
+    font-family: var(--gl-font-display);
+    font-size: var(--gl-font-size-lg);
+    font-weight: var(--gl-font-weight-bold);
+    line-height: var(--gl-line-height-heading);
+    margin: 0 0 var(--gl-space-2);
+}
+
+.gl-card__title a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.gl-card__title a:hover {
+    color: var(--gl-color-accent);
+}
+
+.gl-card__excerpt {
+    font-size: var(--gl-font-size-sm);
+    color: var(--gl-color-text-light);
+    margin: 0;
+    flex: 1;
+}
+
+.gl-card__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: var(--gl-space-3);
+    padding-top: var(--gl-space-3);
+    border-top: 1px solid var(--gl-color-border);
+    font-size: var(--gl-font-size-xs);
+    color: var(--gl-color-text-lighter);
+}
+
+/* Card: Feature variant */
+.gl-card--feature {
+    flex-direction: row;
+}
+
+.gl-card--feature .gl-card__thumb {
+    width: 45%;
+    aspect-ratio: auto;
+}
+
+.gl-card--feature .gl-card__body {
+    justify-content: center;
+}
+
+.gl-card--feature .gl-card__title {
+    font-size: var(--gl-font-size-2xl);
+}
+
+/* Card: Compact variant */
+.gl-card--compact .gl-card__thumb {
+    aspect-ratio: 4 / 3;
+}
+
+.gl-card--compact .gl-card__body {
+    padding: var(--gl-space-3);
+}
+
+.gl-card--compact .gl-card__title {
+    font-size: var(--gl-font-size-base);
+}
+
+/* ==========================================================================
+   CARD GRID
+   ========================================================================== */
+
+.gl-card-grid {
+    display: grid;
+    gap: var(--gl-space-6);
+}
+
+.gl-card-grid--2col { grid-template-columns: repeat(2, 1fr); }
+.gl-card-grid--3col { grid-template-columns: repeat(3, 1fr); }
+.gl-card-grid--4col { grid-template-columns: repeat(4, 1fr); }
+
+/* ==========================================================================
+   BADGES
+   ========================================================================== */
+
+.gl-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--gl-space-1);
+    padding: var(--gl-space-1) var(--gl-space-3);
+    font-family: var(--gl-font-display);
+    font-size: var(--gl-font-size-xs);
+    font-weight: var(--gl-font-weight-semibold);
+    line-height: 1.4;
+    border-radius: var(--gl-radius-full);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+}
+
+.gl-badge--type {
+    background-color: var(--gl-color-surface);
+    color: var(--gl-color-text);
+}
+
+.gl-badge--category {
+    background-color: var(--gl-color-accent);
+    color: #fff;
+}
+
+.gl-badge--confidence {
+    padding: var(--gl-space-1) var(--gl-space-2);
+}
+
+.gl-badge--confirmed   { background-color: var(--gl-color-success); color: #fff; }
+.gl-badge--likely       { background-color: var(--gl-color-warning); color: #1a1a2e; }
+.gl-badge--speculative  { background-color: var(--gl-color-info); color: #fff; }
+.gl-badge--rumor        { background-color: var(--gl-color-error); color: #fff; }
+
+.gl-badge--difficulty-easy   { background-color: var(--gl-color-success); color: #fff; }
+.gl-badge--difficulty-medium { background-color: var(--gl-color-warning); color: #1a1a2e; }
+.gl-badge--difficulty-hard   { background-color: var(--gl-color-error); color: #fff; }
+
+.gl-rank-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: var(--gl-radius-full);
+    background-color: var(--gl-color-accent);
+    color: #fff;
+    font-weight: var(--gl-font-weight-bold);
+    font-size: var(--gl-font-size-sm);
+}
+
+.gl-score-badge {
+    display: inline-block;
+    padding: var(--gl-space-1) var(--gl-space-2);
+    background-color: var(--gl-color-surface);
+    border-radius: var(--gl-radius-sm);
+    font-weight: var(--gl-font-weight-bold);
+    font-size: var(--gl-font-size-sm);
+    font-family: var(--gl-font-mono);
+}
+
+.gl-discount-badge {
+    display: inline-block;
+    padding: var(--gl-space-1) var(--gl-space-2);
+    background-color: var(--gl-color-success);
+    color: #fff;
+    border-radius: var(--gl-radius-sm);
+    font-weight: var(--gl-font-weight-bold);
+    font-size: var(--gl-font-size-sm);
+}
+
+/* ==========================================================================
+   FORMS
+   ========================================================================== */
+
+input[type="text"],
+input[type="email"],
+input[type="url"],
+input[type="search"],
+input[type="number"],
+input[type="date"],
+textarea,
+select {
+    width: 100%;
+    padding: var(--gl-space-3) var(--gl-space-4);
+    font-family: var(--gl-font-body);
+    font-size: var(--gl-font-size-base);
+    color: var(--gl-color-text);
+    background-color: var(--gl-color-bg);
+    border: 1px solid var(--gl-color-border);
+    border-radius: var(--gl-radius-md);
+    transition: border-color var(--gl-transition-fast), box-shadow var(--gl-transition-fast);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    border-color: var(--gl-color-accent);
+    box-shadow: 0 0 0 3px rgba(var(--gl-color-accent-rgb, 99, 102, 241), 0.15);
+}
+
+/* ==========================================================================
+   ICONS
+   ========================================================================== */
+
+.gl-icon {
+    display: inline-block;
+    vertical-align: middle;
+    flex-shrink: 0;
+}
+
+/* ==========================================================================
+   STAT BAR
+   ========================================================================== */
+
+.gl-stat-bar {
+    display: flex;
+    align-items: center;
+    gap: var(--gl-space-3);
+}
+
+.gl-stat-bar__label {
+    font-size: var(--gl-font-size-sm);
+    font-weight: var(--gl-font-weight-medium);
+    min-width: 80px;
+}
+
+.gl-stat-bar__track {
+    flex: 1;
+    height: 8px;
+    background-color: var(--gl-color-surface);
+    border-radius: var(--gl-radius-full);
+    overflow: hidden;
+}
+
+.gl-stat-bar__fill {
+    height: 100%;
+    background-color: var(--gl-color-accent);
+    border-radius: var(--gl-radius-full);
+    transition: width var(--gl-transition-base);
+}
+
+.gl-stat-bar__value {
+    font-size: var(--gl-font-size-sm);
+    font-weight: var(--gl-font-weight-bold);
+    font-family: var(--gl-font-mono);
+    min-width: 40px;
+    text-align: right;
+}
+
+/* ==========================================================================
+   SEARCH FORM
+   ========================================================================== */
+
+.gl-search-form__wrapper {
+    display: flex;
+    align-items: stretch;
+    border: 2px solid var(--gl-color-border);
+    border-radius: var(--gl-radius-lg);
+    overflow: hidden;
+    transition: border-color var(--gl-transition-fast);
+}
+
+.gl-search-form__wrapper:focus-within {
+    border-color: var(--gl-color-accent);
+}
+
+.gl-search-form__input {
+    flex: 1;
+    border: none;
+    border-radius: 0;
+    padding: var(--gl-space-3) var(--gl-space-4);
+}
+
+.gl-search-form__input:focus {
+    box-shadow: none;
+}
+
+.gl-search-form__btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--gl-space-3) var(--gl-space-4);
+    background-color: var(--gl-color-accent);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color var(--gl-transition-fast);
+}
+
+.gl-search-form__btn:hover {
+    background-color: var(--gl-color-accent-dark, var(--gl-color-accent));
+}
+
+/* ==========================================================================
+   ALERT / NOTICE
+   ========================================================================== */
+
+.gl-gta6-notice {
+    padding: var(--gl-space-4) var(--gl-space-5);
+    background-color: #fff3cd;
+    border: 1px solid #ffc107;
+    border-radius: var(--gl-radius-md);
+    color: #856404;
+    font-size: var(--gl-font-size-sm);
+}
+
+.gl-no-results {
+    text-align: center;
+    padding: var(--gl-space-12) var(--gl-space-4);
+}
+
+.gl-no-results h2 {
+    margin-bottom: var(--gl-space-3);
+}
+
+.gl-no-results__categories {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--gl-space-2);
+    margin-top: var(--gl-space-6);
+}

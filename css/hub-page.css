@@ -1,0 +1,341 @@
+/**
+ * Hub Page Styles
+ *
+ * Micro-website / magazine layout for SAG hub pages.
+ *
+ * @package GtaLobby
+ */
+
+/* ==========================================================================
+   HUB HERO
+   ========================================================================== */
+
+.gl-hub-hero {
+    position: relative;
+    padding: var(--gl-space-16) 0 var(--gl-space-12);
+    overflow: hidden;
+}
+
+.gl-hub-hero__bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    filter: brightness(0.35);
+    z-index: 0;
+}
+
+.gl-hub-hero__content {
+    position: relative;
+    z-index: 1;
+    max-width: var(--gl-narrow-width);
+}
+
+.gl-hub-hero--standard {
+    background-color: var(--gl-color-text);
+    color: #fff;
+}
+
+.gl-hub-hero--wide {
+    padding: var(--gl-space-20) 0 var(--gl-space-16);
+}
+
+.gl-hub-hero--minimal {
+    padding: var(--gl-space-8) 0;
+    background-color: var(--gl-color-surface);
+    color: var(--gl-color-text);
+}
+
+.gl-hub-hero--minimal .gl-hub-hero__bg {
+    display: none;
+}
+
+.gl-hub-hero__title {
+    font-size: var(--gl-font-size-5xl);
+    font-weight: var(--gl-font-weight-extrabold);
+    margin-bottom: var(--gl-space-3);
+    color: inherit;
+}
+
+.gl-hub-hero__subtitle {
+    font-size: var(--gl-font-size-lg);
+    opacity: 0.8;
+    margin-bottom: var(--gl-space-2);
+}
+
+.gl-hub-hero__desc {
+    font-size: var(--gl-font-size-lg);
+    max-width: var(--gl-reading-width);
+    opacity: 0.9;
+}
+
+/* ==========================================================================
+   KEY FACTS
+   ========================================================================== */
+
+.gl-key-facts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--gl-space-4);
+    padding: var(--gl-space-5);
+    background-color: var(--gl-color-surface);
+    border-radius: var(--gl-radius-lg);
+    border: 1px solid var(--gl-color-border);
+}
+
+.gl-key-fact {
+    flex: 1;
+    min-width: 140px;
+    text-align: center;
+}
+
+.gl-key-fact__label {
+    display: block;
+    font-size: var(--gl-font-size-xs);
+    color: var(--gl-color-text-light);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: var(--gl-space-1);
+}
+
+.gl-key-fact__value {
+    display: block;
+    font-family: var(--gl-font-display);
+    font-size: var(--gl-font-size-xl);
+    font-weight: var(--gl-font-weight-bold);
+    color: var(--gl-color-accent);
+}
+
+/* ==========================================================================
+   QUICK ANSWER
+   ========================================================================== */
+
+.gl-quick-answer {
+    padding: var(--gl-space-5) var(--gl-space-6);
+    background-color: var(--gl-color-surface);
+    border-left: 4px solid var(--gl-color-accent);
+    border-radius: 0 var(--gl-radius-md) var(--gl-radius-md) 0;
+}
+
+.gl-quick-answer__heading {
+    font-size: var(--gl-font-size-lg);
+    margin-bottom: var(--gl-space-2);
+    color: var(--gl-color-accent);
+}
+
+.gl-quick-answer__text {
+    font-size: var(--gl-font-size-lg);
+    line-height: 1.7;
+}
+
+/* ==========================================================================
+   HUB FILTERS
+   ========================================================================== */
+
+.gl-hub-filters,
+.gl-archive-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--gl-space-2);
+    margin-bottom: var(--gl-space-6);
+    padding-bottom: var(--gl-space-4);
+    border-bottom: 1px solid var(--gl-color-border);
+}
+
+.gl-hub-filter {
+    padding: var(--gl-space-2) var(--gl-space-4);
+    font-family: var(--gl-font-display);
+    font-size: var(--gl-font-size-sm);
+    font-weight: var(--gl-font-weight-medium);
+    color: var(--gl-color-text-light);
+    background: none;
+    border: 1px solid var(--gl-color-border);
+    border-radius: var(--gl-radius-full);
+    cursor: pointer;
+    transition: all var(--gl-transition-fast);
+}
+
+.gl-hub-filter:hover {
+    border-color: var(--gl-color-accent);
+    color: var(--gl-color-accent);
+}
+
+.gl-hub-filter--active {
+    background-color: var(--gl-color-accent);
+    border-color: var(--gl-color-accent);
+    color: #fff;
+}
+
+/* ==========================================================================
+   HUB GRID (for hub cards)
+   ========================================================================== */
+
+.gl-hub-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: var(--gl-space-4);
+}
+
+.gl-hub-card {
+    display: flex;
+    align-items: center;
+    gap: var(--gl-space-3);
+    padding: var(--gl-space-3);
+    background-color: var(--gl-color-bg);
+    border: 1px solid var(--gl-color-border);
+    border-radius: var(--gl-radius-md);
+    text-decoration: none;
+    color: inherit;
+    transition: all var(--gl-transition-fast);
+    border-left: 3px solid var(--cat-accent, var(--gl-color-accent));
+}
+
+.gl-hub-card:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--gl-shadow-sm);
+    text-decoration: none;
+    color: inherit;
+}
+
+.gl-hub-card__thumb {
+    width: 60px;
+    height: 60px;
+    border-radius: var(--gl-radius-sm);
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.gl-hub-card__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.gl-hub-card__title {
+    font-family: var(--gl-font-display);
+    font-size: var(--gl-font-size-sm);
+    font-weight: var(--gl-font-weight-semibold);
+    margin: 0;
+    line-height: 1.3;
+}
+
+.gl-hub-card__cluster {
+    display: block;
+    font-size: var(--gl-font-size-xs);
+    color: var(--gl-color-text-lighter);
+    margin-top: var(--gl-space-1);
+}
+
+/* ==========================================================================
+   FAQ SECTION
+   ========================================================================== */
+
+.gl-faq__item {
+    border: 1px solid var(--gl-color-border);
+    border-radius: var(--gl-radius-md);
+    margin-bottom: var(--gl-space-3);
+    overflow: hidden;
+}
+
+.gl-faq__item[open] {
+    border-color: var(--gl-color-accent);
+}
+
+.gl-faq__question {
+    padding: var(--gl-space-4) var(--gl-space-5);
+    font-family: var(--gl-font-display);
+    font-weight: var(--gl-font-weight-semibold);
+    cursor: pointer;
+    list-style: none;
+    position: relative;
+    padding-right: var(--gl-space-10);
+}
+
+.gl-faq__question::-webkit-details-marker {
+    display: none;
+}
+
+.gl-faq__question::after {
+    content: '+';
+    position: absolute;
+    right: var(--gl-space-5);
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: var(--gl-font-size-xl);
+    color: var(--gl-color-accent);
+    transition: transform var(--gl-transition-fast);
+}
+
+.gl-faq__item[open] .gl-faq__question::after {
+    content: '−';
+}
+
+.gl-faq__answer {
+    padding: 0 var(--gl-space-5) var(--gl-space-4);
+    line-height: 1.7;
+}
+
+/* ==========================================================================
+   CROSS-CLUSTER LINKS
+   ========================================================================== */
+
+.gl-cross-cluster__title {
+    font-size: var(--gl-font-size-xl);
+    margin-bottom: var(--gl-space-4);
+}
+
+.gl-cross-cluster__list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: var(--gl-space-3);
+    list-style: none;
+    padding: 0;
+}
+
+.gl-cross-cluster__link {
+    display: flex;
+    align-items: center;
+    gap: var(--gl-space-2);
+    padding: var(--gl-space-3);
+    background-color: var(--gl-color-surface);
+    border-radius: var(--gl-radius-md);
+    text-decoration: none;
+    color: var(--gl-color-text);
+    transition: background-color var(--gl-transition-fast);
+}
+
+.gl-cross-cluster__link:hover {
+    background-color: var(--gl-color-accent);
+    color: #fff;
+    text-decoration: none;
+}
+
+/* ==========================================================================
+   ZONE SPACING
+   ========================================================================== */
+
+.gl-zone {
+    padding-top: var(--gl-space-8);
+    padding-bottom: var(--gl-space-8);
+}
+
+.gl-zone--breadcrumb {
+    padding-top: var(--gl-space-4);
+    padding-bottom: var(--gl-space-2);
+}
+
+.gl-zone--hero {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.gl-zone__title {
+    font-size: var(--gl-font-size-2xl);
+    margin-bottom: var(--gl-space-6);
+}
+
+.gl-zone--ad {
+    padding-top: var(--gl-space-4);
+    padding-bottom: var(--gl-space-4);
+    text-align: center;
+}

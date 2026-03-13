@@ -1,0 +1,289 @@
+/**
+ * Typography Styles
+ *
+ * Font families, sizes, weights, headings, body text,
+ * and typographic utilities. Works with design tokens.
+ *
+ * @package GtaLobby
+ */
+
+/* ==========================================================================
+   BASE TYPOGRAPHY
+   ========================================================================== */
+
+html {
+    font-size: var(--gl-font-size-base, 17px);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+body {
+    font-family: var(--gl-font-body);
+    font-size: 1rem;
+    font-weight: var(--gl-font-weight-regular);
+    line-height: var(--gl-line-height-body);
+    color: var(--gl-color-text);
+    background-color: var(--gl-color-bg);
+}
+
+/* ==========================================================================
+   HEADINGS
+   ========================================================================== */
+
+h1, h2, h3, h4, h5, h6,
+.gl-h1, .gl-h2, .gl-h3, .gl-h4, .gl-h5, .gl-h6 {
+    font-family: var(--gl-font-display);
+    font-weight: var(--gl-font-weight-bold);
+    line-height: var(--gl-line-height-heading);
+    color: var(--gl-color-text);
+    margin-top: 0;
+    margin-bottom: var(--gl-space-4);
+}
+
+h1, .gl-h1 {
+    font-size: var(--gl-font-size-5xl);
+    letter-spacing: -0.02em;
+}
+
+h2, .gl-h2 {
+    font-size: var(--gl-font-size-4xl);
+    letter-spacing: -0.015em;
+}
+
+h3, .gl-h3 {
+    font-size: var(--gl-font-size-3xl);
+    letter-spacing: -0.01em;
+}
+
+h4, .gl-h4 {
+    font-size: var(--gl-font-size-2xl);
+}
+
+h5, .gl-h5 {
+    font-size: var(--gl-font-size-xl);
+}
+
+h6, .gl-h6 {
+    font-size: var(--gl-font-size-lg);
+    font-weight: var(--gl-font-weight-semibold);
+}
+
+/* ==========================================================================
+   BODY TEXT & PARAGRAPHS
+   ========================================================================== */
+
+p {
+    margin-top: 0;
+    margin-bottom: var(--gl-space-4);
+}
+
+.gl-typography p {
+    max-width: var(--gl-reading-width);
+}
+
+.gl-lead {
+    font-size: var(--gl-font-size-lg);
+    line-height: 1.6;
+    color: var(--gl-color-text-light);
+}
+
+small, .gl-small {
+    font-size: var(--gl-font-size-sm);
+}
+
+.gl-xs {
+    font-size: var(--gl-font-size-xs);
+}
+
+strong, b {
+    font-weight: var(--gl-font-weight-bold);
+}
+
+/* ==========================================================================
+   LINKS
+   ========================================================================== */
+
+a {
+    color: var(--gl-color-accent);
+    text-decoration: none;
+    transition: color var(--gl-transition-fast);
+}
+
+a:hover,
+a:focus {
+    color: var(--gl-color-accent-dark, var(--gl-color-accent));
+    text-decoration: underline;
+}
+
+.gl-typography a {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+}
+
+.gl-typography a:hover {
+    text-decoration-thickness: 2px;
+}
+
+/* ==========================================================================
+   LISTS
+   ========================================================================== */
+
+ul, ol {
+    margin-top: 0;
+    margin-bottom: var(--gl-space-4);
+    padding-left: var(--gl-space-6);
+}
+
+.gl-typography ul,
+.gl-typography ol {
+    max-width: var(--gl-reading-width);
+}
+
+.gl-typography li {
+    margin-bottom: var(--gl-space-2);
+}
+
+.gl-typography li > ul,
+.gl-typography li > ol {
+    margin-top: var(--gl-space-2);
+    margin-bottom: 0;
+}
+
+/* ==========================================================================
+   BLOCKQUOTES
+   ========================================================================== */
+
+blockquote {
+    margin: var(--gl-space-6) 0;
+    padding: var(--gl-space-4) var(--gl-space-6);
+    border-left: 4px solid var(--gl-color-accent);
+    background-color: var(--gl-color-surface);
+    border-radius: 0 var(--gl-radius-md) var(--gl-radius-md) 0;
+}
+
+blockquote p:last-child {
+    margin-bottom: 0;
+}
+
+blockquote cite {
+    display: block;
+    margin-top: var(--gl-space-2);
+    font-size: var(--gl-font-size-sm);
+    color: var(--gl-color-text-light);
+    font-style: normal;
+}
+
+/* ==========================================================================
+   CODE
+   ========================================================================== */
+
+code, kbd, samp, pre {
+    font-family: var(--gl-font-mono);
+}
+
+code {
+    padding: 0.15em 0.4em;
+    font-size: 0.875em;
+    background-color: var(--gl-color-surface);
+    border-radius: var(--gl-radius-sm);
+    color: var(--gl-color-text);
+}
+
+pre {
+    margin: var(--gl-space-6) 0;
+    padding: var(--gl-space-4);
+    overflow-x: auto;
+    font-size: var(--gl-font-size-sm);
+    line-height: 1.6;
+    background-color: var(--gl-color-text);
+    color: var(--gl-color-bg);
+    border-radius: var(--gl-radius-md);
+}
+
+pre code {
+    padding: 0;
+    background: none;
+    color: inherit;
+    font-size: inherit;
+}
+
+/* ==========================================================================
+   TABLES (base typography)
+   ========================================================================== */
+
+.gl-typography table {
+    width: 100%;
+    margin-bottom: var(--gl-space-6);
+    border-collapse: collapse;
+}
+
+.gl-typography th,
+.gl-typography td {
+    padding: var(--gl-space-3) var(--gl-space-4);
+    text-align: left;
+    border-bottom: 1px solid var(--gl-color-border);
+}
+
+.gl-typography th {
+    font-weight: var(--gl-font-weight-semibold);
+    background-color: var(--gl-color-surface);
+}
+
+.gl-typography tr:hover td {
+    background-color: var(--gl-color-surface);
+}
+
+/* ==========================================================================
+   HORIZONTAL RULE
+   ========================================================================== */
+
+hr {
+    margin: var(--gl-space-8) 0;
+    border: 0;
+    border-top: 1px solid var(--gl-color-border);
+}
+
+/* ==========================================================================
+   UTILITY CLASSES
+   ========================================================================== */
+
+.gl-sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.gl-text-center { text-align: center; }
+.gl-text-right  { text-align: right; }
+.gl-text-muted  { color: var(--gl-color-text-light); }
+.gl-text-accent { color: var(--gl-color-accent); }
+.gl-font-mono   { font-family: var(--gl-font-mono); }
+.gl-font-display { font-family: var(--gl-font-display); }
+
+.gl-truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.gl-line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.gl-line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}

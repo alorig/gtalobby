@@ -1,0 +1,42 @@
+SAG NICHE: GTA 6,,,,
+,,,,
+Industry,GTA Gaming (GtaLobby.com),,,
+Sector,GTA 6,,,
+Site Type,Content/Affiliate,,,
+Deployment,Standalone,,,
+Attributes,6,,,
+Clusters,20,,,
+Keywords/Cluster,15,,,
+Total Keywords,300,,,
+,,,,
+ATTRIBUTES,,,,
+#,Attribute,Level,Values,
+1,Topic,Primary,"Map & World, Characters, Price & Pre-Order, Platforms & Specs, Leaks & Trailers, Gameplay & Features, Online & Multiplayer, Release & Timeline, Comparisons, Spanish Content",
+2,Content Phase,Primary,"Pre-Launch Anticipation, Launch Week, Post-Launch Definitive, Evergreen Reference",
+3,Confidence,Secondary,"Confirmed Official, Likely Strong Evidence, Rumored Leaker, Speculative Community",
+4,Source Type,Secondary,"Official Rockstar, Trailer Analysis, Datamine, Reputable Leaker, Community, Press",
+5,Platform,Tertiary,"PS5, Xbox Series X, PC, All Platforms",
+6,Language,Tertiary,"English, Spanish, Multilingual",
+,,,,
+CLUSTERS (20),,,,
+#,Cluster Name,Type,Attribute Intersection,Hub Page Title
+1,GTA 6 Map,Map,Topic: Map x Confidence: Mixed,Everything We Know About the GTA 6 Map Including Leonida Vice City and the Open World
+2,GTA 6 Map Size,Map,Topic: Map x Detail: Size,How Big Is the GTA 6 Map Compared to GTA 5 and Every Other Open World Game
+3,GTA 6 Locations,Map,Topic: Map x Detail: Places,All Confirmed GTA 6 Locations from Vice City Districts to Everglades Countryside
+4,GTA 6 Mapping Project,Map/Community,Topic: Map x Source: Fan Community,The GTA 6 Mapping Project and How Fans Are Rebuilding the Map from Trailer Footage
+5,GTA 6 Lucia,Characters,Topic: Characters x Character: Lucia,Who Is Lucia in GTA 6 and Why She Is the Most Important Protagonist in GTA History
+6,GTA 6 Characters,Characters,Topic: Characters x Scope: All,Every Confirmed and Rumored Character in GTA 6 Including Jason and the Supporting Cast
+7,GTA 6 Voice Actors,Characters,Topic: Characters x Detail: Cast,The Voice Actors Behind GTA 6 and What We Know About the Full Cast So Far
+8,GTA 6 Price,Price,Topic: Price x Intent: Purchase,How Much Will GTA 6 Cost and Why Rockstar Is Charging More Than Ever Before
+9,GTA 6 Pre-Order,Price,Topic: Price x Intent: Pre-Purchase,When and Where to Pre Order GTA 6 Including Every Edition Bonus and Retailer
+10,GTA 6 Budget,Price/Industry,Topic: Price x Angle: Dev Cost,How Much Did Rockstar Spend Making GTA 6 and the Story Behind the Biggest Budget in Gaming
+11,GTA 6 PC,Platforms,Topic: Platforms x Platform: PC,Will GTA 6 Come to PC and When to Expect the Port After Console Launch
+12,GTA 6 System Requirements,Platforms,Topic: Platforms x Detail: Specs,The System Requirements You Need to Run GTA 6 on PC at Every Settings Level
+13,GTA 6 Performance,Platforms,Topic: Platforms x Detail: FPS,Will GTA 6 Run at 60FPS on Console and What Performance Modes to Expect at Launch
+14,GTA 6 Leaks Timeline,Leaks,Topic: Leaks x Scope: Complete,A Complete Timeline of Every GTA 6 Leak from the 2022 Hack to the Latest Datamines
+15,GTA 6 Trailer Analysis,Leaks,Topic: Leaks x Source: Official,Breaking Down Every Detail Easter Egg and Hidden Clue Found in the GTA 6 Trailers
+16,GTA 6 Trailer 3,Leaks,Topic: Leaks x Timeline: Next,When Is GTA 6 Trailer 3 Coming and What Rockstar Will Likely Show Next
+17,GTA 6 Hacker,Leaks/Story,Topic: Leaks x Event: Hack,The Full Story of the Teenager Who Hacked Rockstar Games and Leaked GTA 6
+18,GTA 6 Gameplay Features,Gameplay,Topic: Gameplay x Scope: All,All Confirmed GTA 6 Gameplay Features from Physics to Combat to the Wanted System
+19,GTA 6 Crossplay,Online,Topic: Online x Feature: Crossplay,Will GTA 6 Be Crossplay and Can PlayStation and Xbox Players Play Together at Launch
+20,GTA 6 Release Date,Release,Topic: Release x Detail: Date,The Latest GTA 6 Release Date Updates and Everything Rockstar Has Officially Confirmed

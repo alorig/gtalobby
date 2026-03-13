@@ -1,0 +1,325 @@
+/**
+ * Archive & Category Page Styles
+ *
+ * @package GtaLobby
+ */
+
+/* ==========================================================================
+   ARCHIVE LAYOUT
+   ========================================================================== */
+
+.gl-archive__layout {
+    display: grid;
+    grid-template-columns: 1fr var(--gl-sidebar-width);
+    gap: var(--gl-space-8);
+    align-items: start;
+    padding-top: var(--gl-space-4);
+    padding-bottom: var(--gl-space-12);
+}
+
+/* ==========================================================================
+   PAGE LAYOUT
+   ========================================================================== */
+
+.gl-page__layout {
+    display: grid;
+    grid-template-columns: 1fr var(--gl-sidebar-width);
+    gap: var(--gl-space-8);
+    align-items: start;
+    padding-top: var(--gl-space-4);
+    padding-bottom: var(--gl-space-12);
+}
+
+.gl-page__main .gl-article--page .gl-article__title {
+    font-size: var(--gl-font-size-4xl);
+    margin-bottom: var(--gl-space-6);
+}
+
+/* ==========================================================================
+   ARCHIVE HEADER
+   ========================================================================== */
+
+.gl-archive-header {
+    padding: var(--gl-space-8) 0;
+    background-color: var(--gl-color-surface);
+    border-bottom: 1px solid var(--gl-color-border);
+}
+
+.gl-archive-header__title {
+    font-size: var(--gl-font-size-3xl);
+    margin-bottom: var(--gl-space-2);
+}
+
+.gl-archive-header__desc {
+    font-size: var(--gl-font-size-lg);
+    color: var(--gl-color-text-light);
+    max-width: var(--gl-reading-width);
+}
+
+/* ==========================================================================
+   CATEGORY HEADER
+   ========================================================================== */
+
+.gl-category-header {
+    background-color: var(--gl-color-surface);
+    border-bottom: 3px solid var(--cat-accent, var(--gl-color-accent));
+    padding: var(--gl-space-10) 0;
+}
+
+.gl-category-header__title {
+    font-size: var(--gl-font-size-4xl);
+    margin-bottom: var(--gl-space-2);
+}
+
+.gl-category-header__desc {
+    max-width: var(--gl-reading-width);
+    color: var(--gl-color-text-light);
+    margin-bottom: var(--gl-space-3);
+}
+
+.gl-category-header__stats {
+    font-size: var(--gl-font-size-sm);
+    color: var(--gl-color-text-lighter);
+}
+
+/* ==========================================================================
+   SEARCH HEADER
+   ========================================================================== */
+
+.gl-search-header {
+    padding: var(--gl-space-8) 0;
+    background-color: var(--gl-color-surface);
+    border-bottom: 1px solid var(--gl-color-border);
+    text-align: center;
+}
+
+.gl-search-header__title {
+    font-size: var(--gl-font-size-2xl);
+    margin-bottom: var(--gl-space-4);
+}
+
+.gl-search-header__title span {
+    color: var(--gl-color-accent);
+}
+
+.gl-search-header__form {
+    max-width: 500px;
+    margin: 0 auto var(--gl-space-3);
+}
+
+.gl-search-header__count {
+    font-size: var(--gl-font-size-sm);
+    color: var(--gl-color-text-light);
+}
+
+/* ==========================================================================
+   CATEGORY GRID (homepage & footer)
+   ========================================================================== */
+
+.gl-category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: var(--gl-space-4);
+}
+
+.gl-category-grid--compact {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: var(--gl-space-2);
+}
+
+.gl-category-tile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: var(--gl-space-5) var(--gl-space-3);
+    background-color: var(--gl-color-bg);
+    border: 1px solid var(--gl-color-border);
+    border-radius: var(--gl-radius-lg);
+    text-decoration: none;
+    color: var(--gl-color-text);
+    transition: all var(--gl-transition-fast);
+    border-bottom: 3px solid var(--cat-accent, var(--gl-color-accent));
+}
+
+.gl-category-tile:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--gl-shadow-md);
+    text-decoration: none;
+    color: var(--gl-color-text);
+}
+
+.gl-category-tile__icon {
+    font-size: 2rem;
+    margin-bottom: var(--gl-space-2);
+}
+
+.gl-category-tile__name {
+    font-family: var(--gl-font-display);
+    font-size: var(--gl-font-size-sm);
+    font-weight: var(--gl-font-weight-bold);
+    margin: 0 0 var(--gl-space-1);
+}
+
+.gl-category-tile__count {
+    font-size: var(--gl-font-size-xs);
+    color: var(--gl-color-text-light);
+}
+
+.gl-category-tile--compact {
+    padding: var(--gl-space-3);
+    border-bottom-width: 2px;
+}
+
+.gl-category-tile--compact .gl-category-tile__icon {
+    display: none;
+}
+
+/* ==========================================================================
+   404 PAGE
+   ========================================================================== */
+
+.gl-404 {
+    text-align: center;
+    padding: var(--gl-space-16) 0;
+}
+
+.gl-404__code {
+    font-family: var(--gl-font-display);
+    font-size: 8rem;
+    font-weight: var(--gl-font-weight-extrabold);
+    line-height: 1;
+    color: var(--gl-color-accent);
+    opacity: 0.3;
+}
+
+.gl-404__title {
+    font-size: var(--gl-font-size-3xl);
+    margin-bottom: var(--gl-space-3);
+}
+
+.gl-404__desc {
+    color: var(--gl-color-text-light);
+    max-width: var(--gl-reading-width);
+    margin: 0 auto var(--gl-space-6);
+}
+
+.gl-404__search {
+    max-width: 400px;
+    margin: 0 auto var(--gl-space-8);
+}
+
+.gl-404__subtitle {
+    font-size: var(--gl-font-size-xl);
+    margin-bottom: var(--gl-space-4);
+}
+
+.gl-404__categories {
+    margin-bottom: var(--gl-space-8);
+}
+
+/* ==========================================================================
+   HOME PAGE
+   ========================================================================== */
+
+.gl-home-hero {
+    padding: var(--gl-space-16) 0;
+    background: linear-gradient(135deg, var(--gl-color-text) 0%, #2d2d4e 100%);
+    color: #fff;
+    text-align: center;
+}
+
+.gl-home-hero__content {
+    max-width: var(--gl-narrow-width);
+    margin: 0 auto;
+}
+
+.gl-home-hero__title {
+    font-size: var(--gl-font-size-5xl);
+    font-weight: var(--gl-font-weight-extrabold);
+    margin-bottom: var(--gl-space-3);
+    color: #fff;
+}
+
+.gl-home-hero__tagline {
+    font-size: var(--gl-font-size-xl);
+    opacity: 0.85;
+    margin-bottom: var(--gl-space-6);
+}
+
+.gl-home-hero__search {
+    display: flex;
+    max-width: 560px;
+    margin: 0 auto;
+    border-radius: var(--gl-radius-lg);
+    overflow: hidden;
+    box-shadow: var(--gl-shadow-lg);
+}
+
+.gl-home-hero__search-input {
+    flex: 1;
+    border: none;
+    border-radius: 0;
+    padding: var(--gl-space-4) var(--gl-space-5);
+    font-size: var(--gl-font-size-lg);
+}
+
+.gl-home-hero__search-input:focus {
+    box-shadow: none;
+}
+
+.gl-home-hero__search-btn {
+    display: flex;
+    align-items: center;
+    padding: var(--gl-space-4) var(--gl-space-5);
+    background-color: var(--gl-color-accent);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.gl-home-categories,
+.gl-home-gta6,
+.gl-home-hubs,
+.gl-home-latest {
+    padding: var(--gl-space-12) 0;
+}
+
+.gl-home-gta6__grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: var(--gl-space-6);
+}
+
+.gl-home-gta6__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gl-space-3);
+}
+
+.gl-home-latest__section {
+    margin-bottom: var(--gl-space-8);
+}
+
+.gl-home-latest__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--gl-space-4);
+}
+
+.gl-home-latest__cat-title {
+    font-size: var(--gl-font-size-xl);
+    margin: 0;
+}
+
+.gl-home-latest__more {
+    font-size: var(--gl-font-size-sm);
+    font-weight: var(--gl-font-weight-semibold);
+    color: var(--gl-color-accent);
+    text-decoration: none;
+}
+
+.gl-home-latest__more:hover {
+    text-decoration: underline;
+}

@@ -1,0 +1,248 @@
+/* =============================================================
+   GTALOBBY DESIGN TOKENS
+   Complete CSS Custom Properties system for the entire theme.
+   All components reference these tokens — never hardcode values.
+   Colors, typography, spacing, layout, shadows, borders, motion.
+   ============================================================= */
+
+:root {
+    /* -------------------------------------------------------
+       COLOR SYSTEM — Base (Light Theme)
+       ------------------------------------------------------- */
+    --gl-color-bg:              #FAFBFC;
+    --gl-color-bg-alt:          #F1F3F5;
+    --gl-color-surface:         #F6F8FA;
+    --gl-color-surface-raised:  #FFFFFF;
+    --gl-color-border:          #E2E6EA;
+    --gl-color-divider:         #DEE2E6;
+    --gl-color-overlay:         rgba(26, 29, 35, 0.6);
+
+    /* Text */
+    --gl-color-text:            #1A1D23;
+    --gl-color-text-secondary:  #4A5568;
+    --gl-color-text-tertiary:   #718096;
+    --gl-color-text-inverse:    #FFFFFF;
+    --gl-color-text-link:       var(--gl-color-accent);
+    --gl-color-text-link-hover: var(--gl-color-accent-dark);
+
+    /* Primary Accent — Electric Purple (GTA-adjacent, modern) */
+    --gl-color-accent:          #6C5CE7;
+    --gl-color-accent-light:    #A29BFE;
+    --gl-color-accent-dark:     #4834D4;
+    --gl-color-accent-tint:     #F0EDFF;
+    --gl-color-accent-rgb:      108, 92, 231;
+
+    /* Secondary Accent — Teal/Cyan (data, stats, badges) */
+    --gl-color-secondary:       #00CEC9;
+    --gl-color-secondary-light: #81ECEC;
+    --gl-color-secondary-dark:  #00A8A4;
+    --gl-color-secondary-tint:  #E8FFFE;
+
+    /* Semantic Colors */
+    --gl-color-confirmed:       #00B894;
+    --gl-color-likely:          #0984E3;
+    --gl-color-rumored:         #FDCB6E;
+    --gl-color-speculative:     #E17055;
+    --gl-color-success:         #00B894;
+    --gl-color-warning:         #FDCB6E;
+    --gl-color-error:           #D63031;
+    --gl-color-info:            #0984E3;
+
+    /* Category Accent Colors */
+    --gl-color-cat-gta6:        #6C5CE7;
+    --gl-color-cat-cheats:      #E17055;
+    --gl-color-cat-online:      #00CEC9;
+    --gl-color-cat-mods:        #00B894;
+    --gl-color-cat-cars:        #FDCB6E;
+    --gl-color-cat-characters:  #E84393;
+    --gl-color-cat-locations:   #0984E3;
+    --gl-color-cat-money:       #F9A825;
+    --gl-color-cat-news:        #636E72;
+
+    /* Category Tint Colors (light backgrounds) */
+    --gl-color-cat-gta6-tint:       #F0EDFF;
+    --gl-color-cat-cheats-tint:     #FFF0ED;
+    --gl-color-cat-online-tint:     #E8FFFE;
+    --gl-color-cat-mods-tint:       #E6FFF8;
+    --gl-color-cat-cars-tint:       #FFFCEB;
+    --gl-color-cat-characters-tint: #FFE8F5;
+    --gl-color-cat-locations-tint:  #E8F4FD;
+    --gl-color-cat-money-tint:      #FFF8E1;
+    --gl-color-cat-news-tint:       #F0F2F3;
+
+    /* -------------------------------------------------------
+       TYPOGRAPHY
+       ------------------------------------------------------- */
+    /* Font Families */
+    --gl-font-display:    'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+    --gl-font-body:       'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --gl-font-mono:       'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+
+    /* Font Sizes — Desktop (rem) */
+    --gl-text-xs:         0.75rem;    /* 12px */
+    --gl-text-sm:         0.8125rem;  /* 13px */
+    --gl-text-base:       1.0625rem;  /* 17px — optimized for long reads */
+    --gl-text-md:         1.125rem;   /* 18px */
+    --gl-text-lg:         1.25rem;    /* 20px */
+    --gl-text-xl:         1.5rem;     /* 24px */
+    --gl-text-2xl:        2rem;       /* 32px */
+    --gl-text-3xl:        2.5rem;     /* 40px */
+    --gl-text-4xl:        2.75rem;    /* 44px */
+    --gl-text-5xl:        3.25rem;    /* 52px */
+
+    /* Font Weights */
+    --gl-weight-regular:  400;
+    --gl-weight-medium:   500;
+    --gl-weight-semibold: 600;
+    --gl-weight-bold:     700;
+
+    /* Line Heights */
+    --gl-leading-none:    1;
+    --gl-leading-tight:   1.15;
+    --gl-leading-snug:    1.35;
+    --gl-leading-normal:  1.55;
+    --gl-leading-relaxed: 1.7;
+    --gl-leading-loose:   1.85;
+
+    /* Letter Spacing */
+    --gl-tracking-tight:  -0.02em;
+    --gl-tracking-normal: 0;
+    --gl-tracking-wide:   0.04em;
+    --gl-tracking-wider:  0.08em;
+
+    /* -------------------------------------------------------
+       SPACING SCALE
+       ------------------------------------------------------- */
+    --gl-space-1:   0.25rem;   /* 4px */
+    --gl-space-2:   0.5rem;    /* 8px */
+    --gl-space-3:   0.75rem;   /* 12px */
+    --gl-space-4:   1rem;      /* 16px */
+    --gl-space-5:   1.25rem;   /* 20px */
+    --gl-space-6:   1.5rem;    /* 24px */
+    --gl-space-8:   2rem;      /* 32px */
+    --gl-space-10:  2.5rem;    /* 40px */
+    --gl-space-12:  3rem;      /* 48px */
+    --gl-space-16:  4rem;      /* 64px */
+    --gl-space-20:  5rem;      /* 80px */
+    --gl-space-24:  6rem;      /* 96px */
+
+    /* -------------------------------------------------------
+       LAYOUT
+       ------------------------------------------------------- */
+    --gl-max-width:         1440px;
+    --gl-content-width:     1200px;
+    --gl-narrow-width:      800px;
+    --gl-reading-width:     72ch;
+
+    --gl-sidebar-width:     320px;
+    --gl-sidebar-left-width: 240px;
+    --gl-gutter:            var(--gl-space-8);
+
+    --gl-header-height:     72px;
+    --gl-header-height-mobile: 60px;
+    --gl-bottom-bar-height: 56px;
+
+    /* Grid */
+    --gl-grid-gap:          var(--gl-space-6);
+    --gl-card-gap:          var(--gl-space-6);
+
+    /* -------------------------------------------------------
+       BORDERS & RADIUS
+       ------------------------------------------------------- */
+    --gl-radius-sm:    4px;
+    --gl-radius-md:    8px;
+    --gl-radius-lg:    12px;
+    --gl-radius-xl:    16px;
+    --gl-radius-2xl:   24px;
+    --gl-radius-full:  9999px;
+
+    --gl-border-width: 1px;
+    --gl-border:       var(--gl-border-width) solid var(--gl-color-border);
+
+    /* -------------------------------------------------------
+       SHADOWS
+       ------------------------------------------------------- */
+    --gl-shadow-xs:    0 1px 2px rgba(0, 0, 0, 0.04);
+    --gl-shadow-sm:    0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+    --gl-shadow-md:    0 4px 6px rgba(0, 0, 0, 0.05), 0 2px 4px rgba(0, 0, 0, 0.04);
+    --gl-shadow-lg:    0 10px 15px rgba(0, 0, 0, 0.06), 0 4px 6px rgba(0, 0, 0, 0.04);
+    --gl-shadow-xl:    0 20px 25px rgba(0, 0, 0, 0.08), 0 8px 10px rgba(0, 0, 0, 0.04);
+    --gl-shadow-card:  0 2px 8px rgba(0, 0, 0, 0.06);
+    --gl-shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.1);
+
+    /* -------------------------------------------------------
+       TRANSITIONS & ANIMATION
+       ------------------------------------------------------- */
+    --gl-transition-fast:    150ms ease;
+    --gl-transition-base:    250ms ease;
+    --gl-transition-slow:    400ms ease;
+    --gl-transition-spring:  400ms cubic-bezier(0.34, 1.56, 0.64, 1);
+
+    /* -------------------------------------------------------
+       Z-INDEX SCALE
+       ------------------------------------------------------- */
+    --gl-z-dropdown:    100;
+    --gl-z-sticky:      200;
+    --gl-z-header:      300;
+    --gl-z-overlay:     400;
+    --gl-z-modal:       500;
+    --gl-z-tooltip:     600;
+    --gl-z-toast:       700;
+}
+
+/* -------------------------------------------------------
+   RESPONSIVE TOKEN OVERRIDES
+   ------------------------------------------------------- */
+
+/* T2: Desktop 1200-1439px */
+@media (max-width: 1439px) {
+    :root {
+        --gl-gutter: var(--gl-space-6);
+        --gl-sidebar-width: 280px;
+    }
+}
+
+/* T3: Tablet 768-1199px */
+@media (max-width: 1199px) {
+    :root {
+        --gl-text-4xl:  2.25rem;  /* 36px */
+        --gl-text-3xl:  2rem;     /* 32px */
+        --gl-text-2xl:  1.625rem; /* 26px */
+        --gl-text-xl:   1.375rem; /* 22px */
+        --gl-text-base: 1rem;     /* 16px */
+        --gl-gutter:    var(--gl-space-5);
+        --gl-grid-gap:  var(--gl-space-5);
+        --gl-card-gap:  var(--gl-space-5);
+    }
+}
+
+/* T4: Mobile <768px */
+@media (max-width: 767px) {
+    :root {
+        --gl-text-5xl:  2.25rem;  /* 36px */
+        --gl-text-4xl:  2rem;     /* 32px */
+        --gl-text-3xl:  1.625rem; /* 26px */
+        --gl-text-2xl:  1.375rem; /* 22px */
+        --gl-text-xl:   1.25rem;  /* 20px */
+        --gl-text-lg:   1.125rem; /* 18px */
+        --gl-text-base: 1rem;     /* 16px */
+        --gl-gutter:    var(--gl-space-4);
+        --gl-grid-gap:  var(--gl-space-4);
+        --gl-card-gap:  var(--gl-space-4);
+        --gl-header-height: var(--gl-header-height-mobile);
+    }
+}
+
+/* -------------------------------------------------------
+   CATEGORY-CONTEXTUAL ACCENT OVERRIDES
+   Applied when body has category class
+   ------------------------------------------------------- */
+.category-gta6         { --gl-color-accent: var(--gl-color-cat-gta6);       --gl-color-accent-tint: var(--gl-color-cat-gta6-tint); }
+.category-cheats       { --gl-color-accent: var(--gl-color-cat-cheats);     --gl-color-accent-tint: var(--gl-color-cat-cheats-tint); }
+.category-online       { --gl-color-accent: var(--gl-color-cat-online);     --gl-color-accent-tint: var(--gl-color-cat-online-tint); }
+.category-mods         { --gl-color-accent: var(--gl-color-cat-mods);       --gl-color-accent-tint: var(--gl-color-cat-mods-tint); }
+.category-cars         { --gl-color-accent: var(--gl-color-cat-cars);       --gl-color-accent-tint: var(--gl-color-cat-cars-tint); }
+.category-characters   { --gl-color-accent: var(--gl-color-cat-characters); --gl-color-accent-tint: var(--gl-color-cat-characters-tint); }
+.category-locations    { --gl-color-accent: var(--gl-color-cat-locations);  --gl-color-accent-tint: var(--gl-color-cat-locations-tint); }
+.category-money        { --gl-color-accent: var(--gl-color-cat-money);      --gl-color-accent-tint: var(--gl-color-cat-money-tint); }
+.category-news         { --gl-color-accent: var(--gl-color-cat-news);       --gl-color-accent-tint: var(--gl-color-cat-news-tint); }

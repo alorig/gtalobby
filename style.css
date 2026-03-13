@@ -1,0 +1,25 @@
+/*
+Theme Name: GtaLobby
+Theme URI: https://gtalobby.com
+Author: Salman (Alorig) / IGNY8
+Author URI: https://igny8.com
+Description: A fully custom WordPress theme for GtaLobby.com — GTA 5/Online & GTA 6 resource hub. Built with SAG (Semantic Authority Grid) methodology. Features 7 custom post types, 9 taxonomies, hub page micro-website architecture, layout composer, conditional layouts, and a complete design system with 4-tier responsive breakpoints.
+Version: 1.0.0
+Requires at least: 6.0
+Tested up to: 6.7
+Requires PHP: 8.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: gtalobby
+Tags: custom-post-types, gaming, gta, seo, light-theme, responsive, magazine
+
+GtaLobby Theme — IGNY8 SAG Architecture
+9 Categories | 7 Post Types | 155 Hub Pages | 2,325 Keywords
+*/
+
+/* ============================================================
+   CSS DESIGN TOKENS (Custom Properties)
+   All colors, typography, spacing, and layout tokens are defined
+   in css/design-tokens.css and loaded via enqueue.
+   This file contains only the theme declaration header.
+   ============================================================ */

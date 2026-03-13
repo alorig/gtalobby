@@ -1,0 +1,283 @@
+/**
+ * Admin Styles
+ *
+ * Custom styles for the GtaLobby admin pages:
+ * settings tabs, layout composer, GTA 6 manager.
+ *
+ * @package GtaLobby
+ */
+
+/* ==========================================================================
+   SETTINGS PAGE TABS
+   ========================================================================== */
+
+.gl-admin-tabs {
+    display: flex;
+    gap: 0;
+    border-bottom: 2px solid #ccd0d4;
+    margin-bottom: 20px;
+    padding: 0;
+    list-style: none;
+}
+
+.gl-admin-tab {
+    padding: 10px 20px;
+    text-decoration: none;
+    color: #50575e;
+    font-weight: 600;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+    transition: all 0.15s;
+}
+
+.gl-admin-tab:hover {
+    color: #0073aa;
+}
+
+.gl-admin-tab.is-active {
+    color: #0073aa;
+    border-bottom-color: #0073aa;
+}
+
+.gl-admin-tab-panel {
+    display: none;
+}
+
+.gl-admin-tab-panel.is-active {
+    display: block;
+}
+
+/* ==========================================================================
+   SETTINGS FIELDS
+   ========================================================================== */
+
+.gl-admin-field {
+    margin-bottom: 15px;
+}
+
+.gl-admin-field label {
+    font-weight: 600;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.gl-admin-field input[type="text"],
+.gl-admin-field input[type="number"],
+.gl-admin-field input[type="url"],
+.gl-admin-field input[type="date"],
+.gl-admin-field select,
+.gl-admin-field textarea {
+    width: 100%;
+    max-width: 450px;
+}
+
+.gl-admin-field textarea {
+    min-height: 100px;
+    font-family: monospace;
+}
+
+.gl-admin-field .description {
+    color: #646970;
+    font-style: italic;
+    margin-top: 4px;
+}
+
+/* Color pickers */
+.gl-admin-field .wp-color-result {
+    margin-right: 10px;
+}
+
+/* ==========================================================================
+   LAYOUT COMPOSER
+   ========================================================================== */
+
+.gl-layout-composer {
+    max-width: 900px;
+}
+
+.gl-layout-composer__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+.gl-layout-composer__context-select {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.gl-layout-composer__category-select {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+/* Zone list */
+.gl-zone-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.gl-zone-item {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    transition: box-shadow 0.15s;
+}
+
+.gl-zone-item:hover {
+    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+
+.gl-zone-item.ui-sortable-helper {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.gl-zone-item__header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 15px;
+    cursor: move;
+}
+
+.gl-zone-item__drag {
+    color: #999;
+    cursor: move;
+    font-size: 16px;
+}
+
+.gl-zone-item__name {
+    flex: 1;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.gl-zone-item__toggle {
+    background: none;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    padding: 4px 12px;
+    cursor: pointer;
+    font-size: 12px;
+    color: #50575e;
+}
+
+.gl-zone-item__toggle:hover {
+    border-color: #0073aa;
+    color: #0073aa;
+}
+
+.gl-zone-item__enabled {
+    margin-left: auto;
+    margin-right: 10px;
+}
+
+.gl-zone-item__body {
+    display: none;
+    padding: 15px;
+    border-top: 1px solid #eee;
+    background-color: #fafafa;
+}
+
+.gl-zone-item.is-expanded .gl-zone-item__body {
+    display: block;
+}
+
+.gl-zone-item__field {
+    margin-bottom: 10px;
+}
+
+.gl-zone-item__field label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 4px;
+    font-size: 13px;
+}
+
+.gl-zone-item__field select,
+.gl-zone-item__field input {
+    width: 100%;
+    max-width: 300px;
+}
+
+/* ==========================================================================
+   GTA 6 MANAGER
+   ========================================================================== */
+
+.gl-gta6-manager {
+    max-width: 1100px;
+}
+
+.gl-gta6-audit-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.gl-gta6-audit-table th {
+    background-color: #f0f0f1;
+    padding: 10px 12px;
+    text-align: left;
+    font-size: 13px;
+    border-bottom: 1px solid #c3c4c7;
+}
+
+.gl-gta6-audit-table td {
+    padding: 8px 12px;
+    border-bottom: 1px solid #ddd;
+    font-size: 13px;
+    vertical-align: middle;
+}
+
+.gl-gta6-audit-table tr:hover td {
+    background-color: #f6f7f7;
+}
+
+.gl-badge--confidence {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.gl-badge--confirmed   { background-color: #00a32a; color: #fff; }
+.gl-badge--likely       { background-color: #dba617; color: #1d2327; }
+.gl-badge--speculative  { background-color: #2271b1; color: #fff; }
+.gl-badge--rumor        { background-color: #d63638; color: #fff; }
+
+/* ==========================================================================
+   NOTICES & UTILITIES
+   ========================================================================== */
+
+.gl-admin-notice {
+    padding: 12px 15px;
+    margin: 15px 0;
+    border-left: 4px solid #0073aa;
+    background-color: #f0f6fc;
+}
+
+.gl-admin-notice--success {
+    border-color: #00a32a;
+    background-color: #edfaef;
+}
+
+.gl-admin-notice--error {
+    border-color: #d63638;
+    background-color: #fcf0f1;
+}
+
+.gl-admin-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
