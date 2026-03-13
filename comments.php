@@ -8,6 +8,55 @@
 if ( post_password_required() ) {
     return;
 }
+
+/**
+ * Custom comment callback renderer.
+ */
+if ( ! function_exists( 'gtalobby_comment_callback' ) ) :
+function gtalobby_comment_callback( $comment, $args, $depth ) {
+    $tag = ( 'div' === $args['style'] ) ? 'div' : 'li';
+    ?>
+    <<?php echo $tag; ?> id="comment-<?php comment_ID(); ?>" <?php comment_class( 'gl-comment' ); ?>>
+        <article class="gl-comment__body">
+            <header class="gl-comment__header">
+                <div class="gl-comment__avatar">
+                    <?php echo get_avatar( $comment, $args['avatar_size'], '', '', array( 'class' => 'gl-comment__avatar-img' ) ); ?>
+                </div>
+                <div class="gl-comment__meta">
+                    <span class="gl-comment__author"><?php comment_author_link(); ?></span>
+                    <time class="gl-comment__date" datetime="<?php comment_date( 'c' ); ?>">
+                        <?php
+                        printf(
+                            esc_html__( '%1$s at %2$s', 'gtalobby' ),
+                            get_comment_date(),
+                            get_comment_time()
+                        );
+                        ?>
+                    </time>
+                </div>
+            </header>
+            <?php if ( '0' === $comment->comment_approved ) : ?>
+                <p class="gl-comment__moderation"><?php esc_html_e( 'Your comment is awaiting moderation.', 'gtalobby' ); ?></p>
+            <?php endif; ?>
+            <div class="gl-comment__content">
+                <?php comment_text(); ?>
+            </div>
+            <div class="gl-comment__actions">
+                <?php
+                comment_reply_link( array_merge( $args, array(
+                    'depth'     => $depth,
+                    'max_depth' => $args['max_depth'],
+                    'before'    => '<span class="gl-comment__reply">',
+                    'after'     => '</span>',
+                ) ) );
+                edit_comment_link( esc_html__( 'Edit', 'gtalobby' ), '<span class="gl-comment__edit">', '</span>' );
+                ?>
+            </div>
+        </article>
+    <?php
+}
+endif;
+?>
 ?>
 
 <section id="comments" class="gl-comments">
@@ -62,53 +111,3 @@ if ( post_password_required() ) {
     ?>
 
 </section>
-
-<?php
-/**
- * Custom comment callback renderer.
- */
-if ( ! function_exists( 'gtalobby_comment_callback' ) ) :
-function gtalobby_comment_callback( $comment, $args, $depth ) {
-    $tag = ( 'div' === $args['style'] ) ? 'div' : 'li';
-    ?>
-    <<?php echo $tag; ?> id="comment-<?php comment_ID(); ?>" <?php comment_class( 'gl-comment' ); ?>>
-        <article class="gl-comment__body">
-            <header class="gl-comment__header">
-                <div class="gl-comment__avatar">
-                    <?php echo get_avatar( $comment, $args['avatar_size'], '', '', array( 'class' => 'gl-comment__avatar-img' ) ); ?>
-                </div>
-                <div class="gl-comment__meta">
-                    <span class="gl-comment__author"><?php comment_author_link(); ?></span>
-                    <time class="gl-comment__date" datetime="<?php comment_date( 'c' ); ?>">
-                        <?php
-                        printf(
-                            esc_html__( '%1$s at %2$s', 'gtalobby' ),
-                            get_comment_date(),
-                            get_comment_time()
-                        );
-                        ?>
-                    </time>
-                </div>
-            </header>
-            <?php if ( '0' === $comment->comment_approved ) : ?>
-                <p class="gl-comment__moderation"><?php esc_html_e( 'Your comment is awaiting moderation.', 'gtalobby' ); ?></p>
-            <?php endif; ?>
-            <div class="gl-comment__content">
-                <?php comment_text(); ?>
-            </div>
-            <div class="gl-comment__actions">
-                <?php
-                comment_reply_link( array_merge( $args, array(
-                    'depth'     => $depth,
-                    'max_depth' => $args['max_depth'],
-                    'before'    => '<span class="gl-comment__reply">',
-                    'after'     => '</span>',
-                ) ) );
-                edit_comment_link( esc_html__( 'Edit', 'gtalobby' ), '<span class="gl-comment__edit">', '</span>' );
-                ?>
-            </div>
-        </article>
-    <?php
-}
-endif;
-?>
