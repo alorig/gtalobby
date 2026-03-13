@@ -45,6 +45,10 @@ function gtalobby_enqueue_assets() {
         wp_enqueue_style( 'gtalobby-single', $uri . '/css/single-templates.css', array( 'gtalobby-components' ), $ver );
     }
 
+    if ( is_front_page() ) {
+        wp_enqueue_style( 'gtalobby-homepage', $uri . '/css/homepage.css', array( 'gtalobby-components' ), $ver );
+    }
+
     if ( is_front_page() || is_archive() || is_home() || is_search() || is_404() ) {
         wp_enqueue_style( 'gtalobby-archives', $uri . '/css/archives.css', array( 'gtalobby-components' ), $ver );
     }
