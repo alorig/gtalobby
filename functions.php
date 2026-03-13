@@ -151,8 +151,9 @@ require_once GTALOBBY_INC . '/interlinking.php';
 // Admin & settings
 require_once GTALOBBY_INC . '/admin-settings.php';
 
-// Content seeder (hub pages)
+// Content seeders
 require_once GTALOBBY_INC . '/seed-hub-pages.php';
+require_once GTALOBBY_INC . '/seed-content.php';
 
 // Assets
 require_once GTALOBBY_INC . '/enqueue.php';

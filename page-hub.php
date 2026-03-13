@@ -3,8 +3,8 @@
  * Template Name: Hub Page
  * Template Post Type: page
  *
- * GtaLobby Hub Page — Micro-website / Magazine + Landing Page hybrid.
- * Uses the Layout Engine zone system for fully configurable content blocks.
+ * GtaLobby Hub Page — Micro-website landing page with sidebar.
+ * Each hub page covers an entire SAG keyword cluster.
  *
  * @package GtaLobby
  */
@@ -23,20 +23,20 @@ $faq_items       = get_post_meta( $hub_id, 'hub_faq_items', true );
 $child_posts     = get_post_meta( $hub_id, 'hub_child_posts', true );
 $featured_post   = get_post_meta( $hub_id, 'hub_featured_post', true );
 $cross_links     = get_post_meta( $hub_id, 'hub_cross_cluster_links', true );
-$category_slug   = gtalobby_get_current_category_slug();
+$cat_color       = gtalobby_get_category_color( $hub_sector );
 ?>
 
-<div class="gl-hub gl-hub--<?php echo esc_attr( $hub_layout ); ?> gl-hub--hero-<?php echo esc_attr( $hub_hero_style ); ?>">
+<div class="gl-hub gl-hub--<?php echo esc_attr( $hub_layout ); ?>" style="--hub-accent: <?php echo esc_attr( $cat_color ); ?>">
 
-    <?php /* --- BREADCRUMB ZONE --- */ ?>
+    <?php /* --- BREADCRUMB --- */ ?>
     <div class="gl-zone gl-zone--breadcrumb">
         <div class="gl-container">
             <?php gtalobby_breadcrumbs(); ?>
         </div>
     </div>
 
-    <?php /* --- HERO ZONE --- */ ?>
-    <section class="gl-zone gl-zone--hero gl-hub-hero gl-hub-hero--<?php echo esc_attr( $hub_hero_style ); ?>">
+    <?php /* --- HERO --- */ ?>
+    <section class="gl-hub-hero gl-hub-hero--<?php echo esc_attr( $hub_hero_style ); ?>">
         <?php if ( has_post_thumbnail() ) : ?>
             <div class="gl-hub-hero__bg" style="background-image: url(<?php echo esc_url( get_the_post_thumbnail_url( $hub_id, 'gl-hero' ) ); ?>)"></div>
         <?php endif; ?>
@@ -52,7 +52,7 @@ $category_slug   = gtalobby_get_current_category_slug();
         </div>
     </section>
 
-    <?php /* --- KEY FACTS ZONE --- */ ?>
+    <?php /* --- KEY FACTS --- */ ?>
     <?php if ( is_array( $key_facts ) && ! empty( $key_facts ) ) : ?>
     <section class="gl-zone gl-zone--key-facts">
         <div class="gl-container">
@@ -70,44 +70,128 @@ $category_slug   = gtalobby_get_current_category_slug();
     </section>
     <?php endif; ?>
 
-    <?php /* --- QUICK ANSWER ZONE --- */ ?>
-    <?php if ( $hub_quick_ans ) : ?>
-    <section class="gl-zone gl-zone--quick-answer">
-        <div class="gl-container gl-container--narrow">
-            <div class="gl-quick-answer">
-                <h2 class="gl-quick-answer__heading"><?php esc_html_e( 'Quick Answer', 'gtalobby' ); ?></h2>
-                <div class="gl-quick-answer__text"><?php echo wp_kses_post( $hub_quick_ans ); ?></div>
-            </div>
-        </div>
-    </section>
-    <?php endif; ?>
+    <?php /* --- MAIN CONTENT AREA WITH SIDEBAR --- */ ?>
+    <div class="gl-container">
+        <div class="gl-hub-layout">
 
-    <?php /* --- TABLE OF CONTENTS ZONE --- */ ?>
-    <?php
-    $toc = gtalobby_generate_toc( get_the_content() );
-    if ( $toc ) :
-    ?>
-    <section class="gl-zone gl-zone--toc">
-        <div class="gl-container gl-container--narrow">
-            <?php echo $toc; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-        </div>
-    </section>
-    <?php endif; ?>
+            <?php /* --- PRIMARY COLUMN --- */ ?>
+            <div class="gl-hub-layout__primary">
 
-    <?php /* --- BODY CONTENT ZONE --- */ ?>
-    <section class="gl-zone gl-zone--body-content">
-        <div class="gl-container gl-container--narrow">
-            <div class="gl-content gl-typography">
-                <?php the_content(); ?>
-            </div>
-        </div>
-    </section>
+                <?php /* Quick Answer */ ?>
+                <?php if ( $hub_quick_ans ) : ?>
+                <section class="gl-zone gl-zone--quick-answer">
+                    <div class="gl-quick-answer">
+                        <h2 class="gl-quick-answer__heading"><?php esc_html_e( 'Quick Answer', 'gtalobby' ); ?></h2>
+                        <div class="gl-quick-answer__text"><?php echo wp_kses_post( $hub_quick_ans ); ?></div>
+                    </div>
+                </section>
+                <?php endif; ?>
 
-    <?php /* --- FEATURED POST ZONE --- */ ?>
-    <?php if ( $featured_post ) : ?>
-    <section class="gl-zone gl-zone--featured">
+                <?php /* Table of Contents */ ?>
+                <?php
+                $toc = gtalobby_generate_toc( get_the_content() );
+                if ( $toc ) :
+                ?>
+                <section class="gl-zone gl-zone--toc">
+                    <?php echo $toc; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+                </section>
+                <?php endif; ?>
+
+                <?php /* Body Content */ ?>
+                <section class="gl-zone gl-zone--body-content">
+                    <div class="gl-content gl-typography">
+                        <?php the_content(); ?>
+                    </div>
+                </section>
+
+                <?php /* GTA 6 Notice */ ?>
+                <?php if ( gtalobby_is_gta6_content() && gtalobby_is_enabled( 'enable_gta6_mode' ) ) : ?>
+                <div class="gl-gta6-notice">
+                    <strong><?php esc_html_e( 'GTA 6 Content Notice', 'gtalobby' ); ?></strong>
+                    <p><?php echo esc_html( gtalobby_get_gta6_option( 'gta6_notice_text' ) ?: 'This article covers pre-release GTA 6 information and will be updated when the game launches.' ); ?></p>
+                </div>
+                <?php endif; ?>
+
+            </div><!-- /.gl-hub-layout__primary -->
+
+            <?php /* --- SIDEBAR --- */ ?>
+            <aside class="gl-hub-layout__sidebar">
+
+                <?php /* Related Hub Pages */ ?>
+                <?php
+                $related_hubs = get_posts( array(
+                    'post_type'      => 'page',
+                    'posts_per_page' => 5,
+                    'post_status'    => 'publish',
+                    'meta_key'       => 'hub_sector',
+                    'meta_value'     => $hub_sector,
+                    'exclude'        => array( $hub_id ),
+                ) );
+                if ( ! empty( $related_hubs ) ) :
+                ?>
+                <div class="gl-sidebar__section">
+                    <h3 class="gl-sidebar__title"><?php esc_html_e( 'Related Hubs', 'gtalobby' ); ?></h3>
+                    <ul class="gl-sidebar__list">
+                        <?php foreach ( $related_hubs as $rh ) : ?>
+                        <li>
+                            <a href="<?php echo esc_url( get_permalink( $rh->ID ) ); ?>">
+                                <?php echo esc_html( get_post_meta( $rh->ID, 'hub_cluster_name', true ) ?: $rh->post_title ); ?>
+                            </a>
+                        </li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+                <?php endif; ?>
+
+                <?php /* Category Link */ ?>
+                <?php
+                $sector_cat = get_category_by_slug( $hub_sector );
+                if ( $sector_cat ) :
+                ?>
+                <div class="gl-sidebar__section">
+                    <h3 class="gl-sidebar__title"><?php esc_html_e( 'Category', 'gtalobby' ); ?></h3>
+                    <a href="<?php echo esc_url( get_category_link( $sector_cat->term_id ) ); ?>" class="gl-sidebar__cat-link" style="--cat-accent: <?php echo esc_attr( $cat_color ); ?>">
+                        <?php gtalobby_icon( gtalobby_get_category_icon( $hub_sector ), 18 ); ?>
+                        <?php echo esc_html( $sector_cat->name ); ?>
+                        <span class="gl-sidebar__cat-count"><?php echo esc_html( $sector_cat->count ); ?></span>
+                    </a>
+                </div>
+                <?php endif; ?>
+
+                <?php /* Hub Key Info */ ?>
+                <div class="gl-sidebar__section">
+                    <h3 class="gl-sidebar__title"><?php esc_html_e( 'About This Hub', 'gtalobby' ); ?></h3>
+                    <dl class="gl-sidebar__info-list">
+                        <?php if ( $hub_cluster ) : ?>
+                        <dt><?php esc_html_e( 'Cluster', 'gtalobby' ); ?></dt>
+                        <dd><?php echo esc_html( $hub_cluster ); ?></dd>
+                        <?php endif; ?>
+                        <?php if ( $hub_keyword ) : ?>
+                        <dt><?php esc_html_e( 'Target Keyword', 'gtalobby' ); ?></dt>
+                        <dd><?php echo esc_html( $hub_keyword ); ?></dd>
+                        <?php endif; ?>
+                        <?php if ( is_array( $child_posts ) && ! empty( $child_posts ) ) : ?>
+                        <dt><?php esc_html_e( 'Articles', 'gtalobby' ); ?></dt>
+                        <dd><?php echo count( $child_posts ); ?></dd>
+                        <?php endif; ?>
+                    </dl>
+                </div>
+
+                <?php gtalobby_render_ad_slot( 'ad_hub_sidebar' ); ?>
+
+            </aside><!-- /.gl-hub-layout__sidebar -->
+
+        </div><!-- /.gl-hub-layout -->
+    </div>
+
+    <?php /* --- FEATURED POST + CHILD POSTS (full width below) --- */ ?>
+    <?php if ( $featured_post || ( is_array( $child_posts ) && ! empty( $child_posts ) ) ) : ?>
+    <section class="gl-zone gl-zone--child-posts">
         <div class="gl-container">
-            <h2 class="gl-zone__title"><?php esc_html_e( 'Featured', 'gtalobby' ); ?></h2>
+
+            <?php /* Featured Post */ ?>
+            <?php if ( $featured_post ) : ?>
+            <h2 class="gl-zone__title"><?php esc_html_e( 'Featured Article', 'gtalobby' ); ?></h2>
             <?php
             $feat_query = new WP_Query( array(
                 'post__in'       => array( $featured_post ),
@@ -117,20 +201,37 @@ $category_slug   = gtalobby_get_current_category_slug();
             if ( $feat_query->have_posts() ) :
                 while ( $feat_query->have_posts() ) :
                     $feat_query->the_post();
-                    gtalobby_card( 'feature' );
+            ?>
+            <article class="gl-featured-card gl-featured-card--hub">
+                <?php if ( has_post_thumbnail() ) : ?>
+                <div class="gl-featured-card__thumb">
+                    <?php the_post_thumbnail( 'gl-feature', array( 'class' => 'gl-featured-card__img' ) ); ?>
+                </div>
+                <?php else : ?>
+                <div class="gl-featured-card__thumb gl-featured-card__thumb--placeholder" style="--cat-accent: <?php echo esc_attr( $cat_color ); ?>">
+                    <?php gtalobby_icon( gtalobby_get_category_icon( $hub_sector ), 48 ); ?>
+                </div>
+                <?php endif; ?>
+                <div class="gl-featured-card__body">
+                    <?php gtalobby_post_type_badge(); ?>
+                    <h3 class="gl-featured-card__title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
+                    <p class="gl-featured-card__excerpt"><?php echo esc_html( wp_trim_words( get_the_excerpt(), 30 ) ); ?></p>
+                    <div class="gl-featured-card__footer">
+                        <span><?php echo esc_html( get_the_date() ); ?></span>
+                        <span class="gl-featured-card__read"><?php esc_html_e( 'Read Article', 'gtalobby' ); ?> →</span>
+                    </div>
+                </div>
+            </article>
+            <?php
                 endwhile;
                 wp_reset_postdata();
             endif;
+            endif; // featured_post
             ?>
-        </div>
-    </section>
-    <?php endif; ?>
 
-    <?php /* --- CHILD POSTS GRID ZONE --- */ ?>
-    <?php if ( is_array( $child_posts ) && ! empty( $child_posts ) ) : ?>
-    <section class="gl-zone gl-zone--child-posts">
-        <div class="gl-container">
-            <h2 class="gl-zone__title"><?php esc_html_e( 'All Content in This Topic', 'gtalobby' ); ?></h2>
+            <?php /* Child Posts Grid */ ?>
+            <?php if ( is_array( $child_posts ) && ! empty( $child_posts ) ) : ?>
+            <h2 class="gl-zone__title gl-zone__title--children"><?php esc_html_e( 'All Articles in This Hub', 'gtalobby' ); ?></h2>
 
             <?php
             $per_hub = gtalobby_get_option( 'gtalobby_general_options', 'posts_per_hub', 12 );
@@ -147,55 +248,95 @@ $category_slug   = gtalobby_get_current_category_slug();
             ) );
             ?>
 
+            <?php if ( $children_query->have_posts() ) : ?>
             <!-- Post Type Filter Tabs -->
             <div class="gl-hub-filters">
                 <button class="gl-hub-filter gl-hub-filter--active" data-filter="all"><?php esc_html_e( 'All', 'gtalobby' ); ?></button>
                 <?php
-                // Get unique post types in children
                 $child_types = array();
-                if ( $children_query->have_posts() ) :
-                    foreach ( $children_query->posts as $cp ) {
-                        $child_types[ $cp->post_type ] = true;
-                    }
-                    foreach ( array_keys( $child_types ) as $ct ) :
-                        $pt_info = gtalobby_get_post_type_info( $ct );
+                foreach ( $children_query->posts as $cp ) {
+                    $child_types[ $cp->post_type ] = true;
+                }
+                foreach ( array_keys( $child_types ) as $ct ) :
+                    $pt_info = gtalobby_get_post_type_info( $ct );
                 ?>
-                    <button class="gl-hub-filter" data-filter="<?php echo esc_attr( $ct ); ?>"><?php echo esc_html( $pt_info['label'] . 's' ); ?></button>
-                <?php
-                    endforeach;
-                endif;
-                ?>
+                <button class="gl-hub-filter" data-filter="<?php echo esc_attr( $ct ); ?>">
+                    <?php echo esc_html( $pt_info['label'] . 's' ); ?>
+                </button>
+                <?php endforeach; ?>
             </div>
 
             <div class="gl-card-grid gl-card-grid--3col">
-                <?php
-                if ( $children_query->have_posts() ) :
-                    while ( $children_query->have_posts() ) :
-                        $children_query->the_post();
-                        echo '<div class="gl-card-grid__item" data-post-type="' . esc_attr( get_post_type() ) . '">';
-                        gtalobby_card( 'standard' );
-                        echo '</div>';
-                    endwhile;
-                endif;
-                wp_reset_postdata();
-                ?>
+                <?php while ( $children_query->have_posts() ) : $children_query->the_post(); ?>
+                <div class="gl-card-grid__item" data-post-type="<?php echo esc_attr( get_post_type() ); ?>">
+                    <article class="gl-post-card">
+                        <?php if ( has_post_thumbnail() ) : ?>
+                        <div class="gl-post-card__thumb">
+                            <?php the_post_thumbnail( 'gl-card', array( 'class' => 'gl-post-card__img' ) ); ?>
+                        </div>
+                        <?php else : ?>
+                        <div class="gl-post-card__thumb gl-post-card__thumb--placeholder" style="--cat-accent: <?php echo esc_attr( $cat_color ); ?>">
+                            <?php gtalobby_icon( gtalobby_get_category_icon( $hub_sector ), 28 ); ?>
+                        </div>
+                        <?php endif; ?>
+                        <div class="gl-post-card__body">
+                            <div class="gl-post-card__meta">
+                                <?php gtalobby_post_type_badge(); ?>
+                                <span class="gl-post-card__date"><?php echo esc_html( get_the_date( 'M j' ) ); ?></span>
+                            </div>
+                            <h4 class="gl-post-card__title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h4>
+                            <p class="gl-post-card__excerpt"><?php echo esc_html( wp_trim_words( get_the_excerpt(), 14 ) ); ?></p>
+                        </div>
+                    </article>
+                </div>
+                <?php endwhile; wp_reset_postdata(); ?>
             </div>
 
             <?php gtalobby_pagination( $children_query ); ?>
+            <?php endif; // children have_posts ?>
+            <?php endif; // child_posts ?>
+
         </div>
     </section>
-    <?php endif; ?>
+    <?php endif; // featured or children ?>
 
-    <?php /* --- CROSS-CLUSTER LINKS ZONE --- */ ?>
+    <?php /* --- CROSS-CLUSTER LINKS --- */ ?>
     <?php if ( is_array( $cross_links ) && ! empty( $cross_links ) ) : ?>
     <section class="gl-zone gl-zone--cross-cluster">
         <div class="gl-container">
-            <?php gtalobby_cross_cluster_links( $hub_id ); ?>
+            <h2 class="gl-zone__title"><?php esc_html_e( 'Related Topic Hubs', 'gtalobby' ); ?></h2>
+            <div class="gl-cross-cluster__grid">
+                <?php
+                $cross_query = new WP_Query( array(
+                    'post__in'       => $cross_links,
+                    'post_type'      => 'page',
+                    'posts_per_page' => 5,
+                    'post_status'    => 'publish',
+                ) );
+                if ( $cross_query->have_posts() ) :
+                    while ( $cross_query->have_posts() ) :
+                        $cross_query->the_post();
+                        $cx_sector = get_post_meta( get_the_ID(), 'hub_sector', true );
+                        $cx_color  = gtalobby_get_category_color( $cx_sector );
+                        $cx_name   = get_post_meta( get_the_ID(), 'hub_cluster_name', true );
+                ?>
+                <a href="<?php the_permalink(); ?>" class="gl-cross-card" style="--cat-accent: <?php echo esc_attr( $cx_color ); ?>">
+                    <span class="gl-cross-card__cluster"><?php echo esc_html( $cx_name ); ?></span>
+                    <h3 class="gl-cross-card__title"><?php the_title(); ?></h3>
+                    <p class="gl-cross-card__excerpt"><?php echo esc_html( wp_trim_words( get_the_excerpt(), 16 ) ); ?></p>
+                    <span class="gl-cross-card__link"><?php esc_html_e( 'Explore', 'gtalobby' ); ?> →</span>
+                </a>
+                <?php
+                    endwhile;
+                    wp_reset_postdata();
+                endif;
+                ?>
+            </div>
         </div>
     </section>
     <?php endif; ?>
 
-    <?php /* --- FAQ ZONE --- */ ?>
+    <?php /* --- FAQ --- */ ?>
     <?php if ( is_array( $faq_items ) && ! empty( $faq_items ) ) : ?>
     <section class="gl-zone gl-zone--faq">
         <div class="gl-container gl-container--narrow">
@@ -214,18 +355,7 @@ $category_slug   = gtalobby_get_current_category_slug();
     </section>
     <?php endif; ?>
 
-    <?php /* --- GTA 6 NOTICE ZONE --- */ ?>
-    <?php if ( gtalobby_is_gta6_content() && gtalobby_is_enabled( 'enable_gta6_mode' ) ) : ?>
-    <section class="gl-zone gl-zone--gta6-notice">
-        <div class="gl-container gl-container--narrow">
-            <div class="gl-gta6-notice">
-                <p><?php echo esc_html( gtalobby_get_gta6_option( 'gta6_notice_text' ) ); ?></p>
-            </div>
-        </div>
-    </section>
-    <?php endif; ?>
-
-    <?php /* --- AD SLOT ZONE --- */ ?>
+    <?php /* --- AD SLOT --- */ ?>
     <div class="gl-zone gl-zone--ad">
         <div class="gl-container">
             <?php gtalobby_render_ad_slot( 'ad_hub_zone' ); ?>
