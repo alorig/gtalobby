@@ -30,10 +30,11 @@ function gtalobby_enqueue_assets() {
     // Main theme stylesheet (header only, but needed for WP recognition)
     wp_enqueue_style( 'gtalobby-style', get_stylesheet_uri(), array( 'gtalobby-tokens' ), $ver );
 
-    // Component styles
+    // Core styles (always loaded)
     wp_enqueue_style( 'gtalobby-typography', $uri . '/css/typography.css', array( 'gtalobby-tokens' ), $ver );
     wp_enqueue_style( 'gtalobby-components', $uri . '/css/components.css', array( 'gtalobby-tokens' ), $ver );
-    wp_enqueue_style( 'gtalobby-responsive', $uri . '/css/responsive.css', array( 'gtalobby-components' ), $ver );
+    wp_enqueue_style( 'gtalobby-layout', $uri . '/css/layout.css', array( 'gtalobby-components' ), $ver );
+    wp_enqueue_style( 'gtalobby-responsive', $uri . '/css/responsive.css', array( 'gtalobby-layout' ), $ver );
 
     // Context-specific styles
     if ( is_page_template( 'page-hub.php' ) ) {
@@ -44,7 +45,7 @@ function gtalobby_enqueue_assets() {
         wp_enqueue_style( 'gtalobby-single', $uri . '/css/single-templates.css', array( 'gtalobby-components' ), $ver );
     }
 
-    if ( is_archive() || is_home() || is_search() ) {
+    if ( is_front_page() || is_archive() || is_home() || is_search() ) {
         wp_enqueue_style( 'gtalobby-archives', $uri . '/css/archives.css', array( 'gtalobby-components' ), $ver );
     }
 

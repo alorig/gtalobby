@@ -41,13 +41,14 @@ $sag_categories = gtalobby_get_sag_categories();
         <div class="gl-container">
             <h2 class="gl-zone__title"><?php esc_html_e( 'Explore by Category', 'gtalobby' ); ?></h2>
             <div class="gl-category-grid">
-                <?php foreach ( $sag_categories as $slug => $cat_data ) :
+                <?php foreach ( $sag_categories as $slug => $cat_name ) :
                     $cat_obj = get_category_by_slug( $slug );
                     if ( ! $cat_obj ) continue;
                     $color = gtalobby_get_category_color( $slug );
+                    $icon  = gtalobby_get_category_icon( $slug );
                 ?>
                 <a href="<?php echo esc_url( get_category_link( $cat_obj->term_id ) ); ?>" class="gl-category-tile" style="--cat-accent: <?php echo esc_attr( $color ); ?>">
-                    <span class="gl-category-tile__icon"><?php echo esc_html( $cat_data['icon'] ?? '📁' ); ?></span>
+                    <span class="gl-category-tile__icon"><?php echo esc_html( $icon ); ?></span>
                     <h3 class="gl-category-tile__name"><?php echo esc_html( $cat_obj->name ); ?></h3>
                     <span class="gl-category-tile__count"><?php echo esc_html( $cat_obj->count ); ?> <?php esc_html_e( 'articles', 'gtalobby' ); ?></span>
                 </a>

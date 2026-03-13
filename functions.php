@@ -234,6 +234,24 @@ function gtalobby_get_category_color( $slug ) {
 }
 
 /**
+ * Get the emoji icon for a SAG category slug.
+ */
+function gtalobby_get_category_icon( $slug ) {
+    $icons = array(
+        'gta6'       => '🎮',
+        'cheats'     => '🔓',
+        'online'     => '🌐',
+        'mods'       => '🔧',
+        'cars'       => '🚗',
+        'characters' => '🎭',
+        'locations'  => '🗺️',
+        'money'      => '💰',
+        'news'       => '📰',
+    );
+    return isset( $icons[ $slug ] ) ? $icons[ $slug ] : '📁';
+}
+
+/**
  * Check if current post/page is in the GTA 6 category.
  */
 function gtalobby_is_gta6_content() {
