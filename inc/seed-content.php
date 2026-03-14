@@ -32,6 +32,12 @@ function gtalobby_seed_content() {
     // Seed posts across all post types.
     $post_ids = gtalobby_seed_posts();
 
+    // Ensure at least one visible GTA 6 article exists (quick sample content).
+    $sample_post_id = gtalobby_seed_sample_post();
+    if ( $sample_post_id ) {
+        $post_ids[] = $sample_post_id;
+    }
+
     // Wire up hub ↔ child relationships.
     gtalobby_wire_hub_children( $hub_ids, $post_ids );
 
@@ -65,6 +71,64 @@ function gtalobby_get_cat_id( $slug ) {
 function gtalobby_get_term_id( $slug, $taxonomy ) {
     $term = get_term_by( 'slug', $slug, $taxonomy );
     return $term ? $term->term_id : 0;
+}
+
+/**
+ * Ensure sample GTA 6 article exists so the UI has immediate visible content.
+ */
+function gtalobby_seed_sample_post() {
+    if ( ! function_exists( 'wp_insert_post' ) ) {
+        return 0;
+    }
+
+    $gta6_cat = get_category_by_slug( 'gta6' );
+    if ( ! $gta6_cat ) {
+        $cat_id = wp_create_category( 'GTA 6' );
+        if ( is_wp_error( $cat_id ) || ! $cat_id ) {
+            return 0;
+        }
+        $gta6_cat = get_category( $cat_id );
+    }
+
+    $existing = get_posts( array(
+        'category'       => $gta6_cat->term_id,
+        'post_type'      => 'post',
+        'post_status'    => 'publish',
+        'posts_per_page' => 1,
+    ) );
+    if ( ! empty( $existing ) ) {
+        return 0;
+    }
+
+    $sample_id = wp_insert_post( array(
+        'post_title'   => 'GTA 6 Release Date Update (Seeded Sample)',
+        'post_content' => '<p>This is a seeded sample article for the GTA 6 hub. It displays content in the hub/category listing so the page no longer shows empty state.</p>',
+        'post_excerpt' => 'Seeded GTA 6 release date update content',
+        'post_status'  => 'publish',
+        'post_type'    => 'post',
+        'post_author'  => get_current_user_id() ?: 1,
+        'post_category'=> array( $gta6_cat->term_id ),
+    ), true );
+
+    if ( is_wp_error( $sample_id ) || ! $sample_id ) {
+        return 0;
+    }
+
+    wp_set_post_terms( $sample_id, array( $gta6_cat->term_id ), 'category', false );
+
+    $hub = get_page_by_path( 'gta-6-release-date' );
+    if ( $hub && $hub->ID ) {
+        $child_posts = get_post_meta( $hub->ID, 'hub_child_posts', true );
+        if ( ! is_array( $child_posts ) ) {
+            $child_posts = array();
+        }
+        if ( ! in_array( $sample_id, $child_posts, true ) ) {
+            $child_posts[] = $sample_id;
+            update_post_meta( $hub->ID, 'hub_child_posts', $child_posts );
+        }
+    }
+
+    return $sample_id;
 }
 
 /* ==========================================================================
