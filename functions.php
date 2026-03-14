@@ -223,18 +223,10 @@ function gtalobby_get_sag_categories() {
  * Get the category accent color for a given slug or name.
  */
 function gtalobby_get_category_color( $slug ) {
-    $fallback = '#6C5CE7';
-    $colors = array(
-        'gta6'       => '#6C5CE7',
-        'cheats'     => '#E17055',
-        'online'     => '#00CEC9',
-        'mods'       => '#00B894',
-        'cars'       => '#FDCB6E',
-        'characters' => '#E84393',
-        'locations'  => '#0984E3',
-        'money'      => '#F9A825',
-        'news'       => '#636E72',
-    );
+    // Pull colors from the centralized color system (admin-editable)
+    $config = gtalobby_get_color_config();
+
+    $fallback = $config['cat_gta6'];
 
     if ( ! $slug ) {
         return $fallback;
@@ -242,26 +234,27 @@ function gtalobby_get_category_color( $slug ) {
 
     $slug = strtolower( trim( $slug ) );
 
-    if ( isset( $colors[ $slug ] ) ) {
-        return $colors[ $slug ];
+    // Direct match: slug → cat_{slug}
+    if ( isset( $config[ 'cat_' . $slug ] ) ) {
+        return $config[ 'cat_' . $slug ];
     }
 
     // Support category name lookup from SAG category labels.
     foreach ( gtalobby_get_sag_categories() as $item_slug => $label ) {
         if ( strtolower( $label ) === $slug ) {
-            return isset( $colors[ $item_slug ] ) ? $colors[ $item_slug ] : $fallback;
+            return isset( $config[ 'cat_' . $item_slug ] ) ? $config[ 'cat_' . $item_slug ] : $fallback;
         }
     }
 
     // Support existing WordPress category slug / name via taxonomy lookup.
     $term = get_category_by_slug( $slug );
-    if ( $term && ! is_wp_error( $term ) && isset( $colors[ $term->slug ] ) ) {
-        return $colors[ $term->slug ];
+    if ( $term && ! is_wp_error( $term ) && isset( $config[ 'cat_' . $term->slug ] ) ) {
+        return $config[ 'cat_' . $term->slug ];
     }
 
     $term = get_term_by( 'name', $slug, 'category' );
-    if ( $term && ! is_wp_error( $term ) && isset( $colors[ $term->slug ] ) ) {
-        return $colors[ $term->slug ];
+    if ( $term && ! is_wp_error( $term ) && isset( $config[ 'cat_' . $term->slug ] ) ) {
+        return $config[ 'cat_' . $term->slug ];
     }
 
     return $fallback;

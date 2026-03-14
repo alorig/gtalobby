@@ -337,48 +337,49 @@ function gtalobby_get_post_types() {
  */
 function gtalobby_get_post_type_info( $post_type = null ) {
     $post_type = $post_type ?: get_post_type();
+    $config    = gtalobby_get_color_config();
 
     $types = array(
         'mod' => array(
             'label' => esc_html__( 'Mod', 'gtalobby' ),
             'icon'  => 'download',
-            'color' => '#00B894',
+            'color' => $config['cat_mods'],
         ),
         'guide' => array(
             'label' => esc_html__( 'Guide', 'gtalobby' ),
             'icon'  => 'book',
-            'color' => '#6C5CE7',
+            'color' => $config['cat_gta6'],
         ),
         'ranking' => array(
             'label' => esc_html__( 'Ranking', 'gtalobby' ),
             'icon'  => 'trophy',
-            'color' => '#FDCB6E',
+            'color' => $config['cat_cars'],
         ),
         'profile' => array(
             'label' => esc_html__( 'Profile', 'gtalobby' ),
             'icon'  => 'user',
-            'color' => '#E84393',
+            'color' => $config['cat_characters'],
         ),
         'answer' => array(
             'label' => esc_html__( 'Answer', 'gtalobby' ),
             'icon'  => 'zap',
-            'color' => '#0984E3',
+            'color' => $config['cat_locations'],
         ),
         'database' => array(
             'label' => esc_html__( 'Database', 'gtalobby' ),
             'icon'  => 'grid',
-            'color' => '#00CEC9',
+            'color' => $config['cat_online'],
         ),
         'recap' => array(
             'label' => esc_html__( 'Recap', 'gtalobby' ),
             'icon'  => 'calendar',
-            'color' => '#636E72',
+            'color' => $config['cat_news'],
         ),
     );
 
     return isset( $types[ $post_type ] ) ? $types[ $post_type ] : array(
         'label' => esc_html__( 'Post', 'gtalobby' ),
         'icon'  => 'file',
-        'color' => '#718096',
+        'color' => $config['cat_news'],
     );
 }
