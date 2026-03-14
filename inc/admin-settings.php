@@ -336,6 +336,7 @@ function gtalobby_register_color_fields() {
     $register_group( 'gtalobby_colors_borders', array(
         'color_border'          => esc_html__( 'Border', 'gtalobby' ),
         'color_divider'         => esc_html__( 'Divider', 'gtalobby' ),
+        'color_footer_bg'       => esc_html__( 'Footer Background', 'gtalobby' ),
     ) );
 
     /* --- Section: Primary Accent Colors --- */
@@ -799,9 +800,10 @@ function gtalobby_render_color_field( $args ) {
         'color_text_secondary'  => 'text_secondary',
         'color_text_tertiary'   => 'text_tertiary',
         'color_text_inverse'    => 'text_inverse',
-        // Borders
+        // Borders & Layout
         'color_border'          => 'border',
         'color_divider'         => 'divider',
+        'color_footer_bg'       => 'footer_bg',
         // Primary Accent
         'color_accent'          => 'accent',
         'color_accent_light'    => 'accent_light',

@@ -48,6 +48,9 @@
     --gl-color-error:           #D63031;
     --gl-color-info:            #0984E3;
 
+    /* Layout / Surface */
+    --gl-color-footer-bg:       #181B22;
+
     /* Category Accent Colors */
     --gl-color-cat-gta6:        #6C5CE7;
     --gl-color-cat-cheats:      #E17055;

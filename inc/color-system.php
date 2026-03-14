@@ -34,9 +34,10 @@ function gtalobby_get_color_overrides() {
         'color_text_secondary'  => 'text_secondary',
         'color_text_tertiary'   => 'text_tertiary',
         'color_text_inverse'    => 'text_inverse',
-        // Borders
+        // Borders & Layout
         'color_border'          => 'border',
         'color_divider'         => 'divider',
+        'color_footer_bg'       => 'footer_bg',
         // Primary Accent
         'color_accent'          => 'accent',
         'color_accent_light'    => 'accent_light',
@@ -99,6 +100,7 @@ function gtalobby_get_color_config() {
         'overlay'         => '#111635',
         'border'          => '#2b3180',
         'divider'         => '#1b214f',
+        'footer_bg'       => '#181B22',
 
         // Text
         'text'            => '#EAF2FF',
@@ -213,6 +215,7 @@ function gtalobby_output_dynamic_colors() {
         'overlay'         => '--gl-color-overlay',
         'border'          => '--gl-color-border',
         'divider'         => '--gl-color-divider',
+        'footer_bg'       => '--gl-color-footer-bg',
         // Text
         'text'            => '--gl-color-text',
         'text_secondary'  => '--gl-color-text-secondary',

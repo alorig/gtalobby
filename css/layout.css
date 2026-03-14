@@ -602,7 +602,7 @@
    ========================================================================== */
 
 .gl-footer {
-    background-color: #181B22;
+    background-color: var(--gl-color-footer-bg, #181B22);
     color: rgba(255, 255, 255, 0.92);
     margin-top: auto;
 }

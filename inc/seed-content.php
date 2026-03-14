@@ -1267,7 +1267,7 @@ function gtalobby_seed_posts() {
             'category'   => 'cars',
             'excerpt'    => 'Comprehensive sortable speed database for GTA 5 vehicles with top speed, lap times, price, and class filters.',
             'meta'       => array( 'data_source' => 'Broughy1322 + GTA Wiki + testing', 'last_updated' => 'March 2026' ),
-            'taxonomies' => array( 'game_title' => array( 'gta-5', 'gta-online' ), 'platform' => array( 'all-platforms' ), 'vehicle_class' => array( 'all' ), 'game_mode' => array( 'story-mode', 'gta-online-mode' ) ),
+            'taxonomies' => array( 'game_title' => array( 'gta-5', 'gta-online' ), 'platform' => array( 'all-platforms' ), 'vehicle_class' => array( 'supercars', 'sports', 'muscle' ), 'game_mode' => array( 'story-mode', 'gta-online-mode' ) ),
             'hub_slug'   => 'fastest-cars-gta-5',
             'content'    => '<!-- wp:paragraph -->
 <p>Database table includes 100+ vehicles sorted by top speed, lap time, and acceleration. Use the filters to find the best car for your class and race type.</p>
@@ -2245,25 +2245,37 @@ function gtalobby_wire_hub_children( $hub_ids, $post_ids ) {
         'gta-6-map' => array(
             'gta-6-everything-we-know',
             'lucia-gta-6-character-profile',
+            'where-is-gta-6-set',
         ),
         'gta-6-release-date' => array(
             'gta-6-everything-we-know',
             'will-gta-6-be-on-pc',
             'most-anticipated-gta-6-features',
             'gta-6-trailer-2-analysis',
+            'gta-6-news-recap-march-2026',
+            'when-is-gta-6-coming-out',
+            'gta-6-confirmed-features-tracker',
+            'gta-6-development-timeline-recap',
         ),
         'gta-5-cheats' => array(
             'gta-5-cheats-ps5-ps4',
             'do-cheats-disable-trophies-gta-5',
+            'gta-5-all-cheat-codes-database',
+            'best-gta-5-cheats-ranked',
         ),
         'gta-online-money-guide' => array(
             'gta-online-cayo-perico-solo-guide',
             'gta-online-weekly-update-march-2026',
             'gta-online-beginner-money-guide',
+            'best-way-to-make-money-gta-online',
+            'best-gta-online-businesses-ranked',
+            'gta-online-business-profit-database',
         ),
         'best-gta-5-mods' => array(
             'naturalvision-evolved-gta-5',
             'lspdfr-police-mod-gta-5',
+            'how-to-install-gta-5-mods-beginners',
+            'best-gta-5-mods-2026-ranked',
         ),
         'gta-5-best-cars' => array(
             'ocelot-virtue-gta-online',
@@ -2282,12 +2294,18 @@ function gtalobby_wire_hub_children( $hub_ids, $post_ids ) {
         'gta-6-characters' => array(
             'lucia-gta-6-character-profile',
             'trevor-philips-character-profile',
+            'gta-5-character-switch-guide',
+            'best-gta-protagonists-ranked',
+            'who-is-lucia-in-gta-6',
         ),
         'gta-5-map-locations' => array(
             'gta-5-hidden-locations-secrets',
+            'best-gta-maps-ranked',
         ),
         'gta-online-nightclub-guide' => array(
             'gta-online-beginner-money-guide',
+            'how-much-does-gta-online-nightclub-make',
+            'best-money-making-methods-gta-online-2026',
         ),
     );
 

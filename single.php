@@ -3,18 +3,36 @@
  * Generic Single Post Template
  *
  * Falls back for any post type without a dedicated single-{post_type}.php.
- * Provides the standard single-post layout with sidebar.
+ * Zones rendered in admin-defined order via the Layout Engine.
  *
  * @package GtaLobby
  */
 
 get_header();
+
+$category_slug = gtalobby_get_current_category_slug();
+$single_zones  = gtalobby_get_layout( 'single', $category_slug );
+
+// Split zones: pre-main (breadcrumb), main-content (inside article), post-article
+$pre_zones     = array( 'breadcrumb' );
+$article_zones = array( 'post_header', 'featured_image', 'quick_answer_box', 'post_type_fields', 'gta6_confidence', 'toc', 'body_content', 'video_embed', 'ranked_items', 'data_table', 'stats_table', 'gallery', 'install_steps', 'download_box', 'weekly_bonuses', 'related_questions' );
+$footer_zones  = array( 'hub_link', 'social_share' );
+$post_zones    = array( 'author_box', 'related_posts', 'post_navigation', 'comments' );
+
+$sorted_article = $sorted_post = array();
+foreach ( $single_zones as $zone_id => $zone_cfg ) {
+    if ( in_array( $zone_id, $article_zones, true ) ) {
+        $sorted_article[ $zone_id ] = $zone_cfg;
+    } elseif ( in_array( $zone_id, $post_zones, true ) ) {
+        $sorted_post[ $zone_id ] = $zone_cfg;
+    }
+}
 ?>
 
 <div class="gl-single">
 
-    <?php if ( gtalobby_is_zone_enabled( 'single', 'breadcrumb' ) ) : ?>
-    <div class="gl-zone gl-zone--breadcrumb">
+    <?php if ( gtalobby_is_zone_enabled( 'single', 'breadcrumb', $category_slug ) ) : ?>
+    <div class="gl-zone gl-zone--breadcrumb" data-zone="breadcrumb">
         <div class="gl-container">
             <?php gtalobby_breadcrumbs(); ?>
         </div>
@@ -28,64 +46,126 @@ get_header();
 
                 <article id="post-<?php the_ID(); ?>" <?php post_class( 'gl-article' ); ?>>
 
-                    <?php if ( gtalobby_is_zone_enabled( 'single', 'post_header' ) ) : ?>
-                    <header class="gl-article__header">
-                        <?php gtalobby_post_type_badge(); ?>
-                        <?php gtalobby_category_badge(); ?>
+                    <?php
+                    foreach ( $sorted_article as $zone_id => $zone_cfg ) :
+                        if ( ! gtalobby_is_zone_enabled( 'single', $zone_id, $category_slug ) ) {
+                            continue;
+                        }
 
-                        <h1 class="gl-article__title"><?php the_title(); ?></h1>
+                        switch ( $zone_id ) :
 
-                        <?php gtalobby_post_meta(); ?>
+                            case 'post_header':
+                            ?>
+                            <header class="gl-article__header" data-zone="post_header">
+                                <?php gtalobby_post_type_badge(); ?>
+                                <?php gtalobby_category_badge(); ?>
+                                <h1 class="gl-article__title"><?php the_title(); ?></h1>
+                                <?php gtalobby_post_meta(); ?>
+                                <?php if ( gtalobby_is_gta6_content() ) : ?>
+                                    <?php gtalobby_confidence_badge(); ?>
+                                <?php endif; ?>
+                            </header>
+                            <?php
+                                break;
 
-                        <?php if ( gtalobby_is_gta6_content() ) : ?>
-                            <?php gtalobby_confidence_badge(); ?>
-                        <?php endif; ?>
-                    </header>
-                    <?php endif; ?>
+                            case 'featured_image':
+                                if ( has_post_thumbnail() ) :
+                            ?>
+                            <div class="gl-article__hero" data-zone="featured_image">
+                                <?php the_post_thumbnail( 'gl-hero', array( 'class' => 'gl-article__hero-img' ) ); ?>
+                            </div>
+                            <?php
+                                endif;
+                                break;
 
-                    <?php if ( gtalobby_is_zone_enabled( 'single', 'featured_image' ) && has_post_thumbnail() ) : ?>
-                    <div class="gl-article__hero">
-                        <?php the_post_thumbnail( 'gl-hero', array( 'class' => 'gl-article__hero-img' ) ); ?>
-                    </div>
-                    <?php endif; ?>
+                            case 'toc':
+                                $toc = gtalobby_generate_toc( get_the_content() );
+                                if ( $toc ) :
+                            ?>
+                            <div class="gl-article__toc" data-zone="toc">
+                                <?php echo $toc; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+                            </div>
+                            <?php
+                                endif;
+                                break;
 
-                    <?php gtalobby_render_ad_slot( 'ad_before_content' ); ?>
+                            case 'body_content':
+                                gtalobby_render_ad_slot( 'ad_before_content' );
+                            ?>
+                            <div class="gl-article__content gl-typography" data-zone="body_content">
+                                <?php the_content(); ?>
+                            </div>
+                            <?php
+                                gtalobby_render_ad_slot( 'ad_after_content' );
+                                break;
+
+                            // Post-type-specific zones — rendered when relevant custom fields exist
+                            case 'quick_answer_box':
+                            case 'post_type_fields':
+                            case 'gta6_confidence':
+                            case 'video_embed':
+                            case 'ranked_items':
+                            case 'data_table':
+                            case 'stats_table':
+                            case 'gallery':
+                            case 'install_steps':
+                            case 'download_box':
+                            case 'weekly_bonuses':
+                            case 'related_questions':
+                                // These zones are handled by dedicated single-{post_type}.php templates.
+                                // The generic single.php renders the core zones only.
+                                break;
+
+                        endswitch;
+                    endforeach;
+                    ?>
 
                     <?php
-                    $toc = gtalobby_generate_toc( get_the_content() );
-                    if ( gtalobby_is_zone_enabled( 'single', 'toc' ) && $toc ) :
+                    // Footer zones (taxonomy tags, hub link, social share)
+                    $has_footer = false;
+                    foreach ( $footer_zones as $fz ) {
+                        if ( gtalobby_is_zone_enabled( 'single', $fz, $category_slug ) ) {
+                            $has_footer = true;
+                            break;
+                        }
+                    }
+                    if ( $has_footer ) :
                     ?>
-                    <div class="gl-article__toc">
-                        <?php echo $toc; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-                    </div>
-                    <?php endif; ?>
-
-                    <?php if ( gtalobby_is_zone_enabled( 'single', 'body_content' ) ) : ?>
-                    <div class="gl-article__content gl-typography">
-                        <?php the_content(); ?>
-                    </div>
-                    <?php endif; ?>
-
-                    <?php gtalobby_render_ad_slot( 'ad_after_content' ); ?>
-
-                    <?php if ( gtalobby_is_zone_enabled( 'single', 'hub_link' ) || gtalobby_is_zone_enabled( 'single', 'related_posts' ) || gtalobby_is_zone_enabled( 'single', 'social_share' ) ) : ?>
                     <footer class="gl-article__footer">
                         <?php gtalobby_taxonomy_tags(); ?>
-                        <?php if ( gtalobby_is_zone_enabled( 'single', 'hub_link' ) ) : ?><?php gtalobby_hub_link(); ?><?php endif; ?>
-                        <?php if ( gtalobby_is_zone_enabled( 'single', 'social_share' ) ) : ?><?php gtalobby_social_share(); ?><?php endif; ?>
+                        <?php if ( gtalobby_is_zone_enabled( 'single', 'hub_link', $category_slug ) ) : ?><?php gtalobby_hub_link(); ?><?php endif; ?>
+                        <?php if ( gtalobby_is_zone_enabled( 'single', 'social_share', $category_slug ) ) : ?><?php gtalobby_social_share(); ?><?php endif; ?>
                     </footer>
                     <?php endif; ?>
 
                 </article>
 
-                <?php if ( gtalobby_is_zone_enabled( 'single', 'author_box' ) ) : ?><?php gtalobby_author_box(); ?><?php endif; ?>
-                <?php if ( gtalobby_is_zone_enabled( 'single', 'related_posts' ) ) : ?><?php gtalobby_related_posts(); ?><?php endif; ?>
-                <?php if ( gtalobby_is_zone_enabled( 'single', 'post_navigation' ) ) : ?><?php gtalobby_post_navigation(); ?><?php endif; ?>
-
                 <?php
-                if ( gtalobby_is_zone_enabled( 'single', 'comments' ) && ( comments_open() || get_comments_number() ) ) :
-                    comments_template();
-                endif;
+                // Post-article zones in admin order
+                foreach ( $sorted_post as $zone_id => $zone_cfg ) :
+                    if ( ! gtalobby_is_zone_enabled( 'single', $zone_id, $category_slug ) ) {
+                        continue;
+                    }
+
+                    switch ( $zone_id ) :
+                        case 'author_box':
+                            gtalobby_author_box();
+                            break;
+                        case 'related_posts':
+                            gtalobby_related_posts();
+                            break;
+                        case 'post_navigation':
+                            if ( function_exists( 'gtalobby_post_navigation' ) ) {
+                                gtalobby_post_navigation();
+                            }
+                            break;
+                        case 'comments':
+                            if ( comments_open() || get_comments_number() ) {
+                                comments_template();
+                            }
+                            break;
+                    endswitch;
+                endforeach;
                 ?>
 
             <?php endwhile; endif; ?>

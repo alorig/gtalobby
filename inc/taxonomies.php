@@ -308,7 +308,7 @@ function gtalobby_setup_default_terms() {
     $cheat_types = array(
         'Vehicle Spawn'               => 'vehicle-spawn',
         'Weapon'                      => 'weapon',
-        'Player (Invincibility/Health)' => 'player',
+        'Player (Health/Armor)'  => 'player',
         'World (Weather/Gravity)'     => 'world',
         'Wanted Level'                => 'wanted-level',
         'Money/Exploit'               => 'money-exploit',

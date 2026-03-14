@@ -115,6 +115,46 @@
 }
 
 /* ==========================================================================
+   STICKY SUB-NAVIGATION
+   ========================================================================== */
+
+.gl-hub-subnav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background-color: var(--gl-color-surface);
+    border-bottom: 1px solid var(--gl-color-border);
+    padding-top: var(--gl-space-3) !important;
+    padding-bottom: var(--gl-space-3) !important;
+}
+
+.gl-hub-subnav__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--gl-space-1);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.gl-hub-subnav__list li a {
+    display: block;
+    padding: var(--gl-space-2) var(--gl-space-4);
+    font-family: var(--gl-font-display);
+    font-size: var(--gl-font-size-sm);
+    font-weight: var(--gl-font-weight-medium);
+    color: var(--gl-color-text-secondary);
+    text-decoration: none;
+    border-radius: var(--gl-radius-full);
+    transition: all var(--gl-transition-fast);
+}
+
+.gl-hub-subnav__list li a:hover {
+    background-color: color-mix(in srgb, var(--hub-accent, var(--gl-color-accent)) 12%, transparent);
+    color: var(--hub-accent, var(--gl-color-accent));
+}
+
+/* ==========================================================================
    KEY FACTS
    ========================================================================== */
 
