@@ -446,6 +446,27 @@ function gtalobby_get_layout( $template_type, $context = '' ) {
 }
 
 /**
+ * Check if a specific zone is enabled, considering layout options and conditions.
+ */
+function gtalobby_is_zone_enabled( $template_type, $zone_id, $context = '' ) {
+    $zones = gtalobby_get_layout( $template_type, $context );
+    if ( empty( $zones[ $zone_id ] ) ) {
+        return false;
+    }
+
+    $zone = $zones[ $zone_id ];
+    if ( empty( $zone['enabled'] ) ) {
+        return false;
+    }
+
+    if ( ! gtalobby_zone_conditions_met( $zone ) ) {
+        return false;
+    }
+
+    return true;
+}
+
+/**
  * Save layout configuration for a template type.
  */
 function gtalobby_save_layout( $template_type, $zones, $context = '' ) {

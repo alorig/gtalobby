@@ -14,12 +14,15 @@ $category_slug = gtalobby_get_current_category_slug();
 
 <div class="gl-archive">
 
+    <?php if ( gtalobby_is_zone_enabled( 'archive', 'breadcrumb' ) ) : ?>
     <div class="gl-zone gl-zone--breadcrumb">
         <div class="gl-container">
             <?php gtalobby_breadcrumbs(); ?>
         </div>
     </div>
+    <?php endif; ?>
 
+    <?php if ( gtalobby_is_zone_enabled( 'archive', 'archive_header' ) ) : ?>
     <section class="gl-zone gl-zone--archive-header gl-archive-header">
         <div class="gl-container">
             <?php if ( is_post_type_archive() ) : ?>
@@ -60,6 +63,7 @@ $category_slug = gtalobby_get_current_category_slug();
             <?php endif; ?>
         </div>
     </section>
+    <?php endif; ?>
 
     <?php gtalobby_render_ad_slot( 'ad_before_content' ); ?>
 
@@ -68,6 +72,7 @@ $category_slug = gtalobby_get_current_category_slug();
         <main class="gl-archive__main" id="main-content">
             <?php if ( have_posts() ) : ?>
 
+            <?php if ( gtalobby_is_zone_enabled( 'archive', 'post_grid' ) ) : ?>
             <div class="gl-card-grid gl-card-grid--3col">
                 <?php
                 while ( have_posts() ) :
@@ -78,8 +83,11 @@ $category_slug = gtalobby_get_current_category_slug();
                 endwhile;
                 ?>
             </div>
+            <?php endif; ?>
 
-            <?php gtalobby_pagination(); ?>
+            <?php if ( gtalobby_is_zone_enabled( 'archive', 'pagination' ) ) : ?>
+                <?php gtalobby_pagination(); ?>
+            <?php endif; ?>
 
             <?php else : ?>
 

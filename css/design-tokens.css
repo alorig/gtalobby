@@ -7,36 +7,36 @@
 
 :root {
     /* -------------------------------------------------------
-       COLOR SYSTEM — Base (Light Theme)
+       COLOR SYSTEM — Base (Dark Vice Streets Theme)
        ------------------------------------------------------- */
-    --gl-color-bg:              #FAFBFC;
-    --gl-color-bg-alt:          #F1F3F5;
-    --gl-color-surface:         #F6F8FA;
-    --gl-color-surface-raised:  #FFFFFF;
-    --gl-color-border:          #E2E6EA;
-    --gl-color-divider:         #DEE2E6;
-    --gl-color-overlay:         rgba(26, 29, 35, 0.6);
+    --gl-color-bg:              #060714;
+    --gl-color-bg-alt:          #0f1328;
+    --gl-color-surface:         #0c1030;
+    --gl-color-surface-raised:  #13183e;
+    --gl-color-border:          #2b3180;
+    --gl-color-divider:         #1b214f;
+    --gl-color-overlay:         rgba(17, 22, 53, 0.6);
 
     /* Text */
-    --gl-color-text:            #1A1D23;
-    --gl-color-text-secondary:  #4A5568;
-    --gl-color-text-tertiary:   #718096;
-    --gl-color-text-inverse:    #FFFFFF;
+    --gl-color-text:            #EAF2FF;
+    --gl-color-text-secondary:  #A9B4DB;
+    --gl-color-text-tertiary:   #8E9ECC;
+    --gl-color-text-inverse:    #0D1223;
     --gl-color-text-link:       var(--gl-color-accent);
     --gl-color-text-link-hover: var(--gl-color-accent-dark);
 
-    /* Primary Accent — Electric Purple (GTA-adjacent, modern) */
-    --gl-color-accent:          #6C5CE7;
-    --gl-color-accent-light:    #A29BFE;
-    --gl-color-accent-dark:     #4834D4;
-    --gl-color-accent-tint:     #F0EDFF;
-    --gl-color-accent-rgb:      108, 92, 231;
+    /* Primary Accent — Neon Magenta */
+    --gl-color-accent:          #FF2C98;
+    --gl-color-accent-light:    #FF88C3;
+    --gl-color-accent-dark:     #A41869;
+    --gl-color-accent-tint:     #371C4B;
+    --gl-color-accent-rgb:      255, 44, 152;
 
-    /* Secondary Accent — Teal/Cyan (data, stats, badges) */
-    --gl-color-secondary:       #00CEC9;
-    --gl-color-secondary-light: #81ECEC;
-    --gl-color-secondary-dark:  #00A8A4;
-    --gl-color-secondary-tint:  #E8FFFE;
+    /* Secondary Accent — Cyber Cyan */
+    --gl-color-secondary:       #27D9FF;
+    --gl-color-secondary-light: #8CE9FF;
+    --gl-color-secondary-dark:  #00A6C8;
+    --gl-color-secondary-tint:  #1B4056;
 
     /* Semantic Colors */
     --gl-color-confirmed:       #00B894;

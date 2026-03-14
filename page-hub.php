@@ -29,13 +29,16 @@ $cat_color       = gtalobby_get_category_color( $hub_sector );
 <div class="gl-hub gl-hub--<?php echo esc_attr( $hub_layout ); ?>" style="--hub-accent: <?php echo esc_attr( $cat_color ); ?>">
 
     <?php /* --- BREADCRUMB --- */ ?>
+    <?php if ( gtalobby_is_zone_enabled( 'hub', 'breadcrumb' ) ) : ?>
     <div class="gl-zone gl-zone--breadcrumb">
         <div class="gl-container">
             <?php gtalobby_breadcrumbs(); ?>
         </div>
     </div>
+    <?php endif; ?>
 
     <?php /* --- HERO --- */ ?>
+    <?php if ( gtalobby_is_zone_enabled( 'hub', 'hero' ) ) : ?>
     <section class="gl-hub-hero gl-hub-hero--<?php echo esc_attr( $hub_hero_style ); ?>">
         <?php if ( has_post_thumbnail() ) : ?>
             <div class="gl-hub-hero__bg" style="background-image: url(<?php echo esc_url( get_the_post_thumbnail_url( $hub_id, 'gl-hero' ) ); ?>)"></div>
@@ -51,9 +54,10 @@ $cat_color       = gtalobby_get_category_color( $hub_sector );
             <?php endif; ?>
         </div>
     </section>
+    <?php endif; ?>
 
     <?php /* --- KEY FACTS --- */ ?>
-    <?php if ( is_array( $key_facts ) && ! empty( $key_facts ) ) : ?>
+    <?php if ( gtalobby_is_zone_enabled( 'hub', 'key_facts' ) && is_array( $key_facts ) && ! empty( $key_facts ) ) : ?>
     <section class="gl-zone gl-zone--key-facts">
         <div class="gl-container">
             <div class="gl-key-facts">
@@ -78,7 +82,7 @@ $cat_color       = gtalobby_get_category_color( $hub_sector );
             <div class="gl-hub-layout__primary">
 
                 <?php /* Quick Answer */ ?>
-                <?php if ( $hub_quick_ans ) : ?>
+                <?php if ( gtalobby_is_zone_enabled( 'hub', 'quick_answer' ) && $hub_quick_ans ) : ?>
                 <section class="gl-zone gl-zone--quick-answer">
                     <div class="gl-quick-answer">
                         <h2 class="gl-quick-answer__heading"><?php esc_html_e( 'Quick Answer', 'gtalobby' ); ?></h2>
@@ -90,7 +94,7 @@ $cat_color       = gtalobby_get_category_color( $hub_sector );
                 <?php /* Table of Contents */ ?>
                 <?php
                 $toc = gtalobby_generate_toc( get_the_content() );
-                if ( $toc ) :
+                if ( gtalobby_is_zone_enabled( 'hub', 'toc' ) && $toc ) :
                 ?>
                 <section class="gl-zone gl-zone--toc">
                     <?php echo $toc; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
@@ -98,14 +102,16 @@ $cat_color       = gtalobby_get_category_color( $hub_sector );
                 <?php endif; ?>
 
                 <?php /* Body Content */ ?>
+                <?php if ( gtalobby_is_zone_enabled( 'hub', 'body_content' ) ) : ?>
                 <section class="gl-zone gl-zone--body-content">
                     <div class="gl-content gl-typography">
                         <?php the_content(); ?>
                     </div>
                 </section>
+                <?php endif; ?>
 
                 <?php /* GTA 6 Notice */ ?>
-                <?php if ( gtalobby_is_gta6_content() && gtalobby_is_enabled( 'enable_gta6_mode' ) ) : ?>
+                <?php if ( gtalobby_is_zone_enabled( 'hub', 'gta6_notice' ) && gtalobby_is_gta6_content() && gtalobby_is_enabled( 'enable_gta6_mode' ) ) : ?>
                 <div class="gl-gta6-notice">
                     <strong><?php esc_html_e( 'GTA 6 Content Notice', 'gtalobby' ); ?></strong>
                     <p><?php echo esc_html( gtalobby_get_gta6_option( 'gta6_notice_text' ) ?: 'This article covers pre-release GTA 6 information and will be updated when the game launches.' ); ?></p>
@@ -185,12 +191,12 @@ $cat_color       = gtalobby_get_category_color( $hub_sector );
     </div>
 
     <?php /* --- FEATURED POST + CHILD POSTS (full width below) --- */ ?>
-    <?php if ( $featured_post || ( is_array( $child_posts ) && ! empty( $child_posts ) ) ) : ?>
+    <?php if ( gtalobby_is_zone_enabled( 'hub', 'featured_children' ) || gtalobby_is_zone_enabled( 'hub', 'child_posts_grid' ) ) : ?>
     <section class="gl-zone gl-zone--child-posts">
         <div class="gl-container">
 
             <?php /* Featured Post */ ?>
-            <?php if ( $featured_post ) : ?>
+            <?php if ( gtalobby_is_zone_enabled( 'hub', 'featured_children' ) && $featured_post ) : ?>
             <h2 class="gl-zone__title"><?php esc_html_e( 'Featured Article', 'gtalobby' ); ?></h2>
             <?php
             $feat_query = new WP_Query( array(
@@ -230,7 +236,7 @@ $cat_color       = gtalobby_get_category_color( $hub_sector );
             ?>
 
             <?php /* Child Posts Grid */ ?>
-            <?php if ( is_array( $child_posts ) && ! empty( $child_posts ) ) : ?>
+            <?php if ( gtalobby_is_zone_enabled( 'hub', 'child_posts_grid' ) && is_array( $child_posts ) && ! empty( $child_posts ) ) : ?>
             <h2 class="gl-zone__title gl-zone__title--children"><?php esc_html_e( 'All Articles in This Hub', 'gtalobby' ); ?></h2>
 
             <?php

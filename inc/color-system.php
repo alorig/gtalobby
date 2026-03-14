@@ -15,31 +15,31 @@ defined( 'ABSPATH' ) || exit;
  */
 function gtalobby_get_color_config() {
     $defaults = array(
-        // Base
-        'bg'              => '#FAFBFC',
-        'bg_alt'          => '#F1F3F5',
-        'surface'         => '#F6F8FA',
-        'surface_raised'  => '#FFFFFF',
-        'border'          => '#E2E6EA',
-        'divider'         => '#DEE2E6',
+        // Base (Vice Streets dark theme)
+        'bg'              => '#060714',
+        'bg_alt'          => '#0f1328',
+        'surface'         => '#0c1030',
+        'surface_raised'  => '#13183e',
+        'border'          => '#2b3180',
+        'divider'         => '#1b214f',
 
         // Text
-        'text'            => '#1A1D23',
-        'text_secondary'  => '#4A5568',
-        'text_tertiary'   => '#718096',
-        'text_inverse'    => '#FFFFFF',
+        'text'            => '#EAF2FF',
+        'text_secondary'  => '#A9B4DB',
+        'text_tertiary'   => '#8E9ECC',
+        'text_inverse'    => '#0D1223',
 
-        // Primary Accent
-        'accent'          => '#6C5CE7',
-        'accent_light'    => '#A29BFE',
-        'accent_dark'     => '#4834D4',
-        'accent_tint'     => '#F0EDFF',
+        // Primary Accent (neon magenta/purple)
+        'accent'          => '#FF2C98',
+        'accent_light'    => '#FF73C2',
+        'accent_dark'     => '#A42877',
+        'accent_tint'     => '#35245e',
 
-        // Secondary Accent
-        'secondary'       => '#00CEC9',
-        'secondary_light' => '#81ECEC',
-        'secondary_dark'  => '#00A8A4',
-        'secondary_tint'  => '#E8FFFE',
+        // Secondary Accent (neon cyan)
+        'secondary'       => '#27D9FF',
+        'secondary_light' => '#8CE9FF',
+        'secondary_dark'  => '#00A6C8',
+        'secondary_tint'  => '#1B4056',
 
         // Semantic
         'confirmed'       => '#00B894',
@@ -50,16 +50,16 @@ function gtalobby_get_color_config() {
         'warning'         => '#FDCB6E',
         'error'           => '#D63031',
 
-        // Category Accents
-        'cat_gta6'        => '#6C5CE7',
-        'cat_cheats'      => '#E17055',
-        'cat_online'      => '#00CEC9',
-        'cat_mods'        => '#00B894',
-        'cat_cars'        => '#FDCB6E',
-        'cat_characters'  => '#E84393',
-        'cat_locations'   => '#0984E3',
-        'cat_money'       => '#F9A825',
-        'cat_news'        => '#636E72',
+        // Category Accents (vice neon palette)
+        'cat_gta6'        => '#FF2C98',
+        'cat_cheats'      => '#FF6A4E',
+        'cat_online'      => '#27D9FF',
+        'cat_mods'        => '#3BB79E',
+        'cat_cars'        => '#FDD976',
+        'cat_characters'  => '#E14ECF',
+        'cat_locations'   => '#4F9BFF',
+        'cat_money'       => '#F9C02D',
+        'cat_news'        => '#8E98C6',
     );
 
     $saved = get_option( 'gtalobby_colors', array() );

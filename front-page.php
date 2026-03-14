@@ -29,6 +29,7 @@ $sag_descriptions = array(
     <?php /* ============================================================
        HERO — GTA 6-focused authority section
        ============================================================ */ ?>
+    <?php if ( gtalobby_is_zone_enabled( 'homepage', 'hero' ) ) : ?>
     <section class="gl-home-hero">
         <div class="gl-home-hero__bg"></div>
         <div class="gl-container">
@@ -76,10 +77,12 @@ $sag_descriptions = array(
             </div>
         </div>
     </section>
+    <?php endif; ?>
 
     <?php /* ============================================================
        CATEGORY GRID — 9 SAG categories with descriptions
        ============================================================ */ ?>
+    <?php if ( gtalobby_is_zone_enabled( 'homepage', 'category_grid' ) ) : ?>
     <section class="gl-zone gl-home-categories">
         <div class="gl-container">
             <div class="gl-home-categories__header">
@@ -110,11 +113,12 @@ $sag_descriptions = array(
             </div>
         </div>
     </section>
+    <?php endif; ?>
 
     <?php /* ============================================================
        GTA 6 SPOTLIGHT — Featured GTA 6 content
        ============================================================ */ ?>
-    <?php if ( gtalobby_is_enabled( 'enable_gta6_mode' ) ) : ?>
+    <?php if ( gtalobby_is_zone_enabled( 'homepage', 'gta6_spotlight' ) && gtalobby_is_enabled( 'enable_gta6_mode' ) ) : ?>
     <section class="gl-zone gl-home-gta6">
         <div class="gl-container">
             <div class="gl-home-gta6__header">
@@ -214,6 +218,7 @@ $sag_descriptions = array(
     <?php /* ============================================================
        FEATURED HUBS — Topic hub landing pages
        ============================================================ */ ?>
+    <?php if ( gtalobby_is_zone_enabled( 'homepage', 'featured_hubs' ) ) : ?>
     <section class="gl-zone gl-home-hubs">
         <div class="gl-container">
             <div class="gl-home-hubs__header">
@@ -261,10 +266,12 @@ $sag_descriptions = array(
             </div>
         </div>
     </section>
+    <?php endif; ?>
 
     <?php /* ============================================================
        LATEST CONTENT — Posts by category with cards
        ============================================================ */ ?>
+    <?php if ( gtalobby_is_zone_enabled( 'homepage', 'latest_posts' ) ) : ?>
     <section class="gl-zone gl-home-latest">
         <div class="gl-container">
             <h2 class="gl-zone__title"><?php esc_html_e( 'Latest Content', 'gtalobby' ); ?></h2>
@@ -328,6 +335,7 @@ $sag_descriptions = array(
 
         </div>
     </section>
+    <?php endif; ?>
 
 </div>
 
