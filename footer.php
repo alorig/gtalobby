@@ -1,4 +1,4 @@
-</main><!-- /.gl-main -->
+</div><!-- /.gl-main -->
 
 <footer class="gl-footer" role="contentinfo">
 
@@ -98,7 +98,7 @@
 
     <!-- Footer Navigation -->
     <?php if ( has_nav_menu( 'footer' ) ) : ?>
-    <div class="gl-footer__nav-wrap">
+    <nav class="gl-footer__nav-wrap" aria-label="<?php esc_attr_e( 'Footer Navigation', 'gtalobby' ); ?>">
         <div class="gl-container">
             <?php
             wp_nav_menu( array(
@@ -110,7 +110,7 @@
             ) );
             ?>
         </div>
-    </div>
+    </nav>
     <?php endif; ?>
 
     <!-- Copyright -->

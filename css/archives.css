@@ -60,6 +60,24 @@
    CATEGORY HEADER
    ========================================================================== */
 
+.gl-category-header__breadcrumb,
+.gl-archive-header__breadcrumb {
+    font-size: var(--gl-font-size-sm);
+    color: var(--gl-color-text-light);
+    margin-bottom: var(--gl-space-3);
+}
+
+.gl-category-header__breadcrumb a,
+.gl-archive-header__breadcrumb a {
+    color: var(--gl-color-text-light);
+    text-decoration: none;
+}
+
+.gl-category-header__breadcrumb a:hover,
+.gl-archive-header__breadcrumb a:hover {
+    color: var(--gl-color-accent);
+}
+
 .gl-category-header {
     background-color: var(--gl-color-surface);
     border-bottom: 3px solid var(--cat-accent, var(--gl-color-accent));
@@ -269,8 +287,8 @@
 
 .gl-home-hero {
     padding: var(--gl-space-16) 0;
-    background: linear-gradient(135deg, var(--gl-color-text) 0%, #2d2d4e 100%);
-    color: #fff;
+    background: linear-gradient(135deg, var(--gl-color-bg) 0%, var(--gl-color-bg-alt) 100%);
+    color: var(--gl-color-text);
     text-align: center;
 }
 
@@ -283,7 +301,7 @@
     font-size: var(--gl-font-size-5xl);
     font-weight: var(--gl-font-weight-extrabold);
     margin-bottom: var(--gl-space-3);
-    color: #fff;
+    color: var(--gl-color-text);
 }
 
 .gl-home-hero__tagline {

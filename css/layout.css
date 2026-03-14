@@ -23,6 +23,25 @@
     border-width: 0;
 }
 
+.gl-skip-link {
+    position: absolute;
+    top: -100%;
+    left: var(--gl-space-4);
+    z-index: var(--gl-z-toast);
+    padding: var(--gl-space-2) var(--gl-space-4);
+    background-color: var(--gl-color-accent);
+    color: var(--gl-color-text);
+    font-weight: var(--gl-font-weight-semibold);
+    font-size: var(--gl-font-size-sm);
+    border-radius: var(--gl-radius-md);
+    text-decoration: none;
+    transition: top var(--gl-transition-fast);
+}
+
+.gl-skip-link:focus {
+    top: var(--gl-space-2);
+}
+
 /* ==========================================================================
    ANNOUNCEMENT BAR
    ========================================================================== */

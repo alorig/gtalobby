@@ -349,3 +349,27 @@ function gtalobby_excerpt_more( $more ) {
     return '&hellip;';
 }
 add_filter( 'excerpt_more', 'gtalobby_excerpt_more' );
+
+/**
+ * Include custom post types in category, tag, and taxonomy archives.
+ * Without this, WordPress only shows standard 'post' type on category pages.
+ */
+function gtalobby_include_cpts_in_archives( $query ) {
+    if ( is_admin() || ! $query->is_main_query() ) {
+        return;
+    }
+
+    if ( is_category() || is_tag() || is_tax() ) {
+        $cpts  = gtalobby_get_post_types();
+        $types = array_merge( array( 'post' ), $cpts );
+        $query->set( 'post_type', $types );
+    }
+
+    // Also include CPTs on the main blog/home page
+    if ( is_home() ) {
+        $cpts  = gtalobby_get_post_types();
+        $types = array_merge( array( 'post' ), $cpts );
+        $query->set( 'post_type', $types );
+    }
+}
+add_action( 'pre_get_posts', 'gtalobby_include_cpts_in_archives' );

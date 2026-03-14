@@ -9,6 +9,7 @@
 
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
+<a class="gl-skip-link" href="#main-content"><?php esc_html_e( 'Skip to content', 'gtalobby' ); ?></a>
 
 <!-- SVG Icon Sprite (hidden) -->
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
@@ -169,4 +170,4 @@ if ( gtalobby_is_enabled( 'enable_gta6_mode' ) && gtalobby_get_gta6_option( 'gta
 gtalobby_render_ad_slot( 'ad_header_banner', 'gl-ad-slot gl-ad-slot--header' );
 ?>
 
-<main id="main-content" class="gl-main" role="main">
+<div class="gl-main">

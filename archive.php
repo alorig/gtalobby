@@ -25,19 +25,16 @@ $archive_zones = gtalobby_get_layout( 'archive', $category_slug );
         switch ( $zone_id ) :
 
             case 'breadcrumb':
-            ?>
-            <div class="gl-zone gl-zone--breadcrumb" data-zone="breadcrumb">
-                <div class="gl-container">
-                    <?php gtalobby_breadcrumbs(); ?>
-                </div>
-            </div>
-            <?php
+                // Breadcrumbs rendered inside archive_header zone
                 break;
 
             case 'archive_header':
             ?>
             <section class="gl-zone gl-zone--archive-header gl-archive-header" data-zone="archive_header">
                 <div class="gl-container">
+                    <?php if ( gtalobby_is_zone_enabled( 'archive', 'breadcrumb', $category_slug ) ) : ?>
+                        <div class="gl-archive-header__breadcrumb"><?php gtalobby_breadcrumbs(); ?></div>
+                    <?php endif; ?>
                     <?php if ( is_post_type_archive() ) : ?>
                         <?php $pt = get_queried_object(); ?>
                         <h1 class="gl-archive-header__title"><?php post_type_archive_title(); ?></h1>

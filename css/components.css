@@ -420,10 +420,10 @@ select:focus {
 
 .gl-gta6-notice {
     padding: var(--gl-space-4) var(--gl-space-5);
-    background-color: #fff3cd;
-    border: 1px solid #ffc107;
+    background-color: color-mix(in srgb, var(--gl-color-warning) 10%, var(--gl-color-surface));
+    border: 1px solid color-mix(in srgb, var(--gl-color-warning) 30%, transparent);
     border-radius: var(--gl-radius-md);
-    color: #856404;
+    color: var(--gl-color-warning);
     font-size: var(--gl-font-size-sm);
 }
 

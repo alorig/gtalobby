@@ -10,12 +10,6 @@ get_header();
 
 <div class="gl-page">
 
-    <div class="gl-zone gl-zone--breadcrumb">
-        <div class="gl-container">
-            <?php gtalobby_breadcrumbs(); ?>
-        </div>
-    </div>
-
     <div class="gl-container gl-page__layout">
 
         <main class="gl-page__main" id="main-content">
@@ -24,6 +18,7 @@ get_header();
                 <article id="page-<?php the_ID(); ?>" <?php post_class( 'gl-article gl-article--page' ); ?>>
 
                     <header class="gl-article__header">
+                        <div class="gl-article__breadcrumb"><?php gtalobby_breadcrumbs(); ?></div>
                         <h1 class="gl-article__title"><?php the_title(); ?></h1>
                     </header>
 

@@ -28,6 +28,21 @@
    ARTICLE BASE
    ========================================================================== */
 
+.gl-article__breadcrumb {
+    font-size: var(--gl-font-size-sm);
+    color: var(--gl-color-text-light);
+    margin-bottom: var(--gl-space-3);
+}
+
+.gl-article__breadcrumb a {
+    color: var(--gl-color-text-light);
+    text-decoration: none;
+}
+
+.gl-article__breadcrumb a:hover {
+    color: var(--gl-color-accent);
+}
+
 .gl-article__header {
     margin-bottom: var(--gl-space-6);
 }
@@ -106,6 +121,8 @@
     border-radius: var(--gl-radius-lg);
     border: 1px solid var(--gl-color-border);
     margin-bottom: var(--gl-space-8);
+    max-height: 400px;
+    overflow-y: auto;
 }
 
 .gl-toc__title {
@@ -354,9 +371,9 @@
     min-width: 120px;
 }
 
-.gl-podium__place--gold   { background: linear-gradient(135deg, #ffd700 0%, #ffec80 100%); min-height: 160px; }
-.gl-podium__place--silver { background: linear-gradient(135deg, #c0c0c0 0%, #e0e0e0 100%); min-height: 130px; }
-.gl-podium__place--bronze { background: linear-gradient(135deg, #cd7f32 0%, #e8a860 100%); min-height: 110px; }
+.gl-podium__place--gold   { background: linear-gradient(135deg, var(--gl-color-cat-money) 0%, var(--gl-color-cat-money-tint) 100%); min-height: 160px; color: var(--gl-color-text-inverse); }
+.gl-podium__place--silver { background: linear-gradient(135deg, var(--gl-color-text-tertiary) 0%, var(--gl-color-text-secondary) 100%); min-height: 130px; color: var(--gl-color-text-inverse); }
+.gl-podium__place--bronze { background: linear-gradient(135deg, var(--gl-color-cat-cheats) 0%, var(--gl-color-cat-cheats-tint) 100%); min-height: 110px; color: var(--gl-color-text-inverse); }
 
 .gl-podium__rank {
     font-size: var(--gl-font-size-3xl);
@@ -447,7 +464,7 @@
     display: flex;
     gap: var(--gl-space-4);
     padding: var(--gl-space-5) var(--gl-space-6);
-    background: linear-gradient(135deg, var(--gl-color-surface) 0%, #f0f4ff 100%);
+    background: linear-gradient(135deg, var(--gl-color-surface) 0%, var(--gl-color-surface-raised) 100%);
     border: 2px solid var(--gl-color-accent);
     border-radius: var(--gl-radius-lg);
     margin-bottom: var(--gl-space-6);
