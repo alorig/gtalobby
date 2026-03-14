@@ -29,14 +29,7 @@ $cat_color_dark   = gtalobby_darken_hex( $cat_color, 0.28 );
 
 <div class="gl-hub gl-hub--<?php echo esc_attr( $hub_layout ); ?>" style="--hub-accent: <?php echo esc_attr( $cat_color ); ?>; --hub-accent-rgb: <?php echo esc_attr( gtalobby_hex_to_rgb( $cat_color ) ); ?>; --hub-accent-dark: <?php echo esc_attr( $cat_color_dark ); ?>; --hub-accent-dark-rgb: <?php echo esc_attr( gtalobby_hex_to_rgb( $cat_color_dark ) ); ?>;">
 
-    <?php /* --- BREADCRUMB --- */ ?>
-    <?php if ( gtalobby_is_zone_enabled( 'hub', 'breadcrumb' ) ) : ?>
-    <div class="gl-zone gl-zone--breadcrumb">
-        <div class="gl-container">
-            <?php gtalobby_breadcrumbs(); ?>
-        </div>
-    </div>
-    <?php endif; ?>
+    <?php /* --- BREADCRUMB (removed — hub pages no longer show breadcrumbs) --- */ ?>
 
     <?php /* --- HERO --- */ ?>
     <?php if ( gtalobby_is_zone_enabled( 'hub', 'hero' ) ) : ?>
