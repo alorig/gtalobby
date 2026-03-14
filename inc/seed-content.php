@@ -1507,6 +1507,680 @@ function gtalobby_seed_posts() {
 <!-- /wp:paragraph -->',
         ),
 
+        array(
+            'post_type'  => 'recap',
+            'slug'       => 'gta-6-news-recap-march-2026',
+            'title'      => 'GTA 6 News Recap — Everything That Happened in March 2026',
+            'category'   => 'news',
+            'excerpt'    => 'Monthly roundup of all GTA 6 news, announcements, and community developments from March 2026.',
+            'meta'       => array( 'week_date_range' => 'March 1-31, 2026', 'podium_vehicle' => '', 'new_content' => 'Trailer 2 analysis, Take-Two earnings call, community speculation roundup.' ),
+            'taxonomies' => array( 'game_title' => array( 'gta-6' ), 'platform' => array( 'ps5', 'xbox-series-x' ) ),
+            'hub_slug'   => 'gta-6-release-date',
+            'content'    => '<!-- wp:paragraph -->
+<p>March 2026 was a significant month for GTA 6 news. From Take-Two\'s quarterly earnings call to community discoveries in trailer footage, here\'s everything that happened.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>Take-Two Earnings Call Highlights</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Take-Two Interactive\'s Q3 FY2026 earnings call reaffirmed GTA 6\'s Fall 2025 release window. CEO Strauss Zelnick described it as "the most significant entertainment launch in history" and confirmed marketing efforts would ramp up through summer 2025. No specific release date was given beyond the Fall window.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>Community Trailer Analysis</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The community continued frame-by-frame analysis of existing trailers. Notable discoveries this month include what appears to be a boat garage system, evidence of underwater activities beyond simple swimming, and a possible day-night business cycle visible in shop windows. A leaked Rockstar employee LinkedIn profile also referenced "dynamic narrative events" in their project description.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>Pre-Order Speculation</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Multiple retailers reported that placeholder GTA 6 listings were being prepared in their internal systems. While no official pre-order date has been announced, industry analysts expect pre-orders to open within 60-90 days of the launch, potentially as early as summer 2025. Collector\'s edition rumors continue to circulate but remain unconfirmed.</p>
+<!-- /wp:paragraph -->',
+        ),
+
+        array(
+            'post_type'  => 'answer',
+            'slug'       => 'when-is-gta-6-coming-out',
+            'title'      => 'When Is GTA 6 Coming Out? Latest Release Date Info',
+            'category'   => 'news',
+            'excerpt'    => 'Quick answer on the latest GTA 6 release date based on official announcements from Rockstar Games.',
+            'meta'       => array(
+                'short_answer'          => 'GTA 6 is confirmed for Fall 2025 on PS5 and Xbox Series X|S. Rockstar Games has not announced a specific date beyond the Fall window. Take-Two Interactive reaffirmed this timeline in their most recent earnings call. A PC version has not been announced but historically follows 12-18 months after console launch.',
+                'gta6_confidence_level' => 'confirmed',
+                'confidence_level'      => 'confirmed',
+                'source_type'           => 'official',
+            ),
+            'taxonomies' => array( 'game_title' => array( 'gta-6' ), 'platform' => array( 'ps5', 'xbox-series-x' ) ),
+            'hub_slug'   => 'gta-6-release-date',
+            'content'    => '<!-- wp:paragraph -->
+<p>The most asked question in gaming right now: when exactly is GTA 6 coming out? Here\'s everything we know from official sources.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>Official Timeline</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Rockstar Games officially confirmed <strong>Fall 2025</strong> as the release window for GTA 6. This was first announced alongside Trailer 1 in December 2023, and has been reaffirmed in every subsequent Take-Two earnings call. The game will launch exclusively on PS5 and Xbox Series X|S.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>Could It Be Delayed?</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>As of early 2026, there are no credible reports of a delay. Take-Two has consistently used confident language about the Fall 2025 window. However, Rockstar has delayed major titles before — GTA 5 was pushed back twice during development. Until a specific date is locked in, some flexibility remains.</p>
+<!-- /wp:paragraph -->',
+        ),
+
+        /* ===================== ADDITIONAL GTA 6 POSTS ===================== */
+
+        array(
+            'post_type'  => 'database',
+            'slug'       => 'gta-6-confirmed-features-tracker',
+            'title'      => 'GTA 6 Confirmed Features Tracker — Every Official Detail in One Place',
+            'category'   => 'gta6',
+            'excerpt'    => 'A living database tracking every confirmed GTA 6 feature, mechanic, and detail from official sources.',
+            'meta'       => array(
+                'data_source'               => 'Official trailers, Rockstar Newswire, Take-Two earnings calls',
+                'last_updated'              => 'March 2026',
+                'gta6_confidence_level'     => 'confirmed',
+                'confidence_level'          => 'confirmed',
+            ),
+            'taxonomies' => array( 'game_title' => array( 'gta-6' ), 'platform' => array( 'ps5', 'xbox-series-x' ) ),
+            'hub_slug'   => 'gta-6-release-date',
+            'content'    => '<!-- wp:paragraph -->
+<p>This database tracks every feature, mechanic, and detail about GTA 6 that has been officially confirmed by Rockstar Games or credibly reported by trusted sources. Each entry is tagged with its confidence level and source.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>Confirmed World Features</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Setting: State of Leonida (fictionalized Florida). Central city: Vice City (reimagined). Biomes: urban, swamp, rural, coastal, island chain. Dynamic weather including hurricanes. Day-night cycle with NPC routines. More enterable interiors than any previous GTA. Social media system integrated into gameplay.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>Confirmed Characters</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Dual protagonists: Lucia (female, Latin American) and Jason (male). Bonnie-and-Clyde narrative dynamic. Lucia shown in prison at story start. Multiple supporting characters visible in trailers. Player character switching system similar to GTA 5.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>Confirmed Technical Details</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Platform: PS5 and Xbox Series X|S (no last-gen). Release: Fall 2025. Engine: Enhanced RAGE engine. Graphics: Photorealistic lighting, volumetric clouds, advanced water physics. Performance: Expected 30fps quality mode and 60fps performance mode based on console capabilities.</p>
+<!-- /wp:paragraph -->',
+        ),
+
+        array(
+            'post_type'  => 'recap',
+            'slug'       => 'gta-6-development-timeline-recap',
+            'title'      => 'GTA 6 Development Timeline — From First Rumors to Official Reveal',
+            'category'   => 'gta6',
+            'excerpt'    => 'Complete timeline recap of GTA 6\'s development from 2014 early production to the official 2023 reveal.',
+            'meta'       => array( 'week_date_range' => '2014-2026', 'podium_vehicle' => '', 'new_content' => 'Full development history and milestone tracker.' ),
+            'taxonomies' => array( 'game_title' => array( 'gta-6' ), 'platform' => array( 'ps5', 'xbox-series-x' ) ),
+            'hub_slug'   => 'gta-6-release-date',
+            'content'    => '<!-- wp:paragraph -->
+<p>GTA 6 has been in development for over a decade. This timeline chronicles every major milestone from the earliest production hints to the official reveal.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>2014-2018: Silent Development</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Early pre-production began around 2014, shortly after GTA 5\'s next-gen launch. Rockstar\'s primary focus through 2018 was Red Dead Redemption 2, but a small team was establishing GTA 6\'s scope and setting. Reports from Jason Schreier at Bloomberg indicated the game went through several concept changes during this period.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>2019-2022: Full Production and The Leaks</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Full production ramped up after RDR2 shipped. In September 2022, the biggest leak in gaming history occurred when a hacker accessed Rockstar\'s internal Slack and published 90+ minutes of early development footage. The leaks confirmed the Vice City setting, dual protagonists, and numerous gameplay systems. Rockstar acknowledged the breach but stated it would not impact development.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>2023-Present: Official Reveal</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>In December 2023, Rockstar released the first official GTA 6 trailer, confirming the Leonida setting, Lucia and Jason as protagonists, and a Fall 2025 release window. The trailer broke YouTube records with over 90 million views in 24 hours. A second trailer followed in 2024, providing deeper looks at gameplay mechanics and the open world.</p>
+<!-- /wp:paragraph -->',
+        ),
+
+        /* ===================== ADDITIONAL CHEATS POSTS ===================== */
+
+        array(
+            'post_type'  => 'database',
+            'slug'       => 'gta-5-all-cheat-codes-database',
+            'title'      => 'GTA 5 Complete Cheat Code Database — Every Code for Every Platform',
+            'category'   => 'cheats',
+            'excerpt'    => 'Searchable database of every GTA 5 cheat code organized by platform, with button combos and phone numbers.',
+            'meta'       => array( 'data_source' => 'Rockstar Games official + community testing', 'last_updated' => 'March 2026' ),
+            'taxonomies' => array( 'game_title' => array( 'gta-5' ), 'platform' => array( 'all-platforms' ), 'cheat_type' => array( 'all-cheats' ), 'game_mode' => array( 'story-mode' ) ),
+            'hub_slug'   => 'gta-5-cheats',
+            'content'    => '<!-- wp:paragraph -->
+<p>The complete, searchable database of every cheat code available in GTA 5. Filter by platform, category, or search by name. Includes button combinations for PlayStation, Xbox, and PC keyboard inputs.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>Player Effect Cheats</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><strong>Invincibility:</strong> PS: Right, X, Right, Left, Right, R1, Right, Left, X, Triangle. Xbox: Right, A, Right, Left, Right, RB, Right, Left, A, Y. PC: PAINKILLER. Duration: 5 minutes. <strong>Max Health/Armor:</strong> PS: O, L1, Triangle, R2, X, Square, O, Right, Square, L1, L1, L1. PC: TURTLE. <strong>Super Jump:</strong> PS: Left, Left, Triangle, Triangle, Right, Right, Left, Right, Square, R1, R2. PC: HOPTOIT.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>Vehicle Spawn Cheats</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><strong>Buzzard Helicopter:</strong> PS: O, O, L1, O, O, O, L1, L2, R1, Triangle, O, Triangle. PC: BUZZOFF. <strong>Comet (Porsche):</strong> PS: R1, O, R2, Right, L1, L2, X, X, Square, R1. PC: COMET. <strong>Rapid GT (Aston Martin):</strong> PS: R2, L1, O, Right, L1, R1, Right, Left, O, R2. PC: RAPIDGT. <strong>Duster (Crop Plane):</strong> PS: Right, Left, R1, R1, R1, Left, Triangle, Triangle, X, O, L1, L1. PC: FLYSPRAY.</p>
+<!-- /wp:paragraph -->',
+        ),
+
+        array(
+            'post_type'  => 'ranking',
+            'slug'       => 'best-gta-5-cheats-ranked',
+            'title'      => 'The 15 Best GTA 5 Cheats Ranked — Most Fun and Useful Codes',
+            'category'   => 'cheats',
+            'excerpt'    => 'Ranking the 15 most fun and useful cheat codes in GTA 5 by gameplay impact and entertainment value.',
+            'meta'       => array( 'ranking_criteria' => 'Fun factor, gameplay utility, and creative potential.', 'total_items' => 15 ),
+            'taxonomies' => array( 'game_title' => array( 'gta-5' ), 'platform' => array( 'all-platforms' ), 'cheat_type' => array( 'all-cheats' ), 'game_mode' => array( 'story-mode' ) ),
+            'hub_slug'   => 'gta-5-cheats',
+            'content'    => '<!-- wp:paragraph -->
+<p>GTA 5 has over 35 cheat codes, but not all cheats are created equal. This ranking covers the 15 best cheats based on fun factor, creative potential, and gameplay utility.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>1. Explosive Melee Attacks</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Every punch sends people flying with an explosion. It\'s absurd, hilarious, and never gets old. Combine it with super jump for airborne explosive punches. This is GTA at its most chaotic and fun — the number one cheat for pure entertainment value.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>2. Moon Gravity</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Vehicles float after jumps and ragdoll physics become comically exaggerated. Drive off a ramp and soar across the city. Combined with fast cars, this creates some of the most spectacular moments possible in GTA 5. Essential for stunt montages.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>3. Invincibility (God Mode)</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Five minutes of complete invulnerability. Use it to survive ridiculous stunts, fight the military at 5 stars, or explore areas that would normally kill you. The time limit keeps it balanced — you need to re-enter the code every 5 minutes, which adds a fun strategic element during chaos.</p>
+<!-- /wp:paragraph -->',
+        ),
+
+        /* ===================== ADDITIONAL ONLINE POSTS ===================== */
+
+        array(
+            'post_type'  => 'answer',
+            'slug'       => 'best-way-to-make-money-gta-online',
+            'title'      => 'What Is the Best Way to Make Money in GTA Online in 2026?',
+            'category'   => 'online',
+            'excerpt'    => 'Quick answer on the most profitable money-making methods in GTA Online as of 2026.',
+            'meta'       => array(
+                'short_answer' => 'The Cayo Perico Heist remains the best solo money method at $1.2-1.9M per run (45-60 minutes). For passive income, the Nightclub warehouse generates up to $1.69M AFK. The Agency provides consistent $20K+ payphone hits. New players should prioritize buying the Kosatka submarine ($2.2M) to unlock Cayo Perico as their first major investment.',
+            ),
+            'taxonomies' => array( 'game_title' => array( 'gta-online' ), 'platform' => array( 'all-platforms' ), 'game_mode' => array( 'gta-online-mode' ) ),
+            'hub_slug'   => 'gta-online-money-guide',
+            'content'    => '<!-- wp:paragraph -->
+<p>With dozens of businesses, heists, and activities available, knowing where to focus your time is crucial for maximizing GTA Online earnings.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>Solo Methods</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><strong>Cayo Perico Heist:</strong> $1.2-1.9M per run, completable in 45-60 minutes solo. The gold standard for active money-making. <strong>Agency Payphone Hits:</strong> $85K per hit with bonuses, 5-10 minutes each. <strong>Auto Shop Contracts:</strong> $170K per contract, 15-20 minutes. These three form the backbone of solo grinding in 2026.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>Passive Income</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><strong>Nightclub:</strong> Accumulates stock from linked businesses while you play normally — up to $1.69M per full warehouse. <strong>Bunker:</strong> Produces weapons stock worth $210K per sale (with upgrades). <strong>MC Businesses:</strong> Cocaine and Meth labs generate decent passive income when linked to the Nightclub.</p>
+<!-- /wp:paragraph -->',
+        ),
+
+        array(
+            'post_type'  => 'ranking',
+            'slug'       => 'best-gta-online-businesses-ranked',
+            'title'      => 'Best GTA Online Businesses Ranked — ROI and Profit Analysis 2026',
+            'category'   => 'online',
+            'excerpt'    => 'Every GTA Online business ranked by return on investment, hourly profit, and overall value in 2026.',
+            'meta'       => array( 'ranking_criteria' => 'Return on investment, hourly profit rate, and setup difficulty.', 'total_items' => 12 ),
+            'taxonomies' => array( 'game_title' => array( 'gta-online' ), 'platform' => array( 'all-platforms' ), 'game_mode' => array( 'gta-online-mode' ), 'business_type' => array( 'all-businesses' ) ),
+            'hub_slug'   => 'gta-online-money-guide',
+            'content'    => '<!-- wp:paragraph -->
+<p>GTA Online has over a dozen business types, each with different investment costs, profit margins, and gameplay requirements. This ranking helps you decide what to buy and in what order.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>1. Kosatka Submarine — ROI King</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Cost: $2.2M. Profit per run: $1.2-1.9M. ROI: 1-2 runs to break even. The Kosatka unlocks the Cayo Perico Heist, which remains the single best money-making activity in GTA Online. Every player should own one. It pays for itself in under 2 hours.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>2. Agency — Consistent Returns</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Cost: $2.0-2.8M. Generates passive daily income ($20K/day at max), plus payphone hits ($85K each) and security contracts ($30-70K each). The Agency is the best "set and forget" business with active bonuses on top. Dr. Dre contract pays $1M on first completion.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>3. Nightclub — Passive Income Champion</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Cost: $1.08-1.7M (plus linked businesses). The Nightclub warehouse passively accumulates goods worth up to $1.69M when all technicians are assigned. It requires minimal player interaction — just sell when full. Best paired with Bunker, Cargo, Cocaine, Meth, and Counterfeit Cash.</p>
+<!-- /wp:paragraph -->',
+        ),
+
+        array(
+            'post_type'  => 'database',
+            'slug'       => 'gta-online-business-profit-database',
+            'title'      => 'GTA Online Business Profit Calculator — Every Business Compared',
+            'category'   => 'online',
+            'excerpt'    => 'Sortable database comparing every GTA Online business by cost, profit, ROI, and hourly earnings.',
+            'meta'       => array( 'data_source' => 'Community testing + GTA Wiki data', 'last_updated' => 'March 2026' ),
+            'taxonomies' => array( 'game_title' => array( 'gta-online' ), 'platform' => array( 'all-platforms' ), 'game_mode' => array( 'gta-online-mode' ), 'business_type' => array( 'all-businesses' ) ),
+            'hub_slug'   => 'gta-online-money-guide',
+            'content'    => '<!-- wp:paragraph -->
+<p>Compare every GTA Online business side by side. Sort by purchase cost, hourly profit, total ROI time, and whether the business can run passively. Use this data to plan your investment order.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>Active Income Businesses</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><strong>Kosatka:</strong> $2.2M cost, $1.5M avg per run (45 min), $2M/hr effective rate. <strong>Agency:</strong> $2.4M avg cost, $85K per payphone hit (5 min), $500K/hr active. <strong>Auto Shop:</strong> $1.6M cost, $170K per contract (15 min), $340K/hr active. <strong>Arcade:</strong> $1.2M cost, unlocks Casino Heist ($1.2-1.8M per run with crew).</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>Passive Income Businesses</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><strong>Nightclub:</strong> $1.4M avg, earns $40K/hr passively (all technicians). <strong>Bunker:</strong> $1.1M + $1.75M upgrades, $7K/hr passive. <strong>Cocaine:</strong> $975K + $1.4M upgrades, $5.5K/hr passive. <strong>Meth:</strong> $910K + $1.1M upgrades, $4.5K/hr passive. <strong>Counterfeit Cash:</strong> $845K + $960K upgrades, $3.5K/hr passive.</p>
+<!-- /wp:paragraph -->',
+        ),
+
+        /* ===================== ADDITIONAL CHARACTERS POSTS ===================== */
+
+        array(
+            'post_type'  => 'guide',
+            'slug'       => 'gta-5-character-switch-guide',
+            'title'      => 'GTA 5 Character Switching Guide — How It Works and Best Strategies',
+            'category'   => 'characters',
+            'excerpt'    => 'Complete guide to GTA 5\'s character switching system including mechanics, strategies, and mission tips.',
+            'meta'       => array( 'difficulty_rating' => 'easy', 'time_to_complete' => '5 minutes read', 'step_count' => 0 ),
+            'taxonomies' => array( 'game_title' => array( 'gta-5' ), 'platform' => array( 'all-platforms' ), 'game_mode' => array( 'story-mode' ) ),
+            'hub_slug'   => 'gta-6-characters',
+            'content'    => '<!-- wp:paragraph -->
+<p>GTA 5\'s character switching system was revolutionary when it launched. This guide explains how it works, when to use it, and strategies for getting the most out of all three protagonists.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>How Character Switching Works</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Hold down on the D-pad (console) or press Alt (PC) to open the character wheel. Select Michael, Franklin, or Trevor to switch. Outside of missions, the camera zooms out to a satellite view and drops into the selected character, who will be going about their daily life — Michael watching TV, Franklin walking his dog, Trevor in some unpredictable situation.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>Mission Character Switching</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>During heists and multi-character missions, switching is instant and tactical. Each character has a unique vantage point or role. For example, during a bank heist, Michael might be inside negotiating while Trevor provides sniper cover and Franklin drives the getaway vehicle. The game prompts you to switch at key moments, but you can also switch freely.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>Character-Specific Activities</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><strong>Michael:</strong> Tennis, yoga, therapy sessions, movie watching. <strong>Franklin:</strong> Tow truck missions, street racing, Chop the dog activities. <strong>Trevor:</strong> Rampage missions, bail bonds, arms trafficking. Each character also has unique properties to purchase and manage. Playing as all three gives you access to the full range of GTA 5\'s content.</p>
+<!-- /wp:paragraph -->',
+        ),
+
+        array(
+            'post_type'  => 'ranking',
+            'slug'       => 'best-gta-protagonists-ranked',
+            'title'      => 'Every GTA Protagonist Ranked — From Claude to Lucia',
+            'category'   => 'characters',
+            'excerpt'    => 'Ranking every mainline GTA protagonist by story depth, personality, cultural impact, and gameplay fun.',
+            'meta'       => array( 'ranking_criteria' => 'Story depth, personality, cultural impact, and gameplay variety.', 'total_items' => 12 ),
+            'taxonomies' => array( 'game_title' => array( 'gta-5', 'gta-6' ), 'platform' => array( 'all-platforms' ) ),
+            'hub_slug'   => 'gta-6-characters',
+            'content'    => '<!-- wp:paragraph -->
+<p>From the silent Claude in GTA III to Lucia in the upcoming GTA 6, the series has given us some of gaming\'s most memorable characters. Here\'s every mainline GTA protagonist ranked.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>1. CJ (Carl Johnson) — GTA San Andreas</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>CJ remains the community\'s favorite GTA protagonist. His journey from the streets of Grove Street to the top of San Andreas\'s criminal underworld is the series\' most emotionally resonant story. The RPG elements — where CJ\'s appearance changed based on diet and exercise — made him feel more personal than any other GTA character.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>2. Niko Bellic — GTA IV</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The immigrant story of Niko Bellic arriving in Liberty City seeking the American Dream remains GTA\'s most mature narrative. His war-torn past, moral struggles, and the player\'s ability to make difficult choices gave GTA IV a gravitas the series hadn\'t achieved before.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>3. Tommy Vercetti — GTA Vice City</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Ray Liotta\'s Tommy Vercetti defined an era. His rise from Mafia errand boy to Vice City kingpin, set against a perfect 1980s Miami backdrop, is pure entertainment. Tommy\'s charisma and ruthlessness made Vice City one of the most stylish games ever made.</p>
+<!-- /wp:paragraph -->',
+        ),
+
+        array(
+            'post_type'  => 'answer',
+            'slug'       => 'who-is-lucia-in-gta-6',
+            'title'      => 'Who Is Lucia in GTA 6?',
+            'category'   => 'characters',
+            'excerpt'    => 'Quick answer on Lucia, GTA 6\'s first female protagonist — who she is, her background, and what we know.',
+            'meta'       => array(
+                'short_answer'          => 'Lucia is one of two playable protagonists in GTA 6 and the first female lead in the mainline GTA series. She is a Latin American woman with a criminal background who partners with Jason in the state of Leonida (fictionalized Florida). The first trailer shows her in a prison setting, suggesting she begins the story incarcerated. Rockstar has confirmed she is central to the game\'s Bonnie-and-Clyde inspired narrative.',
+                'gta6_confidence_level' => 'confirmed',
+                'confidence_level'      => 'confirmed',
+                'source_type'           => 'trailer',
+            ),
+            'taxonomies' => array( 'game_title' => array( 'gta-6' ), 'platform' => array( 'ps5', 'xbox-series-x' ) ),
+            'hub_slug'   => 'gta-6-characters',
+            'content'    => '<!-- wp:paragraph -->
+<p>Lucia is breaking new ground as the first playable female protagonist in a mainline Grand Theft Auto game. Here\'s everything confirmed about her character.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>Confirmed Details</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Lucia is a young Latin American woman living in the state of Leonida. She is one of two playable protagonists alongside Jason. The official trailer shows her in a prison visitation scene, confirming a criminal background. She and Jason form a romantic and criminal partnership described by industry insiders as a modern Bonnie and Clyde story.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>Why Lucia Matters</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>After 25+ years of exclusively male GTA protagonists, Lucia represents a significant evolution for the franchise. Rockstar has indicated that her perspective brings new dimensions to the GTA storytelling formula, exploring themes the series hasn\'t been able to address with its previous protagonists.</p>
+<!-- /wp:paragraph -->',
+        ),
+
+        /* ===================== ADDITIONAL LOCATIONS POSTS ===================== */
+
+        array(
+            'post_type'  => 'answer',
+            'slug'       => 'where-is-gta-6-set',
+            'title'      => 'Where Is GTA 6 Set? Everything About the Map Location',
+            'category'   => 'locations',
+            'excerpt'    => 'Quick answer on GTA 6\'s confirmed setting, map location, and how it compares to previous GTA maps.',
+            'meta'       => array(
+                'short_answer'          => 'GTA 6 is set in the state of Leonida, a fictionalized version of Florida. The central city is Vice City (based on Miami). The map includes swamps, rural communities, a Florida Keys-inspired island chain, industrial ports, and suburban areas. The map is expected to be significantly larger than GTA 5\'s San Andreas, making it the biggest GTA map ever created.',
+                'gta6_confidence_level' => 'confirmed',
+                'confidence_level'      => 'confirmed',
+                'source_type'           => 'trailer',
+            ),
+            'taxonomies' => array( 'game_title' => array( 'gta-6' ), 'platform' => array( 'ps5', 'xbox-series-x' ) ),
+            'hub_slug'   => 'gta-6-map',
+            'content'    => '<!-- wp:paragraph -->
+<p>GTA 6 returns to Vice City — but this time the entire state of Leonida is included, not just the city. Here\'s what we know about the map.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>Confirmed Areas</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><strong>Vice City:</strong> The main urban center, a modern reimagining of GTA Vice City\'s Miami. Neon lights, art deco architecture, beaches, and a vibrant nightlife scene. <strong>Grassrivers:</strong> A swampy region resembling the Everglades, visible in trailer footage with airboat activity. <strong>Port Gellhorn:</strong> An industrial port area. <strong>Island Chain:</strong> A Florida Keys-inspired series of islands connected by bridges.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>Map Size Comparison</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>While Rockstar hasn\'t released exact dimensions, trailer analysis and leak information suggest the GTA 6 map is 1.5-2x larger than GTA 5\'s San Andreas. More importantly, the density of content — enterable buildings, NPC routines, and activities — is reportedly far higher than any previous GTA map.</p>
+<!-- /wp:paragraph -->',
+        ),
+
+        array(
+            'post_type'  => 'ranking',
+            'slug'       => 'best-gta-maps-ranked',
+            'title'      => 'Every GTA Map Ranked — From Liberty City to Leonida',
+            'category'   => 'locations',
+            'excerpt'    => 'Ranking every major GTA map by size, detail, variety, and overall impact on the gaming landscape.',
+            'meta'       => array( 'ranking_criteria' => 'Map size, detail density, environmental variety, and cultural impact.', 'total_items' => 8 ),
+            'taxonomies' => array( 'game_title' => array( 'gta-5', 'gta-6' ), 'platform' => array( 'all-platforms' ) ),
+            'hub_slug'   => 'gta-5-map-locations',
+            'content'    => '<!-- wp:paragraph -->
+<p>Grand Theft Auto has given us some of the most iconic open worlds in gaming history. Here\'s every major GTA map ranked by the overall experience it delivers.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>1. San Andreas (GTA 5) — The Gold Standard</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>GTA 5\'s Los Santos and Blaine County set the standard for open-world design. The variety — from downtown skyscrapers to desert highways to mountain trails to underwater reefs — is unmatched. Over a decade later, it still feels vast and detailed. Its longevity as a GTA Online platform proves its design quality.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>2. Vice City (GTA Vice City) — Pure Atmosphere</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Vice City\'s 1980s Miami is smaller by modern standards, but its atmosphere is legendary. Every neon sign, palm tree, and sunset was crafted to transport you to the \'80s. The two-island layout with connecting bridges created natural gameplay boundaries that felt organic rather than artificial.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>3. San Andreas (GTA SA) — Ambitious Scale</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The original San Andreas was staggeringly ambitious for 2004 — three cities, vast countryside, deserts, and forests. Los Santos, San Fierro, and Las Venturas each had distinct identities. It proved that GTA could go beyond a single city and deliver an entire state experience.</p>
+<!-- /wp:paragraph -->',
+        ),
+
+        /* ===================== ADDITIONAL MONEY POSTS ===================== */
+
+        array(
+            'post_type'  => 'answer',
+            'slug'       => 'how-much-does-gta-online-nightclub-make',
+            'title'      => 'How Much Money Does a Nightclub Make in GTA Online?',
+            'category'   => 'money',
+            'excerpt'    => 'Quick answer on GTA Online Nightclub earnings, passive income rates, and how to maximize profits.',
+            'meta'       => array(
+                'short_answer' => 'A fully upgraded GTA Online Nightclub with all 5 technicians assigned generates up to $1.69M per full warehouse (takes ~66 hours of real time). The Nightclub also earns daily safe income of $10K/day (up to $250K max). Total passive potential: approximately $40K/hour from warehouse goods plus $10K/day safe income. It requires owning linked businesses (Bunker, Cargo, Cocaine, Meth, Counterfeit Cash) for maximum efficiency.',
+            ),
+            'taxonomies' => array( 'game_title' => array( 'gta-online' ), 'platform' => array( 'all-platforms' ), 'game_mode' => array( 'gta-online-mode' ), 'business_type' => array( 'nightclub' ) ),
+            'hub_slug'   => 'gta-online-nightclub-guide',
+            'content'    => '<!-- wp:paragraph -->
+<p>The Nightclub is one of GTA Online\'s most profitable passive businesses. Here\'s exactly how much it earns and how to maximize your income.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>Warehouse Income Breakdown</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The Nightclub warehouse generates goods based on linked businesses. The five most profitable technician assignments are: <strong>South American Imports (Cocaine):</strong> $20K/hr. <strong>Cargo (CEO Crates/Hangar):</strong> $8.57K/hr. <strong>Pharmaceutical Research (Meth):</strong> $8.57K/hr. <strong>Sporting Goods (Bunker):</strong> $7.5K/hr. <strong>Cash (Counterfeit):</strong> $3.5K/hr. Total: ~$48K/hr passively.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>How to Maximize Profits</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Buy all Equipment and Staff upgrades ($1.4M + $475K). Assign all 5 technicians to the top 5 categories listed above. Sell at full capacity ($1.69M) using Tony\'s cut-reducing single vehicle delivery. Reassign technicians if any category fills up before others. The Nightclub works while you do anything else in GTA Online.</p>
+<!-- /wp:paragraph -->',
+        ),
+
+        array(
+            'post_type'  => 'ranking',
+            'slug'       => 'best-money-making-methods-gta-online-2026',
+            'title'      => 'Best Money Making Methods in GTA Online 2026 — Ranked by $/Hour',
+            'category'   => 'money',
+            'excerpt'    => 'Every GTA Online money-making method ranked by effective hourly earnings in 2026.',
+            'meta'       => array( 'ranking_criteria' => 'Effective dollars per hour including setup time and average payouts.', 'total_items' => 15 ),
+            'taxonomies' => array( 'game_title' => array( 'gta-online' ), 'platform' => array( 'all-platforms' ), 'game_mode' => array( 'gta-online-mode' ) ),
+            'hub_slug'   => 'gta-online-nightclub-guide',
+            'content'    => '<!-- wp:paragraph -->
+<p>Time is money in GTA Online. This ranking compares every major money-making method by how much you actually earn per hour of real play time, including setup and travel time.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>1. Cayo Perico Heist — $1.8-2.4M/hr</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Still the undisputed king. Experienced players can complete the full cycle (scope + preps + finale) in 40-50 minutes for $1.2-1.9M. The effective hourly rate makes everything else look like pocket change. Solo-friendly, no level requirements beyond owning the Kosatka.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>2. Agency Payphone Hits — $800K-1M/hr</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Payphone hits pay $85K each with the assassination bonus and take 3-5 minutes. Chain them with VIP Work in between cooldowns. Consistent, low-effort, and enjoyable variety in contracts. Requires Agency ownership ($2.0M+).</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>3. Casino Heist (with crew) — $700K-1.2M/hr per person</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The Diamond Casino Heist remains excellent for teams of 2. Big Con approach with Gruppe Sechs is the most efficient. Payout depends on vault contents (gold and artwork are best). Requires Arcade ownership ($1.2M+) and a competent partner.</p>
+<!-- /wp:paragraph -->',
+        ),
+
+        /* ===================== ADDITIONAL MODS POSTS ===================== */
+
+        array(
+            'post_type'  => 'guide',
+            'slug'       => 'how-to-install-gta-5-mods-beginners',
+            'title'      => 'How to Install GTA 5 Mods — Complete Beginner\'s Guide 2026',
+            'category'   => 'mods',
+            'excerpt'    => 'Step-by-step guide for installing mods in GTA 5 PC including OpenIV, Script Hook V, and mod folder setup.',
+            'meta'       => array( 'difficulty_rating' => 'easy', 'time_to_complete' => '30 minutes', 'step_count' => 6 ),
+            'taxonomies' => array( 'game_title' => array( 'gta-5' ), 'platform' => array( 'pc' ), 'mod_category' => array( 'all-mods' ), 'game_mode' => array( 'story-mode' ) ),
+            'hub_slug'   => 'best-gta-5-mods',
+            'content'    => '<!-- wp:paragraph -->
+<p>Installing GTA 5 mods is straightforward once you understand the basic tools. This guide walks you through the complete setup process from scratch.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>Step 1: Install OpenIV</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>OpenIV is the essential modding tool for GTA 5. Download it from openiv.com and install. On first launch, point it to your GTA 5 installation directory. OpenIV allows you to browse, extract, and replace game files. Enable the ASI Loader when prompted — this is required for script mods.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>Step 2: Set Up the Mods Folder</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>In OpenIV, go to Tools → ASI Manager and install the OpenIV.ASI plugin. Then create a "mods" folder in your GTA 5 root directory. Copy update.rpf, x64a.rpf through x64w.rpf, and common.rpf from your GTA 5 folder into the mods folder. This creates a safe modding environment — the game reads from the mods folder first, leaving your original files untouched.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>Step 3: Install Script Hook V</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Script Hook V is required for any script-based mod (.asi files). Download the latest version from dev-c.com, extract ScriptHookV.dll and dinput8.dll into your GTA 5 root directory (not the mods folder). Script Hook V must be updated after every GTA 5 game update — check for new versions after patches.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>Step 4: Install Your First Mod</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>For script mods (.asi files): place them in the GTA 5 root directory. For replacement mods (.rpf files): use OpenIV to install them into the mods folder. Always read the mod\'s readme for specific instructions. Start with simple mods like a trainer (Menyoo or Simple Trainer) to verify your setup works before installing complex overhauls.</p>
+<!-- /wp:paragraph -->',
+        ),
+
+        array(
+            'post_type'  => 'ranking',
+            'slug'       => 'best-gta-5-mods-2026-ranked',
+            'title'      => 'The 20 Best GTA 5 Mods in 2026 — Essential Mods Ranked',
+            'category'   => 'mods',
+            'excerpt'    => 'Ranking the 20 best GTA 5 mods in 2026 from graphics overhauls to gameplay transformations.',
+            'meta'       => array( 'ranking_criteria' => 'Quality, impact on gameplay, stability, and community support.', 'total_items' => 20 ),
+            'taxonomies' => array( 'game_title' => array( 'gta-5' ), 'platform' => array( 'pc' ), 'mod_category' => array( 'all-mods' ), 'game_mode' => array( 'story-mode' ) ),
+            'hub_slug'   => 'best-gta-5-mods',
+            'content'    => '<!-- wp:paragraph -->
+<p>GTA 5\'s modding community is one of the most creative in gaming. After 13 years, the best mods can make the game feel brand new. Here are the 20 essential mods every GTA 5 PC player should know about.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>1. NaturalVision Evolved</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The definitive graphics overhaul. Photorealistic lighting, weather, and color grading that makes GTA 5 look like a current-gen game. Combined with QuantV shaders, it produces screenshots that are genuinely difficult to distinguish from real photographs. Essential for any visual upgrade setup.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>2. LSPDFR</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Transforms GTA 5 into a police simulator. Patrol streets, respond to calls, conduct traffic stops, and manage suspects. The plugin ecosystem (Stop The Ped, Ultimate Backup, CompuLite CAD) creates the deepest roleplay experience available in any GTA game. This mod alone has kept GTA 5 relevant for millions of players.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>3. FiveM (Multiplayer Framework)</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>While technically a standalone platform, FiveM deserves mention as the mod that transformed GTA 5 multiplayer. Custom roleplay servers, racing leagues, zombie survival — FiveM hosts thousands of unique game modes created by the community. It\'s the reason GTA 5 roleplay became a massive Twitch category.</p>
+<!-- /wp:paragraph -->',
+        ),
+
     );
 
     foreach ( $posts as $post_data ) {
