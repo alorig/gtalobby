@@ -700,11 +700,39 @@ function gtalobby_render_color_field( $args ) {
     $options = get_option( $args['option_group'], array() );
     $key     = $args['field_key'];
     $value   = isset( $options[ $key ] ) ? $options[ $key ] : '';
+
+    $defaults = gtalobby_get_color_config();
+    $default_color = '';
+
+    $map = array(
+        'color_background'     => 'bg',
+        'color_surface'        => 'surface',
+        'color_text_primary'   => 'text',
+        'color_text_secondary' => 'text_secondary',
+        'color_accent'         => 'accent',
+        'color_accent_secondary' => 'secondary',
+        'color_border'         => 'border',
+        'color_divider'        => 'divider',
+    );
+
+    if ( isset( $map[ $key ] ) && isset( $defaults[ $map[ $key ] ] ) ) {
+        $default_color = $defaults[ $map[ $key ] ];
+    } elseif ( strpos( $key, 'category_' ) === 0 ) {
+        $slug = str_replace( 'category_', '', $key );
+        if ( isset( $defaults[ 'cat_' . $slug ] ) ) {
+            $default_color = $defaults[ 'cat_' . $slug ];
+        }
+    } elseif ( isset( $defaults[ $key ] ) ) {
+        $default_color = $defaults[ $key ];
+    }
+
     printf(
-        '<input type="text" name="%s[%s]" value="%s" class="gl-color-picker" data-default-color="" />',
+        '<input type="text" name="%s[%s]" value="%s" class="gl-color-picker" data-default-color="%s" placeholder="%s" />',
         esc_attr( $args['option_group'] ),
         esc_attr( $key ),
-        esc_attr( $value )
+        esc_attr( $value ),
+        esc_attr( $default_color ),
+        esc_attr( $default_color )
     );
 }
 

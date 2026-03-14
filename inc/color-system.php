@@ -13,6 +13,57 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Get the full color configuration (defaults + saved overrides).
  */
+function gtalobby_get_color_overrides() {
+    $saved_new    = get_option( 'gtalobby_color_options', array() );
+    $saved_legacy = get_option( 'gtalobby_colors', array() );
+    $saved        = wp_parse_args( $saved_new, $saved_legacy );
+
+    if ( ! is_array( $saved ) || empty( $saved ) ) {
+        return array();
+    }
+
+    $map = array(
+        'color_background'      => 'bg',
+        'color_surface'         => 'surface',
+        'color_text_primary'    => 'text',
+        'color_text_secondary'  => 'text_secondary',
+        'color_accent'          => 'accent',
+        'color_accent_secondary'=> 'secondary',
+        'color_border'          => 'border',
+        'color_divider'         => 'divider',
+    );
+
+    $overrides = array();
+    foreach ( $saved as $key => $value ) {
+        $value = sanitize_hex_color( $value );
+        if ( empty( $value ) ) {
+            continue;
+        }
+
+        if ( isset( $map[ $key ] ) ) {
+            $overrides[ $map[ $key ] ] = $value;
+            continue;
+        }
+
+        if ( strpos( $key, 'category_' ) === 0 ) {
+            $slug = str_replace( 'category_', '', $key );
+            if ( ! empty( $slug ) ) {
+                $overrides[ 'cat_' . $slug ] = $value;
+            }
+            continue;
+        }
+
+        if ( strpos( $key, 'cat_' ) === 0 ) {
+            $overrides[ $key ] = $value;
+            continue;
+        }
+
+        $overrides[ $key ] = $value;
+    }
+
+    return $overrides;
+}
+
 function gtalobby_get_color_config() {
     $defaults = array(
         // Base (Vice Streets dark theme)
@@ -62,9 +113,8 @@ function gtalobby_get_color_config() {
         'cat_news'        => '#8E98C6',
     );
 
-    $saved = get_option( 'gtalobby_colors', array() );
-
-    return wp_parse_args( $saved, $defaults );
+    $overrides = gtalobby_get_color_overrides();
+    return wp_parse_args( $overrides, $defaults );
 }
 
 /**
@@ -98,11 +148,10 @@ function gtalobby_hex_to_rgb( $hex ) {
  * Only outputs overrides — the static defaults are in design-tokens.css.
  */
 function gtalobby_output_dynamic_colors() {
-    $colors = gtalobby_get_color_config();
+    $defaults  = gtalobby_get_color_config();
+    $overrides = gtalobby_get_color_overrides();
 
-    // Only output if there are saved overrides
-    $saved = get_option( 'gtalobby_colors', array() );
-    if ( empty( $saved ) ) {
+    if ( empty( $overrides ) ) {
         return;
     }
 
@@ -142,7 +191,7 @@ function gtalobby_output_dynamic_colors() {
         'cat_news'        => '--gl-color-cat-news',
     );
 
-    foreach ( $saved as $key => $value ) {
+    foreach ( $overrides as $key => $value ) {
         if ( isset( $map[ $key ] ) && $value ) {
             $css .= '    ' . $map[ $key ] . ': ' . esc_attr( $value ) . ';' . PHP_EOL;
 
