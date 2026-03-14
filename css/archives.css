@@ -194,12 +194,11 @@
 
 .gl-category-tile__name {
     font-family: var(--gl-font-display);
-    font-size: var(--gl-font-size-sm);
+    font-size: var(--gl-font-size-xl);
     font-weight: var(--gl-font-weight-bold);
     margin: 0 0 var(--gl-space-1);
-    line-height: 1.3;
+    line-height: 2;
 }
-
 .gl-category-tile__count {
     font-size: var(--gl-font-size-xs);
     color: var(--gl-color-text-secondary);
