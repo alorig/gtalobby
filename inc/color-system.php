@@ -134,6 +134,26 @@ function gtalobby_generate_tint( $hex, $amount = 0.92 ) {
 }
 
 /**
+ * Generate a darkened color from a hex (0..1, e.g. 0.20 = 20% darker).
+ */
+function gtalobby_darken_hex( $hex, $amount = 0.25 ) {
+    $hex = ltrim( $hex, '#' );
+    if ( strlen( $hex ) !== 6 ) {
+        return '#000000';
+    }
+
+    $r = hexdec( substr( $hex, 0, 2 ) );
+    $g = hexdec( substr( $hex, 2, 2 ) );
+    $b = hexdec( substr( $hex, 4, 2 ) );
+
+    $r = (int) max( 0, min( 255, round( $r * ( 1 - $amount ) ) ) );
+    $g = (int) max( 0, min( 255, round( $g * ( 1 - $amount ) ) ) );
+    $b = (int) max( 0, min( 255, round( $b * ( 1 - $amount ) ) ) );
+
+    return sprintf( '#%02x%02x%02x', $r, $g, $b );
+}
+
+/**
  * Convert hex to RGB string.
  */
 function gtalobby_hex_to_rgb( $hex ) {

@@ -21,7 +21,11 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(130deg, rgba(var(--hub-accent-rgb, 40, 56, 120), 0.90) 0%, rgba(0, 0, 0, 0.25) 45%, rgba(0, 0, 0, 0.72) 100%);
+    background: linear-gradient(130deg,
+        rgba(var(--hub-accent-rgb, 40, 56, 120), 0.95) 0%,
+        rgba(var(--hub-accent-rgb, 40, 56, 120), 0.60) 45%,
+        rgba(var(--hub-accent-dark-rgb, 15, 20, 30), 0.95) 100%
+    );
     z-index: 0;
     pointer-events: none;
 }
@@ -30,7 +34,10 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle at top left, rgba(var(--hub-accent-rgb, 40, 56, 120), 0.30), rgba(0, 0, 0, 0.80) 70%);
+    background: radial-gradient(circle at top left,
+        rgba(var(--hub-accent-rgb, 40, 56, 120), 0.24),
+        rgba(var(--hub-accent-dark-rgb, 15, 20, 30), 0.85) 75%
+    );
     z-index: 0;
     pointer-events: none;
 }
