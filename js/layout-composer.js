@@ -15,14 +15,15 @@
         var $composer = $('.gl-layout-composer');
         if (!$composer.length) return;
 
-        var ajaxUrl  = (typeof gtalobbyLayout !== 'undefined') ? gtalobbyLayout.ajaxUrl : ajaxurl;
-        var nonce    = (typeof gtalobbyLayout !== 'undefined') ? gtalobbyLayout.nonce : '';
+        var ajaxUrl = gtalobbyLayout.ajaxUrl;
+        var nonce   = gtalobbyLayout.nonce;
+        var i18n    = gtalobbyLayout.i18n || {};
 
         /* =============================================
            SORTABLE ZONES
            ============================================= */
 
-        var $zoneList = $('.gl-zone-list');
+        var $zoneList = $composer.find('.gl-zone-list');
 
         if ($zoneList.length && $.fn.sortable) {
             $zoneList.sortable({
@@ -48,54 +49,106 @@
         });
 
         /* =============================================
-           CONTEXT SWITCH
+           ZONE ENABLE/DISABLE VISUAL FEEDBACK
            ============================================= */
 
-        var $contextSelect  = $('.gl-layout-composer__context');
-        var $categorySelect = $('.gl-layout-composer__category');
-
-        $contextSelect.on('change', function () {
-            loadLayout();
-        });
-
-        $categorySelect.on('change', function () {
-            loadLayout();
+        $composer.on('change', '.gl-zone-item__enabled input', function () {
+            var $item = $(this).closest('.gl-zone-item');
+            if ($(this).is(':checked')) {
+                $item.removeClass('gl-zone-item--disabled').addClass('gl-zone-item--enabled');
+            } else {
+                $item.removeClass('gl-zone-item--enabled').addClass('gl-zone-item--disabled');
+            }
         });
 
         /* =============================================
-           SAVE LAYOUT
+           CONTEXT SWITCH (via nav tabs — page reload)
+           ============================================= */
+
+        var $categorySelect = $composer.find('.gl-layout-composer__category');
+        if (!$categorySelect.length) {
+            $categorySelect = $('#gl-category-override');
+        }
+
+        $categorySelect.on('change', function () {
+            var category = $(this).val() || '';
+            // Read current context from the composer data attribute
+            var context = $composer.data('context') || 'hub';
+            var url = window.location.pathname + '?page=gtalobby-layout&context=' + context;
+            if (category) {
+                url += '&category=' + category;
+            }
+            window.location.href = url;
+        });
+
+        /* =============================================
+           DIRTY STATE
            ============================================= */
 
         var isDirty = false;
 
         function markDirty() {
             isDirty = true;
-            $('.gl-layout-save-btn').addClass('button-primary');
+            $composer.find('.gl-layout-save-btn').addClass('button-primary');
+            $composer.find('.gl-layout-status').text('');
         }
 
+        // Any input change marks dirty
         $composer.on('change', '.gl-zone-item :input', function () {
             markDirty();
         });
 
+        /* =============================================
+           COLLECT ZONE DATA
+           ============================================= */
+
+        function collectZones() {
+            var zones = {};
+            var orderIndex = 0;
+
+            $zoneList.find('.gl-zone-item').each(function () {
+                var $zone  = $(this);
+                var zoneId = $zone.data('zone-id');
+                if (!zoneId) return;
+
+                orderIndex += 10;
+
+                var zoneData = {
+                    order:   orderIndex,
+                    enabled: $zone.find('.gl-zone-item__enabled input').is(':checked') ? true : false
+                };
+
+                // Collect all data-field inputs from the body
+                $zone.find('[data-field]').each(function () {
+                    var field = $(this).data('field');
+                    var val   = $(this).val();
+
+                    // Convert numeric fields
+                    if (field === 'columns' || field === 'count' || field === 'per_page') {
+                        val = parseInt(val, 10) || 0;
+                    }
+
+                    zoneData[field] = val;
+                });
+
+                zones[zoneId] = zoneData;
+            });
+
+            return zones;
+        }
+
+        /* =============================================
+           SAVE LAYOUT
+           ============================================= */
+
         $composer.on('click', '.gl-layout-save-btn', function (e) {
             e.preventDefault();
             var $btn = $(this);
-            $btn.prop('disabled', true).text('Saving...');
+            $btn.prop('disabled', true).text(i18n.saving || 'Saving…');
 
-            var context  = $contextSelect.val() || 'hub';
-            var category = $categorySelect.val() || '';
-            var zones    = [];
-
-            $zoneList.find('.gl-zone-item').each(function () {
-                var $zone = $(this);
-                zones.push({
-                    id:          $zone.data('zone-id'),
-                    enabled:     $zone.find('.gl-zone-item__enabled input').is(':checked'),
-                    card_variant: $zone.find('[name*="card_variant"]').val() || 'standard',
-                    per_page:    $zone.find('[name*="per_page"]').val() || '',
-                    columns:     $zone.find('[name*="columns"]').val() || '',
-                });
-            });
+            var context  = $composer.data('context') || 'hub';
+            var category = $composer.data('category') || '';
+            var zones    = collectZones();
 
             $.ajax({
                 url: ajaxUrl,
@@ -110,16 +163,22 @@
                 success: function (response) {
                     if (response.success) {
                         isDirty = false;
-                        $btn.removeClass('button-primary').text('Saved ✓');
+                        $btn.removeClass('button-primary');
+                        $composer.find('.gl-layout-status')
+                            .text(i18n.saved || 'Layout saved!')
+                            .css('color', '#00a32a');
                         setTimeout(function () {
                             $btn.text('Save Layout');
-                        }, 2000);
+                            $composer.find('.gl-layout-status').text('');
+                        }, 2500);
                     } else {
                         alert('Save failed: ' + (response.data || 'Unknown error'));
+                        $btn.text('Save Layout');
                     }
                 },
                 error: function () {
-                    alert('Save failed: Network error');
+                    alert(i18n.error || 'Error saving layout.');
+                    $btn.text('Save Layout');
                 },
                 complete: function () {
                     $btn.prop('disabled', false);
@@ -133,13 +192,13 @@
 
         $composer.on('click', '.gl-layout-reset-btn', function (e) {
             e.preventDefault();
-            if (!confirm('Reset layout to defaults? This cannot be undone.')) return;
+            if (!confirm(i18n.resetConfirm || 'Reset layout to defaults? This cannot be undone.')) return;
 
             var $btn     = $(this);
-            var context  = $contextSelect.val() || 'hub';
-            var category = $categorySelect.val() || '';
+            var context  = $composer.data('context') || 'hub';
+            var category = $composer.data('category') || '';
 
-            $btn.prop('disabled', true).text('Resetting...');
+            $btn.prop('disabled', true).text('Resetting…');
 
             $.ajax({
                 url: ajaxUrl,
@@ -161,25 +220,10 @@
                     alert('Reset failed: Network error');
                 },
                 complete: function () {
-                    $btn.prop('disabled', false).text('Reset to Defaults');
+                    $btn.prop('disabled', false).text('Reset to Default');
                 }
             });
         });
-
-        /* =============================================
-           LOAD LAYOUT (for context/category switch)
-           ============================================= */
-
-        function loadLayout() {
-            // Reload the page with new params for simplicity
-            var context  = $contextSelect.val() || 'hub';
-            var category = $categorySelect.val() || '';
-            var url = window.location.pathname + '?page=gtalobby-layout&context=' + context;
-            if (category) {
-                url += '&category=' + category;
-            }
-            window.location.href = url;
-        }
 
         /* =============================================
            UNSAVED CHANGES WARNING

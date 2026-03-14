@@ -1138,9 +1138,9 @@ function gtalobby_layout_page() {
     echo '</nav>';
 
     // Category override selector
-    echo '<div class="gl-layout-category-filter">';
+    echo '<div class="gl-layout-composer__category-select">';
     echo '<label for="gl-category-override">' . esc_html__( 'Category Override:', 'gtalobby' ) . '</label>';
-    echo '<select id="gl-category-override" name="category_override">';
+    echo '<select id="gl-category-override" class="gl-layout-composer__category" name="category_override">';
     echo '<option value="">' . esc_html__( '— Default (All Categories) —', 'gtalobby' ) . '</option>';
     $sag_cats = gtalobby_get_sag_categories();
     foreach ( $sag_cats as $slug => $name ) {
@@ -1158,82 +1158,152 @@ function gtalobby_layout_page() {
     $zones = gtalobby_get_layout( $layout_context, $category_override );
 
     // Zone composer — rendered as sortable list
-    echo '<div class="gl-zone-composer" data-context="' . esc_attr( $layout_context ) . '" data-category="' . esc_attr( $category_override ) . '">';
+    echo '<div class="gl-layout-composer" data-context="' . esc_attr( $layout_context ) . '" data-category="' . esc_attr( $category_override ) . '">';
 
     if ( ! empty( $zones ) ) {
         echo '<ul class="gl-zone-list" id="gl-sortable-zones">';
+        $order_index = 0;
         foreach ( $zones as $zone_id => $zone ) {
-            $enabled_class = ! empty( $zone['enabled'] ) ? 'gl-zone--enabled' : 'gl-zone--disabled';
-            echo '<li class="gl-zone-item ' . esc_attr( $enabled_class ) . '" data-zone="' . esc_attr( $zone_id ) . '">';
-            echo '<span class="gl-zone-handle dashicons dashicons-move"></span>';
-            echo '<span class="gl-zone-name">' . esc_html( ucwords( str_replace( '_', ' ', $zone_id ) ) ) . '</span>';
+            $order_index += 10;
+            $enabled_class = ! empty( $zone['enabled'] ) ? 'gl-zone-item--enabled' : 'gl-zone-item--disabled';
+            $has_condition = ! empty( $zone['conditional'] );
+            $label         = isset( $zone['label'] ) ? $zone['label'] : ucwords( str_replace( '_', ' ', $zone_id ) );
 
-            // Quick toggles
-            echo '<span class="gl-zone-controls">';
+            echo '<li class="gl-zone-item ' . esc_attr( $enabled_class ) . '" data-zone-id="' . esc_attr( $zone_id ) . '">';
+
+            // Header row (drag handle, name, toggle, expand)
+            echo '<div class="gl-zone-item__header">';
+            echo '<span class="gl-zone-item__drag dashicons dashicons-move"></span>';
+            echo '<span class="gl-zone-item__name">' . esc_html( $label ) . '</span>';
+
+            if ( $has_condition ) {
+                $cond_parts = array();
+                if ( isset( $zone['conditional']['category'] ) ) {
+                    $cond_parts[] = 'cat: ' . ( is_array( $zone['conditional']['category'] ) ? implode( ', ', $zone['conditional']['category'] ) : $zone['conditional']['category'] );
+                }
+                if ( isset( $zone['conditional']['post_type'] ) ) {
+                    $cond_parts[] = 'type: ' . ( is_array( $zone['conditional']['post_type'] ) ? implode( ', ', $zone['conditional']['post_type'] ) : $zone['conditional']['post_type'] );
+                }
+                echo '<span class="gl-zone-item__condition" title="' . esc_attr( implode( ' | ', $cond_parts ) ) . '">⚡ conditional</span>';
+            }
+
+            // Enabled checkbox
+            echo '<label class="gl-zone-item__enabled">';
             printf(
-                '<label class="gl-zone-toggle"><input type="checkbox" name="zones[%s][enabled]" value="1" %s /> %s</label>',
-                esc_attr( $zone_id ),
+                '<input type="checkbox" data-field="enabled" value="1" %s /> %s',
                 checked( ! empty( $zone['enabled'] ), true, false ),
                 esc_html__( 'Visible', 'gtalobby' )
             );
+            echo '</label>';
+
+            // Expand button
+            echo '<button type="button" class="gl-zone-item__toggle">' . esc_html__( 'Expand', 'gtalobby' ) . '</button>';
+
+            echo '</div>'; // .gl-zone-item__header
+
+            // Expandable body
+            echo '<div class="gl-zone-item__body">';
 
             // Width selector
             $width = isset( $zone['width'] ) ? $zone['width'] : 'contained';
+            echo '<div class="gl-zone-item__field">';
+            echo '<label>' . esc_html__( 'Width', 'gtalobby' ) . '</label>';
             printf(
-                '<select name="zones[%s][width]" class="gl-zone-width">
+                '<select data-field="width">
                     <option value="full" %s>%s</option>
                     <option value="contained" %s>%s</option>
                     <option value="narrow" %s>%s</option>
                 </select>',
-                esc_attr( $zone_id ),
-                selected( $width, 'full', false ), esc_html__( 'Full', 'gtalobby' ),
+                selected( $width, 'full', false ), esc_html__( 'Full Width', 'gtalobby' ),
                 selected( $width, 'contained', false ), esc_html__( 'Contained', 'gtalobby' ),
                 selected( $width, 'narrow', false ), esc_html__( 'Narrow', 'gtalobby' )
             );
+            echo '</div>';
 
-            echo '</span>'; // .gl-zone-controls
-
-            // Expandable settings
-            echo '<div class="gl-zone-details">';
-            if ( isset( $zone['items_count'] ) ) {
+            // Count / items
+            if ( isset( $zone['count'] ) ) {
+                echo '<div class="gl-zone-item__field">';
                 printf(
-                    '<label>%s <input type="number" name="zones[%s][items_count]" value="%d" min="1" max="50" class="small-text" /></label>',
-                    esc_html__( 'Items:', 'gtalobby' ),
-                    esc_attr( $zone_id ),
-                    intval( $zone['items_count'] )
+                    '<label>%s</label><input type="number" data-field="count" value="%d" min="1" max="50" class="small-text" />',
+                    esc_html__( 'Items to show', 'gtalobby' ),
+                    intval( $zone['count'] )
                 );
+                echo '</div>';
             }
+
+            // Columns
             if ( isset( $zone['columns'] ) ) {
+                echo '<div class="gl-zone-item__field">';
                 printf(
-                    '<label>%s <input type="number" name="zones[%s][columns]" value="%d" min="1" max="6" class="small-text" /></label>',
-                    esc_html__( 'Columns:', 'gtalobby' ),
-                    esc_attr( $zone_id ),
+                    '<label>%s</label><input type="number" data-field="columns" value="%d" min="1" max="6" class="small-text" />',
+                    esc_html__( 'Columns', 'gtalobby' ),
                     intval( $zone['columns'] )
                 );
+                echo '</div>';
             }
-            if ( isset( $zone['card_variant'] ) ) {
-                $variants = array( 'standard', 'compact', 'feature', 'hero', 'minimal', 'magazine' );
-                printf( '<label>%s <select name="zones[%s][card_variant]">', esc_html__( 'Card Style:', 'gtalobby' ), esc_attr( $zone_id ) );
-                foreach ( $variants as $v ) {
-                    printf( '<option value="%s" %s>%s</option>', esc_attr( $v ), selected( $zone['card_variant'], $v, false ), esc_html( ucfirst( $v ) ) );
+
+            // Per-page (archive)
+            if ( isset( $zone['per_page'] ) ) {
+                echo '<div class="gl-zone-item__field">';
+                printf(
+                    '<label>%s</label><input type="number" data-field="per_page" value="%d" min="1" max="100" class="small-text" />',
+                    esc_html__( 'Posts per page', 'gtalobby' ),
+                    intval( $zone['per_page'] )
+                );
+                echo '</div>';
+            }
+
+            // Card variant / style
+            if ( isset( $zone['style'] ) ) {
+                $styles = array( 'standard', 'compact', 'feature', 'hero', 'minimal', 'magazine', 'card-grid', 'accordion', 'featured-hub', 'product-page', 'entity-showcase', 'utility-first' );
+                echo '<div class="gl-zone-item__field">';
+                printf( '<label>%s</label><select data-field="style">', esc_html__( 'Display Style', 'gtalobby' ) );
+                foreach ( $styles as $v ) {
+                    printf( '<option value="%s" %s>%s</option>', esc_attr( $v ), selected( $zone['style'], $v, false ), esc_html( ucfirst( str_replace( '-', ' ', $v ) ) ) );
                 }
-                echo '</select></label>';
+                echo '</select>';
+                echo '</div>';
             }
-            echo '</div>'; // .gl-zone-details
+
+            // Background
+            if ( isset( $zone['bg'] ) ) {
+                $bgs = array( 'inherit', 'surface', 'accent', 'accent-tint' );
+                echo '<div class="gl-zone-item__field">';
+                printf( '<label>%s</label><select data-field="bg">', esc_html__( 'Background', 'gtalobby' ) );
+                foreach ( $bgs as $bg ) {
+                    printf( '<option value="%s" %s>%s</option>', esc_attr( $bg ), selected( $zone['bg'], $bg, false ), esc_html( ucfirst( str_replace( '-', ' ', $bg ) ) ) );
+                }
+                echo '</select>';
+                echo '</div>';
+            }
+
+            // Spacing
+            if ( isset( $zone['spacing'] ) ) {
+                $spacings = array( 'compact', 'normal', 'breathing' );
+                echo '<div class="gl-zone-item__field">';
+                printf( '<label>%s</label><select data-field="spacing">', esc_html__( 'Spacing', 'gtalobby' ) );
+                foreach ( $spacings as $sp ) {
+                    printf( '<option value="%s" %s>%s</option>', esc_attr( $sp ), selected( $zone['spacing'], $sp, false ), esc_html( ucfirst( $sp ) ) );
+                }
+                echo '</select>';
+                echo '</div>';
+            }
+
+            echo '</div>'; // .gl-zone-item__body
 
             echo '</li>';
         }
         echo '</ul>';
     }
 
-    // Save button (AJAX)
-    echo '<div class="gl-zone-actions">';
-    echo '<button type="button" class="button button-primary" id="gl-save-layout">' . esc_html__( 'Save Layout', 'gtalobby' ) . '</button>';
-    echo '<button type="button" class="button" id="gl-reset-layout">' . esc_html__( 'Reset to Default', 'gtalobby' ) . '</button>';
-    wp_nonce_field( 'gtalobby_save_layout', 'gl_layout_nonce' );
+    // Action buttons
+    echo '<div class="gl-admin-actions">';
+    echo '<button type="button" class="button button-primary gl-layout-save-btn">' . esc_html__( 'Save Layout', 'gtalobby' ) . '</button>';
+    echo '<button type="button" class="button gl-layout-reset-btn">' . esc_html__( 'Reset to Default', 'gtalobby' ) . '</button>';
+    echo '<span class="gl-layout-status"></span>';
     echo '</div>';
 
-    echo '</div>'; // .gl-zone-composer
+    echo '</div>'; // .gl-layout-composer
     echo '</div>'; // .wrap
 }
 
@@ -1441,3 +1511,110 @@ function gtalobby_render_ad_slot( $slot, $wrapper_class = 'gl-ad-slot' ) {
     echo $code; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped — ad code is sanitized on save
     echo '</div>';
 }
+
+/* ================================================================
+   LAYOUT ENGINE — AJAX HANDLERS
+   ================================================================ */
+
+/**
+ * AJAX: Save layout zone configuration.
+ */
+function gtalobby_ajax_save_layout() {
+    if ( ! current_user_can( 'manage_options' ) ) {
+        wp_send_json_error( 'Unauthorized' );
+    }
+
+    if ( ! wp_verify_nonce( $_POST['nonce'] ?? '', 'gtalobby_save_layout' ) ) {
+        wp_send_json_error( 'Invalid nonce' );
+    }
+
+    $context  = sanitize_key( $_POST['context'] ?? 'hub' );
+    $category = sanitize_key( $_POST['category'] ?? '' );
+    $raw      = $_POST['zones'] ?? '';
+
+    $zones = json_decode( stripslashes( $raw ), true );
+    if ( ! is_array( $zones ) || empty( $zones ) ) {
+        wp_send_json_error( 'Invalid zone data' );
+    }
+
+    // Validate context
+    $valid_contexts = array( 'hub', 'single', 'archive', 'homepage' );
+    if ( ! in_array( $context, $valid_contexts, true ) ) {
+        wp_send_json_error( 'Invalid context' );
+    }
+
+    // Sanitize zone data
+    $sanitized = array();
+    $defaults_fn = "gtalobby_get_{$context}_zones_default";
+    $defaults = function_exists( $defaults_fn ) ? call_user_func( $defaults_fn ) : array();
+
+    foreach ( $zones as $zone_id => $zone_data ) {
+        $zone_id = sanitize_key( $zone_id );
+
+        // Only accept known zone IDs
+        if ( ! isset( $defaults[ $zone_id ] ) ) {
+            continue;
+        }
+
+        $clean = array();
+        $clean['order']   = isset( $zone_data['order'] ) ? absint( $zone_data['order'] ) : 50;
+        $clean['enabled'] = ! empty( $zone_data['enabled'] );
+
+        // Optional fields — only save if they exist in defaults
+        $optional_strings = array( 'width', 'bg', 'spacing', 'style' );
+        foreach ( $optional_strings as $field ) {
+            if ( isset( $zone_data[ $field ] ) ) {
+                $clean[ $field ] = sanitize_key( $zone_data[ $field ] );
+            }
+        }
+
+        $optional_ints = array( 'columns', 'count', 'per_page' );
+        foreach ( $optional_ints as $field ) {
+            if ( isset( $zone_data[ $field ] ) ) {
+                $clean[ $field ] = absint( $zone_data[ $field ] );
+            }
+        }
+
+        $sanitized[ $zone_id ] = $clean;
+    }
+
+    if ( empty( $sanitized ) ) {
+        wp_send_json_error( 'No valid zones to save' );
+    }
+
+    gtalobby_save_layout( $context, $sanitized, $category );
+
+    wp_send_json_success( array( 'message' => 'Layout saved', 'count' => count( $sanitized ) ) );
+}
+add_action( 'wp_ajax_gtalobby_save_layout', 'gtalobby_ajax_save_layout' );
+
+/**
+ * AJAX: Reset layout to defaults.
+ */
+function gtalobby_ajax_reset_layout() {
+    if ( ! current_user_can( 'manage_options' ) ) {
+        wp_send_json_error( 'Unauthorized' );
+    }
+
+    if ( ! wp_verify_nonce( $_POST['nonce'] ?? '', 'gtalobby_save_layout' ) ) {
+        wp_send_json_error( 'Invalid nonce' );
+    }
+
+    $context  = sanitize_key( $_POST['context'] ?? 'hub' );
+    $category = sanitize_key( $_POST['category'] ?? '' );
+
+    $valid_contexts = array( 'hub', 'single', 'archive', 'homepage' );
+    if ( ! in_array( $context, $valid_contexts, true ) ) {
+        wp_send_json_error( 'Invalid context' );
+    }
+
+    $option_key = "gtalobby_layout_{$context}";
+    if ( $category ) {
+        $option_key .= "_{$category}";
+    }
+
+    delete_option( $option_key );
+
+    wp_send_json_success( array( 'message' => 'Layout reset to defaults' ) );
+}
+add_action( 'wp_ajax_gtalobby_reset_layout', 'gtalobby_ajax_reset_layout' );

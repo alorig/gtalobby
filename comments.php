@@ -57,7 +57,6 @@ function gtalobby_comment_callback( $comment, $args, $depth ) {
 }
 endif;
 ?>
-?>
 
 <section id="comments" class="gl-comments">
 
