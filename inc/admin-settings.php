@@ -1396,32 +1396,68 @@ function gtalobby_ajax_save_layout() {
 
     $context  = isset( $_POST['context'] ) ? sanitize_key( $_POST['context'] ) : '';
     $category = isset( $_POST['category'] ) ? sanitize_key( $_POST['category'] ) : '';
-    $zones    = isset( $_POST['zones'] ) ? $_POST['zones'] : array();
+    $raw      = isset( $_POST['zones'] ) ? $_POST['zones'] : '';
 
-    if ( empty( $context ) || empty( $zones ) ) {
+    if ( empty( $context ) || empty( $raw ) ) {
         wp_send_json_error( array( 'message' => 'Missing data' ) );
     }
+
+    // Validate context
+    $valid_contexts = array( 'hub', 'single', 'archive', 'homepage' );
+    if ( ! in_array( $context, $valid_contexts, true ) ) {
+        wp_send_json_error( array( 'message' => 'Invalid context' ) );
+    }
+
+    // Decode JSON string from JS
+    $zones = is_string( $raw ) ? json_decode( stripslashes( $raw ), true ) : $raw;
+    if ( ! is_array( $zones ) || empty( $zones ) ) {
+        wp_send_json_error( array( 'message' => 'Invalid zone data' ) );
+    }
+
+    // Get defaults for validation
+    $defaults_fn = "gtalobby_get_{$context}_zones_default";
+    $defaults = function_exists( $defaults_fn ) ? call_user_func( $defaults_fn ) : array();
 
     // Sanitize zone data
     $sanitized_zones = array();
     foreach ( $zones as $zone_id => $zone_data ) {
         $safe_id = sanitize_key( $zone_id );
-        $sanitized_zones[ $safe_id ] = array(
-            'enabled'      => ! empty( $zone_data['enabled'] ),
-            'order'        => isset( $zone_data['order'] ) ? intval( $zone_data['order'] ) : 0,
-            'width'        => isset( $zone_data['width'] ) ? sanitize_key( $zone_data['width'] ) : 'contained',
-            'items_count'  => isset( $zone_data['items_count'] ) ? absint( $zone_data['items_count'] ) : null,
-            'columns'      => isset( $zone_data['columns'] ) ? absint( $zone_data['columns'] ) : null,
-            'card_variant' => isset( $zone_data['card_variant'] ) ? sanitize_key( $zone_data['card_variant'] ) : null,
+
+        // Only accept known zone IDs
+        if ( ! empty( $defaults ) && ! isset( $defaults[ $safe_id ] ) ) {
+            continue;
+        }
+
+        $clean = array(
+            'enabled' => ! empty( $zone_data['enabled'] ),
+            'order'   => isset( $zone_data['order'] ) ? absint( $zone_data['order'] ) : 50,
         );
-        // Remove null values
-        $sanitized_zones[ $safe_id ] = array_filter( $sanitized_zones[ $safe_id ], function( $v ) {
-            return $v !== null;
-        } );
+
+        // Optional string fields
+        $string_fields = array( 'width', 'bg', 'spacing', 'style' );
+        foreach ( $string_fields as $field ) {
+            if ( isset( $zone_data[ $field ] ) ) {
+                $clean[ $field ] = sanitize_key( $zone_data[ $field ] );
+            }
+        }
+
+        // Optional integer fields
+        $int_fields = array( 'columns', 'count', 'per_page' );
+        foreach ( $int_fields as $field ) {
+            if ( isset( $zone_data[ $field ] ) ) {
+                $clean[ $field ] = absint( $zone_data[ $field ] );
+            }
+        }
+
+        $sanitized_zones[ $safe_id ] = $clean;
+    }
+
+    if ( empty( $sanitized_zones ) ) {
+        wp_send_json_error( array( 'message' => 'No valid zones' ) );
     }
 
     gtalobby_save_layout( $context, $sanitized_zones, $category );
-    wp_send_json_success( array( 'message' => 'Layout saved' ) );
+    wp_send_json_success( array( 'message' => 'Layout saved', 'count' => count( $sanitized_zones ) ) );
 }
 add_action( 'wp_ajax_gtalobby_save_layout', 'gtalobby_ajax_save_layout' );
 
@@ -1511,110 +1547,3 @@ function gtalobby_render_ad_slot( $slot, $wrapper_class = 'gl-ad-slot' ) {
     echo $code; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped — ad code is sanitized on save
     echo '</div>';
 }
-
-/* ================================================================
-   LAYOUT ENGINE — AJAX HANDLERS
-   ================================================================ */
-
-/**
- * AJAX: Save layout zone configuration.
- */
-function gtalobby_ajax_save_layout() {
-    if ( ! current_user_can( 'manage_options' ) ) {
-        wp_send_json_error( 'Unauthorized' );
-    }
-
-    if ( ! wp_verify_nonce( $_POST['nonce'] ?? '', 'gtalobby_save_layout' ) ) {
-        wp_send_json_error( 'Invalid nonce' );
-    }
-
-    $context  = sanitize_key( $_POST['context'] ?? 'hub' );
-    $category = sanitize_key( $_POST['category'] ?? '' );
-    $raw      = $_POST['zones'] ?? '';
-
-    $zones = json_decode( stripslashes( $raw ), true );
-    if ( ! is_array( $zones ) || empty( $zones ) ) {
-        wp_send_json_error( 'Invalid zone data' );
-    }
-
-    // Validate context
-    $valid_contexts = array( 'hub', 'single', 'archive', 'homepage' );
-    if ( ! in_array( $context, $valid_contexts, true ) ) {
-        wp_send_json_error( 'Invalid context' );
-    }
-
-    // Sanitize zone data
-    $sanitized = array();
-    $defaults_fn = "gtalobby_get_{$context}_zones_default";
-    $defaults = function_exists( $defaults_fn ) ? call_user_func( $defaults_fn ) : array();
-
-    foreach ( $zones as $zone_id => $zone_data ) {
-        $zone_id = sanitize_key( $zone_id );
-
-        // Only accept known zone IDs
-        if ( ! isset( $defaults[ $zone_id ] ) ) {
-            continue;
-        }
-
-        $clean = array();
-        $clean['order']   = isset( $zone_data['order'] ) ? absint( $zone_data['order'] ) : 50;
-        $clean['enabled'] = ! empty( $zone_data['enabled'] );
-
-        // Optional fields — only save if they exist in defaults
-        $optional_strings = array( 'width', 'bg', 'spacing', 'style' );
-        foreach ( $optional_strings as $field ) {
-            if ( isset( $zone_data[ $field ] ) ) {
-                $clean[ $field ] = sanitize_key( $zone_data[ $field ] );
-            }
-        }
-
-        $optional_ints = array( 'columns', 'count', 'per_page' );
-        foreach ( $optional_ints as $field ) {
-            if ( isset( $zone_data[ $field ] ) ) {
-                $clean[ $field ] = absint( $zone_data[ $field ] );
-            }
-        }
-
-        $sanitized[ $zone_id ] = $clean;
-    }
-
-    if ( empty( $sanitized ) ) {
-        wp_send_json_error( 'No valid zones to save' );
-    }
-
-    gtalobby_save_layout( $context, $sanitized, $category );
-
-    wp_send_json_success( array( 'message' => 'Layout saved', 'count' => count( $sanitized ) ) );
-}
-add_action( 'wp_ajax_gtalobby_save_layout', 'gtalobby_ajax_save_layout' );
-
-/**
- * AJAX: Reset layout to defaults.
- */
-function gtalobby_ajax_reset_layout() {
-    if ( ! current_user_can( 'manage_options' ) ) {
-        wp_send_json_error( 'Unauthorized' );
-    }
-
-    if ( ! wp_verify_nonce( $_POST['nonce'] ?? '', 'gtalobby_save_layout' ) ) {
-        wp_send_json_error( 'Invalid nonce' );
-    }
-
-    $context  = sanitize_key( $_POST['context'] ?? 'hub' );
-    $category = sanitize_key( $_POST['category'] ?? '' );
-
-    $valid_contexts = array( 'hub', 'single', 'archive', 'homepage' );
-    if ( ! in_array( $context, $valid_contexts, true ) ) {
-        wp_send_json_error( 'Invalid context' );
-    }
-
-    $option_key = "gtalobby_layout_{$context}";
-    if ( $category ) {
-        $option_key .= "_{$category}";
-    }
-
-    delete_option( $option_key );
-
-    wp_send_json_success( array( 'message' => 'Layout reset to defaults' ) );
-}
-add_action( 'wp_ajax_gtalobby_reset_layout', 'gtalobby_ajax_reset_layout' );
