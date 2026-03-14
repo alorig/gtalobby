@@ -782,7 +782,7 @@ function gtalobby_render_text_field( $args ) {
 function gtalobby_render_color_field( $args ) {
     $options = get_option( $args['option_group'], array() );
     $key     = $args['field_key'];
-    $value   = isset( $options[ $key ] ) ? $options[ $key ] : '';
+    $saved   = isset( $options[ $key ] ) ? $options[ $key ] : '';
 
     $defaults = gtalobby_get_color_config();
     $default_color = '';
@@ -833,6 +833,9 @@ function gtalobby_render_color_field( $args ) {
     } elseif ( isset( $defaults[ $key ] ) ) {
         $default_color = $defaults[ $key ];
     }
+
+    // Show the default color when no override is saved, so all pickers display the active theme color
+    $value = ! empty( $saved ) ? $saved : $default_color;
 
     printf(
         '<input type="text" name="%s[%s]" value="%s" class="gl-color-picker" data-default-color="%s" placeholder="%s" />',
