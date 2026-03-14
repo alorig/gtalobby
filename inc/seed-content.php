@@ -9,7 +9,7 @@
  * Triggered on theme activation (after_switch_theme) or via admin action.
  *
  * @package GtaLobby
- */
+ 1*/
 
 defined( 'ABSPATH' ) || exit;
 
