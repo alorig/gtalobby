@@ -156,7 +156,7 @@ function gtalobby_seed_additional_hubs() {
             'primary_keyword' => 'GTA 5 cheats',
             'hero_style'      => 'standard',
             'layout_style'    => 'micro_website',
-            'quick_answer'    => '<p>GTA 5 features over <strong>30 cheat codes</strong> across all platforms. On PS4/PS5, cheats are entered as button combinations during gameplay. On Xbox, similar button combos apply. PC players can use the tilde (~) console. Cheats include invincibility, all weapons, wanted level changes, vehicle spawns, and world modifiers. <strong>Cheats disable achievements/trophies</strong> for that session.</p>',
+            'quick_answer'    => '<p>GTA 5 features over <strong>30 cheat codes</strong> across all platforms. On PS4/PS5, cheats are entered as button combinations during gameplay. On Xbox, similar button combos apply. PC players can use the tilde (~) console. Cheats include all weapons, wanted level changes, vehicle spawns, super jump, and world modifiers. <strong>Cheats disable achievements/trophies</strong> for that session.</p>',
             'key_facts' => array(
                 array( 'fact_label' => 'Total Cheats',  'fact_value' => '35+ codes' ),
                 array( 'fact_label' => 'Platforms',     'fact_value' => 'PS, Xbox, PC' ),
@@ -166,7 +166,7 @@ function gtalobby_seed_additional_hubs() {
             'faq_items' => array(
                 array( 'question' => 'Do GTA 5 cheats disable achievements?', 'answer' => '<p>Yes. Activating any cheat code in GTA 5 will disable trophies and achievements for the current play session. You need to reload a save without cheats active to re-enable them.</p>' ),
                 array( 'question' => 'Can you use cheats in GTA Online?', 'answer' => '<p>No. Cheat codes are completely disabled in GTA Online. They only work in Story Mode. Using external cheating tools in GTA Online can result in a permanent ban.</p>' ),
-                array( 'question' => 'How do you enter cheats on PS5?', 'answer' => '<p>During gameplay (not in a menu or cutscene), press the button combination quickly. For example, the invincibility cheat is: Right, X, Right, Left, Right, R1, Right, Left, X, Triangle. You\'ll see a confirmation message on screen.</p>' ),
+                array( 'question' => 'How do you enter cheats on PS5?', 'answer' => '<p>During gameplay (not in a menu or cutscene), press the button combination quickly. For example, the max health and armor cheat is: O, L1, Triangle, R2, X, Square, O, Right, Square, L1, L1, L1. You\'ll see a confirmation message on screen.</p>' ),
             ),
             'cross_cluster_slugs' => array( 'gta-5-best-cars' ),
             'content' => '<!-- wp:heading -->
@@ -174,7 +174,7 @@ function gtalobby_seed_additional_hubs() {
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
-<p>Grand Theft Auto 5 includes a comprehensive set of cheat codes that let you manipulate the game world in creative and often hilarious ways. Whether you want to become invincible, spawn a fighter jet, or make the world go into slow motion, there\'s a cheat for that.</p>
+<p>Grand Theft Auto 5 includes a comprehensive set of cheat codes that let you manipulate the game world in creative and often hilarious ways. Whether you want to spawn a fighter jet, gain explosive punches, or make the world go into slow motion, there\'s a cheat for that.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:heading -->
@@ -182,7 +182,7 @@ function gtalobby_seed_additional_hubs() {
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
-<p>Player cheats modify your character\'s abilities and status. The most popular is <strong>invincibility</strong>, which makes you immune to all damage for 5 minutes. Other player cheats include max health and armor, super jump, explosive melee attacks, and fast run/swim.</p>
+<p>Player cheats modify your character\'s abilities and status. The most popular is <strong>max health and armor</strong>, which fully restores your health and gives you full body armor. Other player cheats include super jump, explosive melee attacks, fast run/swim, and slow-motion aiming.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:heading -->
@@ -214,7 +214,7 @@ function gtalobby_seed_additional_hubs() {
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
-<p>Before you start entering cheats, keep these warnings in mind: cheats <strong>disable trophies and achievements</strong> for the current session, cheats cannot be used during missions, and some cheats (like invincibility) are timed and will expire after 5 minutes. Always save your game before activating cheats so you can reload a clean save afterward.</p>
+<p>Before you start entering cheats, keep these warnings in mind: cheats <strong>disable trophies and achievements</strong> for the current session, cheats cannot be used during missions, and some cheats (like slow motion) are timed and will expire after a set duration. Always save your game before activating cheats so you can reload a clean save afterward.</p>
 <!-- /wp:paragraph -->',
         ),
 
@@ -902,14 +902,6 @@ function gtalobby_seed_posts() {
             'hub_slug'   => 'gta-5-cheats',
             'content'    => '<!-- wp:paragraph -->
 <p>GTA 5 on PlayStation features over 35 cheat codes entered via button combinations or the in-game phone dialer. This guide lists every cheat with its PS5/PS4 input sequence.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:heading -->
-<h2>Invincibility (God Mode)</h2>
-<!-- /wp:heading -->
-
-<!-- wp:paragraph -->
-<p><strong>Button combo:</strong> Right, X, Right, Left, Right, R1, Right, Left, X, Triangle. Grants 5 minutes of invincibility. Must be re-entered after it expires. <strong>Phone:</strong> 1-999-724-654-5537 (1-999-PAINKILLER).</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:heading -->
@@ -1683,7 +1675,7 @@ function gtalobby_seed_posts() {
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
-<p><strong>Invincibility:</strong> PS: Right, X, Right, Left, Right, R1, Right, Left, X, Triangle. Xbox: Right, A, Right, Left, Right, RB, Right, Left, A, Y. PC: PAINKILLER. Duration: 5 minutes. <strong>Max Health/Armor:</strong> PS: O, L1, Triangle, R2, X, Square, O, Right, Square, L1, L1, L1. PC: TURTLE. <strong>Super Jump:</strong> PS: Left, Left, Triangle, Triangle, Right, Right, Left, Right, Square, R1, R2. PC: HOPTOIT.</p>
+<p><strong>Max Health/Armor:</strong> PS: O, L1, Triangle, R2, X, Square, O, Right, Square, L1, L1, L1. PC: TURTLE. <strong>Super Jump:</strong> PS: Left, Left, Triangle, Triangle, Right, Right, Left, Right, Square, R1, R2. PC: HOPTOIT. <strong>Explosive Melee:</strong> PS: Right, Left, X, Triangle, R1, O, O, O, L2. PC: HOTHANDS. <strong>Fast Run:</strong> PS: Triangle, Left, Right, Right, L2, L1, Square. PC: CATCHME.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:heading -->
@@ -1725,11 +1717,11 @@ function gtalobby_seed_posts() {
 <!-- /wp:paragraph -->
 
 <!-- wp:heading -->
-<h2>3. Invincibility (God Mode)</h2>
+<h2>3. Explosive Melee Attacks</h2>
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
-<p>Five minutes of complete invulnerability. Use it to survive ridiculous stunts, fight the military at 5 stars, or explore areas that would normally kill you. The time limit keeps it balanced — you need to re-enter the code every 5 minutes, which adds a fun strategic element during chaos.</p>
+<p>Turn every punch and kick into a devastating explosion. Send NPCs, cars, and anything else flying with a single hit. Combined with super jump, you become a one-person wrecking crew. The ragdoll physics make every encounter uniquely hilarious and endlessly entertaining.</p>
 <!-- /wp:paragraph -->',
         ),
 
