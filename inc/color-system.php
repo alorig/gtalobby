@@ -23,14 +23,39 @@ function gtalobby_get_color_overrides() {
     }
 
     $map = array(
+        // Backgrounds & Surfaces
         'color_background'      => 'bg',
+        'color_bg_alt'          => 'bg_alt',
         'color_surface'         => 'surface',
+        'color_surface_raised'  => 'surface_raised',
+        'color_overlay'         => 'overlay',
+        // Text
         'color_text_primary'    => 'text',
         'color_text_secondary'  => 'text_secondary',
-        'color_accent'          => 'accent',
-        'color_accent_secondary'=> 'secondary',
+        'color_text_tertiary'   => 'text_tertiary',
+        'color_text_inverse'    => 'text_inverse',
+        // Borders
         'color_border'          => 'border',
         'color_divider'         => 'divider',
+        // Primary Accent
+        'color_accent'          => 'accent',
+        'color_accent_light'    => 'accent_light',
+        'color_accent_dark'     => 'accent_dark',
+        'color_accent_tint'     => 'accent_tint',
+        // Secondary Accent
+        'color_accent_secondary'=> 'secondary',
+        'color_secondary_light' => 'secondary_light',
+        'color_secondary_dark'  => 'secondary_dark',
+        'color_secondary_tint'  => 'secondary_tint',
+        // Semantic
+        'color_confirmed'       => 'confirmed',
+        'color_likely'          => 'likely',
+        'color_rumored'         => 'rumored',
+        'color_speculative'     => 'speculative',
+        'color_success'         => 'success',
+        'color_warning'         => 'warning',
+        'color_error'           => 'error',
+        'color_info'            => 'info',
     );
 
     $overrides = array();
@@ -71,6 +96,7 @@ function gtalobby_get_color_config() {
         'bg_alt'          => '#0f1328',
         'surface'         => '#0c1030',
         'surface_raised'  => '#13183e',
+        'overlay'         => '#111635',
         'border'          => '#2b3180',
         'divider'         => '#1b214f',
 
@@ -80,13 +106,13 @@ function gtalobby_get_color_config() {
         'text_tertiary'   => '#8E9ECC',
         'text_inverse'    => '#0D1223',
 
-        // Primary Accent (neon magenta/purple)
+        // Primary Accent (neon magenta)
         'accent'          => '#FF2C98',
-        'accent_light'    => '#FF73C2',
-        'accent_dark'     => '#A42877',
-        'accent_tint'     => '#35245e',
+        'accent_light'    => '#FF88C3',
+        'accent_dark'     => '#A41869',
+        'accent_tint'     => '#371C4B',
 
-        // Secondary Accent (neon cyan)
+        // Secondary Accent (cyber cyan)
         'secondary'       => '#27D9FF',
         'secondary_light' => '#8CE9FF',
         'secondary_dark'  => '#00A6C8',
@@ -100,17 +126,18 @@ function gtalobby_get_color_config() {
         'success'         => '#00B894',
         'warning'         => '#FDCB6E',
         'error'           => '#D63031',
+        'info'            => '#0984E3',
 
-        // Category Accents (vice neon palette)
-        'cat_gta6'        => '#FF2C98',
-        'cat_cheats'      => '#FF6A4E',
-        'cat_online'      => '#27D9FF',
-        'cat_mods'        => '#3BB79E',
-        'cat_cars'        => '#FDD976',
-        'cat_characters'  => '#E14ECF',
-        'cat_locations'   => '#4F9BFF',
-        'cat_money'       => '#F9C02D',
-        'cat_news'        => '#8E98C6',
+        // Category Accents (synced with design-tokens.css)
+        'cat_gta6'        => '#6C5CE7',
+        'cat_cheats'      => '#E17055',
+        'cat_online'      => '#00CEC9',
+        'cat_mods'        => '#00B894',
+        'cat_cars'        => '#FDCB6E',
+        'cat_characters'  => '#E84393',
+        'cat_locations'   => '#0984E3',
+        'cat_money'       => '#F9A825',
+        'cat_news'        => '#636E72',
     );
 
     $overrides = gtalobby_get_color_overrides();
@@ -178,28 +205,39 @@ function gtalobby_output_dynamic_colors() {
     $css = ':root {' . PHP_EOL;
 
     $map = array(
+        // Backgrounds & Surfaces
         'bg'              => '--gl-color-bg',
         'bg_alt'          => '--gl-color-bg-alt',
         'surface'         => '--gl-color-surface',
         'surface_raised'  => '--gl-color-surface-raised',
+        'overlay'         => '--gl-color-overlay',
         'border'          => '--gl-color-border',
         'divider'         => '--gl-color-divider',
+        // Text
         'text'            => '--gl-color-text',
         'text_secondary'  => '--gl-color-text-secondary',
         'text_tertiary'   => '--gl-color-text-tertiary',
         'text_inverse'    => '--gl-color-text-inverse',
+        // Primary Accent
         'accent'          => '--gl-color-accent',
         'accent_light'    => '--gl-color-accent-light',
         'accent_dark'     => '--gl-color-accent-dark',
         'accent_tint'     => '--gl-color-accent-tint',
+        // Secondary Accent
         'secondary'       => '--gl-color-secondary',
         'secondary_light' => '--gl-color-secondary-light',
         'secondary_dark'  => '--gl-color-secondary-dark',
         'secondary_tint'  => '--gl-color-secondary-tint',
+        // Semantic
         'confirmed'       => '--gl-color-confirmed',
         'likely'          => '--gl-color-likely',
         'rumored'         => '--gl-color-rumored',
         'speculative'     => '--gl-color-speculative',
+        'success'         => '--gl-color-success',
+        'warning'         => '--gl-color-warning',
+        'error'           => '--gl-color-error',
+        'info'            => '--gl-color-info',
+        // Categories
         'cat_gta6'        => '--gl-color-cat-gta6',
         'cat_cheats'      => '--gl-color-cat-cheats',
         'cat_online'      => '--gl-color-cat-online',
@@ -213,19 +251,26 @@ function gtalobby_output_dynamic_colors() {
 
     foreach ( $overrides as $key => $value ) {
         if ( isset( $map[ $key ] ) && $value ) {
-            $css .= '    ' . $map[ $key ] . ': ' . esc_attr( $value ) . ';' . PHP_EOL;
+            // Overlay needs rgba output (hex with 60% opacity)
+            if ( $key === 'overlay' ) {
+                $css .= '    ' . $map[ $key ] . ': rgba(' . gtalobby_hex_to_rgb( $value ) . ', 0.6);' . PHP_EOL;
+            } else {
+                $css .= '    ' . $map[ $key ] . ': ' . esc_attr( $value ) . ';' . PHP_EOL;
+            }
 
             // Auto-generate tints for category colors
             if ( strpos( $key, 'cat_' ) === 0 ) {
-                $tint_var = str_replace( 'cat_', 'cat_', $key ) . '-tint';
                 $tint_css_var = $map[ $key ] . '-tint';
                 $css .= '    ' . $tint_css_var . ': ' . gtalobby_generate_tint( $value ) . ';' . PHP_EOL;
             }
         }
 
-        // RGB version for accent
+        // RGB versions for accent and secondary
         if ( $key === 'accent' && $value ) {
             $css .= '    --gl-color-accent-rgb: ' . gtalobby_hex_to_rgb( $value ) . ';' . PHP_EOL;
+        }
+        if ( $key === 'secondary' && $value ) {
+            $css .= '    --gl-color-secondary-rgb: ' . gtalobby_hex_to_rgb( $value ) . ';' . PHP_EOL;
         }
     }
 

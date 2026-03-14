@@ -273,41 +273,124 @@ function gtalobby_register_general_fields() {
    ================================================================ */
 
 function gtalobby_register_color_fields() {
-    // Section: Base Colors
+
+    // Helper to register a group of color fields
+    $register_group = function ( $section_id, $fields ) {
+        foreach ( $fields as $key => $label ) {
+            add_settings_field(
+                'gtalobby_' . $key,
+                $label,
+                'gtalobby_render_color_field',
+                'gtalobby-colors',
+                $section_id,
+                array(
+                    'option_group' => 'gtalobby_color_options',
+                    'field_key'    => $key,
+                )
+            );
+        }
+    };
+
+    /* --- Section: Background & Surface Colors --- */
     add_settings_section(
-        'gtalobby_colors_base',
-        esc_html__( 'Base Colors', 'gtalobby' ),
+        'gtalobby_colors_backgrounds',
+        esc_html__( 'Background & Surface Colors', 'gtalobby' ),
         function () {
-            echo '<p>' . esc_html__( 'Override the default light theme colors. Leave empty to use defaults.', 'gtalobby' ) . '</p>';
+            echo '<p>' . esc_html__( 'Page backgrounds, card surfaces, and overlay colors. Leave empty to use defaults.', 'gtalobby' ) . '</p>';
         },
         'gtalobby-colors'
     );
+    $register_group( 'gtalobby_colors_backgrounds', array(
+        'color_background'      => esc_html__( 'Background', 'gtalobby' ),
+        'color_bg_alt'          => esc_html__( 'Background Alt', 'gtalobby' ),
+        'color_surface'         => esc_html__( 'Surface (Cards)', 'gtalobby' ),
+        'color_surface_raised'  => esc_html__( 'Surface Raised (Header)', 'gtalobby' ),
+        'color_overlay'         => esc_html__( 'Overlay', 'gtalobby' ),
+    ) );
 
-    $base_colors = array(
-        'color_background'     => esc_html__( 'Background', 'gtalobby' ),
-        'color_surface'        => esc_html__( 'Surface (Cards)', 'gtalobby' ),
-        'color_text_primary'   => esc_html__( 'Primary Text', 'gtalobby' ),
-        'color_text_secondary' => esc_html__( 'Secondary Text', 'gtalobby' ),
-        'color_accent'         => esc_html__( 'Global Accent', 'gtalobby' ),
-        'color_accent_secondary' => esc_html__( 'Secondary Accent', 'gtalobby' ),
-        'color_border'         => esc_html__( 'Border', 'gtalobby' ),
+    /* --- Section: Text Colors --- */
+    add_settings_section(
+        'gtalobby_colors_text',
+        esc_html__( 'Text Colors', 'gtalobby' ),
+        function () {
+            echo '<p>' . esc_html__( 'Primary, secondary, and tertiary text colors for content hierarchy.', 'gtalobby' ) . '</p>';
+        },
+        'gtalobby-colors'
     );
+    $register_group( 'gtalobby_colors_text', array(
+        'color_text_primary'    => esc_html__( 'Primary Text', 'gtalobby' ),
+        'color_text_secondary'  => esc_html__( 'Secondary Text', 'gtalobby' ),
+        'color_text_tertiary'   => esc_html__( 'Tertiary Text', 'gtalobby' ),
+        'color_text_inverse'    => esc_html__( 'Inverse Text (on light bg)', 'gtalobby' ),
+    ) );
 
-    foreach ( $base_colors as $key => $label ) {
-        add_settings_field(
-            'gtalobby_' . $key,
-            $label,
-            'gtalobby_render_color_field',
-            'gtalobby-colors',
-            'gtalobby_colors_base',
-            array(
-                'option_group' => 'gtalobby_color_options',
-                'field_key'    => $key,
-            )
-        );
-    }
+    /* --- Section: Border & Divider Colors --- */
+    add_settings_section(
+        'gtalobby_colors_borders',
+        esc_html__( 'Border & Divider Colors', 'gtalobby' ),
+        function () {
+            echo '<p>' . esc_html__( 'Borders for cards, inputs, and section dividers.', 'gtalobby' ) . '</p>';
+        },
+        'gtalobby-colors'
+    );
+    $register_group( 'gtalobby_colors_borders', array(
+        'color_border'          => esc_html__( 'Border', 'gtalobby' ),
+        'color_divider'         => esc_html__( 'Divider', 'gtalobby' ),
+    ) );
 
-    // Section: Category Accent Colors
+    /* --- Section: Primary Accent Colors --- */
+    add_settings_section(
+        'gtalobby_colors_accent',
+        esc_html__( 'Primary Accent (Neon Magenta)', 'gtalobby' ),
+        function () {
+            echo '<p>' . esc_html__( 'Main accent color and its variants. Light/dark/tint are auto-generated if left empty.', 'gtalobby' ) . '</p>';
+        },
+        'gtalobby-colors'
+    );
+    $register_group( 'gtalobby_colors_accent', array(
+        'color_accent'          => esc_html__( 'Accent', 'gtalobby' ),
+        'color_accent_light'    => esc_html__( 'Accent Light', 'gtalobby' ),
+        'color_accent_dark'     => esc_html__( 'Accent Dark', 'gtalobby' ),
+        'color_accent_tint'     => esc_html__( 'Accent Tint (bg tint)', 'gtalobby' ),
+    ) );
+
+    /* --- Section: Secondary Accent Colors --- */
+    add_settings_section(
+        'gtalobby_colors_secondary',
+        esc_html__( 'Secondary Accent (Cyber Cyan)', 'gtalobby' ),
+        function () {
+            echo '<p>' . esc_html__( 'Secondary accent color and its variants. Light/dark/tint are auto-generated if left empty.', 'gtalobby' ) . '</p>';
+        },
+        'gtalobby-colors'
+    );
+    $register_group( 'gtalobby_colors_secondary', array(
+        'color_accent_secondary'       => esc_html__( 'Secondary', 'gtalobby' ),
+        'color_secondary_light' => esc_html__( 'Secondary Light', 'gtalobby' ),
+        'color_secondary_dark'  => esc_html__( 'Secondary Dark', 'gtalobby' ),
+        'color_secondary_tint'  => esc_html__( 'Secondary Tint (bg tint)', 'gtalobby' ),
+    ) );
+
+    /* --- Section: Semantic / Status Colors --- */
+    add_settings_section(
+        'gtalobby_colors_semantic',
+        esc_html__( 'Semantic / Status Colors', 'gtalobby' ),
+        function () {
+            echo '<p>' . esc_html__( 'Colors for confidence badges, alerts, and status indicators.', 'gtalobby' ) . '</p>';
+        },
+        'gtalobby-colors'
+    );
+    $register_group( 'gtalobby_colors_semantic', array(
+        'color_confirmed'       => esc_html__( 'Confirmed (green)', 'gtalobby' ),
+        'color_likely'          => esc_html__( 'Likely (blue)', 'gtalobby' ),
+        'color_rumored'         => esc_html__( 'Rumored (yellow)', 'gtalobby' ),
+        'color_speculative'     => esc_html__( 'Speculative (orange)', 'gtalobby' ),
+        'color_success'         => esc_html__( 'Success', 'gtalobby' ),
+        'color_warning'         => esc_html__( 'Warning', 'gtalobby' ),
+        'color_error'           => esc_html__( 'Error', 'gtalobby' ),
+        'color_info'            => esc_html__( 'Info', 'gtalobby' ),
+    ) );
+
+    /* --- Section: Category Accent Colors --- */
     add_settings_section(
         'gtalobby_colors_categories',
         esc_html__( 'Category Accent Colors', 'gtalobby' ),
@@ -705,14 +788,39 @@ function gtalobby_render_color_field( $args ) {
     $default_color = '';
 
     $map = array(
-        'color_background'     => 'bg',
-        'color_surface'        => 'surface',
-        'color_text_primary'   => 'text',
-        'color_text_secondary' => 'text_secondary',
-        'color_accent'         => 'accent',
-        'color_accent_secondary' => 'secondary',
-        'color_border'         => 'border',
-        'color_divider'        => 'divider',
+        // Backgrounds & Surfaces
+        'color_background'      => 'bg',
+        'color_bg_alt'          => 'bg_alt',
+        'color_surface'         => 'surface',
+        'color_surface_raised'  => 'surface_raised',
+        'color_overlay'         => 'overlay',
+        // Text
+        'color_text_primary'    => 'text',
+        'color_text_secondary'  => 'text_secondary',
+        'color_text_tertiary'   => 'text_tertiary',
+        'color_text_inverse'    => 'text_inverse',
+        // Borders
+        'color_border'          => 'border',
+        'color_divider'         => 'divider',
+        // Primary Accent
+        'color_accent'          => 'accent',
+        'color_accent_light'    => 'accent_light',
+        'color_accent_dark'     => 'accent_dark',
+        'color_accent_tint'     => 'accent_tint',
+        // Secondary Accent
+        'color_accent_secondary'=> 'secondary',
+        'color_secondary_light' => 'secondary_light',
+        'color_secondary_dark'  => 'secondary_dark',
+        'color_secondary_tint'  => 'secondary_tint',
+        // Semantic
+        'color_confirmed'       => 'confirmed',
+        'color_likely'          => 'likely',
+        'color_rumored'         => 'rumored',
+        'color_speculative'     => 'speculative',
+        'color_success'         => 'success',
+        'color_warning'         => 'warning',
+        'color_error'           => 'error',
+        'color_info'            => 'info',
     );
 
     if ( isset( $map[ $key ] ) && isset( $defaults[ $map[ $key ] ] ) ) {
