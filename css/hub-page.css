@@ -14,7 +14,25 @@
     position: relative;
     padding: var(--gl-space-16) 0 var(--gl-space-12);
     overflow: hidden;
-    background-color: rgba(var(--hub-accent-rgb, 40, 56, 120), 0.25);
+    background-color: rgba(var(--hub-accent-rgb, 40, 56, 120), 0.20);
+}
+
+.gl-hub-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(130deg, rgba(var(--hub-accent-rgb, 255, 44, 152), 0.86) 0%, rgba(0, 0, 0, 0.22) 50%, rgba(0, 0, 0, 0.75) 100%);
+    z-index: 0;
+    pointer-events: none;
+}
+
+.gl-hub-hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top left, rgba(var(--hub-accent-rgb, 255,44,152), 0.25), rgba(0,0,0,0.8) 65%);
+    z-index: 0;
+    pointer-events: none;
 }
 
 .gl-hub-hero__bg {
