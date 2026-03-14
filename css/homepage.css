@@ -11,23 +11,14 @@
    HERO
    ========================================================================== */
 
+/* Override .gl-main padding when homepage is rendered */
+.gl-main:has(.gl-home) {
+    padding-top: 0;
+}
+
+/* Fallback for browsers without :has() support */
 .gl-home {
-    margin-top: calc(-1 * var(--gl-space-8)); /* negate .gl-main top padding so hero sits flush under header */
-}
-
-.gl-home > .gl-zone--breadcrumb {
-    background-color: #181B22;
-    padding-top: var(--gl-space-3);
-    padding-bottom: var(--gl-space-2);
-}
-
-.gl-home > .gl-zone--breadcrumb a,
-.gl-home > .gl-zone--breadcrumb span {
-    color: rgba(255, 255, 255, 0.5);
-}
-
-.gl-home > .gl-zone--breadcrumb a:hover {
-    color: rgba(255, 255, 255, 0.8);
+    margin-top: calc(-1 * var(--gl-space-8));
 }
 
 .gl-home-hero {
@@ -178,7 +169,7 @@
 
 .gl-category-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     gap: var(--gl-space-3);
 }
 
@@ -700,9 +691,15 @@
     }
 }
 
+@media (max-width: 1199px) {
+    .gl-category-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
 @media (max-width: 991px) {
     .gl-category-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(3, 1fr);
     }
 
     .gl-home-hubs__grid {
@@ -737,7 +734,7 @@
     }
 
     .gl-category-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
     }
 
     .gl-home-hubs__grid {

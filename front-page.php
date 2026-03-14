@@ -26,13 +26,6 @@ $sag_descriptions = array(
 
 <div class="gl-home">
 
-    <?php /* --- BREADCRUMB --- */ ?>
-    <div class="gl-zone gl-zone--breadcrumb">
-        <div class="gl-container">
-            <?php gtalobby_breadcrumbs(); ?>
-        </div>
-    </div>
-
     <?php /* ============================================================
        HERO — GTA 6-focused authority section
        ============================================================ */ ?>
