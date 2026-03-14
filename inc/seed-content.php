@@ -328,7 +328,7 @@ function gtalobby_seed_additional_hubs() {
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
-<p><strong>LSPDFR (Los Santos Police Department First Response)</strong> turns GTA 5 into a police simulator. You patrol the streets, respond to calls, conduct traffic stops, and manage pursuits. It has its own plugin ecosystem with hundreds of add-ons. <strong>Simple Trainer</strong> gives you a menu-based sandbox with god mode, teleportation, vehicle spawning, and weather control.</p>
+<p><strong>LSPDFR (Los Santos Police Department First Response)</strong> turns GTA 5 into a police simulator. You patrol the streets, respond to calls, conduct traffic stops, and manage pursuits. It has its own plugin ecosystem with hundreds of add-ons. <strong>Simple Trainer</strong> gives you a menu-based sandbox with teleportation, vehicle spawning, and weather control.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:heading -->

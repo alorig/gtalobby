@@ -120,7 +120,7 @@ Taxonomies represent the dimensional attributes from the SAG niche definition. E
 
 **Taxonomy 3: Cheat Type (slug: cheat_type)**
 - Applies to: Guide, Database, Answer
-- Terms: Vehicle Spawn, Weapon, Player (Invincibility/Health), World (Weather/Gravity), Wanted Level, Money/Exploit, Phone Number, All Cheats
+- Terms: Vehicle Spawn, Weapon, Player (Health), World (Weather/Gravity), Wanted Level, Money/Exploit, Phone Number, All Cheats
 - SAG role: Maps to Cheat Type attribute in the Cheats sector. Used for cluster formation (e.g. Platform: PS5 × Type: All).
 
 **Taxonomy 4: Vehicle Class (slug: vehicle_class)**
