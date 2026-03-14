@@ -141,7 +141,7 @@
     font-family: var(--gl-font-display);
     font-size: var(--gl-font-size-xl);
     font-weight: var(--gl-font-weight-bold);
-    color: var(--gl-color-accent);
+    color: var(--hub-accent, var(--gl-color-accent));
 }
 
 /* ==========================================================================
@@ -151,19 +151,20 @@
 .gl-quick-answer {
     padding: var(--gl-space-5) var(--gl-space-6);
     background-color: var(--gl-color-surface);
-    border-left: 4px solid var(--gl-color-accent);
+    border-left: 4px solid var(--hub-accent, var(--gl-color-accent));
     border-radius: 0 var(--gl-radius-md) var(--gl-radius-md) 0;
 }
 
 .gl-quick-answer__heading {
     font-size: var(--gl-font-size-lg);
     margin-bottom: var(--gl-space-2);
-    color: var(--gl-color-accent);
+    color: var(--hub-accent, var(--gl-color-accent));
 }
 
 .gl-quick-answer__text {
     font-size: var(--gl-font-size-lg);
     line-height: 1.7;
+    color: var(--gl-color-text-secondary);
 }
 
 /* ==========================================================================
@@ -311,6 +312,7 @@
 .gl-faq__answer {
     padding: 0 var(--gl-space-5) var(--gl-space-4);
     line-height: 1.7;
+    color: var(--gl-color-text-secondary);
 }
 
 /* ==========================================================================
@@ -392,6 +394,37 @@
 
 .gl-hub-layout__primary {
     min-width: 0; /* prevent overflow from long content */
+}
+
+/* ==========================================================================
+   HUB BODY TEXT — Color hierarchy for readability
+   Headings stay bright (#EAF2FF), body text uses softer secondary color.
+   ========================================================================== */
+
+.gl-hub .gl-content.gl-typography {
+    color: var(--gl-color-text-secondary);
+}
+
+.gl-hub .gl-content.gl-typography h1,
+.gl-hub .gl-content.gl-typography h2,
+.gl-hub .gl-content.gl-typography h3,
+.gl-hub .gl-content.gl-typography h4,
+.gl-hub .gl-content.gl-typography h5,
+.gl-hub .gl-content.gl-typography h6 {
+    color: var(--gl-color-text);
+}
+
+.gl-hub .gl-content.gl-typography strong,
+.gl-hub .gl-content.gl-typography b {
+    color: var(--gl-color-text);
+}
+
+.gl-hub .gl-content.gl-typography a {
+    color: var(--hub-accent, var(--gl-color-accent));
+}
+
+.gl-hub .gl-content.gl-typography a:hover {
+    color: var(--gl-color-text);
 }
 
 .gl-hub-layout__sidebar {
