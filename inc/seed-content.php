@@ -347,6 +347,54 @@ function gtalobby_seed_additional_hubs() {
 <!-- /wp:paragraph -->',
         ),
 
+        /* --- FASTEST CARS HUB --- */
+        array(
+            'slug'            => 'fastest-cars-gta-5',
+            'title'           => 'The Fastest Cars in GTA 5 Ranked by Top Speed and Lap Time with Full Stats',
+            'excerpt'         => 'Ultimate hub for the fastest cars in GTA 5 with rankings, guides, reviews, database, and updates.',
+            'cluster_name'    => 'Fastest Car GTA 5',
+            'sector'          => 'cars',
+            'primary_keyword' => 'fastest car in gta 5',
+            'hero_style'      => 'standard',
+            'layout_style'    => 'micro_website',
+            'quick_answer'    => '<p>The fastest car in GTA 5 is the Ocelot Pariah at 136.0 mph stock. In GTA Online with HSW, the S80RR can hit 151.0 mph. This hub includes all key fast-car resources and comparisons.</p>',
+            'key_facts' => array(
+                array( 'fact_label' => 'Top Speed Leader',  'fact_value' => 'Ocelot Pariah (136.0 mph)' ),
+                array( 'fact_label' => 'HSW Leader',       'fact_value' => 'S80RR (151.0 mph)' ),
+                array( 'fact_label' => 'Best Acceleration','fact_value' => 'Grotti Itali RSX' ),
+                array( 'fact_label' => 'Ranking Count',    'fact_value' => '20+ cars' ),
+            ),
+            'faq_items' => array(
+                array( 'question' => 'What is the fastest car in GTA 5?', 'answer' => '<p>In stock GTA 5, the Ocelot Pariah is the fastest car by top speed at 136.0 mph. For online HSW tuning, the Pfister S80RR leads with 151.0 mph.</p>' ),
+                array( 'question' => 'Is HSW required for the fastest car?', 'answer' => '<p>HSW is not required for story mode, where the Pariah is fastest stock. In online racing, HSW offers significant advantage, making cars like S80RR and Ocelot Virtue faster on straights.</p>' ),
+                array( 'question' => 'What is the fastest drag car in GTA 5?', 'answer' => '<p>Top drag choices include the Ocelot Pariah, Pfister 811, and Benefactor Krieger. For pure 1/4 mile acceleration, consider the Grotti Itali RSX in stock lap races and HSW classes.</p>' ),
+            ),
+            'cross_cluster_slugs' => array( 'gta-5-best-cars', 'gta-online-money-guide' ),
+            'content' => '<!-- wp:heading -->
+<h2>The Fastest Cars in GTA 5 — Hub Overview</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>This hub ranks the fastest cars in GTA 5 by top speed, lap time, and acceleration. It includes dedicated guides, database resources, and quick answers for the most common speed questions.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>How We Ranked These Cars</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Rankings are based on Broughy1322 testing data, stock vs HSW, and published lap times. We prioritize top speed first, then lap time and handling for racing contexts.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>Articles in This Guide</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Includes child posts: Quick Answer, Database, Guide, Profile, Mod Listing, Weekly Recap, and No-HSW Ranking.</p>
+<!-- /wp:paragraph -->',
+        ),
+
         /* --- CHARACTERS HUB --- */
         array(
             'slug'            => 'gta-6-characters',
@@ -1098,6 +1146,120 @@ function gtalobby_seed_posts() {
 <!-- /wp:paragraph -->',
         ),
 
+        /* ===================== FASTEST CARS CATEGORY ===================== */
+
+        array(
+            'post_type'  => 'ranking',
+            'slug'       => 'fastest-cars-in-gta-5-ranked',
+            'title'      => 'The Fastest Cars in GTA 5 Ranked by Top Speed and Lap Time',
+            'category'   => 'cars',
+            'excerpt'    => 'The definitive hub ranking for the fastest cars in GTA 5 (stock + HSW) with key performance stats and recommendations.',
+            'meta'       => array( 'ranking_criteria' => 'Top speed (primary) + lap time (secondary) + acceleration (tertiary)', 'total_items' => 20 ),
+            'taxonomies' => array( 'game_title' => array( 'gta-5', 'gta-online' ), 'platform' => array( 'all-platforms' ), 'vehicle_class' => array( 'supercars', 'sports' ), 'game_mode' => array( 'story-mode', 'gta-online-mode' ), 'difficulty' => array( 'beginner' ) ),
+            'hub_slug'   => 'fastest-cars-gta-5',
+            'content'    => '<!-- wp:paragraph -->
+<p>Our flagship ranking for the fastest GTA 5 cars. Includes stock and HSW tiers, plus quick calls on which rides to use for drag, circuit, and open-world speed. The Ocelot Pariah leads stock, while the S80RR leads HSW.</p>
+<!-- /wp:paragraph -->',
+        ),
+
+        array(
+            'post_type'  => 'answer',
+            'slug'       => 'what-is-the-fastest-car-in-gta-5',
+            'title'      => 'What Is the Fastest Car in GTA 5?',
+            'category'   => 'cars',
+            'excerpt'    => 'Quick answer for the fastest GTA 5 car with stock and HSW distinctions.',
+            'meta'       => array( 'short_answer' => 'The fastest car in GTA 5 stock is the Ocelot Pariah (136.0 mph). In GTA Online with HSW, the Pfister S80RR can reach 151.0 mph.' ),
+            'taxonomies' => array( 'game_title' => array( 'gta-5', 'gta-online' ), 'platform' => array( 'all-platforms' ), 'vehicle_class' => array( 'supercars' ), 'game_mode' => array( 'story-mode', 'gta-online-mode' ) ),
+            'hub_slug'   => 'fastest-cars-gta-5',
+            'content'    => '<!-- wp:paragraph -->
+<p>The current fastest car in GTA 5 is the Ocelot Pariah in stock mode (136.0 mph). If you run HSW in Online, the S80RR and Ocelot Virtue move to the top ranks with 150+ mph capabilities.</p>
+<!-- /wp:paragraph -->',
+        ),
+
+        array(
+            'post_type'  => 'guide',
+            'slug'       => 'how-to-make-any-car-faster-gta-5',
+            'title'      => 'How to Make Any Car Faster in GTA 5 — Upgrade and Tuning Guide',
+            'category'   => 'cars',
+            'excerpt'    => 'Step-by-step upgrade guide for improving car speed in Story Mode and Online with HSW and tuning.',
+            'meta'       => array( 'difficulty_rating' => 'beginner', 'time_to_complete' => '15-30 minutes', 'step_count' => 8 ),
+            'taxonomies' => array( 'game_title' => array( 'gta-5', 'gta-online' ), 'platform' => array( 'all-platforms' ), 'vehicle_class' => array( 'supercars', 'sports', 'muscle' ), 'game_mode' => array( 'story-mode', 'gta-online-mode' ), 'business_type' => array( 'auto-shop' ), 'content_tags' => array( 'HSW', 'performance', 'tuning' ) ),
+            'hub_slug'   => 'fastest-cars-gta-5',
+            'content'    => '<!-- wp:paragraph -->
+<p>Learn the absolute best upgrade path for speed: engine/transmission/turbo in Story Mode and HSW conversions in Online. Includes top drag/loadout recipes and recommended tuning settings.</p>
+<!-- /wp:paragraph -->',
+        ),
+
+        array(
+            'post_type'  => 'profile',
+            'slug'       => 'ocelot-pariah-gta-5-profile',
+            'title'      => 'Ocelot Pariah — Complete Speed Stats, Location, and Review',
+            'category'   => 'cars',
+            'excerpt'    => 'Full profile of the Ocelot Pariah, GTA 5’s stock fastest car with stats, price, and tuning advice.',
+            'meta'       => array( 'entity_type' => 'vehicle', 'first_appearance' => 'GTA Online (Doomsday Heist, 2017)' ),
+            'taxonomies' => array( 'game_title' => array( 'gta-5', 'gta-online' ), 'platform' => array( 'all-platforms' ), 'vehicle_class' => array( 'sports' ), 'game_mode' => array( 'story-mode', 'gta-online-mode' ) ),
+            'hub_slug'   => 'fastest-cars-gta-5',
+            'content'    => '<!-- wp:paragraph -->
+<p>The Ocelot Pariah is the stock fastest car in GTA 5. It offers great handling, good acceleration, and is affordable for competitive racing in both story and online modes.</p>
+<!-- /wp:paragraph -->',
+        ),
+
+        array(
+            'post_type'  => 'database',
+            'slug'       => 'gta-5-car-speed-database',
+            'title'      => 'GTA 5 Complete Car Speed Database — Every Vehicle Ranked',
+            'category'   => 'cars',
+            'excerpt'    => 'Comprehensive sortable speed database for GTA 5 vehicles with top speed, lap times, price, and class filters.',
+            'meta'       => array( 'data_source' => 'Broughy1322 + GTA Wiki + testing', 'last_updated' => 'March 2026' ),
+            'taxonomies' => array( 'game_title' => array( 'gta-5', 'gta-online' ), 'platform' => array( 'all-platforms' ), 'vehicle_class' => array( 'all' ), 'game_mode' => array( 'story-mode', 'gta-online-mode' ) ),
+            'hub_slug'   => 'fastest-cars-gta-5',
+            'content'    => '<!-- wp:paragraph -->
+<p>Database table includes 100+ vehicles sorted by top speed, lap time, and acceleration. Use the filters to find the best car for your class and race type.</p>
+<!-- /wp:paragraph -->',
+        ),
+
+        array(
+            'post_type'  => 'mod',
+            'slug'       => 'real-top-speed-mod-gta-5',
+            'title'      => 'Real Top Speed Mod for GTA 5 — Unlock True Vehicle Speeds',
+            'category'   => 'cars',
+            'excerpt'    => 'Mod listing for the real top speed mod that removes speed caps and enables authentic performance data.',
+            'meta'       => array( 'download_url' => '#', 'mod_version' => '2.1', 'file_size' => '45 KB', 'author_name' => 'ikt', 'requirements' => 'Script Hook V, OpenIV' ),
+            'taxonomies' => array( 'game_title' => array( 'gta-5' ), 'platform' => array( 'pc' ), 'mod_category' => array( 'vehicle-mods', 'script-mods' ), 'game_mode' => array( 'story-mode' ) ),
+            'hub_slug'   => 'fastest-cars-gta-5',
+            'content'    => '<!-- wp:paragraph -->
+<p>This mod unlocks true max speeds for GTA 5 vehicles and is essential for realistic performance testing beyond the vanilla speed cap.</p>
+<!-- /wp:paragraph -->',
+        ),
+
+        array(
+            'post_type'  => 'recap',
+            'slug'       => 'gta-online-weekly-march-13-19-2026',
+            'title'      => 'GTA Online This Week — Podium Car, Double Money & Speed Discounts (Mar 13–19, 2026)',
+            'category'   => 'cars',
+            'excerpt'    => 'Weekly recap with podium car focus on the Ocelot Pariah and car discounts for March 13–19, 2026.',
+            'meta'       => array( 'week_date_range' => 'March 13-19, 2026', 'podium_vehicle' => 'Ocelot Pariah', 'new_content' => 'Speed discounts and racing bonuses' ),
+            'taxonomies' => array( 'game_title' => array( 'gta-online' ), 'platform' => array( 'all-platforms' ), 'vehicle_class' => array( 'supercars' ), 'game_mode' => array( 'gta-online-mode' ) ),
+            'hub_slug'   => 'fastest-cars-gta-5',
+            'content'    => '<!-- wp:paragraph -->
+<p>This week’s GTA Online update highlights the Ocelot Pariah as the Lucky Wheel podium car plus new speed-focused discounts on supercars.</p>
+<!-- /wp:paragraph -->',
+        ),
+
+        array(
+            'post_type'  => 'ranking',
+            'slug'       => 'fastest-cars-gta-5-no-hsw',
+            'title'      => 'Fastest Cars in GTA 5 Without HSW — Top 10 Stock Speed Ranking',
+            'category'   => 'cars',
+            'excerpt'    => 'Top 10 fastest cars in GTA 5 without HSW upgrades, focused on ready-to-run stock performance.',
+            'meta'       => array( 'ranking_criteria' => 'Top speed (stock, no HSW)', 'total_items' => 10 ),
+            'taxonomies' => array( 'game_title' => array( 'gta-5', 'gta-online' ), 'platform' => array( 'all-platforms' ), 'vehicle_class' => array( 'supercars', 'sports' ), 'game_mode' => array( 'story-mode', 'gta-online-mode' ), 'difficulty' => array( 'beginner' ) ),
+            'hub_slug'   => 'fastest-cars-gta-5',
+            'content'    => '<!-- wp:paragraph -->
+<p>Stock speed ranking for players who want the fastest cars without requiring HSW tuning. Ocelot Pariah leads, followed by Pfister 811 and Benefactor Krieger.</p>
+<!-- /wp:paragraph -->',
+        ),
+
         /* ===================== CHARACTERS CATEGORY ===================== */
 
         array(
@@ -1377,6 +1539,16 @@ function gtalobby_wire_hub_children( $hub_ids, $post_ids ) {
             'ocelot-virtue-gta-online',
             'top-10-fastest-super-cars-gta-online',
         ),
+        'fastest-cars-gta-5' => array(
+            'fastest-cars-in-gta-5-ranked',
+            'what-is-the-fastest-car-in-gta-5',
+            'how-to-make-any-car-faster-gta-5',
+            'ocelot-pariah-gta-5-profile',
+            'gta-5-car-speed-database',
+            'real-top-speed-mod-gta-5',
+            'gta-online-weekly-march-13-19-2026',
+            'fastest-cars-gta-5-no-hsw',
+        ),
         'gta-6-characters' => array(
             'lucia-gta-6-character-profile',
             'trevor-philips-character-profile',
@@ -1397,6 +1569,7 @@ function gtalobby_wire_hub_children( $hub_ids, $post_ids ) {
         'gta-online-money-guide' => 'gta-online-cayo-perico-solo-guide',
         'best-gta-5-mods'        => 'naturalvision-evolved-gta-5',
         'gta-5-best-cars'        => 'ocelot-virtue-gta-online',
+        'fastest-cars-gta-5'      => 'fastest-cars-in-gta-5-ranked',
         'gta-6-characters'       => 'lucia-gta-6-character-profile',
         'gta-5-map-locations'    => 'gta-5-hidden-locations-secrets',
         'gta-online-nightclub-guide' => 'gta-online-beginner-money-guide',
