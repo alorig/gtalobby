@@ -29,8 +29,6 @@ $cat_color_dark   = gtalobby_darken_hex( $cat_color, 0.28 );
 
 <div class="gl-hub gl-hub--<?php echo esc_attr( $hub_layout ); ?>" style="--hub-accent: <?php echo esc_attr( $cat_color ); ?>; --hub-accent-rgb: <?php echo esc_attr( gtalobby_hex_to_rgb( $cat_color ) ); ?>; --hub-accent-dark: <?php echo esc_attr( $cat_color_dark ); ?>; --hub-accent-dark-rgb: <?php echo esc_attr( gtalobby_hex_to_rgb( $cat_color_dark ) ); ?>;">
 
-    <?php /* --- BREADCRUMB (removed — hub pages no longer show breadcrumbs) --- */ ?>
-
     <?php /* --- HERO --- */ ?>
     <?php if ( gtalobby_is_zone_enabled( 'hub', 'hero' ) ) : ?>
     <section class="gl-hub-hero gl-hub-hero--<?php echo esc_attr( $hub_hero_style ); ?>">
@@ -46,6 +44,12 @@ $cat_color_dark   = gtalobby_darken_hex( $cat_color, 0.28 );
             <?php if ( has_excerpt() ) : ?>
                 <p class="gl-hub-hero__desc"><?php echo esc_html( get_the_excerpt() ); ?></p>
             <?php endif; ?>
+        </div>
+        <?php /* --- BREADCRUMB BAR at bottom of hero --- */ ?>
+        <div class="gl-hub-hero__breadcrumb-bar">
+            <div class="gl-container">
+                <?php gtalobby_breadcrumbs(); ?>
+            </div>
         </div>
     </section>
     <?php endif; ?>
