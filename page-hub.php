@@ -26,7 +26,7 @@ $cross_links     = get_post_meta( $hub_id, 'hub_cross_cluster_links', true );
 $cat_color       = gtalobby_get_category_color( $hub_sector );
 ?>
 
-<div class="gl-hub gl-hub--<?php echo esc_attr( $hub_layout ); ?>" style="--hub-accent: <?php echo esc_attr( $cat_color ); ?>">
+<div class="gl-hub gl-hub--<?php echo esc_attr( $hub_layout ); ?>" style="--hub-accent: <?php echo esc_attr( $cat_color ); ?>; --hub-accent-rgb: <?php echo esc_attr( gtalobby_hex_to_rgb( $cat_color ) ); ?>;">
 
     <?php /* --- BREADCRUMB --- */ ?>
     <?php if ( gtalobby_is_zone_enabled( 'hub', 'breadcrumb' ) ) : ?>
