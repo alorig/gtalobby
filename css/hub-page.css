@@ -20,7 +20,7 @@
 
 .gl-hub-hero {
     position: relative;
-    padding: var(--gl-space-16) 0 0;
+    padding: var(--gl-space-16) 0 var(--gl-space-12);
     overflow: hidden;
     background: linear-gradient(130deg,
         rgba(var(--hub-accent-rgb, 40, 56, 120), 0.95) 0%,
@@ -75,11 +75,11 @@
 }
 
 .gl-hub-hero--wide {
-    padding: var(--gl-space-20) 0 0;
+    padding: var(--gl-space-20) 0 var(--gl-space-16);
 }
 
 .gl-hub-hero--minimal {
-    padding: var(--gl-space-8) 0 0;
+    padding: var(--gl-space-8) 0;
     background-color: var(--gl-color-surface);
     color: var(--gl-color-text);
 }
@@ -112,52 +112,6 @@
     font-size: var(--gl-font-size-lg);
     max-width: var(--gl-reading-width);
     margin-bottom: var(--gl-space-2);
-}
-
-/* ==========================================================================
-   HERO BREADCRUMB BAR — Sits at the bottom of the hero with category shade
-   ========================================================================== */
-
-.gl-hub-hero__breadcrumb-bar {
-    position: relative;
-    z-index: 1;
-    margin-top: var(--gl-space-10);
-    padding: var(--gl-space-3) 0;
-    background: linear-gradient(
-        180deg,
-        rgba(var(--hub-accent-rgb, 40, 56, 120), 0.25) 0%,
-        rgba(var(--hub-accent-rgb, 40, 56, 120), 0.45) 100%
-    );
-    border-top: 1px solid rgba(var(--hub-accent-rgb, 40, 56, 120), 0.35);
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
-}
-
-.gl-hub-hero__breadcrumb-bar .gl-breadcrumbs {
-    margin: 0;
-    padding: 0;
-    font-size: var(--gl-font-size-sm);
-}
-
-.gl-hub-hero__breadcrumb-bar .gl-breadcrumbs a {
-    color: rgba(255, 255, 255, 0.7);
-    text-decoration: none;
-    transition: color var(--gl-transition-fast);
-}
-
-.gl-hub-hero__breadcrumb-bar .gl-breadcrumbs a:hover {
-    color: #fff;
-}
-
-.gl-hub-hero__breadcrumb-bar .gl-breadcrumbs .gl-breadcrumbs__current,
-.gl-hub-hero__breadcrumb-bar .gl-breadcrumbs [aria-current="page"] {
-    color: rgba(255, 255, 255, 0.9);
-    font-weight: var(--gl-font-weight-medium);
-}
-
-.gl-hub-hero__breadcrumb-bar .gl-breadcrumbs__sep,
-.gl-hub-hero__breadcrumb-bar .gl-breadcrumbs .separator {
-    color: rgba(255, 255, 255, 0.4);
 }
 
 /* ==========================================================================

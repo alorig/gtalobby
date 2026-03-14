@@ -45,12 +45,6 @@ $cat_color_dark   = gtalobby_darken_hex( $cat_color, 0.28 );
                 <p class="gl-hub-hero__desc"><?php echo esc_html( get_the_excerpt() ); ?></p>
             <?php endif; ?>
         </div>
-        <?php /* --- BREADCRUMB BAR at bottom of hero --- */ ?>
-        <div class="gl-hub-hero__breadcrumb-bar">
-            <div class="gl-container">
-                <?php gtalobby_breadcrumbs(); ?>
-            </div>
-        </div>
     </section>
     <?php endif; ?>
 
