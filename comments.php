@@ -97,14 +97,36 @@ endif;
     <?php endif; ?>
 
     <?php
+    $commenter = wp_get_current_commenter();
+
     comment_form( array(
         'class_form'    => 'gl-comment-form',
         'title_reply'   => esc_html__( 'Leave a Comment', 'gtalobby' ),
-        'comment_field' => '<div class="gl-comment-form__field gl-comment-form__field--textarea"><label for="comment">' . esc_html__( 'Comment', 'gtalobby' ) . '</label><textarea id="comment" name="comment" cols="45" rows="6" required></textarea></div>',
-        'fields'        => array(
-            'author' => '<div class="gl-comment-form__field"><label for="author">' . esc_html__( 'Name', 'gtalobby' ) . ' <span class="required">*</span></label><input id="author" name="author" type="text" value="' . esc_attr( $commenter['comment_author'] ?? '' ) . '" required /></div>',
-            'email'  => '<div class="gl-comment-form__field"><label for="email">' . esc_html__( 'Email', 'gtalobby' ) . ' <span class="required">*</span></label><input id="email" name="email" type="email" value="' . esc_attr( $commenter['comment_author_email'] ?? '' ) . '" required /></div>',
-            'url'    => '<div class="gl-comment-form__field"><label for="url">' . esc_html__( 'Website', 'gtalobby' ) . '</label><input id="url" name="url" type="url" value="' . esc_attr( $commenter['comment_author_url'] ?? '' ) . '" /></div>',
+
+        'comment_field' =>
+            '<div class="gl-comment-form__field gl-comment-form__field--textarea">'
+            . '<label for="comment">' . esc_html__( 'Comment', 'gtalobby' ) . '</label>'
+            . '<textarea id="comment" name="comment" cols="45" rows="6" required></textarea>'
+            . '</div>',
+
+        'fields' => array(
+            'author' =>
+                '<div class="gl-comment-form__field">'
+                . '<label for="author">' . esc_html__( 'Name', 'gtalobby' ) . ' <span class="required">*</span></label>'
+                . '<input id="author" name="author" type="text" value="' . esc_attr( $commenter['comment_author'] ?? '' ) . '" required />'
+                . '</div>',
+
+            'email' =>
+                '<div class="gl-comment-form__field">'
+                . '<label for="email">' . esc_html__( 'Email', 'gtalobby' ) . ' <span class="required">*</span></label>'
+                . '<input id="email" name="email" type="email" value="' . esc_attr( $commenter['comment_author_email'] ?? '' ) . '" required />'
+                . '</div>',
+
+            'url' =>
+                '<div class="gl-comment-form__field">'
+                . '<label for="url">' . esc_html__( 'Website', 'gtalobby' ) . '</label>'
+                . '<input id="url" name="url" type="url" value="' . esc_attr( $commenter['comment_author_url'] ?? '' ) . '" />'
+                . '</div>',
         ),
     ) );
     ?>

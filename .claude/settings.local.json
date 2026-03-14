@@ -6,7 +6,8 @@
       "Bash(for f:*)",
       "Bash(do echo:*)",
       "Read(//d/GITHUB WEBSITE/gtalobby/**)",
-      "Bash(done)"
+      "Bash(done)",
+      "Bash(grep -c \"<?php gtalobby_hub_link\\(\\); ?><?php endif; ?>\" single-*.php page*.php)"
     ]
   }
 }

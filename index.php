@@ -27,7 +27,6 @@ get_header();
             <?php endif; ?>
 
             <?php if ( have_posts() ) : ?>
-
             <div class="gl-card-grid gl-card-grid--3col">
                 <?php
                 while ( have_posts() ) :
@@ -40,15 +39,14 @@ get_header();
             </div>
 
             <?php gtalobby_pagination(); ?>
-
             <?php else : ?>
 
             <div class="gl-no-results">
                 <h2><?php esc_html_e( 'Nothing Found', 'gtalobby' ); ?></h2>
                 <p><?php esc_html_e( 'No posts to display. Check back soon!', 'gtalobby' ); ?></p>
             </div>
-
             <?php endif; ?>
+
         </main>
 
         <aside class="gl-archive__sidebar" role="complementary">

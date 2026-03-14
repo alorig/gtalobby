@@ -38,6 +38,9 @@ foreach ( $single_zones as $zone_id => $zone_cfg ) {
                 <article id="post-<?php the_ID(); ?>" <?php post_class( 'gl-article gl-article--ranking' ); ?>>
 
                     <?php
+                    /* --------------------------------------------------------
+                       Article Zones — rendered in admin-defined order
+                    -------------------------------------------------------- */
                     foreach ( $sorted_article as $zone_id => $zone_cfg ) :
                         if ( ! gtalobby_is_zone_enabled( 'single', $zone_id, $category_slug ) ) {
                             continue;
@@ -45,16 +48,21 @@ foreach ( $single_zones as $zone_id => $zone_cfg ) {
 
                         switch ( $zone_id ) :
 
+                            /* -- Post Header -------------------------------- */
                             case 'post_header':
                             ?>
                             <header class="gl-article__header" data-zone="post_header">
                                 <?php if ( gtalobby_is_zone_enabled( 'single', 'breadcrumb', $category_slug ) ) : ?>
                                     <div class="gl-article__breadcrumb"><?php gtalobby_breadcrumbs(); ?></div>
                                 <?php endif; ?>
+
                                 <?php gtalobby_post_type_badge(); ?>
                                 <?php gtalobby_category_badge(); ?>
+
                                 <h1 class="gl-article__title"><?php the_title(); ?></h1>
+
                                 <?php gtalobby_post_meta(); ?>
+
                                 <?php if ( gtalobby_is_gta6_content() ) : ?>
                                     <?php gtalobby_confidence_badge(); ?>
                                 <?php endif; ?>
@@ -62,6 +70,7 @@ foreach ( $single_zones as $zone_id => $zone_cfg ) {
                             <?php
                                 break;
 
+                            /* -- Featured Image ----------------------------- */
                             case 'featured_image':
                                 if ( has_post_thumbnail() ) :
                             ?>
@@ -72,6 +81,7 @@ foreach ( $single_zones as $zone_id => $zone_cfg ) {
                                 endif;
                                 break;
 
+                            /* -- Post Type Fields (Ranking Criteria) -------- */
                             case 'post_type_fields':
                                 $criteria = get_post_meta( get_the_ID(), 'ranking_criteria', true );
                                 if ( $criteria ) :
@@ -84,6 +94,7 @@ foreach ( $single_zones as $zone_id => $zone_cfg ) {
                                 endif;
                                 break;
 
+                            /* -- Ranked Items ------------------------------- */
                             case 'ranked_items':
                                 $ranked_items = get_post_meta( get_the_ID(), 'ranking_ranked_items', true );
                                 if ( is_array( $ranked_items ) && ! empty( $ranked_items ) ) :
@@ -151,6 +162,7 @@ foreach ( $single_zones as $zone_id => $zone_cfg ) {
                                 endif;
                                 break;
 
+                            /* -- Table of Contents -------------------------- */
                             case 'toc':
                                 $toc = gtalobby_generate_toc( get_the_content() );
                                 if ( $toc ) :
@@ -162,6 +174,7 @@ foreach ( $single_zones as $zone_id => $zone_cfg ) {
                                 endif;
                                 break;
 
+                            /* -- Body Content ------------------------------- */
                             case 'body_content':
                                 gtalobby_render_ad_slot( 'ad_before_content' );
                             ?>
@@ -172,6 +185,7 @@ foreach ( $single_zones as $zone_id => $zone_cfg ) {
                                 gtalobby_render_ad_slot( 'ad_after_content' );
                                 break;
 
+                            /* -- No-op Zones -------------------------------- */
                             case 'gta6_confidence':
                             case 'video_embed':
                                 break;
@@ -188,39 +202,58 @@ foreach ( $single_zones as $zone_id => $zone_cfg ) {
                             break;
                         }
                     }
+
                     if ( $has_footer ) :
                     ?>
                     <footer class="gl-article__footer">
                         <?php gtalobby_taxonomy_tags(); ?>
-                        <?php if ( gtalobby_is_zone_enabled( 'single', 'hub_link', $category_slug ) ) : ?><?php gtalobby_hub_link(); ?><?php endif; ?>
-                        <?php if ( gtalobby_is_zone_enabled( 'single', 'social_share', $category_slug ) ) : ?><?php gtalobby_social_share(); ?><?php endif; ?>
+
+                        <?php if ( gtalobby_is_zone_enabled( 'single', 'hub_link', $category_slug ) ) : ?>
+                            <?php gtalobby_hub_link(); ?>
+                        <?php endif; ?>
+
+                        <?php if ( gtalobby_is_zone_enabled( 'single', 'social_share', $category_slug ) ) : ?>
+                            <?php gtalobby_social_share(); ?>
+                        <?php endif; ?>
                     </footer>
                     <?php endif; ?>
 
                 </article>
 
                 <?php
+                /* --------------------------------------------------------
+                   Post Zones — rendered in admin-defined order
+                -------------------------------------------------------- */
                 foreach ( $sorted_post as $zone_id => $zone_cfg ) :
                     if ( ! gtalobby_is_zone_enabled( 'single', $zone_id, $category_slug ) ) {
                         continue;
                     }
                     switch ( $zone_id ) :
+
+                        /* -- Author Box --------------------------------- */
                         case 'author_box':
                             gtalobby_author_box();
                             break;
+
+                        /* -- Related Posts ------------------------------- */
                         case 'related_posts':
                             gtalobby_related_posts();
                             break;
+
+                        /* -- Post Navigation ---------------------------- */
                         case 'post_navigation':
                             if ( function_exists( 'gtalobby_post_navigation' ) ) {
                                 gtalobby_post_navigation();
                             }
                             break;
+
+                        /* -- Comments ----------------------------------- */
                         case 'comments':
                             if ( comments_open() || get_comments_number() ) {
                                 comments_template();
                             }
                             break;
+
                     endswitch;
                 endforeach;
                 ?>

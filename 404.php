@@ -17,14 +17,20 @@ get_header();
                 <div class="gl-404__code">404</div>
 
                 <h1 class="gl-404__title"><?php esc_html_e( 'Page Not Found', 'gtalobby' ); ?></h1>
-                <p class="gl-404__desc"><?php esc_html_e( 'The page you\'re looking for doesn\'t exist or has been moved. Try searching or browse our categories below.', 'gtalobby' ); ?></p>
 
+                <p class="gl-404__desc">
+                    <?php esc_html_e( 'The page you\'re looking for doesn\'t exist or has been moved. Try searching or browse our categories below.', 'gtalobby' ); ?>
+                </p>
+
+                <!-- Search Form -->
                 <div class="gl-404__search">
                     <?php get_search_form(); ?>
                 </div>
 
+                <!-- Category Grid -->
                 <div class="gl-404__categories">
                     <h2 class="gl-404__subtitle"><?php esc_html_e( 'Browse Categories', 'gtalobby' ); ?></h2>
+
                     <div class="gl-category-grid gl-category-grid--compact">
                         <?php
                         $sag_categories = gtalobby_get_sag_categories();
@@ -33,7 +39,9 @@ get_header();
                             if ( ! $cat_obj ) continue;
                             $icon = gtalobby_get_category_icon( $slug );
                         ?>
-                        <a href="<?php echo esc_url( get_category_link( $cat_obj->term_id ) ); ?>" class="gl-category-tile gl-category-tile--compact" style="--cat-accent: <?php echo esc_attr( gtalobby_get_category_color( $slug ) ); ?>">
+                        <a href="<?php echo esc_url( get_category_link( $cat_obj->term_id ) ); ?>"
+                           class="gl-category-tile gl-category-tile--compact"
+                           style="--cat-accent: <?php echo esc_attr( gtalobby_get_category_color( $slug ) ); ?>">
                             <span class="gl-category-tile__icon"><?php gtalobby_icon( $icon, 20 ); ?></span>
                             <span class="gl-category-tile__name"><?php echo esc_html( $cat_obj->name ); ?></span>
                         </a>
@@ -41,8 +49,10 @@ get_header();
                     </div>
                 </div>
 
+                <!-- Recent Content -->
                 <div class="gl-404__recent">
                     <h2 class="gl-404__subtitle"><?php esc_html_e( 'Recent Content', 'gtalobby' ); ?></h2>
+
                     <div class="gl-card-grid gl-card-grid--3col">
                         <?php
                         $recent = new WP_Query( array(
@@ -50,8 +60,10 @@ get_header();
                             'post_status'    => 'publish',
                             'post_type'      => array_merge( array( 'post' ), array_keys( gtalobby_get_post_types() ) ),
                         ) );
+
                         if ( $recent->have_posts() ) :
-                            while ( $recent->have_posts() ) : $recent->the_post();
+                            while ( $recent->have_posts() ) :
+                                $recent->the_post();
                                 gtalobby_card( 'compact' );
                             endwhile;
                             wp_reset_postdata();
