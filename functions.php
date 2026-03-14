@@ -220,9 +220,10 @@ function gtalobby_get_sag_categories() {
 }
 
 /**
- * Get the category accent color for a given slug.
+ * Get the category accent color for a given slug or name.
  */
 function gtalobby_get_category_color( $slug ) {
+    $fallback = '#6C5CE7';
     $colors = array(
         'gta6'       => '#6C5CE7',
         'cheats'     => '#E17055',
@@ -234,7 +235,36 @@ function gtalobby_get_category_color( $slug ) {
         'money'      => '#F9A825',
         'news'       => '#636E72',
     );
-    return isset( $colors[ $slug ] ) ? $colors[ $slug ] : '#6C5CE7';
+
+    if ( ! $slug ) {
+        return $fallback;
+    }
+
+    $slug = strtolower( trim( $slug ) );
+
+    if ( isset( $colors[ $slug ] ) ) {
+        return $colors[ $slug ];
+    }
+
+    // Support category name lookup from SAG category labels.
+    foreach ( gtalobby_get_sag_categories() as $item_slug => $label ) {
+        if ( strtolower( $label ) === $slug ) {
+            return isset( $colors[ $item_slug ] ) ? $colors[ $item_slug ] : $fallback;
+        }
+    }
+
+    // Support existing WordPress category slug / name via taxonomy lookup.
+    $term = get_category_by_slug( $slug );
+    if ( $term && ! is_wp_error( $term ) && isset( $colors[ $term->slug ] ) ) {
+        return $colors[ $term->slug ];
+    }
+
+    $term = get_term_by( 'name', $slug, 'category' );
+    if ( $term && ! is_wp_error( $term ) && isset( $colors[ $term->slug ] ) ) {
+        return $colors[ $term->slug ];
+    }
+
+    return $fallback;
 }
 
 /**
