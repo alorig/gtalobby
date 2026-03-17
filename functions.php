@@ -637,18 +637,6 @@ function gtalobby_breadcrumb_schema() {
 add_action( 'wp_head', 'gtalobby_breadcrumb_schema', 5 );
 
 /**
- * SEO: Preconnect to external domains for performance.
- */
-function gtalobby_resource_hints( $urls, $relation_type ) {
-    if ( 'dns-prefetch' === $relation_type ) {
-        $urls[] = 'https://fonts.googleapis.com';
-        $urls[] = 'https://fonts.gstatic.com';
-    }
-    return $urls;
-}
-add_filter( 'wp_resource_hints', 'gtalobby_resource_hints', 10, 2 );
-
-/**
  * SEO: Add custom post type archive pages to sitemap with priority.
  */
 function gtalobby_sitemap_entry( $entry, $post_type, $post ) {
