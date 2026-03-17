@@ -13,7 +13,9 @@
       "Bash(find . -name \"*.css\" -type f -exec wc -l {} +)",
       "Bash(find . -name \"*.js\" -type f -exec wc -l {} +)",
       "Bash(wc -l single-*.php index.php page-hub.php)",
-      "Bash(php -l front-page.php)"
+      "Bash(php -l front-page.php)",
+      "Bash(xargs -0 grep -li \"invincib\\\\|godmode\\\\|god_mode\\\\|god.mode\")",
+      "Bash(find \"d:/GITHUB WEBSITE/gtalobby\" -type f ! -path \"*/.git/*\" -exec wc -l {} +)"
     ]
   }
 }
