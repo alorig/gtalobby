@@ -10,11 +10,35 @@
     <link rel="manifest" href="<?php echo esc_url( get_template_directory_uri() ); ?>/manifest.json">
     <meta name="theme-color" content="#060714">
     <?php gtalobby_open_graph_meta(); ?>
+    <style id="gl-preloader-critical">
+        .gl-preloader{position:fixed;inset:0;z-index:99999;background:#060714;display:flex;align-items:center;justify-content:center}
+        .gl-preloader.is-done{opacity:0;visibility:hidden;pointer-events:none;transition:opacity .5s,visibility .5s}
+        body.gl-loading{overflow:hidden}
+    </style>
     <?php wp_head(); ?>
 </head>
 
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
+
+<!-- Preloader -->
+<div class="gl-preloader" id="gl-preloader" aria-hidden="true">
+    <div class="gl-preloader__inner">
+        <div class="gl-preloader__logo">
+            <span class="gl-preloader__icon">GL</span>
+            <span class="gl-preloader__site"><?php bloginfo( 'name' ); ?></span>
+        </div>
+        <div class="gl-preloader__bar">
+            <div class="gl-preloader__progress" id="gl-preloader-progress"></div>
+        </div>
+        <span class="gl-preloader__text">Loading</span>
+    </div>
+    <!-- Animated background particles -->
+    <div class="gl-preloader__particles">
+        <span></span><span></span><span></span><span></span><span></span><span></span>
+    </div>
+</div>
+
 <a class="gl-skip-link" href="#main-content"><?php esc_html_e( 'Skip to content', 'gtalobby' ); ?></a>
 <div class="gl-scroll-progress" aria-hidden="true"></div>
 

@@ -1,11 +1,214 @@
 /**
  * GtaLobby — Animations System
  *
- * 20 animations for a polished, interactive experience.
+ * 20+ animations for a polished, interactive experience.
  * Uses CSS @keyframes, scroll-driven reveals, and transition enhancements.
  *
  * @package GtaLobby
  */
+
+/* ==========================================================================
+   PRELOADER — Full-screen loading animation
+   ========================================================================== */
+
+.gl-preloader {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    background: #060714;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.gl-preloader.is-done {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.gl-preloader__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 28px;
+    z-index: 2;
+}
+
+/* Logo block */
+.gl-preloader__logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    animation: gl-preloaderPulse 2s ease-in-out infinite;
+}
+
+.gl-preloader__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 72px;
+    height: 72px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #FF2C98 0%, #6C5CE7 50%, #27D9FF 100%);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 28px;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: -1px;
+    box-shadow: 0 0 40px rgba(255, 44, 152, 0.3), 0 0 80px rgba(108, 92, 231, 0.15);
+}
+
+.gl-preloader__site {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: #EAF2FF;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+/* Progress bar */
+.gl-preloader__bar {
+    width: 200px;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.gl-preloader__progress {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #FF2C98, #6C5CE7, #27D9FF);
+    border-radius: 3px;
+    transition: width 0.15s linear;
+}
+
+/* Loading text */
+.gl-preloader__text {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.35);
+    animation: gl-preloaderDots 1.5s steps(4, end) infinite;
+}
+
+.gl-preloader__text::after {
+    content: '';
+    animation: gl-dots 1.5s steps(3, end) infinite;
+}
+
+@keyframes gl-dots {
+    0%   { content: ''; }
+    33%  { content: '.'; }
+    66%  { content: '..'; }
+    100% { content: '...'; }
+}
+
+@keyframes gl-preloaderPulse {
+    0%, 100% { transform: scale(1); }
+    50%      { transform: scale(1.04); }
+}
+
+/* Floating particles */
+.gl-preloader__particles {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.gl-preloader__particles span {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    opacity: 0;
+    animation: gl-particleFloat 4s ease-in-out infinite;
+}
+
+.gl-preloader__particles span:nth-child(1) {
+    background: #FF2C98;
+    left: 15%;
+    top: 80%;
+    animation-delay: 0s;
+    animation-duration: 3.5s;
+}
+
+.gl-preloader__particles span:nth-child(2) {
+    background: #27D9FF;
+    left: 30%;
+    top: 90%;
+    animation-delay: 0.5s;
+    animation-duration: 4s;
+    width: 3px;
+    height: 3px;
+}
+
+.gl-preloader__particles span:nth-child(3) {
+    background: #6C5CE7;
+    left: 55%;
+    top: 85%;
+    animation-delay: 1s;
+    animation-duration: 3.2s;
+    width: 5px;
+    height: 5px;
+}
+
+.gl-preloader__particles span:nth-child(4) {
+    background: #FF2C98;
+    left: 70%;
+    top: 75%;
+    animation-delay: 0.3s;
+    animation-duration: 4.5s;
+}
+
+.gl-preloader__particles span:nth-child(5) {
+    background: #27D9FF;
+    left: 85%;
+    top: 88%;
+    animation-delay: 0.8s;
+    animation-duration: 3.8s;
+    width: 3px;
+    height: 3px;
+}
+
+.gl-preloader__particles span:nth-child(6) {
+    background: #6C5CE7;
+    left: 45%;
+    top: 92%;
+    animation-delay: 1.2s;
+    animation-duration: 3s;
+    width: 6px;
+    height: 6px;
+}
+
+@keyframes gl-particleFloat {
+    0% {
+        opacity: 0;
+        transform: translateY(0) scale(0);
+    }
+    15% {
+        opacity: 0.6;
+        transform: translateY(-20px) scale(1);
+    }
+    50% {
+        opacity: 0.3;
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-300px) scale(0.3);
+    }
+}
+
+/* Hide body scroll while loading */
+body.gl-loading {
+    overflow: hidden;
+}
 
 /* ==========================================================================
    ANIMATION 1: Fade-In Up on Scroll (Section Reveal)
@@ -545,5 +748,9 @@
     [data-animate] {
         opacity: 1;
         transform: none;
+    }
+
+    .gl-preloader {
+        display: none !important;
     }
 }

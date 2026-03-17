@@ -1,7 +1,7 @@
 /**
  * GtaLobby — Animation Controller
  *
- * Scroll-triggered reveals, scroll progress bar,
+ * Preloader, scroll-triggered reveals, scroll progress bar,
  * and interactive animation enhancements.
  *
  * @package GtaLobby
@@ -10,11 +10,83 @@
 (function () {
     'use strict';
 
+    /* =============================================
+       PRELOADER (3–5 seconds)
+       ============================================= */
+
+    var preloader = document.getElementById('gl-preloader');
+    var progressBar = document.getElementById('gl-preloader-progress');
+
+    if (preloader) {
+        document.body.classList.add('gl-loading');
+
+        var DURATION = 3500; /* 3.5 seconds base */
+        var startTime = Date.now();
+        var loaded = false;
+
+        /* Animate progress bar with easing */
+        function updateProgress() {
+            var elapsed = Date.now() - startTime;
+            var raw = Math.min(elapsed / DURATION, 1);
+            /* Ease-out: fast start, slow finish */
+            var eased = 1 - Math.pow(1 - raw, 3);
+            var percent = Math.min(eased * 100, loaded ? 100 : 92);
+
+            if (progressBar) {
+                progressBar.style.width = percent + '%';
+            }
+
+            if (raw < 1 || !loaded) {
+                requestAnimationFrame(updateProgress);
+            } else {
+                dismissPreloader();
+            }
+        }
+
+        function dismissPreloader() {
+            if (progressBar) {
+                progressBar.style.width = '100%';
+            }
+            setTimeout(function () {
+                preloader.classList.add('is-done');
+                document.body.classList.remove('gl-loading');
+                /* Remove from DOM after fade out */
+                setTimeout(function () {
+                    if (preloader.parentNode) {
+                        preloader.parentNode.removeChild(preloader);
+                    }
+                }, 600);
+            }, 300);
+        }
+
+        requestAnimationFrame(updateProgress);
+
+        /* Mark as loaded when page finishes */
+        window.addEventListener('load', function () {
+            /* Ensure minimum 3s display */
+            var elapsed = Date.now() - startTime;
+            var remaining = Math.max(DURATION - elapsed, 0);
+            setTimeout(function () {
+                loaded = true;
+            }, remaining);
+        });
+
+        /* Safety timeout — max 5 seconds no matter what */
+        setTimeout(function () {
+            loaded = true;
+        }, 5000);
+    }
+
     /* Respect reduced motion preferences */
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
         document.querySelectorAll('[data-animate]').forEach(function (el) {
             el.classList.add('gl-visible');
         });
+        /* Skip preloader immediately for reduced motion */
+        if (preloader) {
+            preloader.classList.add('is-done');
+            document.body.classList.remove('gl-loading');
+        }
         return;
     }
 
