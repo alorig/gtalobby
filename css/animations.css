@@ -1,0 +1,549 @@
+/**
+ * GtaLobby — Animations System
+ *
+ * 20 animations for a polished, interactive experience.
+ * Uses CSS @keyframes, scroll-driven reveals, and transition enhancements.
+ *
+ * @package GtaLobby
+ */
+
+/* ==========================================================================
+   ANIMATION 1: Fade-In Up on Scroll (Section Reveal)
+   Elements with [data-animate] fade in as they enter the viewport.
+   ========================================================================== */
+
+@keyframes gl-fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(32px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+[data-animate] {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+[data-animate].gl-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ==========================================================================
+   ANIMATION 2: Staggered Card Entrance
+   Cards in grids animate in one after another.
+   ========================================================================== */
+
+@keyframes gl-staggerIn {
+    from {
+        opacity: 0;
+        transform: translateY(24px) scale(0.97);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.gl-card-grid[data-animate].gl-visible .gl-card-grid__item,
+.gl-card-grid[data-animate].gl-visible .gl-post-card,
+.gl-card-grid[data-animate].gl-visible article,
+.gl-category-grid[data-animate].gl-visible .gl-category-tile,
+.gl-home-hubs__grid[data-animate].gl-visible .gl-hub-card-v2 {
+    animation: gl-staggerIn 0.5s ease-out both;
+}
+
+.gl-card-grid[data-animate].gl-visible > :nth-child(1) { animation-delay: 0.05s; }
+.gl-card-grid[data-animate].gl-visible > :nth-child(2) { animation-delay: 0.1s; }
+.gl-card-grid[data-animate].gl-visible > :nth-child(3) { animation-delay: 0.15s; }
+.gl-card-grid[data-animate].gl-visible > :nth-child(4) { animation-delay: 0.2s; }
+.gl-card-grid[data-animate].gl-visible > :nth-child(5) { animation-delay: 0.25s; }
+.gl-card-grid[data-animate].gl-visible > :nth-child(6) { animation-delay: 0.3s; }
+.gl-card-grid[data-animate].gl-visible > :nth-child(7) { animation-delay: 0.35s; }
+.gl-card-grid[data-animate].gl-visible > :nth-child(8) { animation-delay: 0.4s; }
+.gl-card-grid[data-animate].gl-visible > :nth-child(9) { animation-delay: 0.45s; }
+
+.gl-category-grid[data-animate].gl-visible > :nth-child(1) { animation-delay: 0s; }
+.gl-category-grid[data-animate].gl-visible > :nth-child(2) { animation-delay: 0.06s; }
+.gl-category-grid[data-animate].gl-visible > :nth-child(3) { animation-delay: 0.12s; }
+.gl-category-grid[data-animate].gl-visible > :nth-child(4) { animation-delay: 0.18s; }
+.gl-category-grid[data-animate].gl-visible > :nth-child(5) { animation-delay: 0.24s; }
+.gl-category-grid[data-animate].gl-visible > :nth-child(6) { animation-delay: 0.3s; }
+.gl-category-grid[data-animate].gl-visible > :nth-child(7) { animation-delay: 0.36s; }
+.gl-category-grid[data-animate].gl-visible > :nth-child(8) { animation-delay: 0.42s; }
+.gl-category-grid[data-animate].gl-visible > :nth-child(9) { animation-delay: 0.48s; }
+
+.gl-home-hubs__grid[data-animate].gl-visible > :nth-child(1) { animation-delay: 0s; }
+.gl-home-hubs__grid[data-animate].gl-visible > :nth-child(2) { animation-delay: 0.08s; }
+.gl-home-hubs__grid[data-animate].gl-visible > :nth-child(3) { animation-delay: 0.16s; }
+.gl-home-hubs__grid[data-animate].gl-visible > :nth-child(4) { animation-delay: 0.24s; }
+.gl-home-hubs__grid[data-animate].gl-visible > :nth-child(5) { animation-delay: 0.32s; }
+.gl-home-hubs__grid[data-animate].gl-visible > :nth-child(6) { animation-delay: 0.4s; }
+
+/* ==========================================================================
+   ANIMATION 3: Card Hover Lift & Glow
+   Enhanced hover with subtle glow matching category accent.
+   ========================================================================== */
+
+.gl-post-card,
+.gl-category-tile,
+.gl-hub-card-v2,
+.gl-featured-card,
+.gl-mini-card {
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+                box-shadow 0.3s ease;
+}
+
+.gl-post-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2),
+                0 0 0 1px rgba(255, 44, 152, 0.1);
+}
+
+.gl-category-tile:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15),
+                0 0 20px color-mix(in srgb, var(--cat-accent, var(--gl-color-accent)) 15%, transparent);
+}
+
+.gl-hub-card-v2:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2),
+                0 0 30px color-mix(in srgb, var(--cat-accent, var(--gl-color-accent)) 10%, transparent);
+}
+
+/* ==========================================================================
+   ANIMATION 4: Image Zoom on Hover
+   Smooth zoom for all card thumbnails.
+   ========================================================================== */
+
+.gl-post-card__img,
+.gl-featured-card__img,
+.gl-card__img {
+    transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.gl-post-card:hover .gl-post-card__img,
+.gl-featured-card:hover .gl-featured-card__img,
+.gl-card:hover .gl-card__img {
+    transform: scale(1.08);
+}
+
+/* ==========================================================================
+   ANIMATION 5: CTA Arrow Bounce
+   Arrow icon bounces right on hover.
+   ========================================================================== */
+
+@keyframes gl-arrowBounce {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(5px); }
+}
+
+.gl-hero-panel__cta:hover svg,
+.gl-btn:hover .gl-icon,
+.gl-hub-card-v2:hover .gl-hub-card-v2__link {
+    animation: gl-arrowBounce 0.6s ease infinite;
+}
+
+/* ==========================================================================
+   ANIMATION 6: Neon Pulse Glow (Logo & Accents)
+   Subtle pulsing glow on brand elements.
+   ========================================================================== */
+
+@keyframes gl-neonPulse {
+    0%, 100% {
+        text-shadow: 0 0 8px rgba(255, 44, 152, 0.4),
+                     0 0 20px rgba(255, 44, 152, 0.2);
+    }
+    50% {
+        text-shadow: 0 0 16px rgba(255, 44, 152, 0.6),
+                     0 0 40px rgba(255, 44, 152, 0.3),
+                     0 0 60px rgba(255, 44, 152, 0.1);
+    }
+}
+
+.gl-header__site-icon {
+    animation: gl-neonPulse 3s ease-in-out infinite;
+}
+
+/* ==========================================================================
+   ANIMATION 7: Page Load Fade-In
+   Entire page fades in smoothly on load.
+   ========================================================================== */
+
+@keyframes gl-pageIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.gl-main {
+    animation: gl-pageIn 0.4s ease-out;
+}
+
+/* ==========================================================================
+   ANIMATION 8: Nav Link Underline Slide
+   Underline slides in from left on hover.
+   ========================================================================== */
+
+.gl-nav__list a,
+.gl-footer__links a {
+    position: relative;
+}
+
+.gl-nav__list a::after,
+.gl-footer__links a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--gl-color-accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.gl-nav__list a:hover::after,
+.gl-footer__links a:hover::after {
+    transform: scaleX(1);
+}
+
+/* ==========================================================================
+   ANIMATION 9: Mobile Menu Slide-In
+   Drawer slides in from the right with backdrop fade.
+   ========================================================================== */
+
+.gl-mobile-nav {
+    transform: translateX(100%);
+    transition: transform 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.gl-mobile-nav.is-open {
+    transform: translateX(0);
+}
+
+.gl-mobile-nav__list a {
+    opacity: 0;
+    transform: translateX(20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.gl-mobile-nav.is-open .gl-mobile-nav__list a {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.gl-mobile-nav.is-open .gl-mobile-nav__list li:nth-child(1) a { transition-delay: 0.05s; }
+.gl-mobile-nav.is-open .gl-mobile-nav__list li:nth-child(2) a { transition-delay: 0.1s; }
+.gl-mobile-nav.is-open .gl-mobile-nav__list li:nth-child(3) a { transition-delay: 0.15s; }
+.gl-mobile-nav.is-open .gl-mobile-nav__list li:nth-child(4) a { transition-delay: 0.2s; }
+.gl-mobile-nav.is-open .gl-mobile-nav__list li:nth-child(5) a { transition-delay: 0.25s; }
+.gl-mobile-nav.is-open .gl-mobile-nav__list li:nth-child(6) a { transition-delay: 0.3s; }
+.gl-mobile-nav.is-open .gl-mobile-nav__list li:nth-child(7) a { transition-delay: 0.35s; }
+.gl-mobile-nav.is-open .gl-mobile-nav__list li:nth-child(8) a { transition-delay: 0.4s; }
+.gl-mobile-nav.is-open .gl-mobile-nav__list li:nth-child(9) a { transition-delay: 0.45s; }
+
+/* ==========================================================================
+   ANIMATION 10: Search Overlay Fade & Scale
+   Search overlay fades in with a subtle scale.
+   ========================================================================== */
+
+.gl-search-overlay {
+    opacity: 0;
+    transform: scale(0.97);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    pointer-events: none;
+}
+
+.gl-search-overlay.is-open {
+    opacity: 1;
+    transform: scale(1);
+    pointer-events: auto;
+}
+
+.gl-search-overlay.is-open .gl-search-form__input {
+    animation: gl-fadeInUp 0.4s ease-out 0.1s both;
+}
+
+/* ==========================================================================
+   ANIMATION 11: Badge Pulse (New Content Indicator)
+   Pulsing dot for fresh/new content badges.
+   ========================================================================== */
+
+@keyframes gl-badgePulse {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(255, 44, 152, 0.5);
+    }
+    50% {
+        box-shadow: 0 0 0 8px rgba(255, 44, 152, 0);
+    }
+}
+
+.gl-badge--new::before {
+    content: '';
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--gl-color-accent);
+    margin-right: 6px;
+    animation: gl-badgePulse 2s ease-in-out infinite;
+}
+
+/* ==========================================================================
+   ANIMATION 12: Skeleton Loading Shimmer
+   Placeholder shimmer for loading states.
+   ========================================================================== */
+
+@keyframes gl-shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+.gl-skeleton {
+    background: linear-gradient(
+        90deg,
+        var(--gl-color-surface) 25%,
+        var(--gl-color-surface-raised) 50%,
+        var(--gl-color-surface) 75%
+    );
+    background-size: 200% 100%;
+    animation: gl-shimmer 1.5s ease-in-out infinite;
+    border-radius: var(--gl-radius-md);
+}
+
+.gl-skeleton--text {
+    height: 1em;
+    margin-bottom: 0.5em;
+    width: 80%;
+}
+
+.gl-skeleton--title {
+    height: 1.5em;
+    margin-bottom: 0.75em;
+    width: 60%;
+}
+
+.gl-skeleton--image {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+}
+
+/* ==========================================================================
+   ANIMATION 13: Confidence Badge Shimmer (GTA 6)
+   Gradient shimmer across confidence badges.
+   ========================================================================== */
+
+@keyframes gl-confidenceShimmer {
+    0% { background-position: -100% 0; }
+    100% { background-position: 200% 0; }
+}
+
+.gl-confidence--confirmed {
+    background: linear-gradient(90deg, #00B894, #00CEC9, #00B894);
+    background-size: 200% 100%;
+    animation: gl-confidenceShimmer 3s linear infinite;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* ==========================================================================
+   ANIMATION 14: Hero Panel Number Float
+   Panel numbers float up slightly on hover.
+   ========================================================================== */
+
+@keyframes gl-floatNum {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+.gl-hero-panel:hover .gl-hero-panel__num {
+    animation: gl-floatNum 2s ease-in-out infinite;
+}
+
+/* ==========================================================================
+   ANIMATION 15: Color Strip Wave
+   Bottom color strip has a subtle wave animation.
+   ========================================================================== */
+
+@keyframes gl-stripWave {
+    0%, 100% { transform: scaleY(1); }
+    50% { transform: scaleY(1.6); }
+}
+
+.gl-hero-accordion__strip span {
+    transition: transform 0.3s ease;
+    transform-origin: bottom;
+}
+
+.gl-hero-accordion:hover .gl-hero-accordion__strip span:nth-child(1) {
+    animation: gl-stripWave 1.2s ease-in-out 0s infinite;
+}
+.gl-hero-accordion:hover .gl-hero-accordion__strip span:nth-child(2) {
+    animation: gl-stripWave 1.2s ease-in-out 0.15s infinite;
+}
+.gl-hero-accordion:hover .gl-hero-accordion__strip span:nth-child(3) {
+    animation: gl-stripWave 1.2s ease-in-out 0.3s infinite;
+}
+.gl-hero-accordion:hover .gl-hero-accordion__strip span:nth-child(4) {
+    animation: gl-stripWave 1.2s ease-in-out 0.45s infinite;
+}
+
+/* ==========================================================================
+   ANIMATION 16: Section Title Accent Line Grow
+   Decorative accent line grows in from left on zone titles.
+   ========================================================================== */
+
+.gl-zone__title {
+    position: relative;
+    display: inline-block;
+}
+
+.gl-zone__title::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    height: 3px;
+    width: 0;
+    background: linear-gradient(90deg, var(--gl-color-accent), var(--gl-color-secondary));
+    border-radius: 2px;
+    transition: width 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+[data-animate].gl-visible .gl-zone__title::after,
+.gl-zone__title:hover::after {
+    width: 60px;
+}
+
+/* ==========================================================================
+   ANIMATION 17: Scroll Progress Indicator
+   Thin progress bar at top showing scroll position.
+   ========================================================================== */
+
+.gl-scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    width: 0%;
+    background: linear-gradient(90deg, var(--gl-color-accent), var(--gl-color-secondary));
+    z-index: 9999;
+    transition: width 0.1s linear;
+    pointer-events: none;
+}
+
+/* ==========================================================================
+   ANIMATION 18: Back to Top Button Reveal
+   Slides up when user scrolls past threshold.
+   ========================================================================== */
+
+@keyframes gl-slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.gl-back-to-top {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--gl-color-accent);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.3s ease, transform 0.3s ease, background 0.2s ease;
+    z-index: 500;
+    box-shadow: 0 4px 16px rgba(255, 44, 152, 0.3);
+}
+
+.gl-back-to-top.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.gl-back-to-top:hover {
+    background: var(--gl-color-accent-dark);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(255, 44, 152, 0.4);
+}
+
+/* ==========================================================================
+   ANIMATION 19: TOC Link Highlight on Scroll
+   Active TOC item gets accent highlight.
+   ========================================================================== */
+
+.gl-toc__item a {
+    transition: color 0.2s ease, padding-left 0.3s ease;
+    border-left: 2px solid transparent;
+    padding-left: 8px;
+}
+
+.gl-toc__item.is-active a {
+    color: var(--gl-color-accent);
+    border-left-color: var(--gl-color-accent);
+    padding-left: 14px;
+}
+
+/* ==========================================================================
+   ANIMATION 20: Footer Category Pills Hover Glow
+   Category pills glow on hover with their accent color.
+   ========================================================================== */
+
+.gl-footer__cat-link {
+    transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.gl-footer__cat-link:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 4px 16px color-mix(in srgb, var(--cat-color, var(--gl-color-accent)) 30%, transparent);
+    background: color-mix(in srgb, var(--cat-color, var(--gl-color-accent)) 15%, transparent);
+}
+
+/* ==========================================================================
+   REDUCED MOTION — Respect user preferences
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    [data-animate] {
+        opacity: 1;
+        transform: none;
+    }
+}

@@ -1130,6 +1130,20 @@ function gtalobby_settings_page() {
 
     submit_button();
     echo '</form>';
+
+    // Seed content buttons (General tab only)
+    if ( 'general' === $active_tab ) {
+        $seed_url = wp_nonce_url( admin_url( 'admin-post.php?action=gtalobby_seed_content' ), 'gtalobby_seed_content' );
+        $hub_url  = wp_nonce_url( admin_url( 'admin-post.php?action=gtalobby_seed_hubs' ), 'gtalobby_seed_hubs' );
+
+        echo '<div class="gl-admin-seed" style="margin-top:30px; padding:20px; background:#1d2327; border:1px solid #3c434a; border-radius:6px;">';
+        echo '<h3 style="margin-top:0; color:#c3c4c7;">' . esc_html__( 'Content Seeder', 'gtalobby' ) . '</h3>';
+        echo '<p style="color:#a7aaad;">' . esc_html__( 'Populate the site with demo content to see all templates in action. Safe to run multiple times — skips existing content.', 'gtalobby' ) . '</p>';
+        echo '<a href="' . esc_url( $seed_url ) . '" class="button button-primary" style="margin-right:10px;">' . esc_html__( 'Seed Sample Content', 'gtalobby' ) . '</a>';
+        echo '<a href="' . esc_url( $hub_url ) . '" class="button button-secondary">' . esc_html__( 'Seed Hub Pages', 'gtalobby' ) . '</a>';
+        echo '</div>';
+    }
+
     echo '</div>'; // .gl-admin-tab-content
     echo '</div>'; // .wrap
 }

@@ -35,6 +35,7 @@ function gtalobby_enqueue_assets() {
     wp_enqueue_style( 'gtalobby-components', $uri . '/css/components.css', array( 'gtalobby-tokens' ), $ver );
     wp_enqueue_style( 'gtalobby-layout', $uri . '/css/layout.css', array( 'gtalobby-components' ), $ver );
     wp_enqueue_style( 'gtalobby-responsive', $uri . '/css/responsive.css', array( 'gtalobby-layout' ), $ver );
+    wp_enqueue_style( 'gtalobby-animations', $uri . '/css/animations.css', array( 'gtalobby-responsive' ), $ver );
 
     // Context-specific styles
     if ( is_page_template( 'page-hub.php' ) ) {
@@ -83,6 +84,15 @@ function gtalobby_enqueue_assets() {
     wp_enqueue_script(
         'gtalobby-share',
         $uri . '/js/share.js',
+        array(),
+        $ver,
+        true
+    );
+
+    // Scroll animations controller
+    wp_enqueue_script(
+        'gtalobby-animations',
+        $uri . '/js/animations.js',
         array(),
         $ver,
         true

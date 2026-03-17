@@ -53,7 +53,7 @@ $gta6_cat   = get_category_by_slug( 'gta6' );
                     <!-- Panel 1 — GTA 6 (Cyber Cyan) -->
                     <div class="gl-hero-panel" data-panel="1">
                         <div class="gl-hero-panel__color" style="background: #27D9FF"></div>
-                        <div class="gl-hero-panel__image" style="background-image: url('<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/hero-gta6.jpg')"></div>
+                        <div class="gl-hero-panel__image" style="background-image: url('<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/hero-gta6.jpg'), url('https://images.unsplash.com/photo-1514565131-fce0801e5785?w=1600&h=1000&fit=crop&q=80')"></div>
                         <span class="gl-hero-panel__num">01</span>
                         <span class="gl-hero-panel__label"><?php esc_html_e( 'GTA 6', 'gtalobby' ); ?></span>
                         <div class="gl-hero-panel__content">
@@ -74,7 +74,7 @@ $gta6_cat   = get_category_by_slug( 'gta6' );
                     <!-- Panel 2 — GTA Online (Neon Magenta) -->
                     <div class="gl-hero-panel" data-panel="2">
                         <div class="gl-hero-panel__color" style="background: #FF2C98"></div>
-                        <div class="gl-hero-panel__image" style="background-image: url('<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/hero-online.jpg')"></div>
+                        <div class="gl-hero-panel__image" style="background-image: url('<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/hero-online.jpg'), url('https://images.unsplash.com/photo-1511882150382-421056c89033?w=1600&h=1000&fit=crop&q=80')"></div>
                         <span class="gl-hero-panel__num">02</span>
                         <span class="gl-hero-panel__label"><?php esc_html_e( 'Online', 'gtalobby' ); ?></span>
                         <div class="gl-hero-panel__content">
@@ -95,7 +95,7 @@ $gta6_cat   = get_category_by_slug( 'gta6' );
                     <!-- Panel 3 — Cheats & Codes (Purple) -->
                     <div class="gl-hero-panel" data-panel="3">
                         <div class="gl-hero-panel__color" style="background: #6C5CE7"></div>
-                        <div class="gl-hero-panel__image" style="background-image: url('<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/hero-cheats.jpg')"></div>
+                        <div class="gl-hero-panel__image" style="background-image: url('<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/hero-cheats.jpg'), url('https://images.unsplash.com/photo-1600861194942-f883de0dfe96?w=1600&h=1000&fit=crop&q=80')"></div>
                         <span class="gl-hero-panel__num">03</span>
                         <span class="gl-hero-panel__label"><?php esc_html_e( 'Cheats', 'gtalobby' ); ?></span>
                         <div class="gl-hero-panel__content">
@@ -116,7 +116,7 @@ $gta6_cat   = get_category_by_slug( 'gta6' );
                     <!-- Panel 4 — Mods (Dark Vice) -->
                     <div class="gl-hero-panel" data-panel="4">
                         <div class="gl-hero-panel__color" style="background: #0f1328"></div>
-                        <div class="gl-hero-panel__image" style="background-image: url('<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/hero-mods.jpg')"></div>
+                        <div class="gl-hero-panel__image" style="background-image: url('<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/hero-mods.jpg'), url('https://images.unsplash.com/photo-1593305841991-05c297ba4575?w=1600&h=1000&fit=crop&q=80')"></div>
                         <span class="gl-hero-panel__num">04</span>
                         <span class="gl-hero-panel__label"><?php esc_html_e( 'Mods', 'gtalobby' ); ?></span>
                         <div class="gl-hero-panel__content">
@@ -152,13 +152,13 @@ $gta6_cat   = get_category_by_slug( 'gta6' );
                ============================================================ */
             case 'category_grid':
             ?>
-            <section class="gl-zone gl-home-categories" data-zone="category_grid">
+            <section class="gl-zone gl-home-categories" data-zone="category_grid" data-animate>
                 <div class="gl-container">
                     <div class="gl-home-categories__header">
                         <h2 class="gl-zone__title"><?php esc_html_e( 'Explore by Category', 'gtalobby' ); ?></h2>
                         <p class="gl-zone__subtitle"><?php esc_html_e( '9 content silos covering every aspect of the GTA universe', 'gtalobby' ); ?></p>
                     </div>
-                    <div class="gl-category-grid">
+                    <div class="gl-category-grid" data-animate>
                         <?php foreach ( $sag_categories as $slug => $cat_name ) :
                             $cat_obj = get_category_by_slug( $slug );
                             if ( ! $cat_obj ) continue;
@@ -191,7 +191,7 @@ $gta6_cat   = get_category_by_slug( 'gta6' );
             case 'gta6_spotlight':
                 if ( ! gtalobby_is_enabled( 'enable_gta6_mode' ) ) break;
             ?>
-            <section class="gl-zone gl-home-gta6" data-zone="gta6_spotlight">
+            <section class="gl-zone gl-home-gta6" data-zone="gta6_spotlight" data-animate>
                 <div class="gl-container">
                     <div class="gl-home-gta6__header">
                         <div>
@@ -289,13 +289,13 @@ $gta6_cat   = get_category_by_slug( 'gta6' );
                ============================================================ */
             case 'featured_hubs':
             ?>
-            <section class="gl-zone gl-home-hubs" data-zone="featured_hubs">
+            <section class="gl-zone gl-home-hubs" data-zone="featured_hubs" data-animate>
                 <div class="gl-container">
                     <div class="gl-home-hubs__header">
                         <h2 class="gl-zone__title"><?php esc_html_e( 'Topic Hubs', 'gtalobby' ); ?></h2>
                         <p class="gl-zone__subtitle"><?php esc_html_e( 'Deep-dive landing pages covering entire keyword clusters', 'gtalobby' ); ?></p>
                     </div>
-                    <div class="gl-home-hubs__grid">
+                    <div class="gl-home-hubs__grid" data-animate>
                         <?php
                         $hub_count = isset( $zone_cfg['count'] ) ? (int) $zone_cfg['count'] : 9;
                         $hubs_query = new WP_Query( array(
@@ -345,7 +345,7 @@ $gta6_cat   = get_category_by_slug( 'gta6' );
                ============================================================ */
             case 'latest_posts':
             ?>
-            <section class="gl-zone gl-home-latest" data-zone="latest_posts">
+            <section class="gl-zone gl-home-latest" data-zone="latest_posts" data-animate>
                 <div class="gl-container">
                     <h2 class="gl-zone__title"><?php esc_html_e( 'Latest Content', 'gtalobby' ); ?></h2>
 
@@ -416,7 +416,7 @@ $gta6_cat   = get_category_by_slug( 'gta6' );
                ============================================================ */
             case 'newsletter':
             ?>
-            <section class="gl-zone gl-home-newsletter" data-zone="newsletter">
+            <section class="gl-zone gl-home-newsletter" data-zone="newsletter" data-animate>
                 <div class="gl-container">
                     <?php gtalobby_newsletter_form(); ?>
                 </div>

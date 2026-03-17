@@ -16,6 +16,7 @@
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 <a class="gl-skip-link" href="#main-content"><?php esc_html_e( 'Skip to content', 'gtalobby' ); ?></a>
+<div class="gl-scroll-progress" aria-hidden="true"></div>
 
 <!-- SVG Icon Sprite (hidden) -->
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none">

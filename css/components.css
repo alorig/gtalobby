@@ -623,3 +623,93 @@ select:focus {
     gap: var(--gl-space-2);
     margin-top: var(--gl-space-6);
 }
+
+/* ==========================================================================
+   CARD TEMPLATE PARTS — Additional Styles
+   ========================================================================== */
+
+/* Card image placeholder (when no thumbnail) */
+.gl-card__image--placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 16 / 9;
+    background: linear-gradient(135deg,
+        color-mix(in srgb, var(--cat-accent, var(--gl-color-accent)) 12%, var(--gl-color-surface)),
+        var(--gl-color-surface));
+    color: var(--cat-accent, var(--gl-color-accent));
+    opacity: 0.7;
+}
+
+/* Card badges row */
+.gl-card__badges {
+    display: flex;
+    align-items: center;
+    gap: var(--gl-space-2);
+    flex-wrap: wrap;
+    margin-bottom: var(--gl-space-1);
+}
+
+/* Card subtitle (profile cards) */
+.gl-card__subtitle {
+    display: block;
+    font-size: var(--gl-text-xs);
+    color: var(--cat-accent, var(--gl-color-accent));
+    font-weight: var(--gl-weight-semibold);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: var(--gl-space-1);
+}
+
+/* Profile card square image */
+.gl-card__image--profile {
+    aspect-ratio: 1;
+    max-height: 200px;
+}
+
+/* Rank count badge overlay */
+.gl-card__rank-count {
+    position: absolute;
+    bottom: var(--gl-space-2);
+    right: var(--gl-space-2);
+    font-family: var(--gl-font-mono);
+    font-size: var(--gl-text-xs);
+    font-weight: var(--gl-weight-bold);
+    background: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    padding: var(--gl-space-1) var(--gl-space-2);
+    border-radius: var(--gl-radius-sm);
+    backdrop-filter: blur(4px);
+}
+
+/* Meta tag pills (mod version, compatibility) */
+.gl-card__meta-tag {
+    display: inline-block;
+    font-family: var(--gl-font-mono);
+    font-size: var(--gl-text-xs);
+    color: var(--gl-color-text-tertiary);
+    background: var(--gl-color-surface);
+    padding: 2px var(--gl-space-2);
+    border-radius: var(--gl-radius-sm);
+    border: 1px solid var(--gl-color-divider);
+}
+
+/* Compact card layout */
+.gl-card--compact {
+    flex-direction: row;
+    gap: var(--gl-space-3);
+}
+
+.gl-card--compact .gl-card__image--compact {
+    width: 100px;
+    height: 70px;
+    flex-shrink: 0;
+    aspect-ratio: auto;
+    border-radius: var(--gl-radius-md);
+    overflow: hidden;
+}
+
+.gl-card--compact .gl-card__title {
+    font-size: var(--gl-text-sm);
+    -webkit-line-clamp: 2;
+}

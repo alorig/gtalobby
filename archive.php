@@ -103,7 +103,7 @@ $archive_zones = gtalobby_get_layout( 'archive', $category_slug );
                     if ( $pinned_query->have_posts() ) :
                         $cat_color = gtalobby_get_category_color( $cat_obj->slug );
                 ?>
-                <section class="gl-zone gl-zone--pinned-hubs" data-zone="pinned_hubs">
+                <section class="gl-zone gl-zone--pinned-hubs" data-zone="pinned_hubs" data-animate>
                     <div class="gl-container">
                         <h2 class="gl-zone__title"><?php esc_html_e( 'Topic Hubs', 'gtalobby' ); ?></h2>
 
