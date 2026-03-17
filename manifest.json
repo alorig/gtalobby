@@ -1,0 +1,21 @@
+{
+    "name": "GtaLobby",
+    "short_name": "GtaLobby",
+    "description": "Your GTA Resource Hub — Guides, Cheats, Mods & Everything GTA",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#060714",
+    "theme_color": "#060714",
+    "icons": [
+        {
+            "src": "assets/images/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "assets/images/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}

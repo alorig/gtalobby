@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+
+# Disallow admin and login
+Disallow: /wp-admin/
+Disallow: /wp-login.php
+
+# Allow admin-ajax for frontend functionality
+Allow: /wp-admin/admin-ajax.php
+
+# Sitemaps
+Sitemap: https://gtalobby.com/sitemap.xml

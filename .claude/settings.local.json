@@ -8,7 +8,11 @@
       "Read(//d/GITHUB WEBSITE/gtalobby/**)",
       "Bash(done)",
       "Bash(grep -c \"<?php gtalobby_hub_link\\(\\); ?><?php endif; ?>\" single-*.php page*.php)",
-      "WebSearch"
+      "WebSearch",
+      "Bash(wc -l \"/d/GITHUB WEBSITE/gtalobby\"/css/*.css)",
+      "Bash(find . -name \"*.css\" -type f -exec wc -l {} +)",
+      "Bash(find . -name \"*.js\" -type f -exec wc -l {} +)",
+      "Bash(wc -l single-*.php index.php page-hub.php)"
     ]
   }
 }

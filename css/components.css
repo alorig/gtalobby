@@ -8,6 +8,186 @@
  */
 
 /* ==========================================================================
+   FOCUS STYLES — Keyboard Accessibility
+   ========================================================================== */
+
+/* Global focus-visible outline for all interactive elements */
+:focus-visible {
+    outline: 2px solid var(--gl-color-secondary, #27D9FF);
+    outline-offset: 2px;
+    border-radius: var(--gl-radius-sm);
+}
+
+/* Remove outline for mouse/touch users */
+:focus:not(:focus-visible) {
+    outline: none;
+}
+
+/* Skip link visible on focus */
+.gl-skip-link {
+    position: absolute;
+    top: -100%;
+    left: var(--gl-space-4);
+    z-index: 9999;
+    padding: var(--gl-space-3) var(--gl-space-5);
+    background: var(--gl-color-accent);
+    color: #fff;
+    font-weight: var(--gl-weight-bold);
+    text-decoration: none;
+    border-radius: 0 0 var(--gl-radius-md) var(--gl-radius-md);
+    transition: top var(--gl-transition-fast);
+}
+
+.gl-skip-link:focus {
+    top: 0;
+}
+
+/* Buttons and links with custom focus rings */
+.gl-btn:focus-visible,
+.gl-hero-panel__cta:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 3px;
+    box-shadow: 0 0 0 5px rgba(39, 217, 255, 0.4);
+}
+
+/* Form inputs focus */
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+    outline: 2px solid var(--gl-color-secondary, #27D9FF);
+    outline-offset: 0;
+    border-color: var(--gl-color-secondary, #27D9FF);
+}
+
+/* Card focus (for keyboard navigation) */
+.gl-category-tile:focus-visible,
+.gl-hub-card-v2:focus-visible,
+.gl-post-card:focus-visible {
+    outline: 2px solid var(--gl-color-secondary, #27D9FF);
+    outline-offset: 2px;
+}
+
+/* Navigation link focus */
+.gl-nav__list a:focus-visible,
+.gl-mobile-nav__list a:focus-visible,
+.gl-footer__links a:focus-visible {
+    outline: 2px solid var(--gl-color-secondary, #27D9FF);
+    outline-offset: 2px;
+    border-radius: 2px;
+}
+
+/* Social share button focus */
+.gl-share__btn:focus-visible {
+    outline: 2px solid var(--gl-color-secondary, #27D9FF);
+    outline-offset: 2px;
+}
+
+/* ==========================================================================
+   NEWSLETTER COMPONENT
+   ========================================================================== */
+
+.gl-newsletter {
+    background: linear-gradient(135deg, var(--gl-color-surface, #0c1030) 0%, var(--gl-color-surface-raised, #13183e) 100%);
+    border: 1px solid var(--gl-color-border);
+    border-radius: var(--gl-radius-xl);
+    padding: var(--gl-space-8) var(--gl-space-6);
+    margin: var(--gl-space-8) 0;
+}
+
+.gl-newsletter__inner {
+    display: flex;
+    align-items: center;
+    gap: var(--gl-space-8);
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.gl-newsletter__text {
+    flex: 1;
+    min-width: 0;
+}
+
+.gl-newsletter__title {
+    font-family: var(--gl-font-display);
+    font-size: var(--gl-text-xl);
+    font-weight: var(--gl-weight-bold);
+    color: var(--gl-color-text);
+    margin: 0 0 var(--gl-space-2);
+}
+
+.gl-newsletter__desc {
+    font-size: var(--gl-text-sm);
+    color: var(--gl-color-text-secondary);
+    margin: 0;
+    line-height: 1.5;
+}
+
+.gl-newsletter__form {
+    flex: 1;
+    min-width: 280px;
+}
+
+.gl-newsletter__field {
+    display: flex;
+    gap: 0;
+    border-radius: var(--gl-radius-lg);
+    overflow: hidden;
+    border: 1px solid var(--gl-color-border);
+    background: var(--gl-color-bg);
+}
+
+.gl-newsletter__input {
+    flex: 1;
+    padding: var(--gl-space-3) var(--gl-space-4);
+    background: transparent;
+    border: none;
+    color: var(--gl-color-text);
+    font-size: var(--gl-text-sm);
+    outline: none;
+    min-width: 0;
+}
+
+.gl-newsletter__input::placeholder {
+    color: var(--gl-color-text-tertiary);
+}
+
+.gl-newsletter__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--gl-space-2);
+    padding: var(--gl-space-3) var(--gl-space-5);
+    background: var(--gl-color-accent);
+    color: #fff;
+    border: none;
+    font-family: var(--gl-font-display);
+    font-weight: var(--gl-weight-semibold);
+    font-size: var(--gl-text-sm);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background var(--gl-transition-fast);
+}
+
+.gl-newsletter__btn:hover {
+    background: var(--gl-color-accent-dark);
+}
+
+.gl-newsletter__privacy {
+    font-size: var(--gl-text-xs);
+    color: var(--gl-color-text-tertiary);
+    margin: var(--gl-space-2) 0 0;
+}
+
+@media (max-width: 767px) {
+    .gl-newsletter__inner {
+        flex-direction: column;
+        text-align: center;
+    }
+    .gl-newsletter__form {
+        width: 100%;
+    }
+}
+
+/* ==========================================================================
    CONTAINER
    ========================================================================== */
 

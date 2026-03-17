@@ -351,6 +351,162 @@ function gtalobby_excerpt_more( $more ) {
 add_filter( 'excerpt_more', 'gtalobby_excerpt_more' );
 
 /**
+ * Output Open Graph and Twitter Card meta tags.
+ */
+function gtalobby_open_graph_meta() {
+    if ( is_admin() ) {
+        return;
+    }
+
+    $title       = wp_get_document_title();
+    $description = get_bloginfo( 'description' );
+    $url         = home_url( '/' );
+    $image       = '';
+    $type        = 'website';
+
+    if ( is_singular() ) {
+        $type        = 'article';
+        $url         = get_permalink();
+        $description = has_excerpt() ? get_the_excerpt() : wp_trim_words( get_the_content(), 30, '...' );
+        $description = wp_strip_all_tags( $description );
+
+        if ( has_post_thumbnail() ) {
+            $image = get_the_post_thumbnail_url( null, 'gl-feature' );
+        }
+    } elseif ( is_category() ) {
+        $cat         = get_queried_object();
+        $description = $cat->description ?: $description;
+        $url         = get_category_link( $cat->term_id );
+    }
+
+    $description = esc_attr( wp_trim_words( $description, 25, '...' ) );
+    ?>
+    <!-- Open Graph -->
+    <meta property="og:type" content="<?php echo esc_attr( $type ); ?>">
+    <meta property="og:title" content="<?php echo esc_attr( $title ); ?>">
+    <meta property="og:description" content="<?php echo $description; ?>">
+    <meta property="og:url" content="<?php echo esc_url( $url ); ?>">
+    <meta property="og:site_name" content="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?>">
+    <?php if ( $image ) : ?>
+    <meta property="og:image" content="<?php echo esc_url( $image ); ?>">
+    <?php endif; ?>
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="<?php echo $image ? 'summary_large_image' : 'summary'; ?>">
+    <meta name="twitter:title" content="<?php echo esc_attr( $title ); ?>">
+    <meta name="twitter:description" content="<?php echo $description; ?>">
+    <?php if ( $image ) : ?>
+    <meta name="twitter:image" content="<?php echo esc_url( $image ); ?>">
+    <?php endif; ?>
+    <?php
+}
+
+/**
+ * Add lazy loading to post thumbnails.
+ */
+function gtalobby_lazy_load_thumbnails( $attr, $attachment, $size ) {
+    if ( ! is_admin() ) {
+        $attr['loading'] = 'lazy';
+    }
+    return $attr;
+}
+add_filter( 'wp_get_attachment_image_attributes', 'gtalobby_lazy_load_thumbnails', 10, 3 );
+
+/**
+ * Add lazy loading to content images.
+ */
+function gtalobby_lazy_load_content_images( $content ) {
+    if ( is_admin() || is_feed() ) {
+        return $content;
+    }
+    $content = preg_replace(
+        '/<img(?!.*loading=)([^>]*)>/i',
+        '<img loading="lazy"$1>',
+        $content
+    );
+    return $content;
+}
+add_filter( 'the_content', 'gtalobby_lazy_load_content_images', 99 );
+
+/**
+ * Google Analytics / GTM placeholder.
+ * Replace GA_MEASUREMENT_ID with your actual tracking ID in WP Admin or here.
+ */
+function gtalobby_analytics_head() {
+    $ga_id = gtalobby_get_option( 'gtalobby_general_options', 'ga_measurement_id', '' );
+    if ( empty( $ga_id ) || is_admin() ) {
+        return;
+    }
+    ?>
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=<?php echo esc_attr( $ga_id ); ?>"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '<?php echo esc_js( $ga_id ); ?>');
+    </script>
+    <?php
+}
+add_action( 'wp_head', 'gtalobby_analytics_head', 1 );
+
+/**
+ * Basic XML Sitemap generation.
+ */
+function gtalobby_register_sitemap() {
+    // WordPress 5.5+ has built-in sitemaps — enable them
+    add_filter( 'wp_sitemaps_enabled', '__return_true' );
+
+    // Add custom post types to the sitemap
+    add_filter( 'wp_sitemaps_post_types', function( $post_types ) {
+        $custom_types = gtalobby_get_post_types();
+        foreach ( $custom_types as $cpt ) {
+            $obj = get_post_type_object( $cpt );
+            if ( $obj && $obj->public ) {
+                $post_types[ $cpt ] = $obj;
+            }
+        }
+        return $post_types;
+    } );
+}
+add_action( 'init', 'gtalobby_register_sitemap' );
+
+/**
+ * Newsletter signup form shortcode and template tag.
+ * Usage: <?php gtalobby_newsletter_form(); ?> or [gtalobby_newsletter]
+ */
+function gtalobby_newsletter_form() {
+    ?>
+    <div class="gl-newsletter">
+        <div class="gl-newsletter__inner">
+            <div class="gl-newsletter__text">
+                <h3 class="gl-newsletter__title"><?php esc_html_e( 'Stay in the Loop', 'gtalobby' ); ?></h3>
+                <p class="gl-newsletter__desc"><?php esc_html_e( 'Get the latest GTA 6 news, guides, and cheat codes delivered to your inbox.', 'gtalobby' ); ?></p>
+            </div>
+            <form class="gl-newsletter__form" action="#" method="post">
+                <?php wp_nonce_field( 'gtalobby_newsletter', 'gl_newsletter_nonce' ); ?>
+                <div class="gl-newsletter__field">
+                    <input type="email" name="gl_newsletter_email" class="gl-newsletter__input"
+                           placeholder="<?php esc_attr_e( 'Enter your email', 'gtalobby' ); ?>"
+                           required aria-label="<?php esc_attr_e( 'Email address', 'gtalobby' ); ?>">
+                    <button type="submit" class="gl-newsletter__btn">
+                        <?php esc_html_e( 'Subscribe', 'gtalobby' ); ?>
+                        <svg class="gl-icon" width="16" height="16"><use href="#icon-arrow-right"></use></svg>
+                    </button>
+                </div>
+                <p class="gl-newsletter__privacy"><?php esc_html_e( 'No spam. Unsubscribe anytime.', 'gtalobby' ); ?></p>
+            </form>
+        </div>
+    </div>
+    <?php
+}
+add_shortcode( 'gtalobby_newsletter', function() {
+    ob_start();
+    gtalobby_newsletter_form();
+    return ob_get_clean();
+} );
+
+/**
  * Include custom post types in category, tag, and taxonomy archives.
  * Without this, WordPress only shows standard 'post' type on category pages.
  */

@@ -632,7 +632,7 @@ function gtalobby_social_share() {
         'x'        => array(
             'url'   => "https://x.com/intent/tweet?url={$url}&text={$title}",
             'label' => 'X (Twitter)',
-            'icon'  => 'x',
+            'icon'  => 'x-twitter',
         ),
         'facebook' => array(
             'url'   => "https://www.facebook.com/sharer/sharer.php?u={$url}",

@@ -414,9 +414,18 @@ $gta6_cat   = get_category_by_slug( 'gta6' );
             /* ============================================================
                WEEKLY RECAP / MOD SPOTLIGHT / NEWSLETTER
                ============================================================ */
+            case 'newsletter':
+            ?>
+            <section class="gl-zone gl-home-newsletter" data-zone="newsletter">
+                <div class="gl-container">
+                    <?php gtalobby_newsletter_form(); ?>
+                </div>
+            </section>
+            <?php
+                break;
+
             case 'weekly_recap':
             case 'mod_spotlight':
-            case 'newsletter':
                 // Future zone implementations
                 break;
 

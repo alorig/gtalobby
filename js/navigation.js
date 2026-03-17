@@ -54,6 +54,33 @@
         }
     }
 
+    /* --- Focus Trap for Mobile Nav --- */
+    if (mobileNav) {
+        mobileNav.addEventListener('keydown', function (e) {
+            if (e.key !== 'Tab' || !mobileNav.classList.contains('is-open')) return;
+
+            var focusable = mobileNav.querySelectorAll(
+                'a[href], button, input, textarea, select, [tabindex]:not([tabindex="-1"])'
+            );
+            if (focusable.length === 0) return;
+
+            var first = focusable[0];
+            var last  = focusable[focusable.length - 1];
+
+            if (e.shiftKey) {
+                if (document.activeElement === first) {
+                    e.preventDefault();
+                    last.focus();
+                }
+            } else {
+                if (document.activeElement === last) {
+                    e.preventDefault();
+                    first.focus();
+                }
+            }
+        });
+    }
+
     /* =============================================
        SEARCH OVERLAY
        ============================================= */

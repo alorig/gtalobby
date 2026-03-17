@@ -140,6 +140,7 @@ add_action( 'admin_init', 'gtalobby_register_settings' );
 function gtalobby_general_defaults() {
     return array(
         'site_tagline_override' => '',
+        'ga_measurement_id'     => '',
         'enable_hub_pages'      => true,
         'enable_breadcrumbs'    => true,
         'enable_schema'         => true,
@@ -266,6 +267,30 @@ function gtalobby_register_general_fields() {
             )
         );
     }
+
+    // Section: Tracking & Analytics
+    add_settings_section(
+        'gtalobby_general_analytics',
+        esc_html__( 'Tracking & Analytics', 'gtalobby' ),
+        function () {
+            echo '<p>' . esc_html__( 'Enter your Google Analytics or GTM Measurement ID.', 'gtalobby' ) . '</p>';
+        },
+        'gtalobby-settings'
+    );
+
+    add_settings_field(
+        'gtalobby_ga_measurement_id',
+        esc_html__( 'GA Measurement ID', 'gtalobby' ),
+        'gtalobby_render_text_field',
+        'gtalobby-settings',
+        'gtalobby_general_analytics',
+        array(
+            'option_group' => 'gtalobby_general_options',
+            'field_key'    => 'ga_measurement_id',
+            'placeholder'  => 'G-XXXXXXXXXX',
+            'description'  => esc_html__( 'Your Google Analytics 4 Measurement ID (e.g. G-XXXXXXXXXX). Leave empty to disable.', 'gtalobby' ),
+        )
+    );
 }
 
 /* ================================================================
@@ -932,6 +957,9 @@ function gtalobby_sanitize_general( $input ) {
 
     // Text
     $sanitized['site_tagline_override'] = isset( $input['site_tagline_override'] ) ? sanitize_text_field( $input['site_tagline_override'] ) : '';
+
+    // Google Analytics Measurement ID
+    $sanitized['ga_measurement_id'] = isset( $input['ga_measurement_id'] ) ? sanitize_text_field( $input['ga_measurement_id'] ) : '';
 
     return $sanitized;
 }
