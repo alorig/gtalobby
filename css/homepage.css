@@ -8,7 +8,7 @@
  */
 
 /* ==========================================================================
-   HERO
+   HERO — ACCORDION SLIDER
    ========================================================================== */
 
 /* Kill default body margin */
@@ -26,142 +26,230 @@ body {
     margin-top: calc(-1 * var(--gl-space-8));
 }
 
-.gl-home-hero {
+.gl-hero-accordion {
     position: relative;
-    padding: var(--gl-space-16) 0 var(--gl-space-12);
-    background-color: var(--gl-color-footer-bg, #181B22);
-    color: var(--gl-color-text);
+    width: 100%;
     overflow: hidden;
 }
 
-.gl-home-hero__bg {
+.gl-hero-accordion__panels {
+    display: flex;
+    width: 100%;
+    height: 70vh;
+    min-height: 480px;
+    max-height: 700px;
+}
+
+/* — Individual Panel — */
+.gl-hero-panel {
+    position: relative;
+    flex: 1;
+    height: 100%;
+    overflow: hidden;
+    cursor: pointer;
+    transition: flex 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.gl-hero-accordion__panels:hover .gl-hero-panel {
+    flex: 0.6;
+}
+.gl-hero-accordion__panels:hover .gl-hero-panel:hover {
+    flex: 3;
+}
+
+/* — Color Background — */
+.gl-hero-panel__color {
     position: absolute;
     inset: 0;
-    background: radial-gradient(ellipse at 70% 50%, rgba(var(--gl-color-accent-rgb, 255, 44, 152), 0.12) 0%, transparent 60%),
-                radial-gradient(ellipse at 30% 80%, rgba(39, 217, 255, 0.08) 0%, transparent 50%);
+    z-index: 1;
+}
+
+/* — Diagonal Edge Overlay — */
+.gl-hero-panel:not(:last-child) .gl-hero-panel__color::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: -40px;
+    width: 80px;
+    height: 100%;
+    z-index: 3;
+    transform: skewX(-4deg);
+    background: inherit;
+}
+/* Match next panel's color */
+.gl-hero-panel[data-panel="1"] .gl-hero-panel__color::after { background: #FF2C98; }
+.gl-hero-panel[data-panel="2"] .gl-hero-panel__color::after { background: #6C5CE7; }
+.gl-hero-panel[data-panel="3"] .gl-hero-panel__color::after { background: #0f1328; }
+
+/* — Image Layer — */
+.gl-hero-panel__image {
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    background-size: cover;
+    background-position: center;
+    opacity: 0.12;
+    transition: opacity 0.5s ease;
+}
+.gl-hero-panel:hover .gl-hero-panel__image {
+    opacity: 1;
+}
+
+/* Image gradient for text readability */
+.gl-hero-panel__image::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to top,
+        rgba(6, 7, 20, 0.85) 0%,
+        rgba(6, 7, 20, 0.3) 40%,
+        rgba(6, 7, 20, 0) 60%
+    );
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+.gl-hero-panel:hover .gl-hero-panel__image::after {
+    opacity: 1;
+}
+
+/* — Panel Number — */
+.gl-hero-panel__num {
+    font-family: var(--gl-font-mono);
+    font-size: 120px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.04);
+    position: absolute;
+    top: 80px;
+    right: 20px;
+    z-index: 6;
+    line-height: 1;
+    transition: all 0.5s ease;
     pointer-events: none;
 }
-
-.gl-home-hero__inner {
-    display: grid;
-    grid-template-columns: 1.2fr 0.8fr;
-    gap: var(--gl-space-10);
-    align-items: center;
+.gl-hero-panel:hover .gl-hero-panel__num {
+    color: rgba(255, 255, 255, 0.08);
+    font-size: 160px;
 }
 
-.gl-home-hero__content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-}
-
-.gl-home-hero__eyebrow {
-    display: inline-block;
+/* — Collapsed Label — */
+.gl-hero-panel__label {
     font-family: var(--gl-font-display);
-    font-size: var(--gl-font-size-xs);
-    font-weight: var(--gl-font-weight-semibold);
+    font-weight: 800;
+    font-size: 18px;
+    color: #fff;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+    letter-spacing: 2px;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--gl-color-accent-light, #A29BFE);
-    margin-bottom: var(--gl-space-3);
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    margin-left: -10px;
+    z-index: 10;
+    transition: opacity 0.3s ease;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+.gl-hero-panel:hover .gl-hero-panel__label {
+    opacity: 0;
 }
 
-.gl-home-hero__title {
-    font-size: clamp(2rem, 4vw, 3.25rem);
-    font-weight: var(--gl-font-weight-extrabold);
-    line-height: 1.1;
-    margin: 0 0 var(--gl-space-4);
-    letter-spacing: -0.02em;
-    color: #fff;
+/* — Content Layer — */
+.gl-hero-panel__content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 40px 32px;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
 }
 
-.gl-home-hero__desc {
-    font-size: var(--gl-font-size-lg);
+/* Expanded content (hidden by default) */
+.gl-hero-panel__expanded {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.4s ease 0.15s;
+}
+.gl-hero-panel:hover .gl-hero-panel__expanded {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.gl-hero-panel__overline {
+    font-family: var(--gl-font-mono);
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
     color: rgba(255, 255, 255, 0.7);
-    line-height: 1.6;
-    margin: 0 0 var(--gl-space-6);
-    max-width: 540px;
+    margin-bottom: 8px;
 }
 
-.gl-home-hero__actions {
-    display: flex;
-    align-items: stretch;
-    gap: var(--gl-space-3);
-    flex-wrap: wrap;
-}
-
-.gl-btn--lg {
-    padding: var(--gl-space-4) var(--gl-space-6);
-    font-size: var(--gl-font-size-base);
-}
-
-.gl-home-hero__search {
-    flex: 1;
-    min-width: 220px;
-}
-
-.gl-home-hero__search-field {
-    display: flex;
-    align-items: center;
-    gap: var(--gl-space-2);
-    padding: var(--gl-space-3) var(--gl-space-4);
-    background-color: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: var(--gl-radius-lg);
-    transition: all var(--gl-transition-fast);
-}
-
-.gl-home-hero__search-field:focus-within {
-    background-color: rgba(255, 255, 255, 0.12);
-    border-color: rgba(255, 255, 255, 0.3);
-}
-
-.gl-home-hero__search-field .gl-icon {
-    color: rgba(255, 255, 255, 0.4);
-    flex-shrink: 0;
-}
-
-.gl-home-hero__search-field input {
-    flex: 1;
-    background: none;
-    border: none;
-    color: #fff;
-    font-size: var(--gl-font-size-sm);
-    padding: 0;
-    outline: none;
-}
-
-.gl-home-hero__search-field input::placeholder {
-    color: rgba(255, 255, 255, 0.4);
-}
-
-/* Hero Stats */
-.gl-home-hero__stats {
-    display: flex;
-    flex-direction: column;
-    gap: var(--gl-space-4);
-    padding-left: var(--gl-space-8);
-    border-left: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.gl-home-hero__stat {
-    display: flex;
-    flex-direction: column;
-}
-
-.gl-home-hero__stat-value {
+.gl-hero-panel__title {
     font-family: var(--gl-font-display);
-    font-size: var(--gl-font-size-3xl);
-    font-weight: var(--gl-font-weight-extrabold);
-    color: var(--gl-color-accent-light, #A29BFE);
-    line-height: 1;
+    font-weight: 900;
+    font-size: 36px;
+    color: #fff;
+    line-height: 1.1;
+    letter-spacing: -0.5px;
+    margin: 0 0 8px;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
 }
 
-.gl-home-hero__stat-label {
-    font-size: var(--gl-font-size-sm);
-    color: rgba(255, 255, 255, 0.5);
-    margin-top: var(--gl-space-1);
+.gl-hero-panel__desc {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.85);
+    max-width: 360px;
+    line-height: 1.5;
+    margin: 0 0 20px;
+}
+
+/* — CTA Buttons — */
+.gl-hero-panel__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--gl-font-display);
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 12px 28px;
+    border-radius: var(--gl-radius-md);
+    transition: all 0.25s ease;
+    width: fit-content;
+}
+.gl-hero-panel__cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+    text-decoration: none;
+}
+.gl-hero-panel__cta svg {
+    width: 14px;
+    height: 14px;
+    transition: transform 0.2s;
+}
+.gl-hero-panel__cta:hover svg {
+    transform: translateX(3px);
+}
+
+/* Per-panel CTA colors */
+.gl-hero-panel__cta--cyan    { background: #27D9FF; color: #060714; }
+.gl-hero-panel__cta--magenta { background: #FF2C98; color: #fff; }
+.gl-hero-panel__cta--purple  { background: #6C5CE7; color: #fff; }
+.gl-hero-panel__cta--dark    { background: #EAF2FF; color: #060714; }
+
+/* — Theme Color Strip — */
+.gl-hero-accordion__strip {
+    display: flex;
+    height: 4px;
+}
+.gl-hero-accordion__strip span {
+    flex: 1;
 }
 
 /* ==========================================================================
@@ -689,21 +777,14 @@ body {
    ========================================================================== */
 
 @media (max-width: 1199px) {
-    .gl-home-hero__inner {
-        grid-template-columns: 1fr;
+    .gl-hero-panel__title {
+        font-size: 28px;
     }
-
-    .gl-home-hero__stats {
-        flex-direction: row;
-        border-left: none;
-        padding-left: 0;
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
-        padding-top: var(--gl-space-4);
+    .gl-hero-panel__num {
+        font-size: 80px;
     }
-
-    .gl-home-hero__stat {
-        flex: 1;
-        text-align: center;
+    .gl-hero-panel:hover .gl-hero-panel__num {
+        font-size: 100px;
     }
 }
 
@@ -728,16 +809,55 @@ body {
 }
 
 @media (max-width: 767px) {
-    .gl-home-hero {
-        padding: var(--gl-space-10) 0 var(--gl-space-8);
-    }
-
-    .gl-home-hero__title {
-        font-size: 1.75rem;
-    }
-
-    .gl-home-hero__actions {
+    .gl-hero-accordion__panels {
         flex-direction: column;
+        height: auto;
+        min-height: 0;
+        max-height: none;
+    }
+
+    .gl-hero-panel {
+        min-height: 120px;
+        transition: min-height 0.5s cubic-bezier(0.25, 0.8, 0.25, 1), flex 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    .gl-hero-accordion__panels:hover .gl-hero-panel {
+        flex: 1;
+        min-height: 80px;
+    }
+    .gl-hero-accordion__panels:hover .gl-hero-panel:hover {
+        flex: 1;
+        min-height: 320px;
+    }
+
+    .gl-hero-panel__label {
+        writing-mode: horizontal-tb;
+        transform: none;
+        left: 24px;
+        bottom: 20px;
+        margin-left: 0;
+        font-size: 14px;
+    }
+
+    .gl-hero-panel__title {
+        font-size: 24px;
+    }
+
+    .gl-hero-panel__num {
+        font-size: 60px;
+        top: 20px;
+        right: 16px;
+    }
+    .gl-hero-panel:hover .gl-hero-panel__num {
+        font-size: 80px;
+    }
+
+    .gl-hero-panel:not(:last-child) .gl-hero-panel__color::after {
+        display: none;
+    }
+
+    .gl-hero-panel__content {
+        padding: 20px 24px;
     }
 
     .gl-home-hubs__grid {
@@ -746,22 +866,5 @@ body {
 
     .gl-card-grid--3col {
         grid-template-columns: 1fr;
-    }
-
-    .gl-home-hero__stats {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: var(--gl-space-3);
-    }
-
-    .gl-home-hero__stat {
-        flex-direction: row;
-        align-items: baseline;
-        gap: var(--gl-space-2);
-        text-align: left;
-    }
-
-    .gl-home-hero__stat-value {
-        font-size: var(--gl-font-size-2xl);
     }
 }

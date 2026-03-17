@@ -43,49 +43,105 @@ $gta6_cat   = get_category_by_slug( 'gta6' );
                HERO
                ============================================================ */
             case 'hero':
+                $online_cat = get_category_by_slug( 'online' );
+                $cheats_cat = get_category_by_slug( 'cheats' );
+                $mods_cat   = get_category_by_slug( 'mods' );
             ?>
-            <section class="gl-home-hero" data-zone="hero">
-                <div class="gl-home-hero__bg"></div>
-                <div class="gl-container">
-                    <div class="gl-home-hero__inner">
-                        <div class="gl-home-hero__content">
-                            <span class="gl-home-hero__eyebrow"><?php esc_html_e( 'Your GTA Resource Hub', 'gtalobby' ); ?></span>
-                            <h1 class="gl-home-hero__title">
-                                <?php esc_html_e( 'Guides, Cheats, Mods & Everything GTA', 'gtalobby' ); ?>
-                            </h1>
-                            <p class="gl-home-hero__desc">
-                                <?php esc_html_e( 'Covering GTA 6 anticipation, GTA Online strategies, cheat codes, vehicle rankings, mods, and more — built on 672 mapped keywords across 9 topic hubs.', 'gtalobby' ); ?>
-                            </p>
-                            <div class="gl-home-hero__actions">
+            <section class="gl-hero-accordion" data-zone="hero">
+                <div class="gl-hero-accordion__panels">
+
+                    <!-- Panel 1 — GTA 6 (Cyber Cyan) -->
+                    <div class="gl-hero-panel" data-panel="1">
+                        <div class="gl-hero-panel__color" style="background: #27D9FF"></div>
+                        <div class="gl-hero-panel__image" style="background-image: url('<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/hero-gta6.jpg')"></div>
+                        <span class="gl-hero-panel__num">01</span>
+                        <span class="gl-hero-panel__label"><?php esc_html_e( 'GTA 6', 'gtalobby' ); ?></span>
+                        <div class="gl-hero-panel__content">
+                            <div class="gl-hero-panel__expanded">
+                                <span class="gl-hero-panel__overline"><?php esc_html_e( 'Coming Soon', 'gtalobby' ); ?></span>
+                                <h2 class="gl-hero-panel__title">GTA 6<br><?php esc_html_e( 'Coverage', 'gtalobby' ); ?></h2>
+                                <p class="gl-hero-panel__desc"><?php esc_html_e( 'Everything confirmed, leaked, and rumored about the next Grand Theft Auto. Trailers, map leaks, character details, and release analysis.', 'gtalobby' ); ?></p>
                                 <?php if ( $gta6_cat ) : ?>
-                                <a href="<?php echo esc_url( get_category_link( $gta6_cat->term_id ) ); ?>" class="gl-btn gl-btn--primary gl-btn--lg">
+                                <a href="<?php echo esc_url( get_category_link( $gta6_cat->term_id ) ); ?>" class="gl-hero-panel__cta gl-hero-panel__cta--cyan">
                                     <?php esc_html_e( 'Explore GTA 6', 'gtalobby' ); ?>
-                                    <svg class="gl-icon" width="16" height="16"><use href="#icon-arrow-right"/></svg>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                                 </a>
                                 <?php endif; ?>
-                                <form class="gl-home-hero__search" role="search" method="get" action="<?php echo esc_url( home_url( '/' ) ); ?>">
-                                    <div class="gl-home-hero__search-field">
-                                        <svg class="gl-icon" width="18" height="18"><use href="#icon-search"/></svg>
-                                        <input type="search" name="s" placeholder="<?php esc_attr_e( 'Search guides, cheats, mods...', 'gtalobby' ); ?>" value="<?php echo get_search_query(); ?>">
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                        <div class="gl-home-hero__stats">
-                            <div class="gl-home-hero__stat">
-                                <span class="gl-home-hero__stat-value">9</span>
-                                <span class="gl-home-hero__stat-label"><?php esc_html_e( 'Topic Hubs', 'gtalobby' ); ?></span>
-                            </div>
-                            <div class="gl-home-hero__stat">
-                                <span class="gl-home-hero__stat-value">7</span>
-                                <span class="gl-home-hero__stat-label"><?php esc_html_e( 'Content Types', 'gtalobby' ); ?></span>
-                            </div>
-                            <div class="gl-home-hero__stat">
-                                <span class="gl-home-hero__stat-value">672</span>
-                                <span class="gl-home-hero__stat-label"><?php esc_html_e( 'Keywords Mapped', 'gtalobby' ); ?></span>
                             </div>
                         </div>
                     </div>
+
+                    <!-- Panel 2 — GTA Online (Neon Magenta) -->
+                    <div class="gl-hero-panel" data-panel="2">
+                        <div class="gl-hero-panel__color" style="background: #FF2C98"></div>
+                        <div class="gl-hero-panel__image" style="background-image: url('<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/hero-online.jpg')"></div>
+                        <span class="gl-hero-panel__num">02</span>
+                        <span class="gl-hero-panel__label"><?php esc_html_e( 'Online', 'gtalobby' ); ?></span>
+                        <div class="gl-hero-panel__content">
+                            <div class="gl-hero-panel__expanded">
+                                <span class="gl-hero-panel__overline"><?php esc_html_e( 'Multiplayer', 'gtalobby' ); ?></span>
+                                <h2 class="gl-hero-panel__title">GTA<br><?php esc_html_e( 'Online', 'gtalobby' ); ?></h2>
+                                <p class="gl-hero-panel__desc"><?php esc_html_e( 'Money guides, weekly updates, heist walkthroughs, business setups, and the best strategies to dominate Los Santos Online.', 'gtalobby' ); ?></p>
+                                <?php if ( $online_cat ) : ?>
+                                <a href="<?php echo esc_url( get_category_link( $online_cat->term_id ) ); ?>" class="gl-hero-panel__cta gl-hero-panel__cta--magenta">
+                                    <?php esc_html_e( 'GTA Online Guides', 'gtalobby' ); ?>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                                </a>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Panel 3 — Cheats & Codes (Purple) -->
+                    <div class="gl-hero-panel" data-panel="3">
+                        <div class="gl-hero-panel__color" style="background: #6C5CE7"></div>
+                        <div class="gl-hero-panel__image" style="background-image: url('<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/hero-cheats.jpg')"></div>
+                        <span class="gl-hero-panel__num">03</span>
+                        <span class="gl-hero-panel__label"><?php esc_html_e( 'Cheats', 'gtalobby' ); ?></span>
+                        <div class="gl-hero-panel__content">
+                            <div class="gl-hero-panel__expanded">
+                                <span class="gl-hero-panel__overline"><?php esc_html_e( 'All Platforms', 'gtalobby' ); ?></span>
+                                <h2 class="gl-hero-panel__title"><?php esc_html_e( 'Cheats', 'gtalobby' ); ?><br>&amp; <?php esc_html_e( 'Codes', 'gtalobby' ); ?></h2>
+                                <p class="gl-hero-panel__desc"><?php esc_html_e( 'Every cheat code for every platform — button combos, phone numbers, console commands, and secret unlocks across all GTA titles.', 'gtalobby' ); ?></p>
+                                <?php if ( $cheats_cat ) : ?>
+                                <a href="<?php echo esc_url( get_category_link( $cheats_cat->term_id ) ); ?>" class="gl-hero-panel__cta gl-hero-panel__cta--purple">
+                                    <?php esc_html_e( 'Browse Cheats', 'gtalobby' ); ?>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                                </a>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Panel 4 — Mods (Dark Vice) -->
+                    <div class="gl-hero-panel" data-panel="4">
+                        <div class="gl-hero-panel__color" style="background: #0f1328"></div>
+                        <div class="gl-hero-panel__image" style="background-image: url('<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/hero-mods.jpg')"></div>
+                        <span class="gl-hero-panel__num">04</span>
+                        <span class="gl-hero-panel__label"><?php esc_html_e( 'Mods', 'gtalobby' ); ?></span>
+                        <div class="gl-hero-panel__content">
+                            <div class="gl-hero-panel__expanded">
+                                <span class="gl-hero-panel__overline"><?php esc_html_e( 'PC Gaming', 'gtalobby' ); ?></span>
+                                <h2 class="gl-hero-panel__title"><?php esc_html_e( 'Mods', 'gtalobby' ); ?><br>&amp; <?php esc_html_e( 'Overhauls', 'gtalobby' ); ?></h2>
+                                <p class="gl-hero-panel__desc"><?php esc_html_e( 'Best mods, installation guides, and visual overhauls for GTA 5 on PC. Transform Los Santos with stunning graphics and gameplay mods.', 'gtalobby' ); ?></p>
+                                <?php if ( $mods_cat ) : ?>
+                                <a href="<?php echo esc_url( get_category_link( $mods_cat->term_id ) ); ?>" class="gl-hero-panel__cta gl-hero-panel__cta--dark">
+                                    <?php esc_html_e( 'Explore Mods', 'gtalobby' ); ?>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                                </a>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Theme color strip -->
+                <div class="gl-hero-accordion__strip">
+                    <span style="background: #27D9FF"></span>
+                    <span style="background: #FF2C98"></span>
+                    <span style="background: #6C5CE7"></span>
+                    <span style="background: #0f1328"></span>
                 </div>
             </section>
             <?php
