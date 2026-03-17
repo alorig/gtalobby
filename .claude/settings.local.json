@@ -21,7 +21,8 @@
       "Bash(awk '{opens+=gsub\\(/{/,\"\"&\"\"\\); closes+=gsub\\(/}/,\"\"&\"\"\\)} END{print \"\"Open:\"\", opens, \"\"Close:\"\", closes, \"\"Balanced:\"\", \\(opens==closes ? \"\"yes\"\" : \"\"no\"\"\\)}' \"d:/GITHUB WEBSITE/gtalobby/css/layout.css\")",
       "Bash(python apply_css_edits.py)",
       "Bash(node apply_css_edits.js)",
-      "Bash(node -e \"const fs=require\\(''fs''\\); const c=fs.readFileSync\\(''css/archives.css''\\); const hasR = c.includes\\(0x0d\\); console.log\\(''Has CR:'', hasR\\); console.log\\(''First 200 bytes hex:'', c.slice\\(0,200\\).toString\\(''hex''\\).match\\(/.{1,2}/g\\).join\\('' ''\\)\\)\")"
+      "Bash(node -e \"const fs=require\\(''fs''\\); const c=fs.readFileSync\\(''css/archives.css''\\); const hasR = c.includes\\(0x0d\\); console.log\\(''Has CR:'', hasR\\); console.log\\(''First 200 bytes hex:'', c.slice\\(0,200\\).toString\\(''hex''\\).match\\(/.{1,2}/g\\).join\\('' ''\\)\\)\")",
+      "Bash(grep -E \"\\\\.php$\")"
     ]
   }
 }

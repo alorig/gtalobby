@@ -1,0 +1,1287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GTA Lobby — Premium Gaming Hub Preview</title>
+    <meta name="theme-color" content="#060714">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+/* ============================================================
+   DESIGN TOKENS
+   ============================================================ */
+:root {
+    --gl-color-bg: #060714;
+    --gl-color-surface: #0c1030;
+    --gl-color-surface-raised: #13183e;
+    --gl-color-border: #2b3180;
+    --gl-color-divider: #1b214f;
+    --gl-color-text: #EAF2FF;
+    --gl-color-text-secondary: #A9B4DB;
+    --gl-color-text-tertiary: #8E9ECC;
+    --gl-color-accent: #FF2C98;
+    --gl-color-accent-light: #FF88C3;
+    --gl-color-accent-dark: #A41869;
+    --gl-color-accent-rgb: 255, 44, 152;
+    --gl-color-secondary: #27D9FF;
+    --gl-color-secondary-dark: #00A6C8;
+    --gl-color-confirmed: #00B894;
+    --gl-color-cat-gta6: #6C5CE7;
+    --gl-font-display: 'Space Grotesk', sans-serif;
+    --gl-font-body: 'Inter', sans-serif;
+    --gl-font-mono: 'JetBrains Mono', monospace;
+    --gl-font-size-xs: 0.75rem;
+    --gl-font-size-sm: 0.8125rem;
+    --gl-font-size-base: 1.0625rem;
+    --gl-font-size-lg: 1.25rem;
+    --gl-font-size-xl: 1.5rem;
+    --gl-font-size-2xl: 2rem;
+    --gl-font-size-3xl: 2.5rem;
+    --gl-font-size-4xl: 2.75rem;
+    --gl-font-weight-regular: 400;
+    --gl-font-weight-medium: 500;
+    --gl-font-weight-semibold: 600;
+    --gl-font-weight-bold: 700;
+    --gl-font-weight-extrabold: 800;
+    --gl-space-1: 0.25rem;
+    --gl-space-2: 0.5rem;
+    --gl-space-3: 0.75rem;
+    --gl-space-4: 1rem;
+    --gl-space-5: 1.25rem;
+    --gl-space-6: 1.5rem;
+    --gl-space-8: 2rem;
+    --gl-space-10: 2.5rem;
+    --gl-space-12: 3rem;
+    --gl-space-16: 4rem;
+    --gl-radius-sm: 4px;
+    --gl-radius-md: 8px;
+    --gl-radius-lg: 12px;
+    --gl-radius-xl: 16px;
+    --gl-radius-2xl: 24px;
+    --gl-radius-full: 9999px;
+    --gl-transition-fast: 150ms ease;
+    --gl-transition-base: 250ms ease;
+    --gl-transition-slow: 400ms ease;
+    --gl-sidebar-width: 320px;
+    --gl-header-height: 72px;
+    --gl-z-header: 300;
+}
+
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+    font-family: var(--gl-font-body);
+    font-size: var(--gl-font-size-base);
+    line-height: 1.7;
+    color: var(--gl-color-text);
+    background-color: var(--gl-color-bg);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+}
+a { color: var(--gl-color-accent); text-decoration: none; transition: color 0.3s ease; }
+a:hover { color: var(--gl-color-secondary); }
+img { max-width: 100%; height: auto; display: block; }
+ul, ol { list-style: none; }
+
+/* ============================================================
+   KEYFRAME ANIMATIONS
+   ============================================================ */
+@keyframes gl-gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+@keyframes gl-neonPulse {
+    0%, 100% { text-shadow: 0 0 8px rgba(255,44,152,0.4), 0 0 20px rgba(255,44,152,0.2); }
+    50% { text-shadow: 0 0 20px rgba(255,44,152,0.8), 0 0 60px rgba(255,44,152,0.4), 0 0 100px rgba(255,44,152,0.2); }
+}
+@keyframes gl-neonBoxPulse {
+    0%, 100% { box-shadow: 0 0 5px rgba(255,44,152,0.3), 0 0 15px rgba(255,44,152,0.1); }
+    50% { box-shadow: 0 0 20px rgba(255,44,152,0.6), 0 0 60px rgba(255,44,152,0.3), 0 0 100px rgba(255,44,152,0.1); }
+}
+@keyframes gl-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+@keyframes gl-glowBreathe {
+    0%, 100% { box-shadow: 0 0 15px rgba(255,44,152,0.15), 0 0 30px rgba(39,217,255,0.1); }
+    50% { box-shadow: 0 0 30px rgba(255,44,152,0.3), 0 0 60px rgba(39,217,255,0.2), 0 0 90px rgba(108,92,231,0.1); }
+}
+@keyframes gl-shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+@keyframes gl-shine {
+    0% { left: -100%; }
+    20% { left: 100%; }
+    100% { left: 100%; }
+}
+@keyframes gl-fadeInUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes gl-fadeInScale {
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
+}
+@keyframes gl-slideInRight {
+    from { transform: translateX(60px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+@keyframes gl-clipRevealLeft {
+    from { clip-path: inset(0 100% 0 0); }
+    to { clip-path: inset(0 0 0 0); }
+}
+@keyframes gl-blurIn {
+    from { filter: blur(20px); opacity: 0; }
+    to { filter: blur(0); opacity: 1; }
+}
+@keyframes gl-particleFloatUp {
+    0% { transform: translateY(0) scale(1); opacity: 0.8; }
+    50% { opacity: 1; }
+    100% { transform: translateY(-200px) scale(0.3); opacity: 0; }
+}
+@keyframes gl-morphBlob {
+    0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+    25% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+    50% { border-radius: 50% 60% 30% 60% / 30% 60% 70% 40%; }
+    75% { border-radius: 60% 30% 60% 40% / 60% 40% 30% 70%; }
+}
+@keyframes gl-charReveal {
+    from { opacity: 0; transform: translateY(100%) rotateX(-80deg); }
+    to { opacity: 1; transform: translateY(0) rotateX(0); }
+}
+@keyframes gl-pulseRing {
+    0% { transform: scale(0.5); opacity: 1; }
+    100% { transform: scale(2.5); opacity: 0; }
+}
+@keyframes gl-glowOrbFloat {
+    0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.5; }
+    33% { transform: translate(30px, -30px) scale(1.1); opacity: 0.7; }
+    66% { transform: translate(-20px, 20px) scale(0.9); opacity: 0.4; }
+}
+@keyframes gl-ripple {
+    0% { transform: scale(0); opacity: 0.6; }
+    100% { transform: scale(4); opacity: 0; }
+}
+@keyframes gl-cursorBlink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+@keyframes gl-pageIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Ambient body glow */
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+        radial-gradient(ellipse 80% 50% at 20% 40%, rgba(255,44,152,0.03) 0%, transparent 50%),
+        radial-gradient(ellipse 60% 50% at 80% 60%, rgba(39,217,255,0.03) 0%, transparent 50%),
+        radial-gradient(ellipse 50% 60% at 50% 90%, rgba(108,92,231,0.03) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: -1;
+    animation: gl-gradientShift 20s ease infinite;
+    background-size: 200% 200%;
+}
+
+/* ============================================================
+   SCROLL REVEAL SYSTEM
+   ============================================================ */
+[data-animate] {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.7s cubic-bezier(0.25,0.46,0.45,0.94), transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94), filter 0.7s ease, clip-path 0.8s cubic-bezier(0.25,0.46,0.45,0.94);
+}
+[data-animate].gl-visible { opacity: 1; transform: translateY(0); }
+[data-animate="blur"] { filter: blur(20px); transform: none; }
+[data-animate="blur"].gl-visible { filter: blur(0); opacity: 1; }
+[data-animate="fade-scale"] { transform: scale(0.8); }
+[data-animate="fade-scale"].gl-visible { opacity: 1; transform: scale(1); }
+[data-animate="fade-left"] { transform: translateX(-60px); }
+[data-animate="fade-left"].gl-visible { opacity: 1; transform: none; }
+[data-animate="fade-right"] { transform: translateX(60px); }
+[data-animate="fade-right"].gl-visible { opacity: 1; transform: none; }
+[data-animate="slide-right"] { transform: translateX(60px); }
+[data-animate="slide-right"].gl-visible { opacity: 1; transform: none; }
+[data-animate="slide-left"] { transform: translateX(-100px); }
+[data-animate="slide-left"].gl-visible { opacity: 1; transform: none; }
+[data-animate="clip-left"] { clip-path: inset(0 100% 0 0); transform: none; opacity: 1; }
+[data-animate="clip-left"].gl-visible { clip-path: inset(0 0 0 0); }
+[data-animate="zoom"] { transform: scale(0.5); }
+[data-animate="zoom"].gl-visible { opacity: 1; transform: scale(1); }
+[data-animate="fade-down"] { transform: translateY(-60px); }
+[data-animate="fade-down"].gl-visible { opacity: 1; transform: none; }
+[data-delay="100"] { transition-delay: 0.1s; }
+[data-delay="200"] { transition-delay: 0.2s; }
+[data-delay="300"] { transition-delay: 0.3s; }
+[data-delay="400"] { transition-delay: 0.4s; }
+[data-delay="500"] { transition-delay: 0.5s; }
+
+/* ============================================================
+   SCROLL PROGRESS
+   ============================================================ */
+.gl-scroll-progress {
+    position: fixed; top: 0; left: 0; height: 3px; width: 0%;
+    background: linear-gradient(90deg, #FF2C98, #27D9FF, #6C5CE7);
+    z-index: 9999; transition: width 0.1s linear; pointer-events: none;
+    box-shadow: 0 0 10px rgba(255,44,152,0.5), 0 0 20px rgba(39,217,255,0.3);
+}
+
+/* ============================================================
+   CONTAINER
+   ============================================================ */
+.gl-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--gl-space-6);
+}
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+.gl-header {
+    position: sticky; top: 0; z-index: var(--gl-z-header);
+    height: var(--gl-header-height);
+    background: rgba(6,7,20,0.85);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    display: flex; align-items: center;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    transition: box-shadow 0.3s ease;
+}
+.gl-header::after {
+    content: ""; position: absolute; bottom: -2px; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, #FF2C98, #27D9FF, #6C5CE7, #FF2C98);
+    background-size: 300% 100%;
+    animation: gl-gradientShift 4s ease infinite;
+}
+.gl-header__inner {
+    display: flex; align-items: center; justify-content: space-between;
+    width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 var(--gl-space-6);
+}
+.gl-header__brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.gl-header__logo {
+    width: 40px; height: 40px; border-radius: 10px;
+    background: linear-gradient(135deg, #FF2C98, #6C5CE7);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; color: #fff; font-size: 18px; font-family: var(--gl-font-display);
+    box-shadow: 0 0 20px rgba(255,44,152,0.3);
+    animation: gl-neonBoxPulse 4s ease-in-out infinite;
+}
+.gl-header__name {
+    font-family: var(--gl-font-display); font-weight: 800; font-size: 1.25rem;
+    background: linear-gradient(90deg, #FF2C98, #27D9FF, #6C5CE7, #FF2C98);
+    background-size: 300% 100%;
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    animation: gl-gradientShift 6s ease infinite;
+    filter: drop-shadow(0 0 10px rgba(255,44,152,0.3));
+}
+.gl-header__nav { display: flex; gap: var(--gl-space-6); }
+.gl-header__nav a {
+    color: var(--gl-color-text-secondary); font-size: var(--gl-font-size-sm);
+    font-weight: var(--gl-font-weight-semibold); text-decoration: none;
+    position: relative; transition: color 0.3s ease;
+}
+.gl-header__nav a::after {
+    content: ''; position: absolute; bottom: -4px; left: 0; width: 100%; height: 2px;
+    background: linear-gradient(90deg, #FF2C98, #27D9FF);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.3s cubic-bezier(0.25,0.8,0.25,1);
+}
+.gl-header__nav a:hover { color: #FF2C98; text-shadow: 0 0 20px rgba(255,44,152,0.4); }
+.gl-header__nav a:hover::after { transform: scaleX(1); }
+
+/* ============================================================
+   MAIN LAYOUT
+   ============================================================ */
+.gl-main { animation: gl-pageIn 0.5s ease-out; }
+.gl-single__layout {
+    display: grid;
+    grid-template-columns: 1fr var(--gl-sidebar-width);
+    gap: var(--gl-space-8);
+    align-items: start;
+    padding-top: var(--gl-space-8);
+    padding-bottom: var(--gl-space-12);
+}
+
+/* ============================================================
+   ARTICLE HEADER
+   ============================================================ */
+.gl-article__header {
+    position: relative;
+    padding: var(--gl-space-8) var(--gl-space-6);
+    background: linear-gradient(135deg, rgba(12,16,48,0.85) 0%, rgba(6,7,20,0.9) 50%, rgba(19,24,62,0.85) 100%);
+    backdrop-filter: blur(24px) saturate(180%);
+    border-radius: var(--gl-radius-xl);
+    border: 1px solid rgba(255,44,152,0.15);
+    box-shadow: 0 12px 48px rgba(0,0,0,0.4), 0 0 40px rgba(255,44,152,0.08), 0 0 80px rgba(39,217,255,0.04);
+    overflow: hidden;
+    margin-bottom: var(--gl-space-6);
+    transition: box-shadow 0.4s ease, border-color 0.4s ease;
+}
+.gl-article__header::after {
+    content: ""; position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, #FF2C98, #27D9FF, #6C5CE7, #FF2C98);
+    background-size: 300% 100%; animation: gl-gradientShift 4s ease infinite;
+}
+.gl-article__header:hover {
+    border-color: rgba(255,44,152,0.25);
+    box-shadow: 0 16px 60px rgba(0,0,0,0.5), 0 0 60px rgba(255,44,152,0.12), 0 0 100px rgba(39,217,255,0.06);
+}
+.gl-article__header-glow {
+    position: absolute; top: -80px; right: -80px; width: 250px; height: 250px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,44,152,0.15) 0%, rgba(39,217,255,0.08) 40%, transparent 70%);
+    pointer-events: none; animation: gl-glowOrbFloat 8s ease-in-out infinite; filter: blur(40px);
+}
+
+/* Badges */
+.gl-badge {
+    display: inline-flex; align-items: center;
+    padding: 6px 16px; font-size: var(--gl-font-size-xs);
+    font-weight: var(--gl-font-weight-bold); text-transform: uppercase;
+    letter-spacing: 0.1em; border-radius: var(--gl-radius-full);
+    margin-right: var(--gl-space-2); margin-bottom: var(--gl-space-3);
+    position: relative; overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
+}
+.gl-badge::before {
+    content: ""; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+    animation: gl-shine 3s ease-in-out infinite;
+}
+.gl-badge--type {
+    background: linear-gradient(135deg, rgba(255,44,152,0.15), rgba(108,92,231,0.15));
+    border: 1px solid rgba(255,44,152,0.3); color: #FF2C98;
+    box-shadow: 0 0 15px rgba(255,44,152,0.15), 0 0 30px rgba(255,44,152,0.05);
+}
+.gl-badge--cat {
+    background: linear-gradient(135deg, rgba(108,92,231,0.15), rgba(39,217,255,0.1));
+    border: 1px solid rgba(108,92,231,0.3); color: #6C5CE7;
+    box-shadow: 0 0 15px rgba(108,92,231,0.2), 0 0 30px rgba(108,92,231,0.08);
+}
+.gl-badge:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 25px rgba(255,44,152,0.3), 0 0 40px rgba(255,44,152,0.15);
+}
+
+/* Title */
+.gl-article__title {
+    font-size: clamp(1.75rem, 4vw, var(--gl-font-size-4xl));
+    line-height: 1.1; font-family: var(--gl-font-display);
+    font-weight: var(--gl-font-weight-extrabold);
+    letter-spacing: -0.02em;
+    background: linear-gradient(135deg, #ffffff 0%, rgba(255,255,255,0.9) 40%, #27D9FF 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    filter: drop-shadow(0 2px 10px rgba(255,44,152,0.15));
+    margin-bottom: var(--gl-space-5); padding-bottom: var(--gl-space-5);
+    position: relative;
+}
+.gl-article__title::after {
+    content: ""; position: absolute; bottom: 0; left: 0;
+    width: 100px; height: 3px; border-radius: 999px;
+    background: linear-gradient(90deg, #FF2C98, #27D9FF, #6C5CE7);
+    box-shadow: 0 0 15px rgba(255,44,152,0.4), 0 0 30px rgba(39,217,255,0.2);
+    transition: width 0.6s cubic-bezier(0.25,0.8,0.25,1);
+}
+.gl-article__header:hover .gl-article__title::after { width: 200px; }
+
+/* Post Meta */
+.gl-post-meta {
+    display: flex; flex-wrap: wrap; align-items: center; gap: var(--gl-space-3);
+    font-size: var(--gl-font-size-sm); color: var(--gl-color-text-secondary);
+    padding: var(--gl-space-4) 0;
+}
+.gl-post-meta__item {
+    display: inline-flex; align-items: center; gap: var(--gl-space-2);
+    padding: 6px 14px; background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.06); border-radius: var(--gl-radius-full);
+    transition: all 0.3s ease;
+}
+.gl-post-meta__item:hover {
+    background: rgba(255,44,152,0.08); border-color: rgba(255,44,152,0.2);
+    color: #FF2C98; box-shadow: 0 0 15px rgba(255,44,152,0.1);
+}
+.gl-post-meta__item svg { width: 14px; height: 14px; opacity: 0.6; }
+
+/* Confidence Badge */
+.gl-confidence {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 6px 14px; border-radius: var(--gl-radius-full);
+    font-size: var(--gl-font-size-sm); font-weight: var(--gl-font-weight-bold);
+    background: rgba(0,184,148,0.1); border: 1px solid rgba(0,184,148,0.3);
+    color: var(--gl-color-confirmed);
+    box-shadow: 0 0 15px rgba(0,184,148,0.15);
+}
+.gl-confidence__dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--gl-color-confirmed);
+    box-shadow: 0 0 8px var(--gl-color-confirmed);
+}
+
+/* ============================================================
+   HERO IMAGE
+   ============================================================ */
+.gl-article__hero {
+    margin-bottom: var(--gl-space-8); border-radius: var(--gl-radius-xl);
+    overflow: hidden; position: relative;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.3), 0 0 30px rgba(255,44,152,0.08);
+    transition: box-shadow 0.5s ease, transform 0.5s ease;
+}
+.gl-article__hero::before {
+    content: ""; position: absolute; inset: 0; border-radius: var(--gl-radius-xl);
+    border: 1px solid rgba(255,44,152,0.08); z-index: 2; pointer-events: none;
+    transition: border-color 0.4s ease, box-shadow 0.4s ease;
+}
+.gl-article__hero::after {
+    content: ""; position: absolute; bottom: 0; left: 0; right: 0; height: 55%;
+    background: linear-gradient(to top, rgba(6,7,20,0.9) 0%, rgba(6,7,20,0.5) 30%, transparent 100%);
+    pointer-events: none; z-index: 1;
+}
+.gl-article__hero:hover {
+    box-shadow: 0 20px 60px rgba(255,44,152,0.25), 0 0 100px rgba(255,44,152,0.1), 0 0 40px rgba(39,217,255,0.08);
+    transform: translateY(-4px);
+}
+.gl-article__hero:hover::before {
+    border-color: rgba(255,44,152,0.4);
+    box-shadow: inset 0 0 40px rgba(255,44,152,0.1), 0 0 40px rgba(255,44,152,0.2);
+}
+.gl-article__hero img {
+    width: 100%; height: auto; display: block;
+    transition: transform 0.8s cubic-bezier(0.25,0.8,0.25,1), filter 0.8s ease;
+}
+.gl-article__hero:hover img { transform: scale(1.05); filter: brightness(1.05) saturate(1.1); }
+
+/* Accent Divider */
+.gl-article__accent-divider {
+    height: 3px; margin: 0 auto var(--gl-space-8); width: 120px;
+    background: linear-gradient(90deg, transparent, #FF2C98, #27D9FF, #6C5CE7, transparent);
+    border-radius: 999px;
+    box-shadow: 0 0 20px rgba(255,44,152,0.5), 0 0 40px rgba(39,217,255,0.3);
+    animation: gl-gradientShift 4s ease infinite; background-size: 200% 100%;
+}
+
+/* ============================================================
+   TOC
+   ============================================================ */
+.gl-toc {
+    padding: var(--gl-space-6);
+    background: linear-gradient(135deg, rgba(12,16,48,0.8), rgba(6,7,20,0.85));
+    backdrop-filter: blur(24px); border-radius: var(--gl-radius-xl);
+    border: 1px solid rgba(255,44,152,0.12);
+    border-left: 3px solid #FF2C98;
+    margin-bottom: var(--gl-space-8);
+    box-shadow: 0 8px 40px rgba(0,0,0,0.35), 0 0 30px rgba(255,44,152,0.06);
+    transition: all 0.4s ease;
+}
+.gl-toc:hover {
+    box-shadow: 0 12px 50px rgba(0,0,0,0.4), 0 0 50px rgba(255,44,152,0.1), 0 0 80px rgba(39,217,255,0.05);
+    border-color: rgba(255,44,152,0.2);
+}
+.gl-toc__title {
+    font-size: var(--gl-font-size-lg); margin-bottom: var(--gl-space-4);
+    font-family: var(--gl-font-display); font-weight: var(--gl-font-weight-bold);
+}
+.gl-toc__list { counter-reset: toc; }
+.gl-toc__list li {
+    counter-increment: toc; margin-bottom: var(--gl-space-2);
+    padding: 8px 12px; border-radius: var(--gl-radius-md);
+    transition: all 0.3s ease;
+}
+.gl-toc__list li:hover {
+    background: rgba(255,44,152,0.06); padding-left: 20px;
+}
+.gl-toc__list li::before {
+    content: counter(toc) "."; color: #FF2C98;
+    font-weight: 600; margin-right: 10px;
+    font-family: var(--gl-font-mono); font-size: var(--gl-font-size-xs);
+}
+.gl-toc__list a { color: var(--gl-color-text-secondary); transition: color 0.3s; }
+.gl-toc__list li:hover a { color: #FF2C98; }
+
+/* ============================================================
+   ARTICLE CONTENT
+   ============================================================ */
+.gl-article__content {
+    font-size: var(--gl-font-size-base); line-height: 1.8;
+    color: var(--gl-color-text-secondary);
+}
+.gl-article__content h2 {
+    font-family: var(--gl-font-display); font-weight: var(--gl-font-weight-bold);
+    font-size: var(--gl-font-size-2xl); color: var(--gl-color-text);
+    margin: var(--gl-space-10) 0 var(--gl-space-4);
+    padding-bottom: var(--gl-space-3); position: relative;
+    border-bottom: 1px solid rgba(255,44,152,0.1);
+}
+.gl-article__content h2::before {
+    content: ''; position: absolute; bottom: -1px; left: 0;
+    width: 60px; height: 3px;
+    background: linear-gradient(90deg, #FF2C98, #27D9FF);
+    border-radius: 999px;
+    box-shadow: 0 0 10px rgba(255,44,152,0.3);
+}
+.gl-article__content h3 {
+    font-family: var(--gl-font-display); font-weight: var(--gl-font-weight-bold);
+    font-size: var(--gl-font-size-xl); color: var(--gl-color-text);
+    margin: var(--gl-space-8) 0 var(--gl-space-3);
+}
+.gl-article__content p { margin-bottom: var(--gl-space-5); }
+.gl-article__content ul { margin-bottom: var(--gl-space-5); padding-left: var(--gl-space-6); }
+.gl-article__content li {
+    margin-bottom: var(--gl-space-2); position: relative; padding-left: 8px;
+}
+.gl-article__content li::before {
+    content: ''; position: absolute; left: -16px; top: 10px;
+    width: 6px; height: 6px; border-radius: 50%; background: #FF2C98;
+    box-shadow: 0 0 8px rgba(255,44,152,0.4);
+}
+.gl-article__content blockquote {
+    margin: var(--gl-space-6) 0; padding: var(--gl-space-5) var(--gl-space-6);
+    background: linear-gradient(135deg, rgba(12,16,48,0.6), rgba(19,24,62,0.6));
+    border-left: 3px solid; border-image: linear-gradient(180deg, #FF2C98, #6C5CE7) 1;
+    border-radius: 0 var(--gl-radius-lg) var(--gl-radius-lg) 0;
+    font-style: italic; color: var(--gl-color-text);
+}
+
+/* ============================================================
+   GUIDE META GRID
+   ============================================================ */
+.gl-guide-meta {
+    padding: var(--gl-space-6);
+    background: linear-gradient(135deg, rgba(12,16,48,0.8), rgba(6,7,20,0.9));
+    backdrop-filter: blur(20px); border-radius: var(--gl-radius-xl);
+    border: 1px solid rgba(255,44,152,0.12);
+    margin-bottom: var(--gl-space-8); position: relative; overflow: hidden;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.3), 0 0 25px rgba(255,44,152,0.05);
+}
+.gl-guide-meta::before {
+    content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, #FF2C98, #27D9FF, #6C5CE7, #FF2C98);
+    background-size: 300% 100%; animation: gl-gradientShift 4s ease infinite;
+}
+.gl-guide-meta__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--gl-space-4); }
+.gl-guide-meta__item {
+    padding: var(--gl-space-4); background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.05); border-radius: var(--gl-radius-lg);
+    text-align: center; transition: all 0.3s cubic-bezier(0.25,0.8,0.25,1);
+}
+.gl-guide-meta__item:hover {
+    transform: translateY(-4px); background: rgba(255,44,152,0.06);
+    border-color: rgba(255,44,152,0.2); box-shadow: 0 8px 30px rgba(0,0,0,0.2), 0 0 20px rgba(255,44,152,0.1);
+}
+.gl-guide-meta__label {
+    display: block; font-size: var(--gl-font-size-xs); color: var(--gl-color-secondary);
+    text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; font-weight: 600;
+}
+.gl-guide-meta__value {
+    font-weight: 700; color: #FF2C98; font-family: var(--gl-font-display); font-size: var(--gl-font-size-lg);
+}
+
+/* ============================================================
+   AUTHOR BOX
+   ============================================================ */
+.gl-author-box {
+    display: flex; gap: var(--gl-space-6); padding: var(--gl-space-8);
+    background: linear-gradient(135deg, rgba(12,16,48,0.8), rgba(6,7,20,0.9), rgba(19,24,62,0.8));
+    backdrop-filter: blur(20px); border-radius: var(--gl-radius-xl);
+    margin: var(--gl-space-10) 0; position: relative; overflow: hidden;
+    border: 1px solid rgba(255,44,152,0.15);
+    box-shadow: 0 8px 40px rgba(0,0,0,0.3), 0 0 30px rgba(255,44,152,0.06);
+    transition: all 0.4s cubic-bezier(0.25,0.8,0.25,1);
+}
+.gl-author-box::before {
+    content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
+    background: linear-gradient(180deg, #FF2C98, #27D9FF, #6C5CE7); z-index: 1;
+    box-shadow: 0 0 15px rgba(255,44,152,0.4);
+}
+.gl-author-box::after {
+    content: ""; position: absolute; inset: -2px;
+    border-radius: calc(var(--gl-radius-xl) + 2px);
+    background: linear-gradient(135deg, #FF2C98, #27D9FF, #6C5CE7, #FF2C98);
+    background-size: 300% 300%; animation: gl-gradientShift 6s ease infinite;
+    z-index: -1; opacity: 0.3; filter: blur(1px);
+    transition: opacity 0.4s ease;
+}
+.gl-author-box:hover {
+    transform: translateY(-6px); border-color: rgba(255,44,152,0.3);
+    box-shadow: 0 20px 60px rgba(255,44,152,0.2), 0 0 50px rgba(255,44,152,0.1);
+}
+.gl-author-box:hover::after { opacity: 0.6; }
+.gl-author-box__avatar {
+    width: 72px; height: 72px; border-radius: 50%; flex-shrink: 0;
+    background: linear-gradient(135deg, #FF2C98, #6C5CE7);
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-size: 28px; font-weight: 800;
+    box-shadow: 0 0 20px rgba(255,44,152,0.3), 0 0 40px rgba(255,44,152,0.1);
+}
+.gl-author-box__name { font-family: var(--gl-font-display); font-weight: 700; font-size: var(--gl-font-size-lg); color: var(--gl-color-text); margin-bottom: 4px; }
+.gl-author-box__bio { color: var(--gl-color-text-secondary); font-size: var(--gl-font-size-sm); line-height: 1.6; }
+
+/* ============================================================
+   SIDEBAR
+   ============================================================ */
+.gl-single__sidebar {
+    position: sticky; top: calc(var(--gl-header-height) + 20px);
+    display: flex; flex-direction: column; gap: var(--gl-space-5);
+}
+.gl-sidebar-widget {
+    background: rgba(12,16,48,0.8);
+    backdrop-filter: blur(16px) saturate(150%);
+    border: 1px solid rgba(255,44,152,0.1);
+    border-left: 3px solid;
+    border-image: linear-gradient(180deg, #FF2C98, #6C5CE7) 1;
+    border-image-slice: 0 0 0 1;
+    border-radius: var(--gl-radius-xl);
+    padding: var(--gl-space-6);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2), 0 0 15px rgba(255,44,152,0.04);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+.gl-sidebar-widget::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 30% 20%, rgba(255,44,152,0.03), transparent 60%);
+    pointer-events: none;
+}
+.gl-sidebar-widget:hover {
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3), 0 0 30px rgba(255,44,152,0.1), 0 0 60px rgba(39,217,255,0.05);
+    border-color: rgba(255,44,152,0.2);
+    transform: translateY(-2px);
+}
+.gl-sidebar-widget__title {
+    font-family: var(--gl-font-display); font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.08em;
+    font-size: var(--gl-font-size-sm); margin-bottom: var(--gl-space-4);
+    padding-bottom: var(--gl-space-3); position: relative;
+    background: linear-gradient(135deg, #FF2C98, #27D9FF);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.gl-sidebar-widget__title::before {
+    content: ''; position: absolute; left: -16px; top: 50%; transform: translateY(-50%);
+    width: 6px; height: 6px; border-radius: 50%; background: #FF2C98;
+    box-shadow: 0 0 10px #FF2C98; animation: gl-neonBoxPulse 3s ease-in-out infinite;
+}
+.gl-sidebar-widget__title::after {
+    content: ''; position: absolute; bottom: 0; left: 0;
+    width: 48px; height: 2px;
+    background: linear-gradient(90deg, #FF2C98, #27D9FF);
+    border-radius: 999px; transition: width 0.4s ease;
+}
+.gl-sidebar-widget:hover .gl-sidebar-widget__title::after { width: 100%; }
+.gl-sidebar-widget__list li { margin-bottom: 4px; }
+.gl-sidebar-widget__list a {
+    display: flex; align-items: center; gap: 8px;
+    padding: 10px 16px; border-radius: var(--gl-radius-md);
+    color: var(--gl-color-text-secondary); font-size: var(--gl-font-size-sm);
+    transition: all 0.3s ease; position: relative;
+}
+.gl-sidebar-widget__list a::before {
+    content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%);
+    width: 3px; height: 0; border-radius: 999px;
+    background: linear-gradient(180deg, #FF2C98, #6C5CE7);
+    transition: height 0.3s ease;
+}
+.gl-sidebar-widget__list a:hover {
+    background: rgba(255,44,152,0.06); color: #FF2C98;
+    transform: translateX(4px); text-shadow: 0 0 10px rgba(255,44,152,0.2);
+}
+.gl-sidebar-widget__list a:hover::before { height: 20px; }
+.gl-sidebar-widget__list .gl-badge--inline {
+    font-size: 10px; padding: 2px 8px; border-radius: 999px;
+    background: linear-gradient(135deg, rgba(255,44,152,0.15), rgba(108,92,231,0.1));
+    border: 1px solid rgba(255,44,152,0.2); color: #FF2C98;
+    margin-left: auto; font-weight: 700;
+}
+
+/* Search widget */
+.gl-sidebar-search {
+    display: flex; gap: 8px;
+}
+.gl-sidebar-search input {
+    flex: 1; background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1); border-radius: 8px;
+    padding: 10px 16px; color: #fff; font-size: 14px;
+    font-family: var(--gl-font-body); transition: all 0.3s ease;
+}
+.gl-sidebar-search input:focus {
+    border-color: #FF2C98; outline: none;
+    box-shadow: 0 0 20px rgba(255,44,152,0.2), 0 0 40px rgba(255,44,152,0.1);
+    background: rgba(255,255,255,0.08);
+}
+.gl-sidebar-search button {
+    background: linear-gradient(135deg, #FF2C98, #6C5CE7); border: none;
+    border-radius: 8px; padding: 10px 18px; color: #fff; font-weight: 600;
+    cursor: pointer; transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255,44,152,0.3);
+}
+.gl-sidebar-search button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 25px rgba(255,44,152,0.5), 0 0 40px rgba(255,44,152,0.2);
+}
+
+/* Info card */
+.gl-sidebar-info { font-size: var(--gl-font-size-sm); color: var(--gl-color-text-secondary); }
+.gl-sidebar-info__row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+.gl-sidebar-info__label { color: var(--gl-color-text-tertiary); }
+.gl-sidebar-info__value { font-weight: 600; color: var(--gl-color-confirmed); }
+
+/* ============================================================
+   POST NAVIGATION
+   ============================================================ */
+.gl-post-nav {
+    display: grid; grid-template-columns: 1fr 1fr; gap: var(--gl-space-5);
+    margin: var(--gl-space-10) 0; position: relative;
+    padding-top: var(--gl-space-8);
+}
+.gl-post-nav::before {
+    content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, #FF2C98, #27D9FF, transparent); border-radius: 999px;
+}
+.gl-post-nav__item {
+    text-decoration: none; color: var(--gl-color-text);
+    padding: var(--gl-space-6);
+    background: linear-gradient(135deg, rgba(12,16,48,0.8), rgba(19,24,62,0.8));
+    backdrop-filter: blur(16px); border-radius: var(--gl-radius-xl);
+    border: 1px solid rgba(255,44,152,0.1);
+    box-shadow: 0 6px 24px rgba(0,0,0,0.25), 0 0 15px rgba(255,44,152,0.04);
+    transition: all 0.4s cubic-bezier(0.25,0.8,0.25,1);
+    position: relative; overflow: hidden;
+}
+.gl-post-nav__item:hover {
+    background: linear-gradient(135deg, rgba(255,44,152,0.08), rgba(39,217,255,0.04));
+    border-color: rgba(255,44,152,0.3); transform: translateY(-6px);
+    box-shadow: 0 16px 50px rgba(255,44,152,0.15), 0 0 40px rgba(255,44,152,0.08);
+}
+.gl-post-nav__label {
+    font-size: var(--gl-font-size-xs); color: var(--gl-color-secondary);
+    text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; font-weight: 600;
+}
+.gl-post-nav__title {
+    font-weight: 600; font-family: var(--gl-font-display); font-size: var(--gl-font-size-sm);
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.gl-footer {
+    background: linear-gradient(180deg, var(--gl-color-bg) 0%, #0a0e24 100%);
+    border-top: 1px solid rgba(255,44,152,0.08);
+    padding: var(--gl-space-16) 0 var(--gl-space-8);
+    position: relative; overflow: hidden;
+}
+.gl-footer::before {
+    content: ''; position: absolute; inset: 0;
+    background:
+        radial-gradient(ellipse at 20% 30%, rgba(255,44,152,0.04), transparent 50%),
+        radial-gradient(ellipse at 80% 70%, rgba(39,217,255,0.03), transparent 50%);
+    pointer-events: none;
+}
+.gl-footer__inner {
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: var(--gl-space-8);
+    position: relative; z-index: 1;
+}
+.gl-footer__brand-name {
+    font-family: var(--gl-font-display); font-weight: 800; font-size: var(--gl-font-size-xl);
+    background: linear-gradient(135deg, #FF2C98, #27D9FF);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    margin-bottom: var(--gl-space-3);
+}
+.gl-footer__brand-desc { color: var(--gl-color-text-secondary); font-size: var(--gl-font-size-sm); line-height: 1.7; max-width: 300px; }
+.gl-footer__col-title {
+    font-family: var(--gl-font-display); font-weight: 700; font-size: var(--gl-font-size-sm);
+    text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: var(--gl-space-4);
+    background: linear-gradient(135deg, #FF2C98, #27D9FF);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.gl-footer__links li { margin-bottom: var(--gl-space-2); }
+.gl-footer__links a {
+    color: var(--gl-color-text-secondary); font-size: var(--gl-font-size-sm);
+    transition: all 0.3s ease; position: relative;
+}
+.gl-footer__links a:hover {
+    color: #FF2C98; text-shadow: 0 0 10px rgba(255,44,152,0.3);
+}
+.gl-footer__bottom {
+    margin-top: var(--gl-space-10); padding-top: var(--gl-space-6);
+    border-top: 1px solid rgba(255,255,255,0.04);
+    text-align: center; color: var(--gl-color-text-tertiary);
+    font-size: var(--gl-font-size-xs); position: relative; z-index: 1;
+}
+.gl-footer__bottom::before {
+    content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+    width: 200px; height: 1px;
+    background: linear-gradient(90deg, transparent, #FF2C98, #27D9FF, transparent);
+    box-shadow: 0 0 10px rgba(255,44,152,0.3);
+}
+
+/* ============================================================
+   BACK TO TOP
+   ============================================================ */
+.gl-back-to-top {
+    position: fixed; bottom: 24px; right: 24px; width: 48px; height: 48px;
+    border-radius: 50%; background: linear-gradient(135deg, #FF2C98, #6C5CE7);
+    color: #fff; border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; transform: translateY(20px);
+    transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    z-index: 500;
+    box-shadow: 0 4px 20px rgba(255,44,152,0.4), 0 0 40px rgba(255,44,152,0.1);
+    font-size: 20px;
+}
+.gl-back-to-top.is-visible { opacity: 1; transform: translateY(0); animation: gl-glowBreathe 3s ease-in-out infinite; }
+.gl-back-to-top:hover { transform: translateY(-4px) scale(1.1); box-shadow: 0 8px 30px rgba(255,44,152,0.6); }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 1199px) {
+    .gl-single__layout { grid-template-columns: 1fr; }
+    .gl-single__sidebar { position: relative; top: 0; }
+    .gl-footer__inner { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 767px) {
+    .gl-header__nav { display: none; }
+    .gl-guide-meta__grid { grid-template-columns: 1fr; }
+    .gl-post-nav { grid-template-columns: 1fr; }
+    .gl-author-box { flex-direction: column; align-items: center; text-align: center; }
+    .gl-footer__inner { grid-template-columns: 1fr; }
+}
+    </style>
+</head>
+<body>
+    <!-- Scroll Progress -->
+    <div class="gl-scroll-progress"></div>
+
+    <!-- Header -->
+    <header class="gl-header">
+        <div class="gl-header__inner">
+            <a href="#" class="gl-header__brand">
+                <div class="gl-header__logo">G</div>
+                <span class="gl-header__name">GTA LOBBY</span>
+            </a>
+            <nav class="gl-header__nav">
+                <a href="#">GTA 6</a>
+                <a href="#">Guides</a>
+                <a href="#">Online</a>
+                <a href="#">Mods</a>
+                <a href="#">Cars</a>
+                <a href="#">News</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="gl-main">
+        <div class="gl-container">
+            <div class="gl-single__layout">
+
+                <!-- Main Column -->
+                <main>
+                    <!-- Article Header -->
+                    <header class="gl-article__header" data-animate="blur">
+                        <div class="gl-article__header-glow"></div>
+                        <div>
+                            <span class="gl-badge gl-badge--type" data-animate="fade-scale">GUIDE</span>
+                            <span class="gl-badge gl-badge--cat" data-animate="fade-scale" data-delay="100">GTA 6</span>
+                        </div>
+                        <h1 class="gl-article__title" data-animate data-delay="100">GTA 6 &mdash; Everything We Know So Far in 2026</h1>
+                        <div class="gl-post-meta" data-animate data-delay="200">
+                            <span class="gl-post-meta__item">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                                March 14, 2026
+                            </span>
+                            <span class="gl-post-meta__item">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                                GTA Editorial
+                            </span>
+                            <span class="gl-post-meta__item">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                                8 min read
+                            </span>
+                        </div>
+                        <div class="gl-confidence" data-animate data-delay="300">
+                            <span class="gl-confidence__dot"></span>
+                            Confirmed
+                        </div>
+                    </header>
+
+                    <!-- Hero Image -->
+                    <div class="gl-article__hero" data-animate="clip-left">
+                        <img src="https://images.unsplash.com/photo-1511882150382-421056c89033?w=1200&h=500&fit=crop&q=85" alt="GTA 6 Cover Art">
+                    </div>
+
+                    <!-- Accent Divider -->
+                    <div class="gl-article__accent-divider"></div>
+
+                    <!-- Guide Meta -->
+                    <div class="gl-guide-meta" data-animate="fade-scale">
+                        <div class="gl-guide-meta__grid">
+                            <div class="gl-guide-meta__item">
+                                <span class="gl-guide-meta__label">Difficulty</span>
+                                <span class="gl-guide-meta__value">Beginner</span>
+                            </div>
+                            <div class="gl-guide-meta__item">
+                                <span class="gl-guide-meta__label">Read Time</span>
+                                <span class="gl-guide-meta__value">8 min</span>
+                            </div>
+                            <div class="gl-guide-meta__item">
+                                <span class="gl-guide-meta__label">Last Updated</span>
+                                <span class="gl-guide-meta__value">Mar 2026</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TOC -->
+                    <div class="gl-toc" data-animate="slide-right">
+                        <h3 class="gl-toc__title">Table of Contents</h3>
+                        <ol class="gl-toc__list">
+                            <li><a href="#section-1">Release Date &amp; Platforms</a></li>
+                            <li><a href="#section-2">Setting &amp; Map Details</a></li>
+                            <li><a href="#section-3">Characters &amp; Story</a></li>
+                            <li><a href="#section-4">Gameplay Features</a></li>
+                            <li><a href="#section-5">GTA Online 2.0</a></li>
+                            <li><a href="#section-6">Technical Specs</a></li>
+                        </ol>
+                    </div>
+
+                    <!-- Article Content -->
+                    <div class="gl-article__content" data-animate>
+                        <h2 id="section-1">Release Date &amp; Platforms</h2>
+                        <p>Rockstar Games has officially confirmed that Grand Theft Auto VI will launch on PlayStation 5 and Xbox Series X|S. The game represents the biggest leap in the series' history, with a living, breathing open world that pushes the boundaries of what's possible in interactive entertainment.</p>
+                        <p>After years of speculation, the first official trailer dropped in December 2023, instantly becoming one of the most-watched gaming trailers of all time. The second trailer followed in early 2025, revealing even more about the game's stunning recreation of Vice City.</p>
+
+                        <blockquote>
+                            "GTA VI represents our most ambitious project ever. We're creating a world that feels truly alive, where every corner has a story to tell." — Rockstar Games
+                        </blockquote>
+
+                        <h2 id="section-2">Setting &amp; Map Details</h2>
+                        <p>Set in the fictional state of Leonida (inspired by Florida), GTA 6 features the return of Vice City — now a sprawling, modern metropolis surrounded by swamps, beaches, and rural areas. The map is rumored to be the largest in GTA history.</p>
+                        <ul>
+                            <li>Vice City returns as a fully reimagined modern metropolis</li>
+                            <li>Surrounding areas include swamps, beaches, keys, and rural towns</li>
+                            <li>Dynamic weather system with hurricanes and tropical storms</li>
+                            <li>Underwater exploration with detailed ocean floor</li>
+                            <li>Interior spaces are more detailed than ever before</li>
+                        </ul>
+
+                        <h2 id="section-3">Characters &amp; Story</h2>
+                        <p>GTA 6 introduces Lucia, the first female protagonist in the mainline series. Along with her partner Jason, players will experience a Bonnie and Clyde-inspired story of crime, ambition, and survival in modern-day Vice City.</p>
+                        <p>The game features a dual-protagonist system, allowing players to switch between Lucia and Jason during missions, each bringing unique skills and perspectives to the narrative.</p>
+
+                        <h3>Key Characters</h3>
+                        <ul>
+                            <li><strong>Lucia</strong> — A street-smart woman navigating the criminal underworld</li>
+                            <li><strong>Jason</strong> — Her partner in crime with his own complex backstory</li>
+                            <li>A cast of supporting characters spanning every level of Vice City's social hierarchy</li>
+                        </ul>
+                    </div>
+
+                    <!-- Author Box -->
+                    <div class="gl-author-box" data-animate data-delay="100">
+                        <div class="gl-author-box__avatar">G</div>
+                        <div>
+                            <div class="gl-author-box__name">GTA Editorial Team</div>
+                            <div class="gl-author-box__bio">The GTA Lobby editorial team covers everything Grand Theft Auto — from breaking news and trailer analysis to in-depth guides, rankings, and community insights. We've been the go-to source for GTA content since 2013.</div>
+                        </div>
+                    </div>
+
+                    <!-- Post Navigation -->
+                    <nav class="gl-post-nav" data-animate="slide-left" data-delay="200">
+                        <a href="#" class="gl-post-nav__item">
+                            <span class="gl-post-nav__label">&larr; Previous</span>
+                            <span class="gl-post-nav__title">GTA 6 Trailer 2 Analysis — Every Detail, Easter Egg, and Hidden Clue</span>
+                        </a>
+                        <a href="#" class="gl-post-nav__item" style="text-align:right;">
+                            <span class="gl-post-nav__label">Next &rarr;</span>
+                            <span class="gl-post-nav__title">Will GTA 6 Be on PC? Everything We Know About the PC Release</span>
+                        </a>
+                    </nav>
+                </main>
+
+                <!-- Sidebar -->
+                <aside class="gl-single__sidebar">
+                    <div class="gl-sidebar-widget" data-animate="slide-right" data-delay="100">
+                        <h3 class="gl-sidebar-widget__title">In This Topic</h3>
+                        <ul class="gl-sidebar-widget__list">
+                            <li><a href="#">
+                                <span class="gl-badge--inline">Guide</span>
+                                GTA 6 Trailer 2 Analysis — Every Detail, Easter Egg, and Hidden Clue
+                            </a></li>
+                            <li><a href="#">
+                                <span class="gl-badge--inline">Guide</span>
+                                GTA 6 — Everything We Know So Far in 2026
+                            </a></li>
+                            <li><a href="#">
+                                <span class="gl-badge--inline">Answer</span>
+                                Will GTA 6 Be on PC? Everything We Know About the PC Release
+                            </a></li>
+                            <li><a href="#">
+                                <span class="gl-badge--inline">Ranking</span>
+                                Top 10 Most Anticipated GTA 6 Features Based on Leaks and Trailers
+                            </a></li>
+                        </ul>
+                    </div>
+
+                    <div class="gl-sidebar-widget" data-animate="slide-right" data-delay="200">
+                        <h3 class="gl-sidebar-widget__title">Source Info</h3>
+                        <div class="gl-sidebar-info">
+                            <div class="gl-sidebar-info__row">
+                                <span class="gl-sidebar-info__label">Confidence</span>
+                                <span class="gl-sidebar-info__value">Confirmed</span>
+                            </div>
+                            <div class="gl-sidebar-info__row">
+                                <span class="gl-sidebar-info__label">Source</span>
+                                <span class="gl-sidebar-info__value" style="color: var(--gl-color-secondary);">Official</span>
+                            </div>
+                            <div class="gl-sidebar-info__row">
+                                <span class="gl-sidebar-info__label">Updated</span>
+                                <span class="gl-sidebar-info__value" style="color: var(--gl-color-text-secondary);">Mar 14, 2026</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="gl-sidebar-widget" data-animate="slide-right" data-delay="300">
+                        <h3 class="gl-sidebar-widget__title">Search</h3>
+                        <div class="gl-sidebar-search">
+                            <input type="text" placeholder="Search articles...">
+                            <button>Go</button>
+                        </div>
+                    </div>
+
+                    <div class="gl-sidebar-widget" data-animate="slide-right" data-delay="400">
+                        <h3 class="gl-sidebar-widget__title">Recent Posts</h3>
+                        <ul class="gl-sidebar-widget__list">
+                            <li><a href="#">How to Make $10M/Hour in GTA Online (2026 Guide)</a></li>
+                            <li><a href="#">Best Cars in GTA 5 Online — Complete Tier List</a></li>
+                            <li><a href="#">GTA 6 Map Comparison — How Big Is Leonida?</a></li>
+                            <li><a href="#">All GTA 5 Cheat Codes for PS5, Xbox, and PC</a></li>
+                            <li><a href="#">Top 20 Best Mods for GTA 5 in 2026</a></li>
+                        </ul>
+                    </div>
+                </aside>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="gl-footer">
+        <div class="gl-container">
+            <div class="gl-footer__inner" data-animate>
+                <div>
+                    <div class="gl-footer__brand-name">GTA LOBBY</div>
+                    <p class="gl-footer__brand-desc">Your ultimate resource for everything Grand Theft Auto. Guides, news, rankings, and community insights since 2013.</p>
+                </div>
+                <div>
+                    <h4 class="gl-footer__col-title">Categories</h4>
+                    <ul class="gl-footer__links">
+                        <li><a href="#">GTA 6</a></li>
+                        <li><a href="#">Cheats</a></li>
+                        <li><a href="#">Online</a></li>
+                        <li><a href="#">Mods</a></li>
+                        <li><a href="#">Cars</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="gl-footer__col-title">Resources</h4>
+                    <ul class="gl-footer__links">
+                        <li><a href="#">Guides</a></li>
+                        <li><a href="#">Rankings</a></li>
+                        <li><a href="#">Database</a></li>
+                        <li><a href="#">Characters</a></li>
+                        <li><a href="#">Locations</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="gl-footer__col-title">Connect</h4>
+                    <ul class="gl-footer__links">
+                        <li><a href="#">Discord</a></li>
+                        <li><a href="#">YouTube</a></li>
+                        <li><a href="#">X / Twitter</a></li>
+                        <li><a href="#">Reddit</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="gl-footer__bottom">
+                &copy; 2026 GTA Lobby. All rights reserved. Not affiliated with Rockstar Games.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <button class="gl-back-to-top" aria-label="Back to top">&uarr;</button>
+
+    <script>
+(function(){
+    'use strict';
+    if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+        document.querySelectorAll('[data-animate]').forEach(function(e){e.classList.add('gl-visible');});
+        return;
+    }
+
+    /* Scroll-triggered reveals */
+    var els=document.querySelectorAll('[data-animate]');
+    if(els.length&&'IntersectionObserver' in window){
+        var obs=new IntersectionObserver(function(entries){
+            entries.forEach(function(entry){
+                if(entry.isIntersecting){entry.target.classList.add('gl-visible');obs.unobserve(entry.target);}
+            });
+        },{threshold:0.08,rootMargin:'0px 0px -60px 0px'});
+        els.forEach(function(el){obs.observe(el);});
+    }else{els.forEach(function(el){el.classList.add('gl-visible');});}
+
+    /* Scroll progress */
+    var pb=document.querySelector('.gl-scroll-progress');
+    if(pb){window.addEventListener('scroll',function(){
+        var s=document.documentElement.scrollTop,h=document.documentElement.scrollHeight-document.documentElement.clientHeight;
+        pb.style.width=(h>0?(s/h)*100:0)+'%';
+    },{passive:true});}
+
+    /* Back to top */
+    var btt=document.querySelector('.gl-back-to-top');
+    if(btt){
+        window.addEventListener('scroll',function(){
+            btt.classList.toggle('is-visible',window.pageYOffset>400);
+        },{passive:true});
+        btt.addEventListener('click',function(e){e.preventDefault();window.scrollTo({top:0,behavior:'smooth'});});
+    }
+
+    /* Particle system */
+    if(window.innerWidth>768){
+        var c=document.createElement('canvas');
+        c.style.cssText='position:fixed;inset:0;pointer-events:none;z-index:1;opacity:0.6;';
+        document.body.appendChild(c);
+        var ctx=c.getContext('2d');
+        function resize(){c.width=window.innerWidth;c.height=window.innerHeight;}
+        resize();window.addEventListener('resize',resize);
+        var particles=[],count=Math.min(50,Math.floor(window.innerWidth/30)),
+            colors=['#FF2C98','#27D9FF','#6C5CE7'];
+        for(var i=0;i<count;i++){
+            particles.push({x:Math.random()*c.width,y:Math.random()*c.height,
+                vx:(Math.random()-0.5)*0.3,vy:(Math.random()-0.5)*0.3,
+                r:Math.random()*2+0.5,color:colors[Math.floor(Math.random()*colors.length)],
+                o:Math.random()*0.5+0.1,p:Math.random()*Math.PI*2});
+        }
+        var mx=0,my=0;
+        document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;});
+        function anim(){
+            ctx.clearRect(0,0,c.width,c.height);
+            particles.forEach(function(p,idx){
+                p.p+=0.02;p.x+=p.vx;p.y+=p.vy;
+                var dx=p.x-mx,dy=p.y-my,d=Math.sqrt(dx*dx+dy*dy);
+                if(d<150&&d>0){var f=(150-d)/150;p.vx+=(dx/d)*f*0.03;p.vy+=(dy/d)*f*0.03;}
+                p.vx*=0.99;p.vy*=0.99;
+                if(p.x<0)p.x=c.width;if(p.x>c.width)p.x=0;
+                if(p.y<0)p.y=c.height;if(p.y>c.height)p.y=0;
+                ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+                ctx.fillStyle=p.color;ctx.globalAlpha=p.o*(0.7+0.3*Math.sin(p.p));ctx.fill();
+                for(var j=idx+1;j<particles.length;j++){
+                    var p2=particles[j],dd=Math.sqrt(Math.pow(p.x-p2.x,2)+Math.pow(p.y-p2.y,2));
+                    if(dd<120){ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(p2.x,p2.y);
+                        ctx.strokeStyle=p.color;ctx.globalAlpha=(1-dd/120)*0.15;ctx.lineWidth=0.5;ctx.stroke();}
+                }
+            });
+            ctx.globalAlpha=1;requestAnimationFrame(anim);
+        }
+        anim();
+    }
+
+    /* Cursor glow */
+    if(window.innerWidth>768){
+        var cg=document.createElement('div');
+        cg.style.cssText='position:fixed;width:400px;height:400px;border-radius:50%;pointer-events:none;z-index:0;background:radial-gradient(circle,rgba(255,44,152,0.06) 0%,rgba(39,217,255,0.03) 40%,transparent 70%);transition:transform 0.15s ease-out;will-change:transform;';
+        document.body.appendChild(cg);
+        document.addEventListener('mousemove',function(e){
+            cg.style.transform='translate('+(e.clientX-200)+'px,'+(e.clientY-200)+'px)';
+        });
+    }
+
+    /* Tilt on cards */
+    document.querySelectorAll('.gl-sidebar-widget,.gl-guide-meta__item').forEach(function(card){
+        if(window.innerWidth<992)return;
+        card.addEventListener('mousemove',function(e){
+            var r=card.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top,
+                cx=r.width/2,cy=r.height/2,
+                rx=((y-cy)/cy)*-3,ry=((x-cx)/cx)*3;
+            card.style.transform='perspective(800px) rotateX('+rx+'deg) rotateY('+ry+'deg) translateY(-4px)';
+        });
+        card.addEventListener('mouseleave',function(){card.style.transform='';});
+    });
+
+    /* Ripple click */
+    document.addEventListener('click',function(e){
+        var t=e.target.closest('a,button,.gl-badge');
+        if(!t)return;
+        var rp=document.createElement('span'),r=t.getBoundingClientRect(),
+            sz=Math.max(r.width,r.height)*2,x=e.clientX-r.left-sz/2,y=e.clientY-r.top-sz/2;
+        rp.style.cssText='position:absolute;border-radius:50%;background:rgba(255,44,152,0.3);width:'+sz+'px;height:'+sz+'px;left:'+x+'px;top:'+y+'px;animation:gl-ripple 0.6s ease-out forwards;pointer-events:none;';
+        var op=getComputedStyle(t).position;
+        if(op==='static')t.style.position='relative';
+        t.style.overflow='hidden';t.appendChild(rp);
+        setTimeout(function(){rp.remove();if(op==='static')t.style.position='';},600);
+    });
+
+    /* Text reveal on title */
+    var titleEl=document.querySelector('.gl-article__title');
+    if(titleEl&&'IntersectionObserver' in window){
+        var to=new IntersectionObserver(function(entries){
+            entries.forEach(function(entry){
+                if(entry.isIntersecting){
+                    var el=entry.target,text=el.textContent.trim();
+                    if(!text||el.dataset.animated)return;
+                    el.dataset.animated='true';el.innerHTML='';
+                    text.split(' ').forEach(function(word,wi){
+                        var ws=document.createElement('span');
+                        ws.style.cssText='display:inline-block;overflow:hidden;';
+                        for(var ci=0;ci<word.length;ci++){
+                            var cs=document.createElement('span');cs.textContent=word[ci];
+                            cs.style.cssText='display:inline-block;opacity:0;transform:translateY(100%) rotateX(-80deg);animation:gl-charReveal 0.5s cubic-bezier(0.25,0.46,0.45,0.94) '+(wi*0.08+ci*0.03)+'s forwards;';
+                            ws.appendChild(cs);
+                        }
+                        el.appendChild(ws);
+                        if(wi<text.split(' ').length-1)el.appendChild(document.createTextNode(' '));
+                    });
+                    to.unobserve(el);
+                }
+            });
+        },{threshold:0.3});
+        to.observe(titleEl);
+    }
+
+    /* Header shadow on scroll */
+    var hdr=document.querySelector('.gl-header');
+    if(hdr){window.addEventListener('scroll',function(){
+        if(window.pageYOffset>50){hdr.style.boxShadow='0 4px 30px rgba(0,0,0,0.4),0 0 40px rgba(255,44,152,0.05)';}
+        else{hdr.style.boxShadow='';}
+    },{passive:true});}
+
+    /* Sidebar hover glow */
+    document.querySelectorAll('.gl-sidebar-widget').forEach(function(s){
+        s.addEventListener('mouseenter',function(){
+            this.style.boxShadow='0 0 30px rgba(255,44,152,0.15),0 0 60px rgba(39,217,255,0.08),0 8px 32px rgba(0,0,0,0.3)';
+        });
+        s.addEventListener('mouseleave',function(){this.style.boxShadow='';});
+    });
+
+    /* Nav hover glow */
+    document.querySelectorAll('.gl-header__nav a').forEach(function(a){
+        a.addEventListener('mouseenter',function(){this.style.textShadow='0 0 20px rgba(255,44,152,0.4)';});
+        a.addEventListener('mouseleave',function(){this.style.textShadow='';});
+    });
+})();
+    </script>
+</body>
+</html>
