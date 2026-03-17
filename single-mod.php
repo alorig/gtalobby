@@ -50,7 +50,8 @@ foreach ( $single_zones as $zone_id => $zone_cfg ) {
                         /* -- Post Header -------------------------------- */
                         case 'post_header':
                         ?>
-                        <header class="gl-article__header" data-zone="post_header">
+                        <header class="gl-article__header" data-zone="post_header" data-animate>
+                            <div class="gl-article__header-glow" aria-hidden="true"></div>
                             <?php gtalobby_post_type_badge(); ?>
                             <?php gtalobby_category_badge(); ?>
 
@@ -69,9 +70,10 @@ foreach ( $single_zones as $zone_id => $zone_cfg ) {
                         case 'featured_image':
                             if ( has_post_thumbnail() ) :
                         ?>
-                        <div class="gl-article__hero" data-zone="featured_image">
+                        <div class="gl-article__hero" data-zone="featured_image" data-animate>
                             <?php the_post_thumbnail( 'gl-hero', array( 'class' => 'gl-article__hero-img' ) ); ?>
                         </div>
+                        <div class="gl-article__accent-divider" aria-hidden="true"></div>
                         <?php
                             endif;
                             break;
@@ -86,7 +88,8 @@ foreach ( $single_zones as $zone_id => $zone_cfg ) {
 
                             if ( $download_url || $mod_version || $file_size || $mod_author ) :
                         ?>
-                        <div class="gl-mod-details" data-zone="download_box">
+                        <div class="gl-mod-details" data-zone="download_box" data-animate>
+                            <div class="gl-mod-details__glow" aria-hidden="true"></div>
                             <h2 class="gl-mod-details__title"><?php esc_html_e( 'Mod Details', 'gtalobby' ); ?></h2>
 
                             <dl class="gl-mod-details__list">
@@ -137,7 +140,7 @@ foreach ( $single_zones as $zone_id => $zone_cfg ) {
                             $toc = gtalobby_generate_toc( get_the_content() );
                             if ( $toc ) :
                         ?>
-                        <div class="gl-article__toc" data-zone="toc">
+                        <div class="gl-article__toc" data-zone="toc" data-animate>
                             <?php echo $toc; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
                         </div>
                         <?php
@@ -148,7 +151,7 @@ foreach ( $single_zones as $zone_id => $zone_cfg ) {
                         case 'body_content':
                             gtalobby_render_ad_slot( 'ad_before_content' );
                         ?>
-                        <div class="gl-article__content gl-typography" data-zone="body_content">
+                        <div class="gl-article__content gl-typography" data-zone="body_content" data-animate>
                             <?php the_content(); ?>
                         </div>
                         <?php
@@ -160,7 +163,7 @@ foreach ( $single_zones as $zone_id => $zone_cfg ) {
                             $install_steps = get_post_meta( get_the_ID(), 'mod_install_steps', true );
                             if ( is_array( $install_steps ) && ! empty( $install_steps ) ) :
                         ?>
-                        <div class="gl-install-steps" data-zone="install_steps">
+                        <div class="gl-install-steps" data-zone="install_steps" data-animate>
                             <h2 class="gl-install-steps__title"><?php esc_html_e( 'Installation Guide', 'gtalobby' ); ?></h2>
                             <ol class="gl-install-steps__list">
                                 <?php foreach ( $install_steps as $i => $step ) : ?>
@@ -187,7 +190,7 @@ foreach ( $single_zones as $zone_id => $zone_cfg ) {
                             $screenshots = get_post_meta( get_the_ID(), 'mod_screenshots', true );
                             if ( is_array( $screenshots ) && ! empty( $screenshots ) ) :
                         ?>
-                        <div class="gl-gallery" data-zone="gallery">
+                        <div class="gl-gallery" data-zone="gallery" data-animate>
                             <h2 class="gl-gallery__title"><?php esc_html_e( 'Screenshots', 'gtalobby' ); ?></h2>
                             <div class="gl-gallery__grid">
                                 <?php foreach ( $screenshots as $img_id ) : ?>
@@ -223,7 +226,7 @@ foreach ( $single_zones as $zone_id => $zone_cfg ) {
 
                 if ( $has_footer ) :
                 ?>
-                <footer class="gl-article__footer">
+                <footer class="gl-article__footer" data-animate>
                     <?php gtalobby_taxonomy_tags(); ?>
                     <?php gtalobby_platform_icons(); ?>
 
@@ -250,23 +253,39 @@ foreach ( $single_zones as $zone_id => $zone_cfg ) {
 
                 switch ( $zone_id ) :
                     case 'author_box':
-                        gtalobby_author_box();
+                    ?>
+                        <div class="gl-author-box-wrapper" data-animate>
+                            <?php gtalobby_author_box(); ?>
+                        </div>
+                    <?php
                         break;
 
                     case 'related_posts':
-                        gtalobby_related_posts();
+                    ?>
+                        <div class="gl-related-posts-wrapper" data-animate>
+                            <?php gtalobby_related_posts(); ?>
+                        </div>
+                    <?php
                         break;
 
                     case 'post_navigation':
-                        if ( function_exists( 'gtalobby_post_navigation' ) ) {
-                            gtalobby_post_navigation();
-                        }
+                        if ( function_exists( 'gtalobby_post_navigation' ) ) :
+                    ?>
+                        <div class="gl-post-navigation-wrapper" data-animate>
+                            <?php gtalobby_post_navigation(); ?>
+                        </div>
+                    <?php
+                        endif;
                         break;
 
                     case 'comments':
-                        if ( comments_open() || get_comments_number() ) {
-                            comments_template();
-                        }
+                        if ( comments_open() || get_comments_number() ) :
+                    ?>
+                        <div class="gl-comments-wrapper" data-animate>
+                            <?php comments_template(); ?>
+                        </div>
+                    <?php
+                        endif;
                         break;
                 endswitch;
             endforeach;

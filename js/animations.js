@@ -336,4 +336,185 @@
         }, { passive: true });
     }
 
+    /* =============================================
+       PAGE TRANSITION EFFECT
+       ============================================= */
+
+    var pageTransition = document.querySelector('.gl-page-transition');
+    if (pageTransition) {
+        /* Fade out the transition overlay on page load */
+        pageTransition.style.opacity = '1';
+        requestAnimationFrame(function () {
+            requestAnimationFrame(function () {
+                pageTransition.style.opacity = '0';
+            });
+        });
+    }
+
+    /* =============================================
+       PARALLAX TILT ON CARDS (Mouse Move)
+       ============================================= */
+
+    var tiltCards = document.querySelectorAll('.gl-cat-card, .gl-gta6-card, .gl-hub-tile, .gl-category-tile');
+    if (tiltCards.length && window.innerWidth > 991) {
+        tiltCards.forEach(function (card) {
+            card.addEventListener('mousemove', function (e) {
+                var rect = card.getBoundingClientRect();
+                var x = e.clientX - rect.left;
+                var y = e.clientY - rect.top;
+                var centerX = rect.width / 2;
+                var centerY = rect.height / 2;
+                var rotateX = ((y - centerY) / centerY) * -3;
+                var rotateY = ((x - centerX) / centerX) * 3;
+                card.style.transform = 'perspective(1000px) rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg) translateY(-4px)';
+            });
+
+            card.addEventListener('mouseleave', function () {
+                card.style.transform = '';
+            });
+        });
+    }
+
+    /* =============================================
+       MAGNETIC BUTTON EFFECT
+       ============================================= */
+
+    var magneticBtns = document.querySelectorAll('.gl-btn--primary, .gl-hero-panel__cta, .gl-404-hero__cta');
+    if (magneticBtns.length && window.innerWidth > 991) {
+        magneticBtns.forEach(function (btn) {
+            btn.addEventListener('mousemove', function (e) {
+                var rect = btn.getBoundingClientRect();
+                var x = e.clientX - rect.left - rect.width / 2;
+                var y = e.clientY - rect.top - rect.height / 2;
+                btn.style.transform = 'translate(' + (x * 0.15) + 'px, ' + (y * 0.15) + 'px)';
+            });
+
+            btn.addEventListener('mouseleave', function () {
+                btn.style.transform = '';
+            });
+        });
+    }
+
+    /* =============================================
+       TYPEWRITER EFFECT FOR HERO TITLES
+       ============================================= */
+
+    var typewriterEls = document.querySelectorAll('.gl-404-hero__code');
+    if (typewriterEls.length) {
+        typewriterEls.forEach(function (el) {
+            var text = el.textContent;
+            el.textContent = '';
+            el.style.visibility = 'visible';
+            var i = 0;
+            function type() {
+                if (i < text.length) {
+                    el.textContent += text.charAt(i);
+                    i++;
+                    setTimeout(type, 150);
+                }
+            }
+            /* Delay start for dramatic effect */
+            setTimeout(type, 500);
+        });
+    }
+
+    /* =============================================
+       STAGGER ANIMATION FOR GRID ITEMS
+       ============================================= */
+
+    var staggerGrids = document.querySelectorAll('.gl-cat-grid, .gl-guide-meta__grid, .gl-install-steps__list, .gl-gallery__grid, .gl-recap-grid, .gl-404-cats__grid');
+    if (staggerGrids.length && 'IntersectionObserver' in window) {
+        var staggerObserver = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    var children = entry.target.children;
+                    for (var i = 0; i < children.length; i++) {
+                        (function (child, index) {
+                            child.style.opacity = '0';
+                            child.style.transform = 'translateY(20px)';
+                            child.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                            setTimeout(function () {
+                                child.style.opacity = '1';
+                                child.style.transform = 'translateY(0)';
+                            }, index * 80);
+                        })(children[i], i);
+                    }
+                    staggerObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        staggerGrids.forEach(function (grid) {
+            staggerObserver.observe(grid);
+        });
+    }
+
+    /* =============================================
+       GLOW FOLLOW CURSOR ON HERO SECTIONS
+       ============================================= */
+
+    var heroSections = document.querySelectorAll('.gl-cat-hero, .gl-arc-hero, .gl-search-hero, .gl-404-hero, .gl-hub-hero');
+    if (heroSections.length && window.innerWidth > 767) {
+        heroSections.forEach(function (hero) {
+            hero.addEventListener('mousemove', function (e) {
+                var rect = hero.getBoundingClientRect();
+                var x = ((e.clientX - rect.left) / rect.width) * 100;
+                var y = ((e.clientY - rect.top) / rect.height) * 100;
+                hero.style.setProperty('--glow-x', x + '%');
+                hero.style.setProperty('--glow-y', y + '%');
+            });
+        });
+    }
+
+    /* =============================================
+       NUMBER COUNT UP ON STATS
+       ============================================= */
+
+    var arcMetaStrong = document.querySelectorAll('.gl-arc-hero__meta strong, .gl-cat-hero__count strong');
+    if (arcMetaStrong.length && 'IntersectionObserver' in window) {
+        var metaCountObserver = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    animateCounter(entry.target);
+                    metaCountObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        arcMetaStrong.forEach(function (el) {
+            metaCountObserver.observe(el);
+        });
+    }
+
+    /* =============================================
+       SMOOTH REVEAL FOR INSTALL STEPS (Timeline)
+       ============================================= */
+
+    var installSteps = document.querySelectorAll('.gl-install-step');
+    if (installSteps.length && 'IntersectionObserver' in window) {
+        var stepObserver = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('gl-visible');
+                    stepObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.2, rootMargin: '0px 0px -30px 0px' });
+
+        installSteps.forEach(function (step, index) {
+            step.style.opacity = '0';
+            step.style.transform = 'translateX(-20px)';
+            step.style.transition = 'opacity 0.5s ease ' + (index * 0.1) + 's, transform 0.5s ease ' + (index * 0.1) + 's';
+            stepObserver.observe(step);
+        });
+    }
+
+    /* Override gl-visible for install steps */
+    document.querySelectorAll('.gl-install-step.gl-visible').length; /* force reflow */
+
+    /* Reveal handler for install steps */
+    var stepStyle = document.createElement('style');
+    stepStyle.textContent = '.gl-install-step.gl-visible { opacity: 1 !important; transform: translateX(0) !important; }';
+    document.head.appendChild(stepStyle);
+
 })();

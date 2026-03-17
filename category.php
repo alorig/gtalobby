@@ -61,7 +61,7 @@ $cat_desc = category_description() ?: ( isset( $cat_descriptions[ $category_slug
                ========================================================== */
             case 'archive_header':
             ?>
-            <section class="gl-cat-hero" data-zone="archive_header">
+            <section class="gl-cat-hero" data-zone="archive_header" data-animate>
                 <?php if ( $hero_img ) : ?>
                 <div class="gl-cat-hero__bg" style="background-image: url('<?php echo esc_url( $hero_img ); ?>')"></div>
                 <?php endif; ?>
@@ -166,7 +166,7 @@ $cat_desc = category_description() ?: ( isset( $cat_descriptions[ $category_slug
             case 'filter_bar':
                 $current_pt = isset( $_GET['post_type'] ) ? sanitize_key( $_GET['post_type'] ) : '';
             ?>
-            <div class="gl-cat-filters" data-zone="filter_bar">
+            <div class="gl-cat-filters" data-zone="filter_bar" data-animate>
                 <div class="gl-container">
                     <div class="gl-cat-filters__bar">
                         <a href="<?php echo esc_url( get_category_link( $category->term_id ) ); ?>"
@@ -195,7 +195,7 @@ $cat_desc = category_description() ?: ( isset( $cat_descriptions[ $category_slug
             case 'post_grid':
                 gtalobby_render_ad_slot( 'ad_before_content' );
             ?>
-            <div class="gl-cat-content" data-zone="post_grid">
+            <div class="gl-cat-content" data-zone="post_grid" data-animate>
                 <div class="gl-container">
 
                     <?php if ( have_posts() ) : ?>

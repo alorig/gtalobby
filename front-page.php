@@ -58,7 +58,7 @@ $gta6_cat   = get_category_by_slug( 'gta6' );
                 $cheats_cat = get_category_by_slug( 'cheats' );
                 $mods_cat   = get_category_by_slug( 'mods' );
             ?>
-            <section class="gl-hero-accordion" data-zone="hero">
+            <section class="gl-hero-accordion" data-zone="hero" data-animate>
                 <div class="gl-hero-accordion__panels">
 
                     <!-- Panel 1 — GTA 6 (Cyber Cyan) -->
@@ -176,6 +176,7 @@ $gta6_cat   = get_category_by_slug( 'gta6' );
                 ) ) )->found_posts;
             ?>
             <div class="gl-stats-bar" data-animate>
+                <div class="gl-stats-bar__glow" aria-hidden="true"></div>
                 <div class="gl-container">
                     <div class="gl-stats-bar__inner">
                         <div class="gl-stats-bar__item">
@@ -567,6 +568,7 @@ $gta6_cat   = get_category_by_slug( 'gta6' );
             case 'newsletter':
             ?>
             <section class="gl-zone gl-home-newsletter" data-zone="newsletter" data-animate>
+                <div class="gl-home-newsletter__glow" aria-hidden="true"></div>
                 <div class="gl-container">
                     <?php gtalobby_newsletter_form(); ?>
                 </div>

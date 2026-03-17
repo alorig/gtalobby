@@ -51,7 +51,8 @@ foreach ( $single_zones as $zone_id => $zone_cfg ) {
                             /* -- Post Header -------------------------------- */
                             case 'post_header':
                             ?>
-                            <header class="gl-article__header" data-zone="post_header">
+                            <header class="gl-article__header" data-zone="post_header" data-animate>
+                                <div class="gl-article__header-glow" aria-hidden="true"></div>
                                 <?php gtalobby_post_type_badge(); ?>
                                 <?php gtalobby_category_badge(); ?>
 
@@ -70,9 +71,10 @@ foreach ( $single_zones as $zone_id => $zone_cfg ) {
                             case 'featured_image':
                                 if ( has_post_thumbnail() ) :
                             ?>
-                            <div class="gl-article__hero" data-zone="featured_image">
+                            <div class="gl-article__hero" data-zone="featured_image" data-animate>
                                 <?php the_post_thumbnail( 'gl-hero', array( 'class' => 'gl-article__hero-img' ) ); ?>
                             </div>
+                            <div class="gl-article__accent-divider" aria-hidden="true"></div>
                             <?php
                                 endif;
                                 break;
@@ -82,7 +84,7 @@ foreach ( $single_zones as $zone_id => $zone_cfg ) {
                                 $criteria = get_post_meta( get_the_ID(), 'ranking_criteria', true );
                                 if ( $criteria ) :
                             ?>
-                            <div class="gl-ranking-criteria" data-zone="post_type_fields">
+                            <div class="gl-ranking-criteria" data-zone="post_type_fields" data-animate>
                                 <h2 class="gl-ranking-criteria__title"><?php esc_html_e( 'Ranking Criteria', 'gtalobby' ); ?></h2>
                                 <div class="gl-ranking-criteria__text gl-typography"><?php echo wp_kses_post( $criteria ); ?></div>
                             </div>
@@ -95,7 +97,7 @@ foreach ( $single_zones as $zone_id => $zone_cfg ) {
                                 $ranked_items = get_post_meta( get_the_ID(), 'ranking_ranked_items', true );
                                 if ( is_array( $ranked_items ) && ! empty( $ranked_items ) ) :
                             ?>
-                            <div class="gl-ranking-table-wrap" data-zone="ranked_items">
+                            <div class="gl-ranking-table-wrap" data-zone="ranked_items" data-animate>
                                 <h2 class="gl-ranking-table__title"><?php esc_html_e( 'Full Rankings', 'gtalobby' ); ?></h2>
                                 <table class="gl-ranking-table gl-sortable-table" data-sortable>
                                     <thead>
@@ -134,6 +136,7 @@ foreach ( $single_zones as $zone_id => $zone_cfg ) {
 
                                 <?php if ( count( $ranked_items ) >= 3 ) : ?>
                                 <div class="gl-podium">
+                                    <div class="gl-podium__glow" aria-hidden="true"></div>
                                     <?php
                                     $podium_order = array( 1, 0, 2 );
                                     $podium_class = array( 'silver', 'gold', 'bronze' );
@@ -163,7 +166,7 @@ foreach ( $single_zones as $zone_id => $zone_cfg ) {
                                 $toc = gtalobby_generate_toc( get_the_content() );
                                 if ( $toc ) :
                             ?>
-                            <div class="gl-article__toc" data-zone="toc">
+                            <div class="gl-article__toc" data-zone="toc" data-animate>
                                 <?php echo $toc; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
                             </div>
                             <?php
@@ -174,7 +177,7 @@ foreach ( $single_zones as $zone_id => $zone_cfg ) {
                             case 'body_content':
                                 gtalobby_render_ad_slot( 'ad_before_content' );
                             ?>
-                            <div class="gl-article__content gl-typography" data-zone="body_content">
+                            <div class="gl-article__content gl-typography" data-zone="body_content" data-animate>
                                 <?php the_content(); ?>
                             </div>
                             <?php
@@ -201,7 +204,7 @@ foreach ( $single_zones as $zone_id => $zone_cfg ) {
 
                     if ( $has_footer ) :
                     ?>
-                    <footer class="gl-article__footer">
+                    <footer class="gl-article__footer" data-animate>
                         <?php gtalobby_taxonomy_tags(); ?>
 
                         <?php if ( gtalobby_is_zone_enabled( 'single', 'hub_link', $category_slug ) ) : ?>
@@ -228,25 +231,33 @@ foreach ( $single_zones as $zone_id => $zone_cfg ) {
 
                         /* -- Author Box --------------------------------- */
                         case 'author_box':
+                            echo '<div data-animate>';
                             gtalobby_author_box();
+                            echo '</div>';
                             break;
 
                         /* -- Related Posts ------------------------------- */
                         case 'related_posts':
+                            echo '<div data-animate>';
                             gtalobby_related_posts();
+                            echo '</div>';
                             break;
 
                         /* -- Post Navigation ---------------------------- */
                         case 'post_navigation':
                             if ( function_exists( 'gtalobby_post_navigation' ) ) {
+                                echo '<div data-animate>';
                                 gtalobby_post_navigation();
+                                echo '</div>';
                             }
                             break;
 
                         /* -- Comments ----------------------------------- */
                         case 'comments':
                             if ( comments_open() || get_comments_number() ) {
+                                echo '<div data-animate>';
                                 comments_template();
+                                echo '</div>';
                             }
                             break;
 

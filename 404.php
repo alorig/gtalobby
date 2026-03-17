@@ -91,7 +91,7 @@ get_header();
                 <?php esc_html_e( 'Recent Content', 'gtalobby' ); ?>
             </h2>
 
-            <div class="gl-card-grid gl-card-grid--3col">
+            <div class="gl-card-grid gl-card-grid--3col" data-animate>
                 <?php
                 $recent = new WP_Query( array(
                     'posts_per_page' => 6,

@@ -50,7 +50,8 @@ foreach ( $single_zones as $zone_id => $zone_cfg ) {
                     /* -- Post Header -------------------------------- */
                     case 'post_header':
                     ?>
-                    <header class="gl-article__header" data-zone="post_header">
+                    <header class="gl-article__header" data-zone="post_header" data-animate>
+                        <div class="gl-article__header-glow" aria-hidden="true"></div>
                         <?php gtalobby_post_type_badge(); ?>
                         <?php gtalobby_category_badge(); ?>
 
@@ -70,7 +71,7 @@ foreach ( $single_zones as $zone_id => $zone_cfg ) {
                         $data_source = get_post_meta( get_the_ID(), 'database_data_source', true );
                         if ( $data_source ) :
                     ?>
-                    <div class="gl-data-source" data-zone="post_type_fields">
+                    <div class="gl-data-source" data-zone="post_type_fields" data-animate>
                         <span class="gl-data-source__label"><?php esc_html_e( 'Data Source:', 'gtalobby' ); ?></span>
                         <span class="gl-data-source__value"><?php echo esc_html( $data_source ); ?></span>
                     </div>
@@ -85,7 +86,7 @@ foreach ( $single_zones as $zone_id => $zone_cfg ) {
 
                         if ( is_array( $headers ) && ! empty( $headers ) && is_array( $table_data ) && ! empty( $table_data ) ) :
                     ?>
-                    <div class="gl-database" data-zone="data_table">
+                    <div class="gl-database" data-zone="data_table" data-animate>
                         <div class="gl-database__toolbar">
                             <div class="gl-database__search">
                                 <input type="text" class="gl-database__search-input" placeholder="<?php esc_attr_e( 'Search table...', 'gtalobby' ); ?>" data-table-search>
@@ -130,7 +131,7 @@ foreach ( $single_zones as $zone_id => $zone_cfg ) {
                         $toc = gtalobby_generate_toc( get_the_content() );
                         if ( $toc ) :
                     ?>
-                    <div class="gl-article__toc" data-zone="toc">
+                    <div class="gl-article__toc" data-zone="toc" data-animate>
                         <?php echo $toc; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
                     </div>
                     <?php
@@ -141,7 +142,7 @@ foreach ( $single_zones as $zone_id => $zone_cfg ) {
                     case 'body_content':
                         gtalobby_render_ad_slot( 'ad_before_content' );
                     ?>
-                    <div class="gl-article__content gl-typography" data-zone="body_content">
+                    <div class="gl-article__content gl-typography" data-zone="body_content" data-animate>
                         <?php the_content(); ?>
                     </div>
                     <?php
@@ -167,7 +168,7 @@ foreach ( $single_zones as $zone_id => $zone_cfg ) {
 
             if ( $has_footer ) :
             ?>
-            <footer class="gl-article__footer">
+            <footer class="gl-article__footer" data-animate>
                 <?php gtalobby_taxonomy_tags(); ?>
 
                 <?php if ( gtalobby_is_zone_enabled( 'single', 'hub_link', $category_slug ) ) : ?>

@@ -15,7 +15,9 @@ defined( 'ABSPATH' ) || exit;
     <?php
     /* -- Hub Pages -------------------------------------------------- */
     if ( is_page_template( 'page-hub.php' ) && is_active_sidebar( 'sidebar-hub' ) ) :
+        echo '<div class="gl-sidebar__section" data-animate>';
         dynamic_sidebar( 'sidebar-hub' );
+        echo '</div>';
 
     /* -- Singular Posts --------------------------------------------- */
     elseif ( is_singular() ) :
@@ -33,6 +35,7 @@ defined( 'ABSPATH' ) || exit;
             $source_type   = get_post_meta( get_the_ID(), 'source_type', true );
             $last_verified = get_post_meta( get_the_ID(), 'last_verified', true );
         ?>
+        <div class="gl-sidebar__section" data-animate>
         <div class="gl-sidebar__gta6-info gl-widget">
             <h3 class="gl-widget__title"><?php esc_html_e( 'Source Info', 'gtalobby' ); ?></h3>
 
@@ -68,6 +71,7 @@ defined( 'ABSPATH' ) || exit;
             </div>
             <?php endif; ?>
         </div>
+        </div>
         <?php
         endif;
 
@@ -76,13 +80,17 @@ defined( 'ABSPATH' ) || exit;
 
         /* Primary sidebar widgets */
         if ( is_active_sidebar( 'sidebar-primary' ) ) :
+            echo '<div class="gl-sidebar__section" data-animate>';
             dynamic_sidebar( 'sidebar-primary' );
+            echo '</div>';
         endif;
 
     /* -- Archive / Default Sidebar ---------------------------------- */
     else :
         if ( is_active_sidebar( 'sidebar-primary' ) ) :
+            echo '<div class="gl-sidebar__section" data-animate>';
             dynamic_sidebar( 'sidebar-primary' );
+            echo '</div>';
         endif;
 
         gtalobby_render_ad_slot( 'ad_sidebar' );

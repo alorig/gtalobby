@@ -109,7 +109,7 @@ $current_type  = isset( $_GET['post_type'] ) ? sanitize_key( $_GET['post_type'] 
     <!-- ============================================================
          Search Results Grid
          ============================================================ -->
-    <div class="gl-container gl-archive__layout">
+    <div class="gl-container gl-archive__layout" data-animate>
 
         <main class="gl-archive__main" id="main-content">
             <?php if ( have_posts() ) : ?>

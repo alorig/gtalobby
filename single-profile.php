@@ -51,7 +51,8 @@ foreach ( $single_zones as $zone_id => $zone_cfg ) {
                             /* -- Post Header -------------------------------- */
                             case 'post_header':
                             ?>
-                            <header class="gl-article__header" data-zone="post_header">
+                            <header class="gl-article__header" data-zone="post_header" data-animate>
+                                <div class="gl-article__header-glow" aria-hidden="true"></div>
                                 <?php gtalobby_post_type_badge(); ?>
                                 <?php gtalobby_category_badge(); ?>
 
@@ -69,7 +70,8 @@ foreach ( $single_zones as $zone_id => $zone_cfg ) {
                             /* -- Featured Image ----------------------------- */
                             case 'featured_image':
                             ?>
-                            <div class="gl-profile-hero" data-zone="featured_image">
+                            <div class="gl-profile-hero" data-zone="featured_image" data-animate>
+                                <div class="gl-profile-hero__glow" aria-hidden="true"></div>
                                 <?php if ( has_post_thumbnail() ) : ?>
                                 <div class="gl-profile-hero__image">
                                     <?php the_post_thumbnail( 'gl-feature', array( 'class' => 'gl-profile-hero__img' ) ); ?>
@@ -87,6 +89,7 @@ foreach ( $single_zones as $zone_id => $zone_cfg ) {
                                     <?php endif; ?>
                                 </div>
                             </div>
+                            <div class="gl-article__accent-divider" aria-hidden="true"></div>
                             <?php
                                 break;
 
@@ -95,7 +98,7 @@ foreach ( $single_zones as $zone_id => $zone_cfg ) {
                                 $stats_table = get_post_meta( get_the_ID(), 'profile_stats_table', true );
                                 if ( is_array( $stats_table ) && ! empty( $stats_table ) ) :
                             ?>
-                            <div class="gl-stats-table-wrap" data-zone="stats_table">
+                            <div class="gl-stats-table-wrap" data-zone="stats_table" data-animate>
                                 <h2 class="gl-stats-table__title"><?php esc_html_e( 'Stats & Attributes', 'gtalobby' ); ?></h2>
                                 <table class="gl-stats-table">
                                     <tbody>
@@ -125,7 +128,7 @@ foreach ( $single_zones as $zone_id => $zone_cfg ) {
                                 $toc = gtalobby_generate_toc( get_the_content() );
                                 if ( $toc ) :
                             ?>
-                            <div class="gl-article__toc" data-zone="toc">
+                            <div class="gl-article__toc" data-zone="toc" data-animate>
                                 <?php echo $toc; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
                             </div>
                             <?php
@@ -136,7 +139,7 @@ foreach ( $single_zones as $zone_id => $zone_cfg ) {
                             case 'body_content':
                                 gtalobby_render_ad_slot( 'ad_before_content' );
                             ?>
-                            <div class="gl-article__content gl-typography" data-zone="body_content">
+                            <div class="gl-article__content gl-typography" data-zone="body_content" data-animate>
                                 <?php the_content(); ?>
                             </div>
                             <?php
@@ -148,7 +151,7 @@ foreach ( $single_zones as $zone_id => $zone_cfg ) {
                                 $gallery = get_post_meta( get_the_ID(), 'profile_gallery', true );
                                 if ( is_array( $gallery ) && ! empty( $gallery ) ) :
                             ?>
-                            <div class="gl-gallery" data-zone="gallery">
+                            <div class="gl-gallery" data-zone="gallery" data-animate>
                                 <h2 class="gl-gallery__title"><?php esc_html_e( 'Gallery', 'gtalobby' ); ?></h2>
                                 <div class="gl-gallery__grid">
                                     <?php foreach ( $gallery as $img_id ) : ?>
@@ -177,7 +180,7 @@ foreach ( $single_zones as $zone_id => $zone_cfg ) {
                     $related_profiles = get_post_meta( get_the_ID(), 'profile_related_profiles', true );
                     if ( is_array( $related_profiles ) && ! empty( $related_profiles ) ) :
                     ?>
-                    <div class="gl-related-profiles">
+                    <div class="gl-related-profiles" data-animate>
                         <h2 class="gl-related-profiles__title"><?php esc_html_e( 'Related Profiles', 'gtalobby' ); ?></h2>
                         <div class="gl-card-grid gl-card-grid--4col">
                             <?php
@@ -210,7 +213,7 @@ foreach ( $single_zones as $zone_id => $zone_cfg ) {
 
                     if ( $has_footer ) :
                     ?>
-                    <footer class="gl-article__footer">
+                    <footer class="gl-article__footer" data-animate>
                         <?php gtalobby_taxonomy_tags(); ?>
                         <?php gtalobby_platform_icons(); ?>
 
@@ -238,25 +241,33 @@ foreach ( $single_zones as $zone_id => $zone_cfg ) {
 
                         /* -- Author Box --------------------------------- */
                         case 'author_box':
+                            echo '<div data-animate>';
                             gtalobby_author_box();
+                            echo '</div>';
                             break;
 
                         /* -- Related Posts ------------------------------- */
                         case 'related_posts':
+                            echo '<div data-animate>';
                             gtalobby_related_posts();
+                            echo '</div>';
                             break;
 
                         /* -- Post Navigation ---------------------------- */
                         case 'post_navigation':
                             if ( function_exists( 'gtalobby_post_navigation' ) ) {
+                                echo '<div data-animate>';
                                 gtalobby_post_navigation();
+                                echo '</div>';
                             }
                             break;
 
                         /* -- Comments ----------------------------------- */
                         case 'comments':
                             if ( comments_open() || get_comments_number() ) {
+                                echo '<div data-animate>';
                                 comments_template();
+                                echo '</div>';
                             }
                             break;
 

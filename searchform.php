@@ -5,7 +5,7 @@
  * @package GtaLobby
  */
 ?>
-<form role="search" method="get" class="gl-search-form" action="<?php echo esc_url( home_url( '/' ) ); ?>">
+<form role="search" method="get" class="gl-search-form" action="<?php echo esc_url( home_url( '/' ) ); ?>" data-animate>
     <label class="gl-sr-only" for="gl-search-input"><?php esc_html_e( 'Search for:', 'gtalobby' ); ?></label>
     <div class="gl-search-form__wrapper">
         <input type="search" id="gl-search-input" class="gl-search-form__input" placeholder="<?php esc_attr_e( 'Search GtaLobby...', 'gtalobby' ); ?>" value="<?php echo get_search_query(); ?>" name="s" />

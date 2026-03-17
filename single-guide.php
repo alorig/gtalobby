@@ -50,7 +50,8 @@ foreach ( $single_zones as $zone_id => $zone_cfg ) {
                         /* -- Post Header -------------------------------- */
                         case 'post_header':
                         ?>
-                        <header class="gl-article__header" data-zone="post_header">
+                        <header class="gl-article__header" data-zone="post_header" data-animate>
+                            <div class="gl-article__header-glow" aria-hidden="true"></div>
                             <?php gtalobby_post_type_badge(); ?>
                             <?php gtalobby_category_badge(); ?>
 
@@ -69,9 +70,10 @@ foreach ( $single_zones as $zone_id => $zone_cfg ) {
                         case 'featured_image':
                             if ( has_post_thumbnail() ) :
                         ?>
-                        <div class="gl-article__hero" data-zone="featured_image">
+                        <div class="gl-article__hero" data-zone="featured_image" data-animate>
                             <?php the_post_thumbnail( 'gl-hero', array( 'class' => 'gl-article__hero-img' ) ); ?>
                         </div>
+                        <div class="gl-article__accent-divider" aria-hidden="true"></div>
                         <?php
                             endif;
                             break;
@@ -85,7 +87,7 @@ foreach ( $single_zones as $zone_id => $zone_cfg ) {
 
                             if ( $difficulty || $time_complete || $step_count || $tools_needed ) :
                         ?>
-                        <div class="gl-guide-meta" data-zone="post_type_fields">
+                        <div class="gl-guide-meta" data-zone="post_type_fields" data-animate>
                             <h2 class="gl-sr-only"><?php esc_html_e( 'Guide Overview', 'gtalobby' ); ?></h2>
                             <div class="gl-guide-meta__grid">
                                 <?php if ( $difficulty ) : ?>
@@ -126,7 +128,7 @@ foreach ( $single_zones as $zone_id => $zone_cfg ) {
                             $video_embed = get_post_meta( get_the_ID(), 'guide_video_embed', true );
                             if ( $video_embed ) :
                         ?>
-                        <div class="gl-video-embed" data-zone="video_embed">
+                        <div class="gl-video-embed" data-zone="video_embed" data-animate>
                             <div class="gl-video-embed__wrapper">
                                 <?php echo wp_oembed_get( $video_embed ) ?: '<a href="' . esc_url( $video_embed ) . '" target="_blank" rel="noopener">' . esc_html__( 'Watch Video', 'gtalobby' ) . '</a>'; ?>
                             </div>
@@ -140,7 +142,7 @@ foreach ( $single_zones as $zone_id => $zone_cfg ) {
                             $toc = gtalobby_generate_toc( get_the_content() );
                             if ( $toc ) :
                         ?>
-                        <div class="gl-article__toc" data-zone="toc">
+                        <div class="gl-article__toc" data-zone="toc" data-animate>
                             <?php echo $toc; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
                         </div>
                         <?php
@@ -151,7 +153,7 @@ foreach ( $single_zones as $zone_id => $zone_cfg ) {
                         case 'body_content':
                             gtalobby_render_ad_slot( 'ad_before_content' );
                         ?>
-                        <div class="gl-article__content gl-typography" data-zone="body_content">
+                        <div class="gl-article__content gl-typography" data-zone="body_content" data-animate>
                             <?php the_content(); ?>
                         </div>
                         <?php
@@ -179,7 +181,7 @@ foreach ( $single_zones as $zone_id => $zone_cfg ) {
 
                 if ( $has_footer ) :
                 ?>
-                <footer class="gl-article__footer">
+                <footer class="gl-article__footer" data-animate>
                     <?php gtalobby_taxonomy_tags(); ?>
                     <?php gtalobby_platform_icons(); ?>
 
@@ -206,23 +208,39 @@ foreach ( $single_zones as $zone_id => $zone_cfg ) {
 
                 switch ( $zone_id ) :
                     case 'author_box':
-                        gtalobby_author_box();
+                    ?>
+                        <div class="gl-author-box-wrapper" data-animate>
+                            <?php gtalobby_author_box(); ?>
+                        </div>
+                    <?php
                         break;
 
                     case 'related_posts':
-                        gtalobby_related_posts();
+                    ?>
+                        <div class="gl-related-posts-wrapper" data-animate>
+                            <?php gtalobby_related_posts(); ?>
+                        </div>
+                    <?php
                         break;
 
                     case 'post_navigation':
-                        if ( function_exists( 'gtalobby_post_navigation' ) ) {
-                            gtalobby_post_navigation();
-                        }
+                        if ( function_exists( 'gtalobby_post_navigation' ) ) :
+                    ?>
+                        <div class="gl-post-navigation-wrapper" data-animate>
+                            <?php gtalobby_post_navigation(); ?>
+                        </div>
+                    <?php
+                        endif;
                         break;
 
                     case 'comments':
-                        if ( comments_open() || get_comments_number() ) {
-                            comments_template();
-                        }
+                        if ( comments_open() || get_comments_number() ) :
+                    ?>
+                        <div class="gl-comments-wrapper" data-animate>
+                            <?php comments_template(); ?>
+                        </div>
+                    <?php
+                        endif;
                         break;
                 endswitch;
             endforeach;

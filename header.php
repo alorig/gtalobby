@@ -150,7 +150,7 @@ if ( gtalobby_is_enabled( 'enable_gta6_mode' ) && gtalobby_get_gta6_option( 'gta
     $banner_link = gtalobby_get_gta6_option( 'gta6_banner_link' );
     if ( $banner_text ) :
 ?>
-<div class="gl-announcement-bar">
+<div class="gl-announcement-bar" data-animate>
     <div class="gl-container">
         <?php if ( $banner_link ) : ?>
             <a href="<?php echo esc_url( $banner_link ); ?>" class="gl-announcement-bar__link">
@@ -278,3 +278,4 @@ gtalobby_render_ad_slot( 'ad_header_banner', 'gl-ad-slot gl-ad-slot--header' );
 ?>
 
 <div class="gl-main">
+<div class="gl-page-transition" aria-hidden="true"></div>

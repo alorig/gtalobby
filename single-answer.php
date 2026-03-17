@@ -50,7 +50,8 @@ foreach ( $single_zones as $zone_id => $zone_cfg ) {
                 /* -- Post Header -------------------------------- */
                 case 'post_header':
                 ?>
-                <header class="gl-article__header" data-zone="post_header">
+                <header class="gl-article__header" data-zone="post_header" data-animate>
+                    <div class="gl-article__header-glow" aria-hidden="true"></div>
                     <?php gtalobby_post_type_badge(); ?>
                     <?php gtalobby_category_badge(); ?>
 
@@ -70,7 +71,8 @@ foreach ( $single_zones as $zone_id => $zone_cfg ) {
                     $short_answer = get_post_meta( get_the_ID(), 'answer_short_answer', true );
                     if ( $short_answer ) :
                 ?>
-                <div class="gl-answer-box" data-zone="quick_answer_box">
+                <div class="gl-answer-box" data-zone="quick_answer_box" data-animate>
+                    <div class="gl-answer-box__glow" aria-hidden="true"></div>
                     <div class="gl-answer-box__icon" aria-hidden="true">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/>
@@ -89,9 +91,10 @@ foreach ( $single_zones as $zone_id => $zone_cfg ) {
                 case 'featured_image':
                     if ( has_post_thumbnail() ) :
                 ?>
-                <div class="gl-article__hero" data-zone="featured_image">
+                <div class="gl-article__hero" data-zone="featured_image" data-animate>
                     <?php the_post_thumbnail( 'gl-feature', array( 'class' => 'gl-article__hero-img' ) ); ?>
                 </div>
+                <div class="gl-article__accent-divider" aria-hidden="true"></div>
                 <?php
                     endif;
                     break;
@@ -101,7 +104,7 @@ foreach ( $single_zones as $zone_id => $zone_cfg ) {
                     $toc = gtalobby_generate_toc( get_the_content() );
                     if ( $toc ) :
                 ?>
-                <div class="gl-article__toc" data-zone="toc">
+                <div class="gl-article__toc" data-zone="toc" data-animate>
                     <?php echo $toc; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
                 </div>
                 <?php
@@ -112,7 +115,7 @@ foreach ( $single_zones as $zone_id => $zone_cfg ) {
                 case 'body_content':
                     gtalobby_render_ad_slot( 'ad_before_content' );
                 ?>
-                <div class="gl-article__content gl-typography" data-zone="body_content">
+                <div class="gl-article__content gl-typography" data-zone="body_content" data-animate>
                     <?php the_content(); ?>
                 </div>
                 <?php
@@ -134,7 +137,7 @@ foreach ( $single_zones as $zone_id => $zone_cfg ) {
                     $related_qs = get_post_meta( get_the_ID(), 'answer_related_questions', true );
                     if ( is_array( $related_qs ) && ! empty( $related_qs ) ) :
                 ?>
-                <div class="gl-related-questions" data-zone="related_questions">
+                <div class="gl-related-questions" data-zone="related_questions" data-animate>
                     <h2 class="gl-related-questions__title"><?php esc_html_e( 'Related Questions', 'gtalobby' ); ?></h2>
                     <ul class="gl-related-questions__list">
                         <?php foreach ( $related_qs as $rq ) : ?>
@@ -173,7 +176,7 @@ foreach ( $single_zones as $zone_id => $zone_cfg ) {
 
         if ( $has_footer ) :
         ?>
-        <footer class="gl-article__footer">
+        <footer class="gl-article__footer" data-animate>
             <?php gtalobby_taxonomy_tags(); ?>
 
             <?php if ( gtalobby_is_zone_enabled( 'single', 'hub_link', $category_slug ) ) : ?>

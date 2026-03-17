@@ -67,7 +67,7 @@ endif;
             <span class="gl-comments__count-badge"><?php echo number_format_i18n( get_comments_number() ); ?></span>
         </h2>
 
-        <ol class="gl-comment-list">
+        <ol class="gl-comment-list" data-animate>
             <?php
             wp_list_comments( array(
                 'style'       => 'ol',
@@ -91,6 +91,9 @@ endif;
         <p class="gl-comments__closed"><?php esc_html_e( 'Comments are closed.', 'gtalobby' ); ?></p>
     <?php endif; ?>
 
+    <div class="gl-comments__divider" aria-hidden="true"></div>
+
+    <div class="gl-comment-form-wrapper" data-animate>
     <?php
     $commenter = wp_get_current_commenter();
 
@@ -131,5 +134,6 @@ endif;
         ),
     ) );
     ?>
+    </div>
 
 </section>

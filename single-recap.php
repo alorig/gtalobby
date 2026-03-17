@@ -51,7 +51,8 @@ foreach ( $single_zones as $zone_id => $zone_cfg ) {
                             /* -- Post Header -------------------------------- */
                             case 'post_header':
                             ?>
-                            <header class="gl-article__header" data-zone="post_header">
+                            <header class="gl-article__header" data-zone="post_header" data-animate>
+                                <div class="gl-article__header-glow" aria-hidden="true"></div>
                                 <?php gtalobby_post_type_badge(); ?>
                                 <?php gtalobby_category_badge(); ?>
 
@@ -74,9 +75,10 @@ foreach ( $single_zones as $zone_id => $zone_cfg ) {
                             case 'featured_image':
                                 if ( has_post_thumbnail() ) :
                             ?>
-                            <div class="gl-article__hero" data-zone="featured_image">
+                            <div class="gl-article__hero" data-zone="featured_image" data-animate>
                                 <?php the_post_thumbnail( 'gl-hero', array( 'class' => 'gl-article__hero-img' ) ); ?>
                             </div>
+                            <div class="gl-article__accent-divider" aria-hidden="true"></div>
                             <?php
                                 endif;
                                 break;
@@ -86,7 +88,8 @@ foreach ( $single_zones as $zone_id => $zone_cfg ) {
                                 $podium_vehicle = get_post_meta( get_the_ID(), 'recap_podium_vehicle', true );
                                 if ( $podium_vehicle ) :
                             ?>
-                            <div class="gl-recap-podium" data-zone="post_type_fields">
+                            <div class="gl-recap-podium" data-zone="post_type_fields" data-animate>
+                                <div class="gl-recap-podium__glow" aria-hidden="true"></div>
                                 <h2 class="gl-recap-podium__title"><?php esc_html_e( 'Podium Vehicle', 'gtalobby' ); ?></h2>
                                 <div class="gl-recap-podium__vehicle">
                                     <span class="gl-recap-podium__icon">🏆</span>
@@ -102,7 +105,7 @@ foreach ( $single_zones as $zone_id => $zone_cfg ) {
                                 $bonuses = get_post_meta( get_the_ID(), 'recap_bonuses', true );
                                 if ( is_array( $bonuses ) && ! empty( $bonuses ) ) :
                             ?>
-                            <div class="gl-recap-section gl-recap-section--bonuses" data-zone="weekly_bonuses">
+                            <div class="gl-recap-section gl-recap-section--bonuses" data-zone="weekly_bonuses" data-animate>
                                 <h2 class="gl-recap-section__title"><?php esc_html_e( 'Bonuses & Rewards', 'gtalobby' ); ?></h2>
                                 <div class="gl-recap-grid">
                                     <?php foreach ( $bonuses as $bonus ) : ?>
@@ -158,7 +161,7 @@ foreach ( $single_zones as $zone_id => $zone_cfg ) {
                             case 'body_content':
                                 gtalobby_render_ad_slot( 'ad_before_content' );
                             ?>
-                            <div class="gl-article__content gl-typography" data-zone="body_content">
+                            <div class="gl-article__content gl-typography" data-zone="body_content" data-animate>
                                 <?php the_content(); ?>
                             </div>
                             <?php
@@ -184,7 +187,7 @@ foreach ( $single_zones as $zone_id => $zone_cfg ) {
 
                     if ( $has_footer ) :
                     ?>
-                    <footer class="gl-article__footer">
+                    <footer class="gl-article__footer" data-animate>
                         <?php gtalobby_taxonomy_tags(); ?>
 
                         <?php if ( gtalobby_is_zone_enabled( 'single', 'hub_link', $category_slug ) ) : ?>
