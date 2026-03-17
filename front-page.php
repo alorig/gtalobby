@@ -58,7 +58,7 @@ $gta6_cat   = get_category_by_slug( 'gta6' );
                 $cheats_cat = get_category_by_slug( 'cheats' );
                 $mods_cat   = get_category_by_slug( 'mods' );
             ?>
-            <section class="gl-hero-accordion" data-zone="hero" data-animate>
+            <section class="gl-hero-accordion" data-zone="hero" data-animate="blur">
                 <div class="gl-hero-accordion__panels">
 
                     <!-- Panel 1 — GTA 6 (Cyber Cyan) -->
@@ -175,7 +175,7 @@ $gta6_cat   = get_category_by_slug( 'gta6' );
                     'meta_value' => 'page-hub.php', 'fields' => 'ids',
                 ) ) )->found_posts;
             ?>
-            <div class="gl-stats-bar" data-animate>
+            <div class="gl-stats-bar" data-animate="fade-scale">
                 <div class="gl-stats-bar__glow" aria-hidden="true"></div>
                 <div class="gl-container">
                     <div class="gl-stats-bar__inner">
@@ -206,13 +206,13 @@ $gta6_cat   = get_category_by_slug( 'gta6' );
                ============================================================ */
             case 'category_grid':
             ?>
-            <section class="gl-zone gl-home-categories" data-zone="category_grid" data-animate>
+            <section class="gl-zone gl-home-categories" data-zone="category_grid" data-animate="fade-up">
                 <div class="gl-container">
                     <div class="gl-home-categories__header">
                         <h2 class="gl-zone__title"><?php esc_html_e( 'Explore by Category', 'gtalobby' ); ?></h2>
                         <p class="gl-zone__subtitle"><?php esc_html_e( '9 content silos covering every aspect of the GTA universe', 'gtalobby' ); ?></p>
                     </div>
-                    <div class="gl-category-grid" data-animate>
+                    <div class="gl-category-grid" data-animate="fade-up" data-delay="200">
                         <?php foreach ( $sag_categories as $slug => $cat_name ) :
                             $cat_obj = get_category_by_slug( $slug );
                             if ( ! $cat_obj ) continue;
@@ -273,7 +273,7 @@ $gta6_cat   = get_category_by_slug( 'gta6' );
                     ) ) );
                 }
             ?>
-            <section class="gl-zone gl-home-gta6" data-zone="gta6_spotlight" data-animate>
+            <section class="gl-zone gl-home-gta6" data-zone="gta6_spotlight" data-animate="clip-left">
                 <!-- Decorative background -->
                 <div class="gl-home-gta6__bg">
                     <div class="gl-home-gta6__bg-glow"></div>
@@ -373,7 +373,7 @@ $gta6_cat   = get_category_by_slug( 'gta6' );
                     'order'          => 'ASC',
                 ) );
             ?>
-            <section class="gl-zone gl-home-hubs" data-zone="featured_hubs" data-animate>
+            <section class="gl-zone gl-home-hubs" data-zone="featured_hubs" data-animate="fade-up">
                 <div class="gl-container">
                     <div class="gl-home-hubs__header">
                         <div>
@@ -383,7 +383,7 @@ $gta6_cat   = get_category_by_slug( 'gta6' );
                     </div>
 
                     <?php if ( $hubs_query->have_posts() ) : ?>
-                    <div class="gl-hubs-masonry" data-animate>
+                    <div class="gl-hubs-masonry" data-animate="zoom" data-delay="200">
                         <?php
                         $hub_i = 0;
                         while ( $hubs_query->have_posts() ) :
@@ -436,7 +436,7 @@ $gta6_cat   = get_category_by_slug( 'gta6' );
             case 'latest_posts':
                 $latest_cats = array_slice( array_keys( $sag_categories ), 0, 5 );
             ?>
-            <section class="gl-zone gl-home-latest" data-zone="latest_posts" data-animate>
+            <section class="gl-zone gl-home-latest" data-zone="latest_posts" data-animate="slide-left">
                 <div class="gl-container">
                     <div class="gl-home-latest__top">
                         <h2 class="gl-zone__title"><?php esc_html_e( 'Latest Content', 'gtalobby' ); ?></h2>
@@ -567,7 +567,7 @@ $gta6_cat   = get_category_by_slug( 'gta6' );
                ============================================================ */
             case 'newsletter':
             ?>
-            <section class="gl-zone gl-home-newsletter" data-zone="newsletter" data-animate>
+            <section class="gl-zone gl-home-newsletter" data-zone="newsletter" data-animate="bounce">
                 <div class="gl-home-newsletter__glow" aria-hidden="true"></div>
                 <div class="gl-container">
                     <?php gtalobby_newsletter_form(); ?>

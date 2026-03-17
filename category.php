@@ -61,7 +61,7 @@ $cat_desc = category_description() ?: ( isset( $cat_descriptions[ $category_slug
                ========================================================== */
             case 'archive_header':
             ?>
-            <section class="gl-cat-hero" data-zone="archive_header" data-animate>
+            <section class="gl-cat-hero" data-zone="archive_header" data-animate="blur">
                 <?php if ( $hero_img ) : ?>
                 <div class="gl-cat-hero__bg" style="background-image: url('<?php echo esc_url( $hero_img ); ?>')"></div>
                 <?php endif; ?>
@@ -75,13 +75,13 @@ $cat_desc = category_description() ?: ( isset( $cat_descriptions[ $category_slug
                         <?php gtalobby_icon( $category_icon, 36 ); ?>
                     </div>
 
-                    <h1 class="gl-cat-hero__title"><?php single_cat_title(); ?></h1>
+                    <h1 class="gl-cat-hero__title" data-animate="fade-up" data-delay="200"><?php single_cat_title(); ?></h1>
 
                     <?php if ( $cat_desc ) : ?>
                     <p class="gl-cat-hero__desc"><?php echo wp_kses_post( $cat_desc ); ?></p>
                     <?php endif; ?>
 
-                    <div class="gl-cat-hero__meta">
+                    <div class="gl-cat-hero__meta" data-animate="fade-up" data-delay="400">
                         <span class="gl-cat-hero__count">
                             <?php printf( esc_html( _n( '%s article', '%s articles', $category->count, 'gtalobby' ) ), '<strong>' . number_format_i18n( $category->count ) . '</strong>' ); ?>
                         </span>
@@ -119,7 +119,7 @@ $cat_desc = category_description() ?: ( isset( $cat_descriptions[ $category_slug
 
                 if ( ! empty( $hub_pages ) ) :
             ?>
-            <section class="gl-zone gl-cat-hubs" data-zone="pinned_hubs" data-animate>
+            <section class="gl-zone gl-cat-hubs" data-zone="pinned_hubs" data-animate="fade-scale">
                 <div class="gl-container">
                     <div class="gl-cat-hubs__header">
                         <h2 class="gl-cat-hubs__title">
@@ -166,7 +166,7 @@ $cat_desc = category_description() ?: ( isset( $cat_descriptions[ $category_slug
             case 'filter_bar':
                 $current_pt = isset( $_GET['post_type'] ) ? sanitize_key( $_GET['post_type'] ) : '';
             ?>
-            <div class="gl-cat-filters" data-zone="filter_bar" data-animate>
+            <div class="gl-cat-filters" data-zone="filter_bar" data-animate="fade-down">
                 <div class="gl-container">
                     <div class="gl-cat-filters__bar">
                         <a href="<?php echo esc_url( get_category_link( $category->term_id ) ); ?>"
@@ -195,7 +195,7 @@ $cat_desc = category_description() ?: ( isset( $cat_descriptions[ $category_slug
             case 'post_grid':
                 gtalobby_render_ad_slot( 'ad_before_content' );
             ?>
-            <div class="gl-cat-content" data-zone="post_grid" data-animate>
+            <div class="gl-cat-content" data-zone="post_grid" data-animate="fade-up">
                 <div class="gl-container">
 
                     <?php if ( have_posts() ) : ?>
@@ -205,7 +205,7 @@ $cat_desc = category_description() ?: ( isset( $cat_descriptions[ $category_slug
                         if ( ! is_paged() ) :
                             the_post();
                         ?>
-                        <article class="gl-cat-featured" data-animate>
+                        <article class="gl-cat-featured" data-animate="fade-scale">
                             <div class="gl-cat-featured__image">
                                 <?php if ( has_post_thumbnail() ) : ?>
                                     <?php the_post_thumbnail( 'gl-feature', array( 'class' => 'gl-cat-featured__img' ) ); ?>
@@ -234,7 +234,7 @@ $cat_desc = category_description() ?: ( isset( $cat_descriptions[ $category_slug
                         <?php endif; ?>
 
                         <?php if ( have_posts() ) : ?>
-                        <div class="gl-cat-grid" data-animate>
+                        <div class="gl-cat-grid" data-animate="fade-up" data-delay="200">
                             <?php
                             $post_index = 0;
                             while ( have_posts() ) :
@@ -272,7 +272,7 @@ $cat_desc = category_description() ?: ( isset( $cat_descriptions[ $category_slug
                         <?php endif; ?>
 
                     <?php else : ?>
-                    <div class="gl-cat-empty" data-animate>
+                    <div class="gl-cat-empty" data-animate="fade-up">
                         <div class="gl-cat-empty__icon"><?php gtalobby_icon( $category_icon, 48 ); ?></div>
                         <h2><?php esc_html_e( 'No Articles Yet', 'gtalobby' ); ?></h2>
                         <p><?php printf( esc_html__( 'Content for %s is coming soon. Check back later!', 'gtalobby' ), '<strong>' . esc_html( single_cat_title( '', false ) ) . '</strong>' ); ?></p>

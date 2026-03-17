@@ -50,12 +50,12 @@ foreach ( $single_zones as $zone_id => $zone_cfg ) {
                         /* -- Post Header -------------------------------- */
                         case 'post_header':
                         ?>
-                        <header class="gl-article__header" data-zone="post_header" data-animate>
+                        <header class="gl-article__header" data-zone="post_header" data-animate="blur">
                             <div class="gl-article__header-glow" aria-hidden="true"></div>
                             <?php gtalobby_post_type_badge(); ?>
                             <?php gtalobby_category_badge(); ?>
 
-                            <h1 class="gl-article__title"><?php the_title(); ?></h1>
+                            <h1 class="gl-article__title" data-animate="fade-up" data-delay="100"><?php the_title(); ?></h1>
 
                             <?php gtalobby_post_meta(); ?>
 
@@ -70,7 +70,7 @@ foreach ( $single_zones as $zone_id => $zone_cfg ) {
                         case 'featured_image':
                             if ( has_post_thumbnail() ) :
                         ?>
-                        <div class="gl-article__hero" data-zone="featured_image" data-animate>
+                        <div class="gl-article__hero" data-zone="featured_image" data-animate="clip-left">
                             <?php the_post_thumbnail( 'gl-hero', array( 'class' => 'gl-article__hero-img' ) ); ?>
                         </div>
                         <div class="gl-article__accent-divider" aria-hidden="true"></div>
@@ -87,7 +87,7 @@ foreach ( $single_zones as $zone_id => $zone_cfg ) {
 
                             if ( $difficulty || $time_complete || $step_count || $tools_needed ) :
                         ?>
-                        <div class="gl-guide-meta" data-zone="post_type_fields" data-animate>
+                        <div class="gl-guide-meta" data-zone="post_type_fields" data-animate="fade-scale">
                             <h2 class="gl-sr-only"><?php esc_html_e( 'Guide Overview', 'gtalobby' ); ?></h2>
                             <div class="gl-guide-meta__grid">
                                 <?php if ( $difficulty ) : ?>
@@ -128,7 +128,7 @@ foreach ( $single_zones as $zone_id => $zone_cfg ) {
                             $video_embed = get_post_meta( get_the_ID(), 'guide_video_embed', true );
                             if ( $video_embed ) :
                         ?>
-                        <div class="gl-video-embed" data-zone="video_embed" data-animate>
+                        <div class="gl-video-embed" data-zone="video_embed" data-animate="zoom">
                             <div class="gl-video-embed__wrapper">
                                 <?php echo wp_oembed_get( $video_embed ) ?: '<a href="' . esc_url( $video_embed ) . '" target="_blank" rel="noopener">' . esc_html__( 'Watch Video', 'gtalobby' ) . '</a>'; ?>
                             </div>
@@ -142,7 +142,7 @@ foreach ( $single_zones as $zone_id => $zone_cfg ) {
                             $toc = gtalobby_generate_toc( get_the_content() );
                             if ( $toc ) :
                         ?>
-                        <div class="gl-article__toc" data-zone="toc" data-animate>
+                        <div class="gl-article__toc" data-zone="toc" data-animate="slide-right">
                             <?php echo $toc; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
                         </div>
                         <?php
@@ -153,7 +153,7 @@ foreach ( $single_zones as $zone_id => $zone_cfg ) {
                         case 'body_content':
                             gtalobby_render_ad_slot( 'ad_before_content' );
                         ?>
-                        <div class="gl-article__content gl-typography" data-zone="body_content" data-animate>
+                        <div class="gl-article__content gl-typography" data-zone="body_content" data-animate="fade-up">
                             <?php the_content(); ?>
                         </div>
                         <?php
@@ -181,7 +181,7 @@ foreach ( $single_zones as $zone_id => $zone_cfg ) {
 
                 if ( $has_footer ) :
                 ?>
-                <footer class="gl-article__footer" data-animate>
+                <footer class="gl-article__footer" data-animate="fade-up" data-delay="100">
                     <?php gtalobby_taxonomy_tags(); ?>
                     <?php gtalobby_platform_icons(); ?>
 
@@ -209,7 +209,7 @@ foreach ( $single_zones as $zone_id => $zone_cfg ) {
                 switch ( $zone_id ) :
                     case 'author_box':
                     ?>
-                        <div class="gl-author-box-wrapper" data-animate>
+                        <div class="gl-author-box-wrapper" data-animate="fade-up" data-delay="100">
                             <?php gtalobby_author_box(); ?>
                         </div>
                     <?php
@@ -217,7 +217,7 @@ foreach ( $single_zones as $zone_id => $zone_cfg ) {
 
                     case 'related_posts':
                     ?>
-                        <div class="gl-related-posts-wrapper" data-animate>
+                        <div class="gl-related-posts-wrapper" data-animate="fade-up" data-delay="200">
                             <?php gtalobby_related_posts(); ?>
                         </div>
                     <?php
@@ -226,7 +226,7 @@ foreach ( $single_zones as $zone_id => $zone_cfg ) {
                     case 'post_navigation':
                         if ( function_exists( 'gtalobby_post_navigation' ) ) :
                     ?>
-                        <div class="gl-post-navigation-wrapper" data-animate>
+                        <div class="gl-post-navigation-wrapper" data-animate="slide-left" data-delay="300">
                             <?php gtalobby_post_navigation(); ?>
                         </div>
                     <?php
@@ -236,7 +236,7 @@ foreach ( $single_zones as $zone_id => $zone_cfg ) {
                     case 'comments':
                         if ( comments_open() || get_comments_number() ) :
                     ?>
-                        <div class="gl-comments-wrapper" data-animate>
+                        <div class="gl-comments-wrapper" data-animate="fade-up" data-delay="400">
                             <?php comments_template(); ?>
                         </div>
                     <?php

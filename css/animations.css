@@ -1,148 +1,1000 @@
 /**
- * GtaLobby — Animations System
+ * GtaLobby — Premium Animation System
  *
- * 20+ animations for a polished, interactive experience.
- * Uses CSS @keyframes, scroll-driven reveals, and transition enhancements.
+ * 100+ animations for an immersive gaming website experience.
+ * Neon glows, particles, gradient shifts, text effects, and more.
  *
  * @package GtaLobby
  */
 
 /* ==========================================================================
-   ANIMATION 1: Fade-In Up on Scroll (Section Reveal)
-   Elements with [data-animate] fade in as they enter the viewport.
+   CORE KEYFRAMES — 100+ Animations
    ========================================================================== */
 
+/* 1. Fade In Up */
 @keyframes gl-fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(32px);
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* 2. Fade In Down */
+@keyframes gl-fadeInDown {
+    from { opacity: 0; transform: translateY(-40px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* 3. Fade In Left */
+@keyframes gl-fadeInLeft {
+    from { opacity: 0; transform: translateX(-60px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+/* 4. Fade In Right */
+@keyframes gl-fadeInRight {
+    from { opacity: 0; transform: translateX(60px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+/* 5. Fade In Scale */
+@keyframes gl-fadeInScale {
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* 6. Fade In Scale Rotate */
+@keyframes gl-fadeInScaleRotate {
+    from { opacity: 0; transform: scale(0.6) rotate(-10deg); }
+    to { opacity: 1; transform: scale(1) rotate(0deg); }
+}
+
+/* 7. Slide Up */
+@keyframes gl-slideUp {
+    from { opacity: 0; transform: translateY(100px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* 8. Slide Down */
+@keyframes gl-slideDown {
+    from { opacity: 0; transform: translateY(-100px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* 9. Zoom In */
+@keyframes gl-zoomIn {
+    from { opacity: 0; transform: scale(0.3); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* 10. Zoom In Bounce */
+@keyframes gl-zoomInBounce {
+    0% { opacity: 0; transform: scale(0.3); }
+    50% { opacity: 1; transform: scale(1.05); }
+    70% { transform: scale(0.95); }
+    100% { transform: scale(1); }
+}
+
+/* 11. Bounce In */
+@keyframes gl-bounceIn {
+    0% { opacity: 0; transform: scale(0.3); }
+    40% { transform: scale(1.1); }
+    60% { transform: scale(0.9); }
+    80% { opacity: 1; transform: scale(1.03); }
+    100% { transform: scale(1); }
+}
+
+/* 12. Flip In X */
+@keyframes gl-flipInX {
+    from { opacity: 0; transform: perspective(400px) rotateX(90deg); }
+    40% { transform: perspective(400px) rotateX(-15deg); }
+    70% { transform: perspective(400px) rotateX(15deg); }
+    to { opacity: 1; transform: perspective(400px) rotateX(0); }
+}
+
+/* 13. Flip In Y */
+@keyframes gl-flipInY {
+    from { opacity: 0; transform: perspective(400px) rotateY(90deg); }
+    40% { transform: perspective(400px) rotateY(-15deg); }
+    70% { transform: perspective(400px) rotateY(15deg); }
+    to { opacity: 1; transform: perspective(400px) rotateY(0); }
+}
+
+/* 14. Rotate In */
+@keyframes gl-rotateIn {
+    from { opacity: 0; transform: rotate(-200deg); }
+    to { opacity: 1; transform: rotate(0); }
+}
+
+/* 15. Neon Pulse */
+@keyframes gl-neonPulse {
+    0%, 100% {
+        text-shadow: 0 0 8px rgba(255, 44, 152, 0.4),
+                     0 0 20px rgba(255, 44, 152, 0.2);
     }
-    to {
-        opacity: 1;
-        transform: translateY(0);
+    50% {
+        text-shadow: 0 0 20px rgba(255, 44, 152, 0.8),
+                     0 0 60px rgba(255, 44, 152, 0.4),
+                     0 0 100px rgba(255, 44, 152, 0.2);
     }
 }
 
+/* 16. Neon Pulse Cyan */
+@keyframes gl-neonPulseCyan {
+    0%, 100% {
+        text-shadow: 0 0 8px rgba(39, 217, 255, 0.4),
+                     0 0 20px rgba(39, 217, 255, 0.2);
+    }
+    50% {
+        text-shadow: 0 0 20px rgba(39, 217, 255, 0.8),
+                     0 0 60px rgba(39, 217, 255, 0.4),
+                     0 0 100px rgba(39, 217, 255, 0.2);
+    }
+}
+
+/* 17. Neon Box Pulse */
+@keyframes gl-neonBoxPulse {
+    0%, 100% {
+        box-shadow: 0 0 5px rgba(255, 44, 152, 0.3),
+                    0 0 15px rgba(255, 44, 152, 0.1),
+                    inset 0 0 5px rgba(255, 44, 152, 0.05);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(255, 44, 152, 0.6),
+                    0 0 60px rgba(255, 44, 152, 0.3),
+                    0 0 100px rgba(255, 44, 152, 0.1),
+                    inset 0 0 15px rgba(255, 44, 152, 0.1);
+    }
+}
+
+/* 18. Neon Box Pulse Cyan */
+@keyframes gl-neonBoxPulseCyan {
+    0%, 100% {
+        box-shadow: 0 0 5px rgba(39, 217, 255, 0.3),
+                    0 0 15px rgba(39, 217, 255, 0.1),
+                    inset 0 0 5px rgba(39, 217, 255, 0.05);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(39, 217, 255, 0.6),
+                    0 0 60px rgba(39, 217, 255, 0.3),
+                    0 0 100px rgba(39, 217, 255, 0.1),
+                    inset 0 0 15px rgba(39, 217, 255, 0.1);
+    }
+}
+
+/* 19. Gradient Shift */
+@keyframes gl-gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* 20. Gradient Shift Diagonal */
+@keyframes gl-gradientShiftDiag {
+    0% { background-position: 0% 0%; }
+    25% { background-position: 100% 0%; }
+    50% { background-position: 100% 100%; }
+    75% { background-position: 0% 100%; }
+    100% { background-position: 0% 0%; }
+}
+
+/* 21. Rainbow Border */
+@keyframes gl-rainbowBorder {
+    0% { border-image-source: linear-gradient(0deg, #FF2C98, #27D9FF, #6C5CE7, #FF2C98); }
+    33% { border-image-source: linear-gradient(120deg, #FF2C98, #27D9FF, #6C5CE7, #FF2C98); }
+    67% { border-image-source: linear-gradient(240deg, #FF2C98, #27D9FF, #6C5CE7, #FF2C98); }
+    100% { border-image-source: linear-gradient(360deg, #FF2C98, #27D9FF, #6C5CE7, #FF2C98); }
+}
+
+/* 22. Border Glow Rotate */
+@keyframes gl-borderGlowRotate {
+    0% { --angle: 0deg; }
+    100% { --angle: 360deg; }
+}
+
+/* 23. Shimmer */
+@keyframes gl-shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+/* 24. Text Shimmer */
+@keyframes gl-textShimmer {
+    0% { background-position: -100% 0; }
+    100% { background-position: 200% 0; }
+}
+
+/* 25. Float Up Down */
+@keyframes gl-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+/* 26. Float Rotate */
+@keyframes gl-floatRotate {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    25% { transform: translateY(-10px) rotate(3deg); }
+    75% { transform: translateY(5px) rotate(-3deg); }
+}
+
+/* 27. Orbit */
+@keyframes gl-orbit {
+    from { transform: rotate(0deg) translateX(60px) rotate(0deg); }
+    to { transform: rotate(360deg) translateX(60px) rotate(-360deg); }
+}
+
+/* 28. Spin */
+@keyframes gl-spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* 29. Spin Reverse */
+@keyframes gl-spinReverse {
+    from { transform: rotate(360deg); }
+    to { transform: rotate(0deg); }
+}
+
+/* 30. Pulse */
+@keyframes gl-pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.05); opacity: 0.8; }
+}
+
+/* 31. Pulse Ring */
+@keyframes gl-pulseRing {
+    0% { transform: scale(0.5); opacity: 1; }
+    100% { transform: scale(2.5); opacity: 0; }
+}
+
+/* 32. Heartbeat */
+@keyframes gl-heartbeat {
+    0%, 100% { transform: scale(1); }
+    14% { transform: scale(1.15); }
+    28% { transform: scale(1); }
+    42% { transform: scale(1.15); }
+    70% { transform: scale(1); }
+}
+
+/* 33. Shake */
+@keyframes gl-shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+    20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+/* 34. Wobble */
+@keyframes gl-wobble {
+    0% { transform: rotate(0deg); }
+    15% { transform: rotate(-5deg); }
+    30% { transform: rotate(3deg); }
+    45% { transform: rotate(-3deg); }
+    60% { transform: rotate(2deg); }
+    75% { transform: rotate(-1deg); }
+    100% { transform: rotate(0deg); }
+}
+
+/* 35. Rubber Band */
+@keyframes gl-rubberBand {
+    0% { transform: scale(1); }
+    30% { transform: scaleX(1.25) scaleY(0.75); }
+    40% { transform: scaleX(0.75) scaleY(1.25); }
+    50% { transform: scaleX(1.15) scaleY(0.85); }
+    65% { transform: scaleX(0.95) scaleY(1.05); }
+    75% { transform: scaleX(1.05) scaleY(0.95); }
+    100% { transform: scale(1); }
+}
+
+/* 36. Jello */
+@keyframes gl-jello {
+    0%, 100% { transform: skew(0deg, 0deg); }
+    30% { transform: skew(-12.5deg, -12.5deg); }
+    40% { transform: skew(6.25deg, 6.25deg); }
+    50% { transform: skew(-3.125deg, -3.125deg); }
+    65% { transform: skew(1.5625deg, 1.5625deg); }
+    75% { transform: skew(-0.78deg, -0.78deg); }
+}
+
+/* 37. Swing */
+@keyframes gl-swing {
+    20% { transform: rotate3d(0, 0, 1, 15deg); }
+    40% { transform: rotate3d(0, 0, 1, -10deg); }
+    60% { transform: rotate3d(0, 0, 1, 5deg); }
+    80% { transform: rotate3d(0, 0, 1, -5deg); }
+    100% { transform: rotate3d(0, 0, 1, 0deg); }
+}
+
+/* 38. Tada */
+@keyframes gl-tada {
+    0% { transform: scale(1) rotate(0deg); }
+    10%, 20% { transform: scale(0.9) rotate(-3deg); }
+    30%, 50%, 70%, 90% { transform: scale(1.1) rotate(3deg); }
+    40%, 60%, 80% { transform: scale(1.1) rotate(-3deg); }
+    100% { transform: scale(1) rotate(0deg); }
+}
+
+/* 39. Glitch */
+@keyframes gl-glitch {
+    0%, 100% { transform: translate(0); }
+    2% { transform: translate(-3px, 3px); }
+    4% { transform: translate(3px, -3px); }
+    6% { transform: translate(-2px, -1px); }
+    8% { transform: translate(2px, 1px); }
+    10% { transform: translate(0); }
+}
+
+/* 40. Glitch Text */
+@keyframes gl-glitchText {
+    0%, 100% { clip-path: inset(0 0 0 0); text-shadow: none; }
+    20% { clip-path: inset(10% 0 60% 0); text-shadow: -3px 0 #FF2C98; }
+    40% { clip-path: inset(40% 0 20% 0); text-shadow: 3px 0 #27D9FF; }
+    60% { clip-path: inset(70% 0 5% 0); text-shadow: -2px 0 #6C5CE7; }
+    80% { clip-path: inset(5% 0 80% 0); text-shadow: 2px 0 #FF2C98; }
+}
+
+/* 41. Scanline */
+@keyframes gl-scanline {
+    0% { top: -100%; }
+    100% { top: 100%; }
+}
+
+/* 42. Flicker */
+@keyframes gl-flicker {
+    0%, 19.999%, 22%, 62.999%, 64%, 64.999%, 70%, 100% { opacity: 1; }
+    20%, 21.999%, 63%, 63.999%, 65%, 69.999% { opacity: 0.4; }
+}
+
+/* 43. Strip Wave */
+@keyframes gl-stripWave {
+    0%, 100% { transform: scaleY(1); }
+    50% { transform: scaleY(1.6); }
+}
+
+/* 44. Arrow Bounce */
+@keyframes gl-arrowBounce {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(6px); }
+}
+
+/* 45. Float Particle */
+@keyframes gl-floatParticle {
+    0%, 100% { transform: translateY(0) translateX(0); opacity: 0.6; }
+    25% { transform: translateY(-30px) translateX(15px); opacity: 1; }
+    50% { transform: translateY(-60px) translateX(-10px); opacity: 0.8; }
+    75% { transform: translateY(-30px) translateX(20px); opacity: 0.4; }
+}
+
+/* 46. Rise And Fade */
+@keyframes gl-riseAndFade {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(-100px); opacity: 0; }
+}
+
+/* 47. Wave */
+@keyframes gl-wave {
+    0%, 60%, 100% { transform: initial; }
+    30% { transform: translateY(-15px); }
+}
+
+/* 48. Morph Blob */
+@keyframes gl-morphBlob {
+    0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+    25% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+    50% { border-radius: 50% 60% 30% 60% / 30% 60% 70% 40%; }
+    75% { border-radius: 60% 30% 60% 40% / 60% 40% 30% 70%; }
+}
+
+/* 49. Line Grow */
+@keyframes gl-lineGrow {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+/* 50. Line Grow Center */
+@keyframes gl-lineGrowCenter {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+}
+
+/* 51. Count Up Glow */
+@keyframes gl-countGlow {
+    0% { text-shadow: 0 0 0 transparent; }
+    50% { text-shadow: 0 0 30px rgba(255, 44, 152, 0.6); }
+    100% { text-shadow: 0 0 0 transparent; }
+}
+
+/* 52. Badge Pulse */
+@keyframes gl-badgePulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(255, 44, 152, 0.5); }
+    50% { box-shadow: 0 0 0 12px rgba(255, 44, 152, 0); }
+}
+
+/* 53. Confidence Shimmer */
+@keyframes gl-confidenceShimmer {
+    0% { background-position: -100% 0; }
+    100% { background-position: 200% 0; }
+}
+
+/* 54. Float Number */
+@keyframes gl-floatNum {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+/* 55. Expand Width */
+@keyframes gl-expandWidth {
+    from { width: 0; opacity: 0; }
+    to { width: 100%; opacity: 1; }
+}
+
+/* 56. Slide In Bottom */
+@keyframes gl-slideInBottom {
+    from { transform: translateY(100%); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* 57. Slide In Top */
+@keyframes gl-slideInTop {
+    from { transform: translateY(-100%); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* 58. Clip Reveal Left */
+@keyframes gl-clipRevealLeft {
+    from { clip-path: inset(0 100% 0 0); }
+    to { clip-path: inset(0 0 0 0); }
+}
+
+/* 59. Clip Reveal Right */
+@keyframes gl-clipRevealRight {
+    from { clip-path: inset(0 0 0 100%); }
+    to { clip-path: inset(0 0 0 0); }
+}
+
+/* 60. Clip Reveal Top */
+@keyframes gl-clipRevealTop {
+    from { clip-path: inset(0 0 100% 0); }
+    to { clip-path: inset(0 0 0 0); }
+}
+
+/* 61. Clip Reveal Bottom */
+@keyframes gl-clipRevealBottom {
+    from { clip-path: inset(100% 0 0 0); }
+    to { clip-path: inset(0 0 0 0); }
+}
+
+/* 62. Clip Reveal Circle */
+@keyframes gl-clipCircle {
+    from { clip-path: circle(0% at 50% 50%); }
+    to { clip-path: circle(100% at 50% 50%); }
+}
+
+/* 63. Text Reveal Blur */
+@keyframes gl-textRevealBlur {
+    from { filter: blur(12px); opacity: 0; }
+    to { filter: blur(0); opacity: 1; }
+}
+
+/* 64. Background Pan */
+@keyframes gl-bgPan {
+    from { background-position: 0% center; }
+    to { background-position: -200% center; }
+}
+
+/* 65. Color Cycle */
+@keyframes gl-colorCycle {
+    0% { color: #FF2C98; }
+    25% { color: #27D9FF; }
+    50% { color: #6C5CE7; }
+    75% { color: #FF2C98; }
+    100% { color: #FF2C98; }
+}
+
+/* 66. Border Color Cycle */
+@keyframes gl-borderColorCycle {
+    0% { border-color: #FF2C98; }
+    33% { border-color: #27D9FF; }
+    67% { border-color: #6C5CE7; }
+    100% { border-color: #FF2C98; }
+}
+
+/* 67. Shadow Pulse */
+@keyframes gl-shadowPulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(255, 44, 152, 0.4); }
+    50% { box-shadow: 0 0 30px 10px rgba(255, 44, 152, 0.15); }
+}
+
+/* 68. Breathing */
+@keyframes gl-breathing {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+}
+
+/* 69. Tilt */
+@keyframes gl-tilt {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(1deg); }
+    75% { transform: rotate(-1deg); }
+}
+
+/* 70. Reveal Mask Left */
+@keyframes gl-revealMaskLeft {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(0); }
+}
+
+/* 71. Light Sweep */
+@keyframes gl-lightSweep {
+    0% { left: -100%; }
+    100% { left: 200%; }
+}
+
+/* 72. Glow Breathe */
+@keyframes gl-glowBreathe {
+    0%, 100% {
+        box-shadow: 0 0 15px rgba(255, 44, 152, 0.15),
+                    0 0 30px rgba(39, 217, 255, 0.1);
+    }
+    50% {
+        box-shadow: 0 0 30px rgba(255, 44, 152, 0.3),
+                    0 0 60px rgba(39, 217, 255, 0.2),
+                    0 0 90px rgba(108, 92, 231, 0.1);
+    }
+}
+
+/* 73. Neon Underline Sweep */
+@keyframes gl-neonUnderlineSweep {
+    from { width: 0; box-shadow: none; }
+    to { width: 100%; box-shadow: 0 0 10px rgba(255, 44, 152, 0.5), 0 0 20px rgba(255, 44, 152, 0.2); }
+}
+
+/* 74. Parallax Drift */
+@keyframes gl-parallaxDrift {
+    0%, 100% { transform: translateX(0) translateY(0); }
+    25% { transform: translateX(20px) translateY(-10px); }
+    50% { transform: translateX(-15px) translateY(-20px); }
+    75% { transform: translateX(10px) translateY(5px); }
+}
+
+/* 75. Rotate Border */
+@keyframes gl-rotateBorder {
+    0% { background-position: 0 0; }
+    100% { background-position: 400% 0; }
+}
+
+/* 76. Star Twinkle */
+@keyframes gl-starTwinkle {
+    0%, 100% { opacity: 0.3; transform: scale(0.8); }
+    50% { opacity: 1; transform: scale(1.2); }
+}
+
+/* 77. Particle Float Up */
+@keyframes gl-particleFloatUp {
+    0% { transform: translateY(0) scale(1); opacity: 0.8; }
+    50% { opacity: 1; }
+    100% { transform: translateY(-200px) scale(0.3); opacity: 0; }
+}
+
+/* 78. Gradient Text Shift */
+@keyframes gl-gradientTextShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* 79. Typewriter Cursor */
+@keyframes gl-typewriterCursor {
+    0%, 100% { border-right-color: var(--gl-color-accent); }
+    50% { border-right-color: transparent; }
+}
+
+/* 80. Elastic Scale */
+@keyframes gl-elasticScale {
+    0% { transform: scale(0); }
+    55% { transform: scale(1.08); }
+    70% { transform: scale(0.96); }
+    85% { transform: scale(1.02); }
+    100% { transform: scale(1); }
+}
+
+/* 81. Drop In */
+@keyframes gl-dropIn {
+    0% { transform: translateY(-200px); opacity: 0; }
+    60% { transform: translateY(15px); opacity: 1; }
+    80% { transform: translateY(-5px); }
+    100% { transform: translateY(0); }
+}
+
+/* 82. Slide In Left */
+@keyframes gl-slideInLeft {
+    from { transform: translateX(-100px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+/* 83. Slide In Right */
+@keyframes gl-slideInRight {
+    from { transform: translateX(100px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+/* 84. Scale Rotate In */
+@keyframes gl-scaleRotateIn {
+    from { transform: scale(0) rotate(-180deg); opacity: 0; }
+    to { transform: scale(1) rotate(0); opacity: 1; }
+}
+
+/* 85. Unfold */
+@keyframes gl-unfold {
+    from { transform: scaleY(0); transform-origin: top; opacity: 0; }
+    to { transform: scaleY(1); transform-origin: top; opacity: 1; }
+}
+
+/* 86. Stretch In */
+@keyframes gl-stretchIn {
+    0% { transform: scaleX(0); }
+    40% { transform: scaleX(1.02); }
+    60% { transform: scaleX(0.98); }
+    80% { transform: scaleX(1.01); }
+    100% { transform: scaleX(1); }
+}
+
+/* 87. Pop */
+@keyframes gl-pop {
+    0% { transform: scale(0); }
+    80% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+/* 88. Flash */
+@keyframes gl-flash {
+    0%, 50%, 100% { opacity: 1; }
+    25%, 75% { opacity: 0; }
+}
+
+/* 89. Hinge */
+@keyframes gl-hinge {
+    0% { transform-origin: top left; animation-timing-function: ease-in-out; }
+    20%, 60% { transform: rotate3d(0, 0, 1, 80deg); transform-origin: top left; animation-timing-function: ease-in-out; }
+    40%, 80% { transform: rotate3d(0, 0, 1, 60deg); transform-origin: top left; animation-timing-function: ease-in-out; opacity: 1; }
+    100% { transform: translateY(700px); opacity: 0; }
+}
+
+/* 90. Roll In */
+@keyframes gl-rollIn {
+    from { opacity: 0; transform: translateX(-100%) rotate(-120deg); }
+    to { opacity: 1; transform: translateX(0) rotate(0); }
+}
+
+/* 91. Blur In */
+@keyframes gl-blurIn {
+    from { filter: blur(20px); opacity: 0; }
+    to { filter: blur(0); opacity: 1; }
+}
+
+/* 92. Grow Height */
+@keyframes gl-growHeight {
+    from { max-height: 0; opacity: 0; }
+    to { max-height: 1000px; opacity: 1; }
+}
+
+/* 93. Shine */
+@keyframes gl-shine {
+    0% { left: -100%; }
+    20% { left: 100%; }
+    100% { left: 100%; }
+}
+
+/* 94. Ripple */
+@keyframes gl-ripple {
+    0% { transform: scale(0); opacity: 0.6; }
+    100% { transform: scale(4); opacity: 0; }
+}
+
+/* 95. Radar */
+@keyframes gl-radar {
+    0% { transform: scale(0); opacity: 1; border-width: 3px; }
+    100% { transform: scale(3); opacity: 0; border-width: 1px; }
+}
+
+/* 96. Dash Offset */
+@keyframes gl-dashOffset {
+    from { stroke-dashoffset: 1000; }
+    to { stroke-dashoffset: 0; }
+}
+
+/* 97. Slide Progress */
+@keyframes gl-slideProgress {
+    from { width: 0%; }
+    to { width: var(--progress, 100%); }
+}
+
+/* 98. Scale Width */
+@keyframes gl-scaleWidth {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+}
+
+/* 99. Page In */
+@keyframes gl-pageIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* 100. Glow Orb Float */
+@keyframes gl-glowOrbFloat {
+    0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.5; }
+    33% { transform: translate(30px, -30px) scale(1.1); opacity: 0.7; }
+    66% { transform: translate(-20px, 20px) scale(0.9); opacity: 0.4; }
+}
+
+/* 101. Matrix Rain */
+@keyframes gl-matrixRain {
+    0% { transform: translateY(-100%); opacity: 1; }
+    100% { transform: translateY(100vh); opacity: 0; }
+}
+
+/* 102. Neon Flicker */
+@keyframes gl-neonFlicker {
+    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+        text-shadow: 0 0 7px #FF2C98, 0 0 10px #FF2C98, 0 0 21px #FF2C98, 0 0 42px #FF2C98;
+    }
+    20%, 24%, 55% {
+        text-shadow: none;
+    }
+}
+
+/* 103. Cursor Blink */
+@keyframes gl-cursorBlink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* 104. Slide Loop */
+@keyframes gl-slideLoop {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+/* 105. Rotate Glow */
+@keyframes gl-rotateGlow {
+    0% { transform: rotate(0deg); filter: hue-rotate(0deg); }
+    100% { transform: rotate(360deg); filter: hue-rotate(360deg); }
+}
+
+
+/* ==========================================================================
+   SCROLL REVEAL SYSTEM
+   ========================================================================== */
+
+/* Base state: hidden */
 [data-animate] {
     opacity: 0;
-    transform: translateY(32px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    transform: translateY(40px);
+    transition: opacity 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
+/* Revealed state */
 [data-animate].gl-visible {
     opacity: 1;
     transform: translateY(0);
 }
 
+/* Animation variants via data attribute */
+[data-animate="fade-up"] { transform: translateY(60px); }
+[data-animate="fade-down"] { transform: translateY(-60px); }
+[data-animate="fade-left"] { transform: translateX(-60px); }
+[data-animate="fade-right"] { transform: translateX(60px); }
+[data-animate="fade-scale"] { transform: scale(0.8); }
+[data-animate="zoom"] { transform: scale(0.5); }
+[data-animate="flip-x"] { transform: perspective(400px) rotateX(90deg); }
+[data-animate="flip-y"] { transform: perspective(400px) rotateY(90deg); }
+[data-animate="blur"] { filter: blur(20px); transform: none; }
+[data-animate="clip-left"] { clip-path: inset(0 100% 0 0); transform: none; opacity: 1; }
+[data-animate="clip-right"] { clip-path: inset(0 0 0 100%); transform: none; opacity: 1; }
+[data-animate="clip-top"] { clip-path: inset(0 0 100% 0); transform: none; opacity: 1; }
+[data-animate="clip-bottom"] { clip-path: inset(100% 0 0 0); transform: none; opacity: 1; }
+[data-animate="clip-circle"] { clip-path: circle(0% at 50% 50%); transform: none; opacity: 1; }
+[data-animate="slide-left"] { transform: translateX(-100px); }
+[data-animate="slide-right"] { transform: translateX(100px); }
+[data-animate="rotate"] { transform: rotate(-10deg) scale(0.9); }
+[data-animate="bounce"] { transform: translateY(60px); }
+
+/* Revealed state for all variants */
+[data-animate="fade-up"].gl-visible,
+[data-animate="fade-down"].gl-visible,
+[data-animate="fade-left"].gl-visible,
+[data-animate="fade-right"].gl-visible,
+[data-animate="slide-left"].gl-visible,
+[data-animate="slide-right"].gl-visible,
+[data-animate="rotate"].gl-visible {
+    opacity: 1;
+    transform: none;
+}
+
+[data-animate="fade-scale"].gl-visible,
+[data-animate="zoom"].gl-visible {
+    opacity: 1;
+    transform: scale(1);
+}
+
+[data-animate="flip-x"].gl-visible {
+    opacity: 1;
+    transform: perspective(400px) rotateX(0);
+}
+
+[data-animate="flip-y"].gl-visible {
+    opacity: 1;
+    transform: perspective(400px) rotateY(0);
+}
+
+[data-animate="blur"].gl-visible {
+    opacity: 1;
+    filter: blur(0);
+}
+
+[data-animate="clip-left"].gl-visible,
+[data-animate="clip-right"].gl-visible,
+[data-animate="clip-top"].gl-visible,
+[data-animate="clip-bottom"].gl-visible {
+    clip-path: inset(0 0 0 0);
+}
+
+[data-animate="clip-circle"].gl-visible {
+    clip-path: circle(100% at 50% 50%);
+}
+
+[data-animate="bounce"].gl-visible {
+    opacity: 1;
+    transform: translateY(0);
+    animation: gl-bounceIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Delay classes */
+[data-delay="100"] { transition-delay: 0.1s; }
+[data-delay="200"] { transition-delay: 0.2s; }
+[data-delay="300"] { transition-delay: 0.3s; }
+[data-delay="400"] { transition-delay: 0.4s; }
+[data-delay="500"] { transition-delay: 0.5s; }
+[data-delay="600"] { transition-delay: 0.6s; }
+[data-delay="700"] { transition-delay: 0.7s; }
+[data-delay="800"] { transition-delay: 0.8s; }
+[data-delay="900"] { transition-delay: 0.9s; }
+[data-delay="1000"] { transition-delay: 1s; }
+
+
 /* ==========================================================================
-   ANIMATION 2: Staggered Card Entrance
-   Cards in grids animate in one after another.
+   STAGGERED CARD ENTRANCE
    ========================================================================== */
 
 @keyframes gl-staggerIn {
-    from {
-        opacity: 0;
-        transform: translateY(24px) scale(0.97);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
+    from { opacity: 0; transform: translateY(30px) scale(0.95); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
 .gl-card-grid[data-animate].gl-visible .gl-card-grid__item,
 .gl-card-grid[data-animate].gl-visible .gl-post-card,
 .gl-card-grid[data-animate].gl-visible article,
 .gl-category-grid[data-animate].gl-visible .gl-category-tile,
-.gl-home-hubs__grid[data-animate].gl-visible .gl-hub-card-v2 {
-    animation: gl-staggerIn 0.5s ease-out both;
+.gl-home-hubs__grid[data-animate].gl-visible .gl-hub-card-v2,
+.gl-cat-grid[data-animate].gl-visible .gl-cat-card,
+.gl-cat-hubs__grid[data-animate].gl-visible .gl-cat-hub-card {
+    animation: gl-staggerIn 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
-.gl-card-grid[data-animate].gl-visible > :nth-child(1) { animation-delay: 0.05s; }
-.gl-card-grid[data-animate].gl-visible > :nth-child(2) { animation-delay: 0.1s; }
-.gl-card-grid[data-animate].gl-visible > :nth-child(3) { animation-delay: 0.15s; }
-.gl-card-grid[data-animate].gl-visible > :nth-child(4) { animation-delay: 0.2s; }
-.gl-card-grid[data-animate].gl-visible > :nth-child(5) { animation-delay: 0.25s; }
-.gl-card-grid[data-animate].gl-visible > :nth-child(6) { animation-delay: 0.3s; }
-.gl-card-grid[data-animate].gl-visible > :nth-child(7) { animation-delay: 0.35s; }
-.gl-card-grid[data-animate].gl-visible > :nth-child(8) { animation-delay: 0.4s; }
-.gl-card-grid[data-animate].gl-visible > :nth-child(9) { animation-delay: 0.45s; }
+.gl-card-grid[data-animate].gl-visible > :nth-child(1),
+.gl-cat-grid[data-animate].gl-visible > :nth-child(1) { animation-delay: 0.05s; }
+.gl-card-grid[data-animate].gl-visible > :nth-child(2),
+.gl-cat-grid[data-animate].gl-visible > :nth-child(2) { animation-delay: 0.12s; }
+.gl-card-grid[data-animate].gl-visible > :nth-child(3),
+.gl-cat-grid[data-animate].gl-visible > :nth-child(3) { animation-delay: 0.19s; }
+.gl-card-grid[data-animate].gl-visible > :nth-child(4),
+.gl-cat-grid[data-animate].gl-visible > :nth-child(4) { animation-delay: 0.26s; }
+.gl-card-grid[data-animate].gl-visible > :nth-child(5),
+.gl-cat-grid[data-animate].gl-visible > :nth-child(5) { animation-delay: 0.33s; }
+.gl-card-grid[data-animate].gl-visible > :nth-child(6),
+.gl-cat-grid[data-animate].gl-visible > :nth-child(6) { animation-delay: 0.4s; }
+.gl-card-grid[data-animate].gl-visible > :nth-child(7) { animation-delay: 0.47s; }
+.gl-card-grid[data-animate].gl-visible > :nth-child(8) { animation-delay: 0.54s; }
+.gl-card-grid[data-animate].gl-visible > :nth-child(9) { animation-delay: 0.61s; }
 
 .gl-category-grid[data-animate].gl-visible > :nth-child(1) { animation-delay: 0s; }
-.gl-category-grid[data-animate].gl-visible > :nth-child(2) { animation-delay: 0.06s; }
-.gl-category-grid[data-animate].gl-visible > :nth-child(3) { animation-delay: 0.12s; }
-.gl-category-grid[data-animate].gl-visible > :nth-child(4) { animation-delay: 0.18s; }
-.gl-category-grid[data-animate].gl-visible > :nth-child(5) { animation-delay: 0.24s; }
-.gl-category-grid[data-animate].gl-visible > :nth-child(6) { animation-delay: 0.3s; }
-.gl-category-grid[data-animate].gl-visible > :nth-child(7) { animation-delay: 0.36s; }
-.gl-category-grid[data-animate].gl-visible > :nth-child(8) { animation-delay: 0.42s; }
-.gl-category-grid[data-animate].gl-visible > :nth-child(9) { animation-delay: 0.48s; }
+.gl-category-grid[data-animate].gl-visible > :nth-child(2) { animation-delay: 0.08s; }
+.gl-category-grid[data-animate].gl-visible > :nth-child(3) { animation-delay: 0.16s; }
+.gl-category-grid[data-animate].gl-visible > :nth-child(4) { animation-delay: 0.24s; }
+.gl-category-grid[data-animate].gl-visible > :nth-child(5) { animation-delay: 0.32s; }
+.gl-category-grid[data-animate].gl-visible > :nth-child(6) { animation-delay: 0.4s; }
+.gl-category-grid[data-animate].gl-visible > :nth-child(7) { animation-delay: 0.48s; }
+.gl-category-grid[data-animate].gl-visible > :nth-child(8) { animation-delay: 0.56s; }
+.gl-category-grid[data-animate].gl-visible > :nth-child(9) { animation-delay: 0.64s; }
 
 .gl-home-hubs__grid[data-animate].gl-visible > :nth-child(1) { animation-delay: 0s; }
-.gl-home-hubs__grid[data-animate].gl-visible > :nth-child(2) { animation-delay: 0.08s; }
-.gl-home-hubs__grid[data-animate].gl-visible > :nth-child(3) { animation-delay: 0.16s; }
-.gl-home-hubs__grid[data-animate].gl-visible > :nth-child(4) { animation-delay: 0.24s; }
-.gl-home-hubs__grid[data-animate].gl-visible > :nth-child(5) { animation-delay: 0.32s; }
-.gl-home-hubs__grid[data-animate].gl-visible > :nth-child(6) { animation-delay: 0.4s; }
+.gl-home-hubs__grid[data-animate].gl-visible > :nth-child(2) { animation-delay: 0.1s; }
+.gl-home-hubs__grid[data-animate].gl-visible > :nth-child(3) { animation-delay: 0.2s; }
+.gl-home-hubs__grid[data-animate].gl-visible > :nth-child(4) { animation-delay: 0.3s; }
+.gl-home-hubs__grid[data-animate].gl-visible > :nth-child(5) { animation-delay: 0.4s; }
+.gl-home-hubs__grid[data-animate].gl-visible > :nth-child(6) { animation-delay: 0.5s; }
+
+.gl-cat-hubs__grid[data-animate].gl-visible > :nth-child(1) { animation-delay: 0.05s; }
+.gl-cat-hubs__grid[data-animate].gl-visible > :nth-child(2) { animation-delay: 0.15s; }
+.gl-cat-hubs__grid[data-animate].gl-visible > :nth-child(3) { animation-delay: 0.25s; }
+.gl-cat-hubs__grid[data-animate].gl-visible > :nth-child(4) { animation-delay: 0.35s; }
+
 
 /* ==========================================================================
-   ANIMATION 3: Card Hover Lift & Glow
-   Enhanced hover with subtle glow matching category accent.
+   CARD HOVER — LIFT, GLOW, NEON BORDER
    ========================================================================== */
 
 .gl-post-card,
 .gl-category-tile,
 .gl-hub-card-v2,
 .gl-featured-card,
-.gl-mini-card {
-    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
-                box-shadow 0.3s ease;
+.gl-mini-card,
+.gl-cat-card,
+.gl-cat-hub-card,
+.gl-cat-featured {
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+                box-shadow 0.4s ease,
+                border-color 0.4s ease;
 }
 
-.gl-post-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2),
-                0 0 0 1px rgba(255, 44, 152, 0.1);
+.gl-post-card:hover,
+.gl-cat-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3),
+                0 0 30px rgba(255, 44, 152, 0.15),
+                0 0 60px rgba(255, 44, 152, 0.05);
 }
 
 .gl-category-tile:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15),
-                0 0 20px color-mix(in srgb, var(--cat-accent, var(--gl-color-accent)) 15%, transparent);
+    transform: translateY(-6px) scale(1.03);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2),
+                0 0 40px color-mix(in srgb, var(--cat-accent, var(--gl-color-accent)) 20%, transparent);
 }
 
-.gl-hub-card-v2:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2),
-                0 0 30px color-mix(in srgb, var(--cat-accent, var(--gl-color-accent)) 10%, transparent);
+.gl-hub-card-v2:hover,
+.gl-cat-hub-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25),
+                0 0 40px color-mix(in srgb, var(--cat-accent, var(--gl-color-accent)) 15%, transparent);
 }
+
+.gl-cat-featured:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3),
+                0 0 50px rgba(255, 44, 152, 0.1);
+}
+
 
 /* ==========================================================================
-   ANIMATION 4: Image Zoom on Hover
-   Smooth zoom for all card thumbnails.
+   IMAGE HOVER ZOOM + OVERLAY
    ========================================================================== */
 
 .gl-post-card__img,
 .gl-featured-card__img,
-.gl-card__img {
-    transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+.gl-card__img,
+.gl-cat-card__img,
+.gl-cat-featured__img,
+.gl-article__hero-img {
+    transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1),
+                filter 0.6s ease;
 }
 
 .gl-post-card:hover .gl-post-card__img,
 .gl-featured-card:hover .gl-featured-card__img,
-.gl-card:hover .gl-card__img {
-    transform: scale(1.08);
+.gl-card:hover .gl-card__img,
+.gl-cat-card:hover .gl-cat-card__img {
+    transform: scale(1.12);
+    filter: brightness(1.1) saturate(1.2);
 }
+
+.gl-cat-featured:hover .gl-cat-featured__img {
+    transform: scale(1.08);
+    filter: brightness(1.1);
+}
+
 
 /* ==========================================================================
-   ANIMATION 5: CTA Arrow Bounce
-   Arrow icon bounces right on hover.
+   CTA & BUTTON ANIMATIONS
    ========================================================================== */
-
-@keyframes gl-arrowBounce {
-    0%, 100% { transform: translateX(0); }
-    50% { transform: translateX(5px); }
-}
 
 .gl-hero-panel__cta:hover svg,
 .gl-btn:hover .gl-icon,
@@ -150,48 +1002,62 @@
     animation: gl-arrowBounce 0.6s ease infinite;
 }
 
-/* ==========================================================================
-   ANIMATION 6: Neon Pulse Glow (Logo & Accents)
-   Subtle pulsing glow on brand elements.
-   ========================================================================== */
-
-@keyframes gl-neonPulse {
-    0%, 100% {
-        text-shadow: 0 0 8px rgba(255, 44, 152, 0.4),
-                     0 0 20px rgba(255, 44, 152, 0.2);
-    }
-    50% {
-        text-shadow: 0 0 16px rgba(255, 44, 152, 0.6),
-                     0 0 40px rgba(255, 44, 152, 0.3),
-                     0 0 60px rgba(255, 44, 152, 0.1);
-    }
+.gl-btn,
+.gl-cat-featured__read,
+.gl-cat-card__link {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
+
+/* Shine sweep on hover for buttons */
+.gl-btn::before,
+.gl-cat-featured__read::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.gl-btn:hover::before,
+.gl-cat-featured__read:hover::before {
+    left: 100%;
+}
+
+
+/* ==========================================================================
+   NEON LOGO & BRAND
+   ========================================================================== */
 
 .gl-header__site-icon {
     animation: gl-neonPulse 3s ease-in-out infinite;
 }
 
+.gl-header__site-name {
+    background: linear-gradient(90deg, #FF2C98, #27D9FF, #6C5CE7, #FF2C98);
+    background-size: 300% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gl-gradientShift 6s ease infinite;
+}
+
+
 /* ==========================================================================
-   ANIMATION 7: Page Load Fade-In
-   Entire page fades in smoothly on load.
+   PAGE LOAD ANIMATION
    ========================================================================== */
 
-@keyframes gl-pageIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
+.gl-main {
+    animation: gl-pageIn 0.5s ease-out;
 }
 
-.gl-main {
-    animation: gl-pageIn 0.4s ease-out;
-}
 
 /* ==========================================================================
-   ANIMATION 8: Nav Link Underline Slide
-   Underline slides in from left on hover.
+   NAV UNDERLINE SLIDE
    ========================================================================== */
 
 .gl-nav__list a,
@@ -207,7 +1073,7 @@
     left: 0;
     width: 100%;
     height: 2px;
-    background: var(--gl-color-accent);
+    background: linear-gradient(90deg, var(--gl-color-accent), var(--gl-color-secondary));
     transform: scaleX(0);
     transform-origin: left;
     transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
@@ -218,14 +1084,14 @@
     transform: scaleX(1);
 }
 
+
 /* ==========================================================================
-   ANIMATION 9: Mobile Menu Slide-In
-   Drawer slides in from the right with backdrop fade.
+   MOBILE MENU SLIDE-IN
    ========================================================================== */
 
 .gl-mobile-nav {
     transform: translateX(100%);
-    transition: transform 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .gl-mobile-nav.is-open {
@@ -234,7 +1100,7 @@
 
 .gl-mobile-nav__list a {
     opacity: 0;
-    transform: translateX(20px);
+    transform: translateX(30px);
     transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
@@ -253,15 +1119,15 @@
 .gl-mobile-nav.is-open .gl-mobile-nav__list li:nth-child(8) a { transition-delay: 0.4s; }
 .gl-mobile-nav.is-open .gl-mobile-nav__list li:nth-child(9) a { transition-delay: 0.45s; }
 
+
 /* ==========================================================================
-   ANIMATION 10: Search Overlay Fade & Scale
-   Search overlay fades in with a subtle scale.
+   SEARCH OVERLAY
    ========================================================================== */
 
 .gl-search-overlay {
     opacity: 0;
-    transform: scale(0.97);
-    transition: opacity 0.25s ease, transform 0.25s ease;
+    transform: scale(0.95);
+    transition: opacity 0.3s ease, transform 0.3s ease;
     pointer-events: none;
 }
 
@@ -275,19 +1141,10 @@
     animation: gl-fadeInUp 0.4s ease-out 0.1s both;
 }
 
-/* ==========================================================================
-   ANIMATION 11: Badge Pulse (New Content Indicator)
-   Pulsing dot for fresh/new content badges.
-   ========================================================================== */
 
-@keyframes gl-badgePulse {
-    0%, 100% {
-        box-shadow: 0 0 0 0 rgba(255, 44, 152, 0.5);
-    }
-    50% {
-        box-shadow: 0 0 0 8px rgba(255, 44, 152, 0);
-    }
-}
+/* ==========================================================================
+   BADGE PULSE
+   ========================================================================== */
 
 .gl-badge--new::before {
     content: '';
@@ -300,58 +1157,26 @@
     animation: gl-badgePulse 2s ease-in-out infinite;
 }
 
+
 /* ==========================================================================
-   ANIMATION 12: Skeleton Loading Shimmer
-   Placeholder shimmer for loading states.
+   SKELETON LOADING
    ========================================================================== */
 
-@keyframes gl-shimmer {
-    0% {
-        background-position: -200% 0;
-    }
-    100% {
-        background-position: 200% 0;
-    }
-}
-
 .gl-skeleton {
-    background: linear-gradient(
-        90deg,
-        var(--gl-color-surface) 25%,
-        var(--gl-color-surface-raised) 50%,
-        var(--gl-color-surface) 75%
-    );
+    background: linear-gradient(90deg, var(--gl-color-surface) 25%, var(--gl-color-surface-raised) 50%, var(--gl-color-surface) 75%);
     background-size: 200% 100%;
     animation: gl-shimmer 1.5s ease-in-out infinite;
     border-radius: var(--gl-radius-md);
 }
 
-.gl-skeleton--text {
-    height: 1em;
-    margin-bottom: 0.5em;
-    width: 80%;
-}
+.gl-skeleton--text { height: 1em; margin-bottom: 0.5em; width: 80%; }
+.gl-skeleton--title { height: 1.5em; margin-bottom: 0.75em; width: 60%; }
+.gl-skeleton--image { width: 100%; aspect-ratio: 16 / 9; }
 
-.gl-skeleton--title {
-    height: 1.5em;
-    margin-bottom: 0.75em;
-    width: 60%;
-}
-
-.gl-skeleton--image {
-    width: 100%;
-    aspect-ratio: 16 / 9;
-}
 
 /* ==========================================================================
-   ANIMATION 13: Confidence Badge Shimmer (GTA 6)
-   Gradient shimmer across confidence badges.
+   CONFIDENCE SHIMMER
    ========================================================================== */
-
-@keyframes gl-confidenceShimmer {
-    0% { background-position: -100% 0; }
-    100% { background-position: 200% 0; }
-}
 
 .gl-confidence--confirmed {
     background: linear-gradient(90deg, #00B894, #00CEC9, #00B894);
@@ -362,51 +1187,33 @@
     background-clip: text;
 }
 
-/* ==========================================================================
-   ANIMATION 14: Hero Panel Number Float
-   Panel numbers float up slightly on hover.
-   ========================================================================== */
 
-@keyframes gl-floatNum {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-8px); }
-}
+/* ==========================================================================
+   HERO PANEL NUMBER FLOAT
+   ========================================================================== */
 
 .gl-hero-panel:hover .gl-hero-panel__num {
     animation: gl-floatNum 2s ease-in-out infinite;
 }
 
-/* ==========================================================================
-   ANIMATION 15: Color Strip Wave
-   Bottom color strip has a subtle wave animation.
-   ========================================================================== */
 
-@keyframes gl-stripWave {
-    0%, 100% { transform: scaleY(1); }
-    50% { transform: scaleY(1.6); }
-}
+/* ==========================================================================
+   COLOR STRIP WAVE
+   ========================================================================== */
 
 .gl-hero-accordion__strip span {
     transition: transform 0.3s ease;
     transform-origin: bottom;
 }
 
-.gl-hero-accordion:hover .gl-hero-accordion__strip span:nth-child(1) {
-    animation: gl-stripWave 1.2s ease-in-out 0s infinite;
-}
-.gl-hero-accordion:hover .gl-hero-accordion__strip span:nth-child(2) {
-    animation: gl-stripWave 1.2s ease-in-out 0.15s infinite;
-}
-.gl-hero-accordion:hover .gl-hero-accordion__strip span:nth-child(3) {
-    animation: gl-stripWave 1.2s ease-in-out 0.3s infinite;
-}
-.gl-hero-accordion:hover .gl-hero-accordion__strip span:nth-child(4) {
-    animation: gl-stripWave 1.2s ease-in-out 0.45s infinite;
-}
+.gl-hero-accordion:hover .gl-hero-accordion__strip span:nth-child(1) { animation: gl-stripWave 1.2s ease-in-out 0s infinite; }
+.gl-hero-accordion:hover .gl-hero-accordion__strip span:nth-child(2) { animation: gl-stripWave 1.2s ease-in-out 0.15s infinite; }
+.gl-hero-accordion:hover .gl-hero-accordion__strip span:nth-child(3) { animation: gl-stripWave 1.2s ease-in-out 0.3s infinite; }
+.gl-hero-accordion:hover .gl-hero-accordion__strip span:nth-child(4) { animation: gl-stripWave 1.2s ease-in-out 0.45s infinite; }
+
 
 /* ==========================================================================
-   ANIMATION 16: Section Title Accent Line Grow
-   Decorative accent line grows in from left on zone titles.
+   SECTION TITLE ACCENT LINE
    ========================================================================== */
 
 .gl-zone__title {
@@ -423,17 +1230,17 @@
     width: 0;
     background: linear-gradient(90deg, var(--gl-color-accent), var(--gl-color-secondary));
     border-radius: 2px;
-    transition: width 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition: width 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 [data-animate].gl-visible .gl-zone__title::after,
 .gl-zone__title:hover::after {
-    width: 60px;
+    width: 80px;
 }
 
+
 /* ==========================================================================
-   ANIMATION 17: Scroll Progress Indicator
-   Thin progress bar at top showing scroll position.
+   SCROLL PROGRESS BAR
    ========================================================================== */
 
 .gl-scroll-progress {
@@ -442,36 +1249,26 @@
     left: 0;
     height: 3px;
     width: 0%;
-    background: linear-gradient(90deg, var(--gl-color-accent), var(--gl-color-secondary));
+    background: linear-gradient(90deg, var(--gl-color-accent), var(--gl-color-secondary), #6C5CE7);
     z-index: 9999;
     transition: width 0.1s linear;
     pointer-events: none;
+    box-shadow: 0 0 10px rgba(255, 44, 152, 0.5), 0 0 20px rgba(39, 217, 255, 0.3);
 }
+
 
 /* ==========================================================================
-   ANIMATION 18: Back to Top Button Reveal
-   Slides up when user scrolls past threshold.
+   BACK TO TOP BUTTON
    ========================================================================== */
-
-@keyframes gl-slideUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
 
 .gl-back-to-top {
     position: fixed;
     bottom: 24px;
     right: 24px;
-    width: 44px;
-    height: 44px;
+    width: 48px;
+    height: 48px;
     border-radius: 50%;
-    background: var(--gl-color-accent);
+    background: linear-gradient(135deg, var(--gl-color-accent), #6C5CE7);
     color: #fff;
     border: none;
     cursor: pointer;
@@ -480,29 +1277,29 @@
     justify-content: center;
     opacity: 0;
     transform: translateY(20px);
-    transition: opacity 0.3s ease, transform 0.3s ease, background 0.2s ease;
+    transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
     z-index: 500;
-    box-shadow: 0 4px 16px rgba(255, 44, 152, 0.3);
+    box-shadow: 0 4px 20px rgba(255, 44, 152, 0.4), 0 0 40px rgba(255, 44, 152, 0.1);
 }
 
 .gl-back-to-top.is-visible {
     opacity: 1;
     transform: translateY(0);
+    animation: gl-glowBreathe 3s ease-in-out infinite;
 }
 
 .gl-back-to-top:hover {
-    background: var(--gl-color-accent-dark);
-    transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(255, 44, 152, 0.4);
+    transform: translateY(-4px) scale(1.1);
+    box-shadow: 0 8px 30px rgba(255, 44, 152, 0.6), 0 0 60px rgba(255, 44, 152, 0.2);
 }
 
+
 /* ==========================================================================
-   ANIMATION 19: TOC Link Highlight on Scroll
-   Active TOC item gets accent highlight.
+   TOC LINK HIGHLIGHT
    ========================================================================== */
 
 .gl-toc__item a {
-    transition: color 0.2s ease, padding-left 0.3s ease;
+    transition: color 0.2s ease, padding-left 0.3s ease, border-color 0.3s ease;
     border-left: 2px solid transparent;
     padding-left: 8px;
 }
@@ -510,27 +1307,29 @@
 .gl-toc__item.is-active a {
     color: var(--gl-color-accent);
     border-left-color: var(--gl-color-accent);
-    padding-left: 14px;
+    padding-left: 16px;
+    text-shadow: 0 0 20px rgba(255, 44, 152, 0.3);
 }
 
+
 /* ==========================================================================
-   ANIMATION 20: Footer Category Pills Hover Glow
-   Category pills glow on hover with their accent color.
+   FOOTER CATEGORY PILLS GLOW
    ========================================================================== */
 
 .gl-footer__cat-link {
-    transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .gl-footer__cat-link:hover {
-    transform: translateY(-2px) scale(1.05);
-    box-shadow: 0 4px 16px color-mix(in srgb, var(--cat-color, var(--gl-color-accent)) 30%, transparent);
+    transform: translateY(-3px) scale(1.08);
+    box-shadow: 0 4px 20px color-mix(in srgb, var(--cat-color, var(--gl-color-accent)) 30%, transparent),
+                0 0 40px color-mix(in srgb, var(--cat-color, var(--gl-color-accent)) 15%, transparent);
     background: color-mix(in srgb, var(--cat-color, var(--gl-color-accent)) 15%, transparent);
 }
 
+
 /* ==========================================================================
-   ANIMATION 21: Gallery Lightbox
-   Full-screen overlay for gallery images.
+   LIGHTBOX
    ========================================================================== */
 
 .gl-lightbox {
@@ -545,16 +1344,13 @@
     transition: opacity 0.3s ease;
 }
 
-.gl-lightbox.is-open {
-    opacity: 1;
-    pointer-events: auto;
-}
+.gl-lightbox.is-open { opacity: 1; pointer-events: auto; }
 
 .gl-lightbox__backdrop {
     position: absolute;
     inset: 0;
-    background: rgba(6, 7, 20, 0.92);
-    backdrop-filter: blur(20px);
+    background: rgba(6, 7, 20, 0.95);
+    backdrop-filter: blur(30px);
 }
 
 .gl-lightbox__content {
@@ -562,21 +1358,19 @@
     z-index: 1;
     max-width: 90vw;
     max-height: 90vh;
-    transform: scale(0.9);
-    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transform: scale(0.85);
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-.gl-lightbox.is-open .gl-lightbox__content {
-    transform: scale(1);
-}
+.gl-lightbox.is-open .gl-lightbox__content { transform: scale(1); }
 
 .gl-lightbox__img {
     max-width: 90vw;
     max-height: 85vh;
     object-fit: contain;
     border-radius: var(--gl-radius-lg);
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5),
-                0 0 40px rgba(255, 44, 152, 0.1);
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.6),
+                0 0 60px rgba(255, 44, 152, 0.15);
 }
 
 .gl-lightbox__close {
@@ -585,9 +1379,9 @@
     right: 0;
     width: 40px;
     height: 40px;
-    border: none;
+    border: 1px solid rgba(255, 255, 255, 0.2);
     background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(8px);
+    backdrop-filter: blur(12px);
     color: #fff;
     font-size: 24px;
     border-radius: 50%;
@@ -595,59 +1389,203 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all var(--gl-transition-fast);
+    transition: all 0.3s ease;
 }
 
 .gl-lightbox__close:hover {
     background: var(--gl-color-accent);
-    transform: rotate(90deg);
+    border-color: var(--gl-color-accent);
+    transform: rotate(90deg) scale(1.1);
+    box-shadow: 0 0 20px rgba(255, 44, 152, 0.5);
 }
 
+
 /* ==========================================================================
-   ANIMATION 22: Stagger animations for new page elements
+   STAGGERED ANIMATIONS FOR PAGE ELEMENTS
    ========================================================================== */
 
-/* 404 category pills stagger */
+/* 404 category pills */
 .gl-404-categories[data-animate].gl-visible .gl-404-cat-pill {
     animation: gl-staggerIn 0.4s ease-out both;
 }
-
 .gl-404-categories[data-animate].gl-visible .gl-404-cat-pill:nth-child(1) { animation-delay: 0s; }
-.gl-404-categories[data-animate].gl-visible .gl-404-cat-pill:nth-child(2) { animation-delay: 0.05s; }
-.gl-404-categories[data-animate].gl-visible .gl-404-cat-pill:nth-child(3) { animation-delay: 0.1s; }
-.gl-404-categories[data-animate].gl-visible .gl-404-cat-pill:nth-child(4) { animation-delay: 0.15s; }
-.gl-404-categories[data-animate].gl-visible .gl-404-cat-pill:nth-child(5) { animation-delay: 0.2s; }
-.gl-404-categories[data-animate].gl-visible .gl-404-cat-pill:nth-child(6) { animation-delay: 0.25s; }
-.gl-404-categories[data-animate].gl-visible .gl-404-cat-pill:nth-child(7) { animation-delay: 0.3s; }
-.gl-404-categories[data-animate].gl-visible .gl-404-cat-pill:nth-child(8) { animation-delay: 0.35s; }
-.gl-404-categories[data-animate].gl-visible .gl-404-cat-pill:nth-child(9) { animation-delay: 0.4s; }
+.gl-404-categories[data-animate].gl-visible .gl-404-cat-pill:nth-child(2) { animation-delay: 0.06s; }
+.gl-404-categories[data-animate].gl-visible .gl-404-cat-pill:nth-child(3) { animation-delay: 0.12s; }
+.gl-404-categories[data-animate].gl-visible .gl-404-cat-pill:nth-child(4) { animation-delay: 0.18s; }
+.gl-404-categories[data-animate].gl-visible .gl-404-cat-pill:nth-child(5) { animation-delay: 0.24s; }
+.gl-404-categories[data-animate].gl-visible .gl-404-cat-pill:nth-child(6) { animation-delay: 0.3s; }
+.gl-404-categories[data-animate].gl-visible .gl-404-cat-pill:nth-child(7) { animation-delay: 0.36s; }
+.gl-404-categories[data-animate].gl-visible .gl-404-cat-pill:nth-child(8) { animation-delay: 0.42s; }
+.gl-404-categories[data-animate].gl-visible .gl-404-cat-pill:nth-child(9) { animation-delay: 0.48s; }
 
-/* Search filter tabs stagger */
+/* Search filter tabs */
 .gl-search-filters[data-animate].gl-visible .gl-search-filter {
-    animation: gl-staggerIn 0.3s ease-out both;
+    animation: gl-staggerIn 0.35s ease-out both;
 }
-
 .gl-search-filters[data-animate].gl-visible .gl-search-filter:nth-child(1) { animation-delay: 0s; }
-.gl-search-filters[data-animate].gl-visible .gl-search-filter:nth-child(2) { animation-delay: 0.06s; }
-.gl-search-filters[data-animate].gl-visible .gl-search-filter:nth-child(3) { animation-delay: 0.12s; }
-.gl-search-filters[data-animate].gl-visible .gl-search-filter:nth-child(4) { animation-delay: 0.18s; }
-.gl-search-filters[data-animate].gl-visible .gl-search-filter:nth-child(5) { animation-delay: 0.24s; }
-.gl-search-filters[data-animate].gl-visible .gl-search-filter:nth-child(6) { animation-delay: 0.3s; }
-.gl-search-filters[data-animate].gl-visible .gl-search-filter:nth-child(7) { animation-delay: 0.36s; }
-.gl-search-filters[data-animate].gl-visible .gl-search-filter:nth-child(8) { animation-delay: 0.42s; }
+.gl-search-filters[data-animate].gl-visible .gl-search-filter:nth-child(2) { animation-delay: 0.08s; }
+.gl-search-filters[data-animate].gl-visible .gl-search-filter:nth-child(3) { animation-delay: 0.16s; }
+.gl-search-filters[data-animate].gl-visible .gl-search-filter:nth-child(4) { animation-delay: 0.24s; }
+.gl-search-filters[data-animate].gl-visible .gl-search-filter:nth-child(5) { animation-delay: 0.32s; }
+.gl-search-filters[data-animate].gl-visible .gl-search-filter:nth-child(6) { animation-delay: 0.4s; }
 
-/* Footer sections stagger */
+/* Footer sections */
 .gl-footer__top-grid[data-animate].gl-visible .gl-footer__col {
     animation: gl-staggerIn 0.5s ease-out both;
 }
-
 .gl-footer__top-grid[data-animate].gl-visible .gl-footer__brand { animation-delay: 0s; }
 .gl-footer__top-grid[data-animate].gl-visible .gl-footer__col:nth-child(2) { animation-delay: 0.1s; }
 .gl-footer__top-grid[data-animate].gl-visible .gl-footer__col:nth-child(3) { animation-delay: 0.2s; }
 .gl-footer__top-grid[data-animate].gl-visible .gl-footer__col:nth-child(4) { animation-delay: 0.3s; }
 
+
 /* ==========================================================================
-   REDUCED MOTION — Respect user preferences
+   GLOBAL AMBIENT ANIMATIONS — Applied across all pages
+   ========================================================================== */
+
+/* Animated gradient background on body for immersive feel */
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+        radial-gradient(ellipse 80% 50% at 20% 40%, rgba(255, 44, 152, 0.03) 0%, transparent 50%),
+        radial-gradient(ellipse 60% 50% at 80% 60%, rgba(39, 217, 255, 0.03) 0%, transparent 50%),
+        radial-gradient(ellipse 50% 60% at 50% 90%, rgba(108, 92, 231, 0.03) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: -1;
+    animation: gl-gradientShift 20s ease infinite;
+    background-size: 200% 200%;
+}
+
+/* Floating particles container */
+.gl-particles {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.gl-particle {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: var(--gl-color-accent);
+    border-radius: 50%;
+    opacity: 0;
+    animation: gl-particleFloatUp var(--duration, 8s) var(--delay, 0s) infinite;
+}
+
+/* Scanline overlay for CRT gaming effect */
+.gl-scanlines::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 0, 0, 0.03) 2px,
+        rgba(0, 0, 0, 0.03) 4px
+    );
+    pointer-events: none;
+    z-index: 9998;
+}
+
+/* Neon text utility class */
+.gl-neon-text {
+    animation: gl-neonPulse 3s ease-in-out infinite;
+}
+
+.gl-neon-text--cyan {
+    animation: gl-neonPulseCyan 3s ease-in-out infinite;
+}
+
+/* Gradient text utility */
+.gl-gradient-text {
+    background: linear-gradient(135deg, #FF2C98, #27D9FF, #6C5CE7);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gl-gradientShift 4s ease infinite;
+}
+
+/* Shimmer text utility */
+.gl-shimmer-text {
+    background: linear-gradient(90deg,
+        var(--gl-color-text-primary) 0%,
+        #FF2C98 25%,
+        #27D9FF 50%,
+        #6C5CE7 75%,
+        var(--gl-color-text-primary) 100%
+    );
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gl-textShimmer 5s linear infinite;
+}
+
+/* Glow box utility */
+.gl-glow-box {
+    animation: gl-glowBreathe 4s ease-in-out infinite;
+}
+
+/* Neon border utility */
+.gl-neon-border {
+    animation: gl-neonBoxPulse 3s ease-in-out infinite;
+}
+
+.gl-neon-border--cyan {
+    animation: gl-neonBoxPulseCyan 3s ease-in-out infinite;
+}
+
+/* Float animation utility */
+.gl-float {
+    animation: gl-float 6s ease-in-out infinite;
+}
+
+/* Morph blob utility */
+.gl-morph-blob {
+    animation: gl-morphBlob 8s ease-in-out infinite;
+}
+
+/* Pulse ring effect */
+.gl-pulse-ring {
+    position: relative;
+}
+
+.gl-pulse-ring::after {
+    content: '';
+    position: absolute;
+    inset: -5px;
+    border-radius: inherit;
+    border: 2px solid var(--gl-color-accent);
+    animation: gl-pulseRing 2s ease-out infinite;
+}
+
+/* Light sweep on card surfaces */
+.gl-light-sweep {
+    position: relative;
+    overflow: hidden;
+}
+
+.gl-light-sweep::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+    animation: gl-shine 4s ease-in-out infinite;
+}
+
+
+/* ==========================================================================
+   REDUCED MOTION
    ========================================================================== */
 
 @media (prefers-reduced-motion: reduce) {
@@ -663,13 +1601,16 @@
     [data-animate] {
         opacity: 1;
         transform: none;
+        filter: none;
+        clip-path: none;
     }
 
-    .gl-lightbox {
-        transition: none;
-    }
-
+    .gl-lightbox,
     .gl-lightbox__content {
         transition: none;
+    }
+
+    body::before {
+        animation: none;
     }
 }

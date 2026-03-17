@@ -78,9 +78,31 @@
     position: sticky;
     top: 0;
     z-index: var(--gl-z-header, 300);
-    background-color: var(--gl-color-surface-raised);
-    border-bottom: 1px solid var(--gl-color-border);
-    box-shadow: var(--gl-shadow-sm);
+    background: rgba(6, 7, 20, 0.85);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border-bottom: none;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4),
+                0 0 60px rgba(255, 44, 152, 0.04),
+                inset 0 -1px 0 rgba(255, 255, 255, 0.05);
+}
+
+/* Animated neon gradient bottom border */
+.gl-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #FF2C98, #27D9FF, #6C5CE7, #FF2C98);
+    background-size: 300% 100%;
+    animation: gl-header-border-glow 4s ease infinite;
+}
+
+@keyframes gl-header-border-glow {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
 }
 
 .gl-header__inner {
@@ -108,11 +130,13 @@
     color: var(--gl-color-text);
     text-decoration: none;
     white-space: nowrap;
-    transition: color var(--gl-transition-fast);
+    transition: all 0.3s ease;
 }
 
 .gl-header__site-name:hover {
     color: var(--gl-color-accent);
+    text-shadow: 0 0 20px rgba(255, 44, 152, 0.5),
+                 0 0 40px rgba(255, 44, 152, 0.2);
 }
 
 /* Branded icon badge (shown when no custom logo uploaded) */
@@ -123,18 +147,46 @@
     width: 38px;
     height: 38px;
     border-radius: var(--gl-radius-md);
-    background: linear-gradient(135deg, var(--gl-color-accent) 0%, var(--gl-color-accent-dark, #4834D4) 100%);
+    background: linear-gradient(135deg, #FF2C98 0%, #6C5CE7 50%, #27D9FF 100%);
+    background-size: 200% 200%;
+    animation: gl-icon-gradient 3s ease infinite;
     color: #fff;
     font-size: var(--gl-font-size-sm);
     font-weight: var(--gl-font-weight-bold);
     letter-spacing: 0.05em;
     flex-shrink: 0;
+    box-shadow: 0 0 20px rgba(255, 44, 152, 0.4),
+                0 0 40px rgba(108, 92, 231, 0.2);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.gl-header__site-icon:hover {
+    box-shadow: 0 0 30px rgba(255, 44, 152, 0.6),
+                0 0 60px rgba(108, 92, 231, 0.3);
+    transform: scale(1.05);
+}
+
+@keyframes gl-icon-gradient {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
 }
 
 .gl-header__site-text {
     font-size: var(--gl-font-size-xl);
     font-weight: var(--gl-font-weight-bold);
     letter-spacing: -0.01em;
+    background: linear-gradient(135deg, #FF2C98, #27D9FF, #6C5CE7);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gl-text-gradient-shift 5s ease infinite;
+    filter: drop-shadow(0 0 8px rgba(255, 44, 152, 0.3));
+}
+
+@keyframes gl-text-gradient-shift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
 }
 
 /* Custom logo support */
@@ -187,8 +239,10 @@
 .gl-nav__list li.current-menu-item > a,
 .gl-nav__list li.current_page_item > a,
 .gl-nav__list li.current-cat > a {
-    color: var(--gl-color-accent);
-    background-color: var(--gl-color-accent-tint, rgba(108, 92, 231, 0.08));
+    color: #FF2C98;
+    background-color: rgba(255, 44, 152, 0.08);
+    text-shadow: 0 0 12px rgba(255, 44, 152, 0.4);
+    box-shadow: 0 0 15px rgba(255, 44, 152, 0.06);
 }
 
 /* Dropdown (depth 2) */
@@ -200,10 +254,13 @@
     min-width: 220px;
     padding: var(--gl-space-2) 0;
     margin-top: var(--gl-space-1);
-    background-color: var(--gl-color-surface-raised);
-    border: 1px solid var(--gl-color-border);
-    border-radius: var(--gl-radius-lg);
-    box-shadow: var(--gl-shadow-lg);
+    background: rgba(12, 16, 48, 0.95);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 44, 152, 0.12);
+    border-radius: 12px;
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4),
+                0 0 40px rgba(255, 44, 152, 0.06);
     list-style: none;
     z-index: var(--gl-z-dropdown, 100);
 }
@@ -249,8 +306,10 @@
 
 .gl-header__search-toggle:hover,
 .gl-header__menu-toggle:hover {
-    background-color: var(--gl-color-surface);
-    color: var(--gl-color-accent);
+    background-color: rgba(255, 44, 152, 0.1);
+    color: #FF2C98;
+    box-shadow: 0 0 20px rgba(255, 44, 152, 0.15);
+    text-shadow: 0 0 8px rgba(255, 44, 152, 0.5);
 }
 
 /* Mobile toggle icon states */
@@ -281,10 +340,13 @@
     top: 100%;
     left: 0;
     right: 0;
-    background-color: var(--gl-color-surface-raised);
-    border-bottom: 1px solid var(--gl-color-border);
+    background: rgba(6, 7, 20, 0.95);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border-bottom: 1px solid rgba(255, 44, 152, 0.1);
     padding: var(--gl-space-6) 0;
-    box-shadow: var(--gl-shadow-lg);
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4),
+                0 0 60px rgba(255, 44, 152, 0.05);
     z-index: var(--gl-z-dropdown, 100);
 }
 
@@ -503,22 +565,25 @@
 }
 
 .gl-sidebar__section {
-    background-color: var(--gl-color-surface-raised);
-    border: 1px solid var(--gl-color-border);
-    border-radius: var(--gl-radius-lg);
-    padding: var(--gl-space-5);
+    background: rgba(12, 16, 48, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 12px;
+    padding: 24px;
 }
 
 .gl-sidebar__title {
     font-family: var(--gl-font-display);
     font-size: var(--gl-font-size-sm);
-    font-weight: var(--gl-font-weight-bold);
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--gl-color-text-secondary);
-    margin-bottom: var(--gl-space-3);
+    letter-spacing: 0.08em;
+    margin-bottom: 16px;
     padding-bottom: var(--gl-space-2);
-    border-bottom: 2px solid var(--gl-color-accent);
+    border-bottom: none;
+    background: linear-gradient(135deg, #FF2C98, #27D9FF);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .gl-sidebar__list {
@@ -533,18 +598,19 @@
 
 .gl-sidebar__list li a {
     display: block;
-    padding: var(--gl-space-2) var(--gl-space-3);
+    padding: 10px 16px;
     font-size: var(--gl-font-size-sm);
     color: var(--gl-color-text);
     text-decoration: none;
-    border-radius: var(--gl-radius-sm);
-    transition: color var(--gl-transition-fast),
-                background-color var(--gl-transition-fast);
+    border-radius: 8px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .gl-sidebar__list li a:hover {
-    color: var(--gl-color-accent);
-    background-color: var(--gl-color-surface);
+    color: #FF2C98;
+    background: rgba(255, 44, 152, 0.08);
+    transform: translateX(4px);
+    text-shadow: 0 0 12px rgba(255, 44, 152, 0.3);
 }
 
 /* ==========================================================================
@@ -562,13 +628,16 @@
 .gl-widget__title {
     font-family: var(--gl-font-display);
     font-size: var(--gl-font-size-sm);
-    font-weight: var(--gl-font-weight-bold);
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--gl-color-text-secondary);
-    margin-bottom: var(--gl-space-3);
+    letter-spacing: 0.08em;
+    margin-bottom: 16px;
     padding-bottom: var(--gl-space-2);
-    border-bottom: 2px solid var(--gl-color-accent);
+    border-bottom: none;
+    background: linear-gradient(135deg, #FF2C98, #27D9FF);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .gl-widget ul {
@@ -578,9 +647,10 @@
 }
 
 .gl-widget ul li {
-    padding: var(--gl-space-2) 0;
-    border-bottom: 1px solid var(--gl-color-border);
+    padding: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
     font-size: var(--gl-font-size-sm);
+    margin-bottom: 2px;
 }
 
 .gl-widget ul li:last-child {
@@ -593,7 +663,7 @@
 }
 
 .gl-widget ul li a:hover {
-    color: var(--gl-color-accent);
+    color: #FF2C98;
 }
 
 /* ==========================================================================
@@ -621,15 +691,15 @@
    ========================================================================== */
 
 .gl-footer {
-    background-color: var(--gl-color-footer-bg, #181B22);
-    background-image: radial-gradient(
-        ellipse at 10% 0%,
-        rgba(var(--gl-color-accent-rgb), 0.06) 0%,
-        transparent 50%
-    );
+    background-color: #060714;
+    background-image:
+        radial-gradient(ellipse at 10% 0%, rgba(255, 44, 152, 0.1) 0%, transparent 50%),
+        radial-gradient(ellipse at 90% 100%, rgba(39, 217, 255, 0.07) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 50%, rgba(108, 92, 231, 0.05) 0%, transparent 60%);
     color: rgba(255, 255, 255, 0.92);
     margin-top: auto;
     position: relative;
+    border-top: 1px solid rgba(255, 44, 152, 0.1);
 }
 
 .gl-footer a {
@@ -640,6 +710,7 @@
 
 .gl-footer a:hover {
     color: #fff;
+    text-shadow: 0 0 10px rgba(255, 44, 152, 0.3);
 }
 
 /* ---- Footer Top ---- */
@@ -686,7 +757,11 @@
     font-family: var(--gl-font-display);
     font-size: var(--gl-font-size-xl);
     font-weight: var(--gl-font-weight-bold);
-    color: #fff;
+    background: linear-gradient(135deg, #FF2C98, #27D9FF);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 0 6px rgba(255, 44, 152, 0.3));
 }
 
 .gl-footer__tagline {
@@ -708,7 +783,10 @@
     font-weight: var(--gl-font-weight-bold);
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    color: rgba(255, 255, 255, 0.45);
+    background: linear-gradient(135deg, #FF2C98, #27D9FF);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     margin: 0 0 var(--gl-space-4);
     padding-bottom: var(--gl-space-2);
     position: relative;
@@ -765,12 +843,15 @@
 }
 
 .gl-footer__links li a:hover {
-    color: #fff;
+    color: #FF2C98;
     padding-left: var(--gl-space-4);
+    text-shadow: 0 0 12px rgba(255, 44, 152, 0.4),
+                 0 0 24px rgba(255, 44, 152, 0.15);
 }
 
 .gl-footer__links li a:hover::before {
     opacity: 1;
+    text-shadow: 0 0 8px rgba(255, 44, 152, 0.6);
 }
 
 /* Widget titles in footer */
@@ -936,18 +1017,33 @@
 /* ---- Accent Bar ---- */
 .gl-article--page .gl-article__accent-bar {
     display: block;
-    width: 60px;
+    width: 80px;
     height: 4px;
     border-radius: 2px;
-    background: linear-gradient(90deg, var(--gl-color-accent), var(--gl-color-secondary));
+    background: linear-gradient(90deg, #FF2C98, #27D9FF, #6C5CE7, #FF2C98);
+    background-size: 300% 100%;
     margin-bottom: var(--gl-space-4);
+    animation: gl-header-border-glow 4s ease infinite;
+    box-shadow: 0 0 12px rgba(255, 44, 152, 0.4),
+                0 0 24px rgba(255, 44, 152, 0.15);
 }
 
 /* ---- Page Header ---- */
 .gl-article--page .gl-article__header {
     padding-bottom: var(--gl-space-6);
     margin-bottom: var(--gl-space-6);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    border-bottom: 1px solid rgba(255, 44, 152, 0.1);
+    position: relative;
+}
+
+.gl-article--page .gl-article__header::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 200px;
+    height: 1px;
+    background: linear-gradient(90deg, #FF2C98, #27D9FF, transparent);
 }
 
 /* ---- Page Title ---- */
@@ -987,9 +1083,11 @@
 }
 
 .gl-article--page .gl-article__hero:hover {
-    box-shadow: 0 8px 32px rgba(255, 44, 152, 0.12),
-                0 0 0 1px rgba(255, 44, 152, 0.15);
-    transform: translateY(-2px);
+    box-shadow: 0 8px 40px rgba(255, 44, 152, 0.2),
+                0 0 0 1px rgba(255, 44, 152, 0.2),
+                0 0 80px rgba(255, 44, 152, 0.08),
+                0 0 120px rgba(108, 92, 231, 0.05);
+    transform: translateY(-3px);
 }
 
 .gl-article--page .gl-article__hero-img {
@@ -1038,9 +1136,12 @@
 /* ---- Gradient Divider ---- */
 .gl-footer__divider {
     height: 3px;
-    background: linear-gradient(90deg, var(--gl-color-accent), var(--gl-color-secondary), var(--gl-color-accent));
-    background-size: 200% 100%;
+    background: linear-gradient(90deg, #FF2C98, #27D9FF, #6C5CE7, #FF2C98);
+    background-size: 300% 100%;
     animation: gl-gradient-shift 4s ease infinite;
+    box-shadow: 0 0 12px rgba(255, 44, 152, 0.4),
+                0 0 30px rgba(39, 217, 255, 0.2),
+                0 0 50px rgba(108, 92, 231, 0.1);
 }
 
 @keyframes gl-gradient-shift {
@@ -1059,16 +1160,27 @@
     align-items: center;
     gap: var(--gl-space-8);
     padding: var(--gl-space-8);
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(24px) saturate(1.2);
-    -webkit-backdrop-filter: blur(24px) saturate(1.2);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(12, 16, 48, 0.85);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border: 1px solid rgba(255, 44, 152, 0.15);
     border-radius: var(--gl-radius-xl);
     position: relative;
     overflow: hidden;
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06),
-                inset 0 0 32px rgba(var(--gl-color-accent-rgb), 0.04),
-                0 4px 32px rgba(0, 0, 0, 0.2);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08),
+                inset 0 0 60px rgba(255, 44, 152, 0.04),
+                0 8px 40px rgba(0, 0, 0, 0.3),
+                0 0 80px rgba(255, 44, 152, 0.06);
+    transition: all 0.4s ease;
+}
+
+.gl-footer__newsletter-card:hover {
+    border-color: rgba(255, 44, 152, 0.25);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1),
+                inset 0 0 80px rgba(255, 44, 152, 0.06),
+                0 12px 60px rgba(0, 0, 0, 0.35),
+                0 0 100px rgba(255, 44, 152, 0.1);
+    transform: translateY(-2px);
 }
 
 .gl-footer__newsletter-card::before {
@@ -1078,7 +1190,9 @@
     left: 0;
     right: 0;
     height: 2px;
-    background: linear-gradient(90deg, var(--gl-color-accent), var(--gl-color-secondary));
+    background: linear-gradient(90deg, #FF2C98, #27D9FF, #6C5CE7, #FF2C98);
+    background-size: 300% 100%;
+    animation: gl-header-border-glow 4s ease infinite;
 }
 
 .gl-footer__newsletter-content {
@@ -1173,26 +1287,30 @@
 }
 
 .gl-footer__logo-icon {
-    box-shadow: 0 0 24px rgba(var(--gl-color-accent-rgb), 0.35),
-                0 0 48px rgba(var(--gl-color-accent-rgb), 0.15);
-    transition: box-shadow var(--gl-transition-base);
-    animation: gl-logo-pulse 3s ease-in-out infinite;
+    background: linear-gradient(135deg, #FF2C98, #6C5CE7, #27D9FF);
+    background-size: 200% 200%;
+    animation: gl-logo-pulse 3s ease-in-out infinite, gl-icon-gradient 3s ease infinite;
+    box-shadow: 0 0 24px rgba(255, 44, 152, 0.4),
+                0 0 48px rgba(108, 92, 231, 0.2);
+    transition: box-shadow var(--gl-transition-base), transform 0.3s ease;
 }
 
 @keyframes gl-logo-pulse {
     0%, 100% {
-        box-shadow: 0 0 24px rgba(var(--gl-color-accent-rgb), 0.35),
-                    0 0 48px rgba(var(--gl-color-accent-rgb), 0.15);
+        box-shadow: 0 0 24px rgba(255, 44, 152, 0.4),
+                    0 0 48px rgba(108, 92, 231, 0.2);
     }
     50% {
-        box-shadow: 0 0 32px rgba(var(--gl-color-accent-rgb), 0.45),
-                    0 0 56px rgba(var(--gl-color-accent-rgb), 0.2);
+        box-shadow: 0 0 36px rgba(255, 44, 152, 0.55),
+                    0 0 64px rgba(108, 92, 231, 0.3);
     }
 }
 
 .gl-footer__logo-link:hover .gl-footer__logo-icon {
-    box-shadow: 0 0 36px rgba(var(--gl-color-accent-rgb), 0.55),
-                0 0 64px rgba(var(--gl-color-accent-rgb), 0.25);
+    box-shadow: 0 0 40px rgba(255, 44, 152, 0.6),
+                0 0 80px rgba(108, 92, 231, 0.3),
+                0 0 120px rgba(39, 217, 255, 0.15);
+    transform: scale(1.05);
     animation-play-state: paused;
 }
 
@@ -1281,12 +1399,15 @@
 /* ---- Footer Column Hover Effects ---- */
 .gl-footer__col {
     padding: var(--gl-space-4);
-    border-radius: var(--gl-radius-lg);
-    transition: background-color var(--gl-transition-fast);
+    border-radius: 12px;
+    transition: all 0.35s ease;
+    position: relative;
 }
 
 .gl-footer__col:hover {
-    background-color: rgba(255, 255, 255, 0.03);
+    background: rgba(12, 16, 48, 0.5);
+    box-shadow: 0 4px 24px rgba(255, 44, 152, 0.05),
+                inset 0 0 40px rgba(255, 44, 152, 0.02);
 }
 
 /* ---- Wave/Gradient Separator ---- */
@@ -1658,97 +1779,171 @@
    ========================================================================== */
 
 /* ---- Glassmorphism Sidebar Sections ---- */
-.gl-sidebar__section {
-    background: rgba(19, 24, 62, 0.7);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+.gl-sidebar__section,
+.gl-widget {
+    background: rgba(12, 16, 48, 0.8);
+    backdrop-filter: blur(16px) saturate(150%);
+    -webkit-backdrop-filter: blur(16px) saturate(150%);
     border: 1px solid rgba(255, 255, 255, 0.06);
-    border-left: 3px solid transparent;
+    border-left: 3px solid;
     border-image: linear-gradient(
         to bottom,
-        var(--gl-color-accent),
-        transparent
+        #FF2C98,
+        #6C5CE7
     ) 1;
     border-image-slice: 0 0 0 3;
-    transition: border-color var(--gl-transition-base),
-                box-shadow var(--gl-transition-base);
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 4px 24px rgba(255, 44, 152, 0.06),
+                0 0 40px rgba(108, 92, 231, 0.04),
+                inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
 }
 
-.gl-sidebar__section:hover {
-    border-color: rgba(var(--gl-color-accent-rgb), 0.15);
-    box-shadow: 0 4px 24px rgba(var(--gl-color-accent-rgb), 0.06);
+/* Subtle inner glow overlay */
+.gl-sidebar__section::before,
+.gl-widget::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(
+        ellipse at 0% 0%,
+        rgba(255, 44, 152, 0.05) 0%,
+        transparent 60%
+    );
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+}
+
+.gl-sidebar__section:hover,
+.gl-widget:hover {
+    border-color: rgba(255, 44, 152, 0.2);
+    box-shadow: 0 8px 40px rgba(255, 44, 152, 0.12),
+                0 0 60px rgba(108, 92, 231, 0.08),
+                inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    transform: translateY(-2px);
+}
+
+.gl-sidebar__section:hover::before,
+.gl-widget:hover::before {
+    opacity: 1;
 }
 
 /* ---- Widget Title with Gradient Underline ---- */
 .gl-widget__title,
-.gl-sidebar__title {
+.gl-sidebar__title,
+.widgettitle {
     position: relative;
     border-bottom: none;
     padding-bottom: var(--gl-space-3);
-    padding-left: var(--gl-space-4);
+    padding-left: 20px;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 700;
+    background: linear-gradient(135deg, #FF2C98, #27D9FF);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .gl-widget__title::before,
-.gl-sidebar__title::before {
+.gl-sidebar__title::before,
+.widgettitle::before {
     content: '';
     position: absolute;
     left: 0;
     top: 50%;
     transform: translateY(-50%);
-    width: 6px;
-    height: 6px;
-    border-radius: var(--gl-radius-full);
-    background-color: var(--gl-color-accent);
-    box-shadow: 0 0 8px rgba(var(--gl-color-accent-rgb), 0.4);
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #FF2C98;
+    box-shadow: 0 0 10px rgba(255, 44, 152, 0.6),
+                0 0 20px rgba(255, 44, 152, 0.3);
+    animation: gl-dot-pulse 2s ease-in-out infinite;
+}
+
+@keyframes gl-dot-pulse {
+    0%, 100% {
+        box-shadow: 0 0 10px rgba(255, 44, 152, 0.6),
+                    0 0 20px rgba(255, 44, 152, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 16px rgba(255, 44, 152, 0.8),
+                    0 0 32px rgba(255, 44, 152, 0.4);
+    }
 }
 
 .gl-widget__title::after,
-.gl-sidebar__title::after {
+.gl-sidebar__title::after,
+.widgettitle::after {
     content: '';
     position: absolute;
     bottom: 0;
     left: 0;
     width: 48px;
     height: 2px;
-    background: linear-gradient(90deg, var(--gl-color-accent), var(--gl-color-secondary));
-    border-radius: var(--gl-radius-full);
-    transition: width var(--gl-transition-base);
+    background: linear-gradient(90deg, #FF2C98, #27D9FF, #6C5CE7);
+    background-size: 200% 100%;
+    border-radius: 2px;
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: gl-underline-shift 3s ease infinite;
+}
+
+@keyframes gl-underline-shift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
 }
 
 .gl-sidebar__section:hover .gl-widget__title::after,
-.gl-sidebar__section:hover .gl-sidebar__title::after {
-    width: 72px;
+.gl-sidebar__section:hover .gl-sidebar__title::after,
+.gl-widget:hover .gl-widget__title::after,
+.gl-widget:hover .widgettitle::after {
+    width: 100%;
 }
 
 /* ---- Sidebar List Link Hover Indent ---- */
-.gl-sidebar__list li a {
+.gl-sidebar__list li a,
+.gl-widget ul li a {
     position: relative;
-    padding-left: var(--gl-space-5);
-    transition: color var(--gl-transition-fast),
-                background-color var(--gl-transition-fast),
-                padding-left var(--gl-transition-fast);
+    display: block;
+    padding: 10px 16px;
+    padding-left: 24px;
+    border-radius: 8px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.gl-sidebar__list li a::before {
+.gl-sidebar__list li a::before,
+.gl-widget ul li a::before {
     content: '';
     position: absolute;
-    left: 0;
+    left: 8px;
     top: 50%;
     transform: translateY(-50%) scaleY(0);
     width: 3px;
     height: 60%;
-    border-radius: var(--gl-radius-full);
-    background: linear-gradient(to bottom, var(--gl-color-accent), var(--gl-color-secondary));
-    transition: transform var(--gl-transition-fast);
+    border-radius: 2px;
+    background: linear-gradient(to bottom, #FF2C98, #6C5CE7);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.gl-sidebar__list li a:hover {
-    color: var(--gl-color-accent);
-    background-color: var(--gl-color-surface);
-    padding-left: var(--gl-space-6);
+.gl-sidebar__list li a:hover,
+.gl-widget ul li a:hover {
+    color: #FF2C98;
+    background: rgba(255, 44, 152, 0.08);
+    transform: translateX(4px);
+    text-shadow: 0 0 12px rgba(255, 44, 152, 0.3);
 }
 
-.gl-sidebar__list li a:hover::before {
+.gl-sidebar__list li a:hover::before,
+.gl-widget ul li a:hover::before {
     transform: translateY(-50%) scaleY(1);
 }
 
@@ -1874,8 +2069,129 @@
     }
 
     /* Sidebar resets for mobile (below sidebar) */
-    .gl-sidebar__section {
+    .gl-sidebar__section,
+    .gl-widget {
         backdrop-filter: none;
         -webkit-backdrop-filter: none;
     }
+}
+
+/* ==========================================================================
+   PREMIUM SEARCH WIDGET IN SIDEBAR
+   ========================================================================== */
+
+.gl-sidebar .search-form,
+.gl-widget .search-form {
+    display: flex;
+    gap: 8px;
+}
+
+.gl-sidebar .search-form input[type="search"],
+.gl-widget .search-form input[type="search"] {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 10px 16px;
+    color: #fff;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.gl-sidebar .search-form input[type="search"]:focus,
+.gl-widget .search-form input[type="search"]:focus {
+    border-color: #FF2C98;
+    box-shadow: 0 0 20px rgba(255, 44, 152, 0.2), 0 0 40px rgba(255, 44, 152, 0.1);
+    outline: none;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.gl-sidebar .search-form button,
+.gl-widget .search-form button,
+.gl-sidebar .search-form input[type="submit"],
+.gl-widget .search-form input[type="submit"] {
+    background: linear-gradient(135deg, #FF2C98, #6C5CE7);
+    border: none;
+    border-radius: 8px;
+    padding: 10px 18px;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 44, 152, 0.3);
+}
+
+.gl-sidebar .search-form button:hover,
+.gl-widget .search-form button:hover,
+.gl-sidebar .search-form input[type="submit"]:hover,
+.gl-widget .search-form input[type="submit"]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 25px rgba(255, 44, 152, 0.5), 0 0 40px rgba(255, 44, 152, 0.2);
+}
+
+/* ==========================================================================
+   PREMIUM FOOTER ENHANCED GLOW EFFECTS
+   ========================================================================== */
+
+/* Footer top section radial glow behind columns */
+.gl-footer__top {
+    position: relative;
+}
+
+.gl-footer__top::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 400px;
+    background: radial-gradient(
+        ellipse,
+        rgba(255, 44, 152, 0.04) 0%,
+        rgba(108, 92, 231, 0.02) 40%,
+        transparent 70%
+    );
+    pointer-events: none;
+}
+
+/* Footer copyright neon glow line */
+.gl-footer__copyright::before {
+    width: 180px;
+    height: 2px;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        #FF2C98,
+        #27D9FF,
+        #6C5CE7,
+        transparent
+    );
+    animation: gl-copyright-glow 3s ease infinite alternate;
+}
+
+@keyframes gl-copyright-glow {
+    0% { opacity: 0.5; width: 120px; }
+    100% { opacity: 1; width: 200px; }
+}
+
+/* Footer social icons enhanced glow */
+.gl-footer__social-link {
+    position: relative;
+}
+
+.gl-footer__social-link::before {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border-radius: inherit;
+    background: linear-gradient(135deg, #FF2C98, #6C5CE7);
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 0.3s ease;
+    filter: blur(8px);
+}
+
+.gl-footer__social-link:hover::before {
+    opacity: 0.4;
 }

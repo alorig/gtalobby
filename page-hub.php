@@ -91,14 +91,14 @@ function gtalobby_hub_grid_cols( $zone_cfg ) {
 
             case 'hero':
                 ?>
-                <section class="gl-hub-hero gl-hub-hero--<?php echo esc_attr( $hub_hero_style ); ?>" data-zone="hero" data-animate>
+                <section class="gl-hub-hero gl-hub-hero--<?php echo esc_attr( $hub_hero_style ); ?>" data-zone="hero" data-animate="blur">
                     <div class="gl-hub-hero__glow" aria-hidden="true"></div>
                     <?php if ( has_post_thumbnail() ) : ?>
                         <div class="gl-hub-hero__bg" style="background-image: url(<?php echo esc_url( get_the_post_thumbnail_url( $hub_id, 'gl-hero' ) ); ?>)"></div>
                     <?php endif; ?>
                     <div class="gl-container gl-hub-hero__content">
                         <?php gtalobby_category_badge(); ?>
-                        <h1 class="gl-hub-hero__title"><?php the_title(); ?></h1>
+                        <h1 class="gl-hub-hero__title" data-animate="fade-up" data-delay="200"><?php the_title(); ?></h1>
                         <?php if ( $hub_keyword ) : ?>
                             <p class="gl-hub-hero__subtitle"><?php echo esc_html( $hub_keyword ); ?></p>
                         <?php endif; ?>
@@ -113,7 +113,7 @@ function gtalobby_hub_grid_cols( $zone_cfg ) {
             case 'key_facts':
                 if ( is_array( $key_facts ) && ! empty( $key_facts ) ) :
                 ?>
-                <section class="gl-zone gl-zone--key-facts" data-zone="key_facts" data-animate>
+                <section class="gl-zone gl-zone--key-facts" data-zone="key_facts" data-animate="fade-scale">
                     <div class="<?php echo esc_attr( gtalobby_hub_container_class( $zone_cfg ) ); ?>">
                         <div class="gl-key-facts">
                             <?php foreach ( $key_facts as $fact ) : ?>
@@ -134,7 +134,7 @@ function gtalobby_hub_grid_cols( $zone_cfg ) {
             case 'subnav':
                 // Sticky sub-navigation with jump links to zone anchors
                 ?>
-                <nav class="gl-zone gl-zone--subnav gl-hub-subnav" data-zone="subnav" data-animate>
+                <nav class="gl-zone gl-zone--subnav gl-hub-subnav" data-zone="subnav" data-animate="fade-down">
                     <div class="<?php echo esc_attr( gtalobby_hub_container_class( $zone_cfg ) ); ?>">
                         <ul class="gl-hub-subnav__list">
                             <?php if ( $hub_quick_ans ) : ?>
@@ -180,7 +180,7 @@ function gtalobby_hub_grid_cols( $zone_cfg ) {
                         case 'quick_answer':
                             if ( $hub_quick_ans ) :
                             ?>
-                            <section class="gl-zone gl-zone--quick-answer" id="zone-quick-answer" data-zone="quick_answer" data-animate>
+                            <section class="gl-zone gl-zone--quick-answer" id="zone-quick-answer" data-zone="quick_answer" data-animate="fade-right">
                                 <div class="gl-quick-answer">
                                     <h2 class="gl-quick-answer__heading"><?php esc_html_e( 'Quick Answer', 'gtalobby' ); ?></h2>
                                     <div class="gl-quick-answer__text"><?php echo wp_kses_post( $hub_quick_ans ); ?></div>
@@ -193,7 +193,7 @@ function gtalobby_hub_grid_cols( $zone_cfg ) {
                         case 'toc':
                             if ( $toc ) :
                             ?>
-                            <section class="gl-zone gl-zone--toc" id="zone-toc" data-zone="toc" data-animate>
+                            <section class="gl-zone gl-zone--toc" id="zone-toc" data-zone="toc" data-animate="slide-right">
                                 <?php echo $toc; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
                             </section>
                             <?php
@@ -202,7 +202,7 @@ function gtalobby_hub_grid_cols( $zone_cfg ) {
 
                         case 'body_content':
                             ?>
-                            <section class="gl-zone gl-zone--body-content" id="zone-body-content" data-zone="body_content" data-animate>
+                            <section class="gl-zone gl-zone--body-content" id="zone-body-content" data-zone="body_content" data-animate="fade-up">
                                 <div class="gl-content gl-typography">
                                     <?php the_content(); ?>
                                 </div>
@@ -253,7 +253,7 @@ function gtalobby_hub_grid_cols( $zone_cfg ) {
                 ) );
                 if ( ! empty( $related_hubs ) ) :
                 ?>
-                <div class="gl-sidebar__section">
+                <div class="gl-sidebar__section" data-animate="slide-right" data-delay="100">
                     <h3 class="gl-sidebar__title"><?php esc_html_e( 'Related Hubs', 'gtalobby' ); ?></h3>
                     <ul class="gl-sidebar__list">
                         <?php foreach ( $related_hubs as $rh ) : ?>
@@ -271,7 +271,7 @@ function gtalobby_hub_grid_cols( $zone_cfg ) {
                 $sector_cat = get_category_by_slug( $hub_sector );
                 if ( $sector_cat ) :
                 ?>
-                <div class="gl-sidebar__section">
+                <div class="gl-sidebar__section" data-animate="slide-right" data-delay="200">
                     <h3 class="gl-sidebar__title"><?php esc_html_e( 'Category', 'gtalobby' ); ?></h3>
                     <a href="<?php echo esc_url( get_category_link( $sector_cat->term_id ) ); ?>" class="gl-sidebar__cat-link" style="--cat-accent: <?php echo esc_attr( $cat_color ); ?>">
                         <?php gtalobby_icon( gtalobby_get_category_icon( $hub_sector ), 18 ); ?>
@@ -281,7 +281,7 @@ function gtalobby_hub_grid_cols( $zone_cfg ) {
                 </div>
                 <?php endif; ?>
 
-                <div class="gl-sidebar__section">
+                <div class="gl-sidebar__section" data-animate="slide-right" data-delay="300">
                     <h3 class="gl-sidebar__title"><?php esc_html_e( 'About This Hub', 'gtalobby' ); ?></h3>
                     <dl class="gl-sidebar__info-list">
                         <?php if ( $hub_cluster ) : ?>
@@ -328,7 +328,7 @@ function gtalobby_hub_grid_cols( $zone_cfg ) {
                     ) );
                     if ( $feat_query->have_posts() ) :
                 ?>
-                <section class="gl-zone gl-zone--featured-children" data-zone="featured_children" data-animate>
+                <section class="gl-zone gl-zone--featured-children" data-zone="featured_children" data-animate="clip-left">
                     <div class="<?php echo esc_attr( $container ); ?>">
                         <h2 class="gl-zone__title"><?php esc_html_e( 'Featured Article', 'gtalobby' ); ?></h2>
                         <?php
@@ -382,7 +382,7 @@ function gtalobby_hub_grid_cols( $zone_cfg ) {
                     if ( $children_query->have_posts() ) :
                         $grid_class = gtalobby_hub_grid_cols( $zone_cfg );
                 ?>
-                <section class="gl-zone gl-zone--child-posts" id="zone-child-posts" data-zone="child_posts_grid" data-animate>
+                <section class="gl-zone gl-zone--child-posts" id="zone-child-posts" data-zone="child_posts_grid" data-animate="fade-up" data-delay="100">
                     <div class="<?php echo esc_attr( $container ); ?>">
                         <h2 class="gl-zone__title gl-zone__title--children"><?php esc_html_e( 'All Articles in This Hub', 'gtalobby' ); ?></h2>
 
@@ -440,7 +440,7 @@ function gtalobby_hub_grid_cols( $zone_cfg ) {
                 if ( is_array( $cross_links ) && ! empty( $cross_links ) ) :
                     $cross_cols = isset( $zone_cfg['columns'] ) ? (int) $zone_cfg['columns'] : 3;
                 ?>
-                <section class="gl-zone gl-zone--cross-cluster" data-zone="cross_cluster" data-animate>
+                <section class="gl-zone gl-zone--cross-cluster" data-zone="cross_cluster" data-animate="fade-left" data-delay="200">
                     <div class="<?php echo esc_attr( $container ); ?>">
                         <h2 class="gl-zone__title"><?php esc_html_e( 'Related Topic Hubs', 'gtalobby' ); ?></h2>
                         <div class="gl-cross-cluster__grid">
@@ -479,7 +479,7 @@ function gtalobby_hub_grid_cols( $zone_cfg ) {
             case 'faq':
                 if ( is_array( $faq_items ) && ! empty( $faq_items ) ) :
                 ?>
-                <section class="gl-zone gl-zone--faq" id="zone-faq" data-zone="faq" data-animate>
+                <section class="gl-zone gl-zone--faq" id="zone-faq" data-zone="faq" data-animate="bounce">
                     <div class="<?php echo esc_attr( $container ); ?>">
                         <h2 class="gl-zone__title"><?php esc_html_e( 'Frequently Asked Questions', 'gtalobby' ); ?></h2>
                         <div class="gl-faq">
@@ -502,7 +502,7 @@ function gtalobby_hub_grid_cols( $zone_cfg ) {
                 $sources = get_post_meta( $hub_id, 'hub_sources', true );
                 if ( $sources ) :
                 ?>
-                <section class="gl-zone gl-zone--sources" data-zone="sources" data-animate>
+                <section class="gl-zone gl-zone--sources" data-zone="sources" data-animate="fade-up" data-delay="300">
                     <div class="<?php echo esc_attr( $container ); ?>">
                         <h2 class="gl-zone__title"><?php esc_html_e( 'Sources & Methodology', 'gtalobby' ); ?></h2>
                         <div class="gl-sources">
