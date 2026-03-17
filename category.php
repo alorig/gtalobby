@@ -1,10 +1,10 @@
 <?php
 /**
- * Category Archive Template
+ * Category Archive Template — Premium Design
  *
- * Displays a SAG sector/category page with hub links,
- * category accent colors, and filterable content grid.
- * Zones rendered in admin-defined order via the Layout Engine.
+ * Cinematic hero header, featured post, filter bar,
+ * masonry content grid. Each of the 9 SAG categories
+ * gets a unique visual identity.
  *
  * @package GtaLobby
  */
@@ -14,15 +14,41 @@ get_header();
 $category       = get_queried_object();
 $category_slug  = $category->slug ?? '';
 $category_color = gtalobby_get_category_color( $category_slug );
+$category_icon  = gtalobby_get_category_icon( $category_slug );
 $archive_zones  = gtalobby_get_layout( 'archive', $category_slug );
+
+/* Category hero images */
+$cat_hero_images = array(
+    'gta6'       => 'https://images.unsplash.com/photo-1514565131-fce0801e5785?w=1600&h=600&fit=crop&q=80',
+    'cheats'     => 'https://images.unsplash.com/photo-1600861194942-f883de0dfe96?w=1600&h=600&fit=crop&q=80',
+    'online'     => 'https://images.unsplash.com/photo-1511882150382-421056c89033?w=1600&h=600&fit=crop&q=80',
+    'mods'       => 'https://images.unsplash.com/photo-1593305841991-05c297ba4575?w=1600&h=600&fit=crop&q=80',
+    'cars'       => 'https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=1600&h=600&fit=crop&q=80',
+    'characters' => 'https://images.unsplash.com/photo-1559386484-97dfc0e15539?w=1600&h=600&fit=crop&q=80',
+    'locations'  => 'https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=1600&h=600&fit=crop&q=80',
+    'money'      => 'https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?w=1600&h=600&fit=crop&q=80',
+    'news'       => 'https://images.unsplash.com/photo-1504711434969-e33886168d5c?w=1600&h=600&fit=crop&q=80',
+);
+$hero_img = isset( $cat_hero_images[ $category_slug ] ) ? $cat_hero_images[ $category_slug ] : '';
+
+/* Category descriptions */
+$cat_descriptions = array(
+    'gta6'       => 'Everything confirmed, leaked, and rumored about the next Grand Theft Auto.',
+    'cheats'     => 'Every cheat code for every platform — button combos, phone numbers, and console commands.',
+    'online'     => 'Money guides, weekly updates, heists, businesses, and GTA Online strategies.',
+    'mods'       => 'Best mods, installation guides, and visual overhauls for GTA 5 on PC.',
+    'cars'       => 'Vehicle stats, top speed rankings, lap times, and the best cars to buy.',
+    'characters' => 'Character profiles, voice actors, backstories, and story analysis.',
+    'locations'  => 'Map guides, hidden locations, collectibles, and secret spots.',
+    'money'      => 'Business guides, passive income setups, and money-making strategies.',
+    'news'       => 'Latest news, patch notes, DLC announcements, and community updates.',
+);
+$cat_desc = category_description() ?: ( isset( $cat_descriptions[ $category_slug ] ) ? $cat_descriptions[ $category_slug ] : '' );
 ?>
 
 <div class="gl-archive gl-archive--category gl-category-<?php echo esc_attr( $category_slug ); ?>" style="--cat-accent: <?php echo esc_attr( $category_color ); ?>">
 
     <?php
-    /* ================================================================
-       Archive Zones — rendered in admin-defined order
-       ================================================================ */
     foreach ( $archive_zones as $zone_id => $zone_cfg ) :
         if ( ! gtalobby_is_zone_enabled( 'archive', $zone_id, $category_slug ) ) {
             continue;
@@ -30,40 +56,56 @@ $archive_zones  = gtalobby_get_layout( 'archive', $category_slug );
 
         switch ( $zone_id ) :
 
-            /* -- Breadcrumb (rendered inside archive_header) -------- */
             case 'breadcrumb':
                 break;
 
-            /* -- Archive Header ------------------------------------- */
+            /* ==========================================================
+               CATEGORY HERO HEADER
+               ========================================================== */
             case 'archive_header':
             ?>
-            <section class="gl-zone gl-zone--archive-header gl-category-header" data-zone="archive_header">
-                <div class="gl-container">
+            <section class="gl-cat-hero" data-zone="archive_header">
+                <?php if ( $hero_img ) : ?>
+                <div class="gl-cat-hero__bg" style="background-image: url('<?php echo esc_url( $hero_img ); ?>')"></div>
+                <?php endif; ?>
+                <div class="gl-cat-hero__overlay"></div>
+
+                <!-- Decorative accent glow -->
+                <div class="gl-cat-hero__glow"></div>
+
+                <div class="gl-container gl-cat-hero__inner">
                     <?php if ( gtalobby_is_zone_enabled( 'archive', 'breadcrumb', $category_slug ) ) : ?>
-                        <div class="gl-category-header__breadcrumb"><?php gtalobby_breadcrumbs(); ?></div>
+                        <div class="gl-cat-hero__breadcrumb"><?php gtalobby_breadcrumbs(); ?></div>
                     <?php endif; ?>
 
-                    <div class="gl-category-header__content">
-                        <?php gtalobby_category_badge(); ?>
+                    <div class="gl-cat-hero__icon">
+                        <?php gtalobby_icon( $category_icon, 36 ); ?>
+                    </div>
 
-                        <h1 class="gl-category-header__title"><?php single_cat_title(); ?></h1>
+                    <h1 class="gl-cat-hero__title"><?php single_cat_title(); ?></h1>
 
-                        <?php if ( category_description() ) : ?>
-                            <div class="gl-category-header__desc"><?php echo wp_kses_post( category_description() ); ?></div>
-                        <?php endif; ?>
+                    <?php if ( $cat_desc ) : ?>
+                    <p class="gl-cat-hero__desc"><?php echo wp_kses_post( $cat_desc ); ?></p>
+                    <?php endif; ?>
 
-                        <div class="gl-category-header__stats">
-                            <span class="gl-category-header__count">
-                                <?php printf( esc_html( _n( '%s article', '%s articles', $category->count, 'gtalobby' ) ), number_format_i18n( $category->count ) ); ?>
-                            </span>
-                        </div>
+                    <div class="gl-cat-hero__meta">
+                        <span class="gl-cat-hero__count">
+                            <?php printf( esc_html( _n( '%s article', '%s articles', $category->count, 'gtalobby' ) ), '<strong>' . number_format_i18n( $category->count ) . '</strong>' ); ?>
+                        </span>
+                        <span class="gl-cat-hero__divider">&middot;</span>
+                        <span class="gl-cat-hero__updated"><?php esc_html_e( 'Updated regularly', 'gtalobby' ); ?></span>
                     </div>
                 </div>
+
+                <!-- Bottom accent strip -->
+                <div class="gl-cat-hero__strip"></div>
             </section>
             <?php
                 break;
 
-            /* -- Pinned Hubs ---------------------------------------- */
+            /* ==========================================================
+               PINNED HUBS
+               ========================================================== */
             case 'pinned_hubs':
                 $hub_pages = get_pages( array(
                     'meta_key'    => 'hub_sector',
@@ -84,31 +126,38 @@ $archive_zones  = gtalobby_get_layout( 'archive', $category_slug );
 
                 if ( ! empty( $hub_pages ) ) :
             ?>
-            <section class="gl-zone gl-zone--pinned-hubs" data-zone="pinned_hubs">
+            <section class="gl-zone gl-cat-hubs" data-zone="pinned_hubs" data-animate>
                 <div class="gl-container">
-                    <h2 class="gl-zone__title"><?php esc_html_e( 'Topic Hubs', 'gtalobby' ); ?></h2>
+                    <div class="gl-cat-hubs__header">
+                        <h2 class="gl-cat-hubs__title">
+                            <?php gtalobby_icon( 'grid', 20 ); ?>
+                            <?php esc_html_e( 'Topic Hubs', 'gtalobby' ); ?>
+                        </h2>
+                    </div>
 
-                    <div class="gl-card-grid gl-card-grid--3col">
-                        <?php foreach ( $hub_pages as $hub ) : ?>
-                        <a href="<?php echo esc_url( get_permalink( $hub->ID ) ); ?>"
-                           class="gl-hub-card"
-                           style="--cat-accent: <?php echo esc_attr( $category_color ); ?>">
-
-                            <?php if ( has_post_thumbnail( $hub->ID ) ) : ?>
-                            <div class="gl-hub-card__thumb">
-                                <?php echo get_the_post_thumbnail( $hub->ID, 'gl-card-square', array( 'class' => 'gl-hub-card__img' ) ); ?>
+                    <div class="gl-cat-hubs__grid">
+                        <?php foreach ( $hub_pages as $hub ) :
+                            $cluster = get_post_meta( $hub->ID, 'hub_cluster_name', true );
+                            $hub_children = get_post_meta( $hub->ID, 'hub_child_posts', true );
+                            $child_count  = is_array( $hub_children ) ? count( $hub_children ) : 0;
+                        ?>
+                        <a href="<?php echo esc_url( get_permalink( $hub->ID ) ); ?>" class="gl-cat-hub-card">
+                            <div class="gl-cat-hub-card__accent"></div>
+                            <div class="gl-cat-hub-card__body">
+                                <div class="gl-cat-hub-card__icon">
+                                    <?php gtalobby_icon( $category_icon, 20 ); ?>
+                                </div>
+                                <div>
+                                    <h3 class="gl-cat-hub-card__title"><?php echo esc_html( $hub->post_title ); ?></h3>
+                                    <?php if ( $cluster ) : ?>
+                                    <span class="gl-cat-hub-card__cluster"><?php echo esc_html( $cluster ); ?></span>
+                                    <?php endif; ?>
+                                </div>
                             </div>
+                            <?php if ( $child_count ) : ?>
+                            <span class="gl-cat-hub-card__count"><?php echo esc_html( $child_count ); ?> <?php esc_html_e( 'articles', 'gtalobby' ); ?></span>
                             <?php endif; ?>
-
-                            <div class="gl-hub-card__body">
-                                <h3 class="gl-hub-card__title"><?php echo esc_html( $hub->post_title ); ?></h3>
-                                <?php
-                                $cluster = get_post_meta( $hub->ID, 'hub_cluster_name', true );
-                                if ( $cluster ) :
-                                ?>
-                                <span class="gl-hub-card__cluster"><?php echo esc_html( $cluster ); ?></span>
-                                <?php endif; ?>
-                            </div>
+                            <span class="gl-cat-hub-card__arrow">&rarr;</span>
                         </a>
                         <?php endforeach; ?>
                     </div>
@@ -118,15 +167,18 @@ $archive_zones  = gtalobby_get_layout( 'archive', $category_slug );
                 endif;
                 break;
 
-            /* -- Filter Bar ----------------------------------------- */
+            /* ==========================================================
+               FILTER BAR
+               ========================================================== */
             case 'filter_bar':
+                $current_pt = isset( $_GET['post_type'] ) ? sanitize_key( $_GET['post_type'] ) : '';
             ?>
-            <div class="gl-zone gl-zone--filter-bar" data-zone="filter_bar">
+            <div class="gl-cat-filters" data-zone="filter_bar">
                 <div class="gl-container">
-                    <div class="gl-archive-filters">
+                    <div class="gl-cat-filters__bar">
                         <a href="<?php echo esc_url( get_category_link( $category->term_id ) ); ?>"
-                           class="gl-hub-filter gl-hub-filter--active">
-                            <?php esc_html_e( 'All', 'gtalobby' ); ?>
+                           class="gl-cat-filter <?php echo empty( $current_pt ) ? 'gl-cat-filter--active' : ''; ?>">
+                            <?php esc_html_e( 'All Content', 'gtalobby' ); ?>
                         </a>
 
                         <?php foreach ( gtalobby_get_post_types() as $pt_slug ) :
@@ -134,7 +186,7 @@ $archive_zones  = gtalobby_get_layout( 'archive', $category_slug );
                             if ( ! $pt_obj ) continue;
                         ?>
                         <a href="<?php echo esc_url( add_query_arg( 'post_type', $pt_slug, get_category_link( $category->term_id ) ) ); ?>"
-                           class="gl-hub-filter">
+                           class="gl-cat-filter <?php echo ( $current_pt === $pt_slug ) ? 'gl-cat-filter--active' : ''; ?>">
                             <?php echo esc_html( $pt_obj->labels->name ); ?>
                         </a>
                         <?php endforeach; ?>
@@ -144,47 +196,101 @@ $archive_zones  = gtalobby_get_layout( 'archive', $category_slug );
             <?php
                 break;
 
-            /* -- Post Grid + Sidebar -------------------------------- */
+            /* ==========================================================
+               FEATURED POST + POST GRID
+               ========================================================== */
             case 'post_grid':
                 gtalobby_render_ad_slot( 'ad_before_content' );
-                $cols = isset( $zone_cfg['columns'] ) ? (int) $zone_cfg['columns'] : 3;
             ?>
-            <div class="gl-container gl-archive__layout" data-zone="post_grid">
-                <main class="gl-archive__main" id="main-content">
+            <div class="gl-cat-content" data-zone="post_grid">
+                <div class="gl-container">
 
                     <?php if ( have_posts() ) : ?>
-                    <div class="gl-card-grid gl-card-grid--<?php echo esc_attr( $cols ); ?>col">
-                        <?php
-                        while ( have_posts() ) :
-                            the_post();
-                            echo '<div class="gl-card-grid__item" data-post-type="' . esc_attr( get_post_type() ) . '">';
-                            gtalobby_card( 'standard' );
-                            echo '</div>';
-                        endwhile;
-                        ?>
-                    </div>
 
-                    <?php if ( gtalobby_is_zone_enabled( 'archive', 'pagination', $category_slug ) ) : ?>
-                        <?php gtalobby_pagination(); ?>
-                    <?php endif; ?>
+                        <?php
+                        /* First post = featured card */
+                        if ( ! is_paged() ) :
+                            the_post();
+                        ?>
+                        <article class="gl-cat-featured" data-animate>
+                            <div class="gl-cat-featured__image">
+                                <?php if ( has_post_thumbnail() ) : ?>
+                                    <?php the_post_thumbnail( 'gl-feature', array( 'class' => 'gl-cat-featured__img' ) ); ?>
+                                <?php else : ?>
+                                    <div class="gl-cat-featured__placeholder">
+                                        <?php gtalobby_icon( $category_icon, 56 ); ?>
+                                    </div>
+                                <?php endif; ?>
+                                <div class="gl-cat-featured__overlay"></div>
+                                <div class="gl-cat-featured__content">
+                                    <div class="gl-cat-featured__badges">
+                                        <?php gtalobby_post_type_badge(); ?>
+                                        <span class="gl-cat-featured__label"><?php esc_html_e( 'Featured', 'gtalobby' ); ?></span>
+                                    </div>
+                                    <h2 class="gl-cat-featured__title">
+                                        <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+                                    </h2>
+                                    <p class="gl-cat-featured__excerpt"><?php echo esc_html( wp_trim_words( get_the_excerpt(), 28 ) ); ?></p>
+                                    <div class="gl-cat-featured__meta">
+                                        <span><?php echo esc_html( get_the_date() ); ?></span>
+                                        <a href="<?php the_permalink(); ?>" class="gl-cat-featured__read"><?php esc_html_e( 'Read Article', 'gtalobby' ); ?> &rarr;</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                        <?php endif; ?>
+
+                        <?php if ( have_posts() ) : ?>
+                        <div class="gl-cat-grid" data-animate>
+                            <?php
+                            $post_index = 0;
+                            while ( have_posts() ) :
+                                the_post();
+                                $post_index++;
+                            ?>
+                            <article class="gl-cat-card">
+                                <div class="gl-cat-card__image">
+                                    <?php if ( has_post_thumbnail() ) : ?>
+                                        <a href="<?php the_permalink(); ?>">
+                                            <?php the_post_thumbnail( 'gl-card', array( 'class' => 'gl-cat-card__img' ) ); ?>
+                                        </a>
+                                    <?php else : ?>
+                                        <a href="<?php the_permalink(); ?>" class="gl-cat-card__placeholder">
+                                            <?php gtalobby_icon( $category_icon, 28 ); ?>
+                                        </a>
+                                    <?php endif; ?>
+                                    <?php gtalobby_post_type_badge( null, false ); ?>
+                                </div>
+                                <div class="gl-cat-card__body">
+                                    <span class="gl-cat-card__date"><?php echo esc_html( get_the_date( 'M j, Y' ) ); ?></span>
+                                    <h3 class="gl-cat-card__title">
+                                        <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+                                    </h3>
+                                    <p class="gl-cat-card__excerpt"><?php echo esc_html( wp_trim_words( get_the_excerpt(), 16 ) ); ?></p>
+                                    <a href="<?php the_permalink(); ?>" class="gl-cat-card__link"><?php esc_html_e( 'Read More', 'gtalobby' ); ?> &rarr;</a>
+                                </div>
+                            </article>
+                            <?php endwhile; ?>
+                        </div>
+                        <?php endif; ?>
+
+                        <?php if ( gtalobby_is_zone_enabled( 'archive', 'pagination', $category_slug ) ) : ?>
+                            <?php gtalobby_pagination(); ?>
+                        <?php endif; ?>
 
                     <?php else : ?>
-                    <div class="gl-no-results">
+                    <div class="gl-cat-empty" data-animate>
+                        <div class="gl-cat-empty__icon"><?php gtalobby_icon( $category_icon, 48 ); ?></div>
                         <h2><?php esc_html_e( 'No Articles Yet', 'gtalobby' ); ?></h2>
-                        <p><?php printf( esc_html__( 'Content for %s is coming soon. Check back later!', 'gtalobby' ), esc_html( single_cat_title( '', false ) ) ); ?></p>
+                        <p><?php printf( esc_html__( 'Content for %s is coming soon. Check back later!', 'gtalobby' ), '<strong>' . esc_html( single_cat_title( '', false ) ) . '</strong>' ); ?></p>
                     </div>
                     <?php endif; ?>
 
-                </main>
-
-                <aside class="gl-archive__sidebar" role="complementary">
-                    <?php get_sidebar(); ?>
-                </aside>
+                </div>
             </div>
             <?php
                 break;
 
-            /* -- Pagination (handled inside post_grid) -------------- */
             case 'pagination':
                 break;
 
