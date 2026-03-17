@@ -23,6 +23,17 @@ $sag_descriptions = array(
     'money'      => 'Business guides, passive income setups, and money-making strategies.',
     'news'       => 'Latest news, patch notes, DLC announcements, and community updates.',
 );
+$sag_images = array(
+    'gta6'       => 'https://images.unsplash.com/photo-1514565131-fce0801e5785?w=600&h=400&fit=crop&q=80',
+    'cheats'     => 'https://images.unsplash.com/photo-1600861194942-f883de0dfe96?w=600&h=400&fit=crop&q=80',
+    'online'     => 'https://images.unsplash.com/photo-1511882150382-421056c89033?w=600&h=400&fit=crop&q=80',
+    'mods'       => 'https://images.unsplash.com/photo-1593305841991-05c297ba4575?w=600&h=400&fit=crop&q=80',
+    'cars'       => 'https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=600&h=400&fit=crop&q=80',
+    'characters' => 'https://images.unsplash.com/photo-1559386484-97dfc0e15539?w=600&h=400&fit=crop&q=80',
+    'locations'  => 'https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=600&h=400&fit=crop&q=80',
+    'money'      => 'https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?w=600&h=400&fit=crop&q=80',
+    'news'       => 'https://images.unsplash.com/photo-1504711434969-e33886168d5c?w=600&h=400&fit=crop&q=80',
+);
 
 /* Layout Engine — get sorted zones */
 $home_zones = gtalobby_get_layout( 'homepage' );
@@ -53,7 +64,7 @@ $gta6_cat   = get_category_by_slug( 'gta6' );
                     <!-- Panel 1 — GTA 6 (Cyber Cyan) -->
                     <div class="gl-hero-panel" data-panel="1">
                         <div class="gl-hero-panel__color" style="background: #27D9FF"></div>
-                        <div class="gl-hero-panel__image" style="background-image: url('<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/hero-gta6.jpg'), url('https://images.unsplash.com/photo-1514565131-fce0801e5785?w=1600&h=1000&fit=crop&q=80')"></div>
+                        <div class="gl-hero-panel__image" style="background-image: url('https://images.unsplash.com/photo-1514565131-fce0801e5785?w=1600&h=1000&fit=crop&q=80')"></div>
                         <span class="gl-hero-panel__num">01</span>
                         <span class="gl-hero-panel__label"><?php esc_html_e( 'GTA 6', 'gtalobby' ); ?></span>
                         <div class="gl-hero-panel__content">
@@ -74,7 +85,7 @@ $gta6_cat   = get_category_by_slug( 'gta6' );
                     <!-- Panel 2 — GTA Online (Neon Magenta) -->
                     <div class="gl-hero-panel" data-panel="2">
                         <div class="gl-hero-panel__color" style="background: #FF2C98"></div>
-                        <div class="gl-hero-panel__image" style="background-image: url('<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/hero-online.jpg'), url('https://images.unsplash.com/photo-1511882150382-421056c89033?w=1600&h=1000&fit=crop&q=80')"></div>
+                        <div class="gl-hero-panel__image" style="background-image: url('https://images.unsplash.com/photo-1511882150382-421056c89033?w=1600&h=1000&fit=crop&q=80')"></div>
                         <span class="gl-hero-panel__num">02</span>
                         <span class="gl-hero-panel__label"><?php esc_html_e( 'Online', 'gtalobby' ); ?></span>
                         <div class="gl-hero-panel__content">
@@ -95,7 +106,7 @@ $gta6_cat   = get_category_by_slug( 'gta6' );
                     <!-- Panel 3 — Cheats & Codes (Purple) -->
                     <div class="gl-hero-panel" data-panel="3">
                         <div class="gl-hero-panel__color" style="background: #6C5CE7"></div>
-                        <div class="gl-hero-panel__image" style="background-image: url('<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/hero-cheats.jpg'), url('https://images.unsplash.com/photo-1600861194942-f883de0dfe96?w=1600&h=1000&fit=crop&q=80')"></div>
+                        <div class="gl-hero-panel__image" style="background-image: url('https://images.unsplash.com/photo-1600861194942-f883de0dfe96?w=1600&h=1000&fit=crop&q=80')"></div>
                         <span class="gl-hero-panel__num">03</span>
                         <span class="gl-hero-panel__label"><?php esc_html_e( 'Cheats', 'gtalobby' ); ?></span>
                         <div class="gl-hero-panel__content">
@@ -116,7 +127,7 @@ $gta6_cat   = get_category_by_slug( 'gta6' );
                     <!-- Panel 4 — Mods (Dark Vice) -->
                     <div class="gl-hero-panel" data-panel="4">
                         <div class="gl-hero-panel__color" style="background: #0f1328"></div>
-                        <div class="gl-hero-panel__image" style="background-image: url('<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/hero-mods.jpg'), url('https://images.unsplash.com/photo-1593305841991-05c297ba4575?w=1600&h=1000&fit=crop&q=80')"></div>
+                        <div class="gl-hero-panel__image" style="background-image: url('https://images.unsplash.com/photo-1593305841991-05c297ba4575?w=1600&h=1000&fit=crop&q=80')"></div>
                         <span class="gl-hero-panel__num">04</span>
                         <span class="gl-hero-panel__label"><?php esc_html_e( 'Mods', 'gtalobby' ); ?></span>
                         <div class="gl-hero-panel__content">
@@ -162,11 +173,16 @@ $gta6_cat   = get_category_by_slug( 'gta6' );
                         <?php foreach ( $sag_categories as $slug => $cat_name ) :
                             $cat_obj = get_category_by_slug( $slug );
                             if ( ! $cat_obj ) continue;
-                            $color = gtalobby_get_category_color( $slug );
-                            $icon  = gtalobby_get_category_icon( $slug );
-                            $desc  = isset( $sag_descriptions[ $slug ] ) ? $sag_descriptions[ $slug ] : '';
+                            $color    = gtalobby_get_category_color( $slug );
+                            $icon     = gtalobby_get_category_icon( $slug );
+                            $desc     = isset( $sag_descriptions[ $slug ] ) ? $sag_descriptions[ $slug ] : '';
+                            $cat_img  = isset( $sag_images[ $slug ] ) ? $sag_images[ $slug ] : '';
                         ?>
                         <a href="<?php echo esc_url( get_category_link( $cat_obj->term_id ) ); ?>" class="gl-category-tile" style="--cat-accent: <?php echo esc_attr( $color ); ?>">
+                            <?php if ( $cat_img ) : ?>
+                            <div class="gl-category-tile__image" style="background-image: url('<?php echo esc_url( $cat_img ); ?>')"></div>
+                            <?php endif; ?>
+                            <div class="gl-category-tile__overlay"></div>
                             <div class="gl-category-tile__icon-wrap">
                                 <?php gtalobby_icon( $icon, 28 ); ?>
                             </div>
