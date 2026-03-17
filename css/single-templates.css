@@ -50,10 +50,10 @@
 .gl-single__layout {
     display: grid;
     grid-template-columns: 1fr var(--gl-sidebar-width);
-    gap: var(--gl-space-8);
+    gap: var(--gl-space-6);
     align-items: start;
-    padding-top: var(--gl-space-4);
-    padding-bottom: var(--gl-space-12);
+    padding-top: var(--gl-space-3);
+    padding-bottom: var(--gl-space-8);
 }
 
 .gl-single__main--wide {

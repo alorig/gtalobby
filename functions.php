@@ -154,6 +154,7 @@ require_once GTALOBBY_INC . '/admin-settings.php';
 // Content seeders
 require_once GTALOBBY_INC . '/seed-hub-pages.php';
 require_once GTALOBBY_INC . '/seed-content.php';
+require_once GTALOBBY_INC . '/seed-vehicles.php';
 
 // Assets
 require_once GTALOBBY_INC . '/enqueue.php';
@@ -362,26 +363,56 @@ function gtalobby_open_graph_meta() {
     $description = get_bloginfo( 'description' );
     $url         = home_url( '/' );
     $image       = '';
+    $image_w     = '';
+    $image_h     = '';
     $type        = 'website';
+    $published   = '';
+    $modified    = '';
+    $author      = '';
+    $section     = '';
 
     if ( is_singular() ) {
         $type        = 'article';
         $url         = get_permalink();
         $description = has_excerpt() ? get_the_excerpt() : wp_trim_words( get_the_content(), 30, '...' );
         $description = wp_strip_all_tags( $description );
+        $published   = get_the_date( 'c' );
+        $modified    = get_the_modified_date( 'c' );
+        $author      = get_the_author_meta( 'display_name' );
+
+        // Get primary category
+        $cats = get_the_category();
+        if ( ! empty( $cats ) ) {
+            $section = $cats[0]->name;
+        }
 
         if ( has_post_thumbnail() ) {
-            $image = get_the_post_thumbnail_url( null, 'gl-feature' );
+            $image    = get_the_post_thumbnail_url( null, 'gl-feature' );
+            $img_id   = get_post_thumbnail_id();
+            $img_data = wp_get_attachment_image_src( $img_id, 'gl-feature' );
+            if ( $img_data ) {
+                $image_w = $img_data[1];
+                $image_h = $img_data[2];
+            }
         }
     } elseif ( is_category() ) {
         $cat         = get_queried_object();
         $description = $cat->description ?: $description;
         $url         = get_category_link( $cat->term_id );
+    } elseif ( is_search() ) {
+        $description = sprintf( 'Search results for "%s" on %s', get_search_query(), get_bloginfo( 'name' ) );
+        $url         = get_search_link();
     }
 
-    $description = esc_attr( wp_trim_words( $description, 25, '...' ) );
+    $description = esc_attr( wp_trim_words( $description, 30, '...' ) );
     ?>
+    <!-- SEO Meta -->
+    <meta name="description" content="<?php echo $description; ?>">
+    <link rel="canonical" href="<?php echo esc_url( $url ); ?>">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+
     <!-- Open Graph -->
+    <meta property="og:locale" content="en_US">
     <meta property="og:type" content="<?php echo esc_attr( $type ); ?>">
     <meta property="og:title" content="<?php echo esc_attr( $title ); ?>">
     <meta property="og:description" content="<?php echo $description; ?>">
@@ -389,6 +420,18 @@ function gtalobby_open_graph_meta() {
     <meta property="og:site_name" content="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?>">
     <?php if ( $image ) : ?>
     <meta property="og:image" content="<?php echo esc_url( $image ); ?>">
+    <?php if ( $image_w && $image_h ) : ?>
+    <meta property="og:image:width" content="<?php echo esc_attr( $image_w ); ?>">
+    <meta property="og:image:height" content="<?php echo esc_attr( $image_h ); ?>">
+    <?php endif; ?>
+    <meta property="og:image:type" content="image/jpeg">
+    <?php endif; ?>
+    <?php if ( $published ) : ?>
+    <meta property="article:published_time" content="<?php echo esc_attr( $published ); ?>">
+    <meta property="article:modified_time" content="<?php echo esc_attr( $modified ); ?>">
+    <?php endif; ?>
+    <?php if ( $section ) : ?>
+    <meta property="article:section" content="<?php echo esc_attr( $section ); ?>">
     <?php endif; ?>
 
     <!-- Twitter Card -->
@@ -529,3 +572,110 @@ function gtalobby_include_cpts_in_archives( $query ) {
     }
 }
 add_action( 'pre_get_posts', 'gtalobby_include_cpts_in_archives' );
+
+/**
+ * SEO: Optimized title tag with site name separator.
+ */
+function gtalobby_document_title_separator( $sep ) {
+    return '—';
+}
+add_filter( 'document_title_separator', 'gtalobby_document_title_separator' );
+
+/**
+ * SEO: Add breadcrumb JSON-LD structured data.
+ */
+function gtalobby_breadcrumb_schema() {
+    if ( is_admin() || is_front_page() ) {
+        return;
+    }
+
+    $items = array();
+    $pos   = 1;
+
+    $items[] = array(
+        '@type'    => 'ListItem',
+        'position' => $pos++,
+        'name'     => get_bloginfo( 'name' ),
+        'item'     => home_url( '/' ),
+    );
+
+    if ( is_category() ) {
+        $cat = get_queried_object();
+        $items[] = array(
+            '@type'    => 'ListItem',
+            'position' => $pos++,
+            'name'     => $cat->name,
+            'item'     => get_category_link( $cat->term_id ),
+        );
+    } elseif ( is_singular() ) {
+        $cats = get_the_category();
+        if ( ! empty( $cats ) ) {
+            $items[] = array(
+                '@type'    => 'ListItem',
+                'position' => $pos++,
+                'name'     => $cats[0]->name,
+                'item'     => get_category_link( $cats[0]->term_id ),
+            );
+        }
+        $items[] = array(
+            '@type'    => 'ListItem',
+            'position' => $pos++,
+            'name'     => get_the_title(),
+            'item'     => get_permalink(),
+        );
+    }
+
+    if ( count( $items ) > 1 ) {
+        $schema = array(
+            '@context'        => 'https://schema.org',
+            '@type'           => 'BreadcrumbList',
+            'itemListElement' => $items,
+        );
+        echo '<script type="application/ld+json">' . wp_json_encode( $schema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE ) . '</script>' . "\n";
+    }
+}
+add_action( 'wp_head', 'gtalobby_breadcrumb_schema', 5 );
+
+/**
+ * SEO: Preconnect to external domains for performance.
+ */
+function gtalobby_resource_hints( $urls, $relation_type ) {
+    if ( 'dns-prefetch' === $relation_type ) {
+        $urls[] = 'https://fonts.googleapis.com';
+        $urls[] = 'https://fonts.gstatic.com';
+    }
+    return $urls;
+}
+add_filter( 'wp_resource_hints', 'gtalobby_resource_hints', 10, 2 );
+
+/**
+ * SEO: Add custom post type archive pages to sitemap with priority.
+ */
+function gtalobby_sitemap_entry( $entry, $post_type, $post ) {
+    if ( in_array( $post_type, array( 'guide', 'ranking', 'database', 'profile' ), true ) ) {
+        $entry['lastmod'] = get_the_modified_date( 'Y-m-d\TH:i:sP', $post );
+    }
+    return $entry;
+}
+add_filter( 'wp_sitemaps_posts_entry', 'gtalobby_sitemap_entry', 10, 3 );
+
+/**
+ * SEO: Output hreflang for international support (future-ready).
+ */
+function gtalobby_hreflang_tags() {
+    if ( is_admin() ) {
+        return;
+    }
+    $url = is_singular() ? get_permalink() : home_url( $_SERVER['REQUEST_URI'] );
+    echo '<link rel="alternate" hreflang="en" href="' . esc_url( $url ) . '">' . "\n";
+    echo '<link rel="alternate" hreflang="x-default" href="' . esc_url( $url ) . '">' . "\n";
+}
+add_action( 'wp_head', 'gtalobby_hreflang_tags', 3 );
+
+/**
+ * SEO: Remove unnecessary WordPress head clutter.
+ */
+remove_action( 'wp_head', 'rsd_link' );
+remove_action( 'wp_head', 'wlwmanifest_link' );
+remove_action( 'wp_head', 'wp_generator' );
+remove_action( 'wp_head', 'wp_shortlink_wp_head' );

@@ -533,14 +533,14 @@
 
 .gl-main {
     min-height: 60vh;
-    padding: var(--gl-space-8) 0;
+    padding: var(--gl-space-5) 0 var(--gl-space-8);
 }
 
 /* Content + sidebar layout grid */
 .gl-layout {
     display: grid;
     grid-template-columns: 1fr var(--gl-sidebar-width, 320px);
-    gap: var(--gl-space-8);
+    gap: var(--gl-space-6);
     align-items: start;
 }
 
@@ -558,10 +558,10 @@
 
 .gl-sidebar {
     position: sticky;
-    top: calc(var(--gl-header-height, 72px) + var(--gl-space-4));
+    top: calc(var(--gl-header-height, 72px) + var(--gl-space-3));
     display: flex;
     flex-direction: column;
-    gap: var(--gl-space-6);
+    gap: var(--gl-space-4);
 }
 
 .gl-sidebar__section {
