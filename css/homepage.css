@@ -533,278 +533,464 @@ body {
 }
 
 /* ==========================================================================
-   GTA 6 SPOTLIGHT
+   GTA 6 SPOTLIGHT — Cinematic Section
    ========================================================================== */
 
 .gl-home-gta6 {
-    background: linear-gradient(180deg, var(--gl-color-surface) 0%, var(--gl-color-bg) 100%);
     position: relative;
+    overflow: hidden;
+    background: var(--gl-color-bg);
 }
 
-.gl-home-gta6::before {
-    content: '';
+.gl-home-gta6__bg {
     position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: min(80%, 800px);
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--gl-color-cat-gta6), transparent);
+    inset: 0;
+    pointer-events: none;
+}
+
+.gl-home-gta6__bg-glow {
+    position: absolute;
+    top: -40%;
+    right: -10%;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, color-mix(in srgb, var(--gl-color-cat-gta6) 12%, transparent) 0%, transparent 70%);
+    filter: blur(60px);
 }
 
 .gl-home-gta6__header {
     display: flex;
-    align-items: flex-start;
+    align-items: flex-end;
     justify-content: space-between;
-    gap: var(--gl-space-4);
-    margin-bottom: var(--gl-space-6);
-}
-
-.gl-home-gta6__header .gl-zone__title {
-    margin-bottom: var(--gl-space-1);
-}
-
-.gl-home-gta6__grid {
-    display: grid;
-    grid-template-columns: 1.5fr 1fr;
     gap: var(--gl-space-6);
+    margin-bottom: var(--gl-space-8);
+    position: relative;
+    z-index: 1;
 }
 
-.gl-home-gta6__sidebar-list {
+.gl-home-gta6__header-left {
+    max-width: 560px;
+}
+
+.gl-home-gta6__badge {
+    display: inline-block;
+    font-family: var(--gl-font-mono);
+    font-size: var(--gl-font-size-xs);
+    font-weight: var(--gl-font-weight-bold);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--gl-color-cat-gta6);
+    background: color-mix(in srgb, var(--gl-color-cat-gta6) 12%, transparent);
+    padding: var(--gl-space-1) var(--gl-space-3);
+    border-radius: var(--gl-radius-full);
+    border: 1px solid color-mix(in srgb, var(--gl-color-cat-gta6) 25%, transparent);
+    margin-bottom: var(--gl-space-3);
+}
+
+.gl-home-gta6__heading {
+    font-family: var(--gl-font-display);
+    font-size: var(--gl-font-size-3xl);
+    font-weight: var(--gl-font-weight-extrabold);
+    letter-spacing: var(--gl-tracking-tight);
+    line-height: 1.1;
+    margin: 0 0 var(--gl-space-2);
+    color: var(--gl-color-text);
+}
+
+.gl-home-gta6__heading span {
+    color: var(--gl-color-cat-gta6);
+}
+
+.gl-home-gta6__tagline {
+    font-size: var(--gl-font-size-base);
+    color: var(--gl-color-text-secondary);
+    margin: 0;
+    line-height: 1.5;
+}
+
+.gl-home-gta6__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--gl-space-2);
+    font-family: var(--gl-font-display);
+    font-size: var(--gl-font-size-sm);
+    font-weight: var(--gl-font-weight-bold);
+    color: var(--gl-color-cat-gta6);
+    text-decoration: none;
+    padding: var(--gl-space-3) var(--gl-space-5);
+    border: 2px solid var(--gl-color-cat-gta6);
+    border-radius: var(--gl-radius-md);
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.gl-home-gta6__cta:hover {
+    background: var(--gl-color-cat-gta6);
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px color-mix(in srgb, var(--gl-color-cat-gta6) 30%, transparent);
+    text-decoration: none;
+}
+
+.gl-home-gta6__cta svg {
+    transition: transform 0.2s ease;
+}
+.gl-home-gta6__cta:hover svg {
+    transform: translateX(3px);
+}
+
+/* GTA 6 Layout */
+.gl-home-gta6__layout {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr;
+    gap: var(--gl-space-5);
+    position: relative;
+    z-index: 1;
+}
+
+/* Hero featured card */
+.gl-gta6-hero-card__image {
+    position: relative;
+    border-radius: var(--gl-radius-xl);
+    overflow: hidden;
+    aspect-ratio: 16 / 10;
+}
+
+.gl-gta6-hero-card__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.gl-gta6-hero-card:hover .gl-gta6-hero-card__img {
+    transform: scale(1.04);
+}
+
+.gl-gta6-hero-card__placeholder {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, color-mix(in srgb, var(--gl-color-cat-gta6) 18%, var(--gl-color-surface)) 0%, var(--gl-color-surface) 100%);
+    color: var(--gl-color-cat-gta6);
+    opacity: 0.6;
+}
+
+.gl-gta6-hero-card__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(6, 7, 20, 0.95) 0%, rgba(6, 7, 20, 0.4) 50%, rgba(6, 7, 20, 0) 100%);
+}
+
+.gl-gta6-hero-card__content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: var(--gl-space-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--gl-space-2);
+}
+
+.gl-gta6-hero-card__title {
+    font-family: var(--gl-font-display);
+    font-size: var(--gl-font-size-2xl);
+    font-weight: var(--gl-font-weight-bold);
+    line-height: 1.2;
+    margin: 0;
+}
+
+.gl-gta6-hero-card__title a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.gl-gta6-hero-card__title a:hover {
+    color: var(--gl-color-cat-gta6);
+}
+
+.gl-gta6-hero-card__excerpt {
+    font-size: var(--gl-font-size-sm);
+    color: rgba(255, 255, 255, 0.75);
+    line-height: 1.5;
+    margin: 0;
+    max-width: 480px;
+}
+
+.gl-gta6-hero-card__meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: var(--gl-space-2);
+    font-size: var(--gl-font-size-xs);
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.gl-gta6-hero-card__read {
+    font-weight: var(--gl-font-weight-semibold);
+    color: var(--gl-color-cat-gta6);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.gl-gta6-hero-card__read:hover {
+    color: #fff;
+    text-decoration: none;
+}
+
+/* GTA 6 sidebar cards */
+.gl-gta6-side {
     display: flex;
     flex-direction: column;
     gap: var(--gl-space-3);
 }
 
-/* Featured Card */
-.gl-featured-card {
+.gl-gta6-card {
     display: flex;
-    flex-direction: column;
-    background-color: var(--gl-color-surface-raised);
+    gap: var(--gl-space-4);
+    padding: var(--gl-space-4) var(--gl-space-5);
+    background: var(--gl-color-surface-raised);
     border: 1px solid var(--gl-color-border);
     border-radius: var(--gl-radius-lg);
-    overflow: hidden;
-    transition: all var(--gl-transition-fast);
+    transition: all 0.3s ease;
+    align-items: flex-start;
 }
 
-.gl-featured-card:hover {
-    box-shadow: var(--gl-shadow-md);
+.gl-gta6-card:hover {
+    border-color: var(--gl-color-cat-gta6);
+    background: color-mix(in srgb, var(--gl-color-cat-gta6) 5%, var(--gl-color-surface-raised));
+    transform: translateX(4px);
 }
 
-.gl-featured-card--hub {
-    flex-direction: row;
+.gl-gta6-card__num {
+    font-family: var(--gl-font-display);
+    font-size: var(--gl-font-size-2xl);
+    font-weight: var(--gl-font-weight-extrabold);
+    color: color-mix(in srgb, var(--gl-color-cat-gta6) 25%, transparent);
+    line-height: 1;
+    flex-shrink: 0;
+    min-width: 36px;
+    transition: color 0.3s ease;
 }
 
-.gl-featured-card--hub .gl-featured-card__thumb {
-    width: 45%;
-    aspect-ratio: auto;
-    min-height: 200px;
-}
-
-.gl-featured-card--hub .gl-featured-card__body {
-    justify-content: center;
-}
-
-.gl-featured-card__thumb {
-    aspect-ratio: 16 / 9;
-    overflow: hidden;
-    position: relative;
-}
-
-.gl-featured-card__thumb--placeholder {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, color-mix(in srgb, var(--gl-color-cat-gta6) 20%, var(--gl-color-surface)) 0%, var(--gl-color-surface) 100%);
+.gl-gta6-card:hover .gl-gta6-card__num {
     color: var(--gl-color-cat-gta6);
 }
 
-.gl-featured-card__placeholder-icon {
-    opacity: 0.5;
-}
-
-.gl-featured-card__img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform var(--gl-transition-base);
-}
-
-.gl-featured-card:hover .gl-featured-card__img {
-    transform: scale(1.03);
-}
-
-.gl-featured-card__body {
-    display: flex;
-    flex-direction: column;
-    gap: var(--gl-space-2);
-    padding: var(--gl-space-5);
-    flex: 1;
-}
-
-.gl-featured-card__title {
-    font-family: var(--gl-font-display);
-    font-size: var(--gl-font-size-xl);
-    font-weight: var(--gl-font-weight-bold);
-    line-height: 1.25;
-    margin: 0;
-}
-
-.gl-featured-card__title a {
-    color: inherit;
-    text-decoration: none;
-}
-
-.gl-featured-card__title a:hover {
-    color: var(--gl-color-accent);
-}
-
-.gl-featured-card__excerpt {
-    font-size: var(--gl-font-size-sm);
-    color: var(--gl-color-text-light);
-    line-height: 1.5;
-    margin: 0;
-}
-
-.gl-featured-card__meta {
-    font-size: var(--gl-font-size-xs);
-    color: var(--gl-color-text-lighter);
-}
-
-.gl-featured-card__footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: auto;
-    padding-top: var(--gl-space-3);
-    font-size: var(--gl-font-size-sm);
-    color: var(--gl-color-text-light);
-}
-
-.gl-featured-card__read {
-    color: var(--gl-color-accent);
-    font-weight: var(--gl-font-weight-semibold);
-}
-
-/* Mini Card */
-.gl-mini-card {
-    display: flex;
-    align-items: flex-start;
-    padding: var(--gl-space-3) var(--gl-space-4);
-    background-color: var(--gl-color-surface-raised);
-    border: 1px solid var(--gl-color-border);
-    border-left: 3px solid transparent;
-    border-radius: var(--gl-radius-md);
-    transition: all 0.25s ease;
-}
-
-.gl-mini-card:hover {
-    border-left-color: var(--gl-color-cat-gta6);
-    background-color: color-mix(in srgb, var(--gl-color-cat-gta6) 5%, var(--gl-color-surface-raised));
-    box-shadow: var(--gl-shadow-sm);
-}
-
-.gl-mini-card__body {
+.gl-gta6-card__body {
     display: flex;
     flex-direction: column;
     gap: var(--gl-space-1);
+    min-width: 0;
 }
 
-.gl-mini-card__title {
+.gl-gta6-card__title {
     font-family: var(--gl-font-display);
     font-size: var(--gl-font-size-sm);
-    font-weight: var(--gl-font-weight-semibold);
-    line-height: 1.3;
+    font-weight: var(--gl-font-weight-bold);
+    line-height: 1.35;
     margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
-.gl-mini-card__title a {
+.gl-gta6-card__title a {
     color: inherit;
     text-decoration: none;
 }
 
-.gl-mini-card__title a:hover {
-    color: var(--gl-color-accent);
+.gl-gta6-card__title a:hover {
+    color: var(--gl-color-cat-gta6);
 }
 
-.gl-mini-card__date {
+.gl-gta6-card__excerpt {
     font-size: var(--gl-font-size-xs);
-    color: var(--gl-color-text-lighter);
+    color: var(--gl-color-text-tertiary);
+    margin: 0;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.gl-gta6-card__date {
+    font-size: 11px;
+    color: var(--gl-color-text-tertiary);
+    font-family: var(--gl-font-mono);
+}
+
+/* Empty state */
+.gl-home-gta6__empty {
+    text-align: center;
+    padding: var(--gl-space-12) var(--gl-space-6);
+    background: var(--gl-color-surface-raised);
+    border: 1px dashed var(--gl-color-border);
+    border-radius: var(--gl-radius-xl);
+}
+
+.gl-home-gta6__empty-icon {
+    color: var(--gl-color-cat-gta6);
+    opacity: 0.4;
+    margin-bottom: var(--gl-space-4);
+}
+
+.gl-home-gta6__empty h3 {
+    font-family: var(--gl-font-display);
+    font-size: var(--gl-font-size-xl);
+    margin: 0 0 var(--gl-space-2);
+}
+
+.gl-home-gta6__empty p {
+    color: var(--gl-color-text-secondary);
+    max-width: 480px;
+    margin: 0 auto;
 }
 
 /* ==========================================================================
-   FEATURED HUBS GRID
+   FEATURED HUBS — Magazine Masonry
    ========================================================================== */
 
 .gl-home-hubs__header {
     margin-bottom: var(--gl-space-2);
 }
 
-.gl-home-hubs__grid {
+.gl-hubs-masonry {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: auto;
     gap: var(--gl-space-4);
 }
 
-.gl-hub-card-v2 {
+/* Featured first hub — spans 2 columns and 2 rows */
+.gl-hub-tile--featured {
+    grid-column: 1 / 3;
+    grid-row: 1 / 3;
+}
+
+.gl-hub-tile {
+    position: relative;
     display: flex;
     flex-direction: column;
-    padding: var(--gl-space-5);
-    background-color: var(--gl-color-surface-raised);
+    background: var(--gl-color-surface-raised);
     border: 1px solid var(--gl-color-border);
-    border-radius: var(--gl-radius-lg);
+    border-radius: var(--gl-radius-xl);
+    overflow: hidden;
     text-decoration: none;
     color: inherit;
-    transition: all var(--gl-transition-fast);
-    border-top: 3px solid var(--cat-accent, var(--gl-color-accent));
+    transition: all 0.35s ease;
 }
 
-.gl-hub-card-v2:hover {
+.gl-hub-tile:hover {
     transform: translateY(-4px);
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3), 0 0 0 1px var(--cat-accent, var(--gl-color-accent));
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3), 0 0 0 1px var(--hub-accent, var(--gl-color-accent));
     text-decoration: none;
     color: inherit;
-    border-color: var(--cat-accent, var(--gl-color-accent));
+    border-color: var(--hub-accent);
 }
 
-.gl-hub-card-v2__top {
+/* Left accent stripe */
+.gl-hub-tile__accent {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--hub-accent, var(--gl-color-accent));
+    border-radius: 4px 0 0 4px;
+    transition: width 0.3s ease;
+}
+
+.gl-hub-tile:hover .gl-hub-tile__accent {
+    width: 6px;
+}
+
+.gl-hub-tile__inner {
+    display: flex;
+    flex-direction: column;
+    padding: var(--gl-space-5) var(--gl-space-5) var(--gl-space-5) var(--gl-space-6);
+    flex: 1;
+}
+
+.gl-hub-tile--featured .gl-hub-tile__inner {
+    padding: var(--gl-space-8) var(--gl-space-8) var(--gl-space-8) calc(var(--gl-space-8) + 4px);
+    justify-content: center;
+}
+
+/* Icon circle */
+.gl-hub-tile__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: var(--gl-radius-full);
+    background: color-mix(in srgb, var(--hub-accent) 12%, transparent);
+    color: var(--hub-accent);
+    margin-bottom: var(--gl-space-3);
+    transition: all 0.3s ease;
+}
+
+.gl-hub-tile:hover .gl-hub-tile__icon {
+    background: var(--hub-accent);
+    color: #fff;
+}
+
+.gl-hub-tile--featured .gl-hub-tile__icon {
+    width: 56px;
+    height: 56px;
+    margin-bottom: var(--gl-space-4);
+}
+
+/* Top meta row */
+.gl-hub-tile__top {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: var(--gl-space-3);
+    margin-bottom: var(--gl-space-2);
 }
 
-.gl-hub-card-v2__sector {
-    font-family: var(--gl-font-display);
-    font-size: var(--gl-font-size-xs);
-    font-weight: var(--gl-font-weight-semibold);
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--cat-accent, var(--gl-color-accent));
-}
-
-.gl-hub-card-v2__count {
-    font-size: var(--gl-font-size-xs);
-    color: var(--gl-color-text-lighter);
+.gl-hub-tile__cluster {
     font-family: var(--gl-font-mono);
+    font-size: var(--gl-font-size-xs);
+    font-weight: var(--gl-font-weight-bold);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--hub-accent);
 }
 
-.gl-hub-card-v2__title {
+.gl-hub-tile__count {
+    font-size: 11px;
+    color: var(--gl-color-text-tertiary);
+    font-family: var(--gl-font-mono);
+    background: color-mix(in srgb, var(--hub-accent) 8%, transparent);
+    padding: 2px 8px;
+    border-radius: var(--gl-radius-full);
+}
+
+.gl-hub-tile__title {
     font-family: var(--gl-font-display);
     font-size: var(--gl-font-size-base);
     font-weight: var(--gl-font-weight-bold);
     line-height: 1.3;
     margin: 0 0 var(--gl-space-2);
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
 }
 
-.gl-hub-card-v2__excerpt {
+.gl-hub-tile--featured .gl-hub-tile__title {
+    font-size: var(--gl-font-size-xl);
+}
+
+.gl-hub-tile__excerpt {
     font-size: var(--gl-font-size-sm);
     color: var(--gl-color-text-light);
-    line-height: 1.4;
+    line-height: 1.5;
     margin: 0;
     flex: 1;
     display: -webkit-box;
@@ -813,129 +999,305 @@ body {
     overflow: hidden;
 }
 
-.gl-hub-card-v2__link {
-    display: inline-block;
-    margin-top: var(--gl-space-3);
-    font-size: var(--gl-font-size-sm);
-    font-weight: var(--gl-font-weight-semibold);
-    color: var(--cat-accent, var(--gl-color-accent));
+.gl-hub-tile--featured .gl-hub-tile__excerpt {
+    -webkit-line-clamp: 4;
+    font-size: var(--gl-font-size-base);
 }
 
-/* ==========================================================================
-   LATEST CONTENT
-   ========================================================================== */
-
-.gl-home-latest__section {
-    margin-bottom: var(--gl-space-10);
-}
-
-.gl-home-latest__section:last-child {
-    margin-bottom: 0;
-}
-
-.gl-home-latest__header {
-    display: flex;
+.gl-hub-tile__link {
+    display: inline-flex;
     align-items: center;
-    justify-content: space-between;
-    margin-bottom: var(--gl-space-5);
-    padding-bottom: var(--gl-space-3);
-    border-bottom: 1px solid var(--gl-color-divider);
-}
-
-.gl-home-latest__cat-title {
-    font-family: var(--gl-font-display);
-    font-size: var(--gl-font-size-xl);
+    gap: var(--gl-space-2);
+    margin-top: var(--gl-space-4);
+    font-size: var(--gl-font-size-sm);
     font-weight: var(--gl-font-weight-bold);
-    margin: 0;
-    padding-left: var(--gl-space-4);
-    border-left: 4px solid var(--cat-accent, var(--gl-color-accent));
-    letter-spacing: var(--gl-tracking-tight);
+    color: var(--hub-accent);
+    transition: gap 0.2s ease;
 }
 
-.gl-home-latest__more {
-    font-size: var(--gl-font-size-sm);
-    font-weight: var(--gl-font-weight-semibold);
-    color: var(--gl-color-accent);
-    text-decoration: none;
-    white-space: nowrap;
-    padding: var(--gl-space-2) var(--gl-space-4);
-    border: 1px solid color-mix(in srgb, var(--gl-color-accent) 30%, transparent);
-    border-radius: var(--gl-radius-full);
-    transition: all var(--gl-transition-fast);
-}
-
-.gl-home-latest__more:hover {
-    background: var(--gl-color-accent);
-    color: #fff;
-    text-decoration: none;
-    border-color: var(--gl-color-accent);
+.gl-hub-tile:hover .gl-hub-tile__link {
+    gap: var(--gl-space-3);
 }
 
 /* ==========================================================================
-   POST CARD (shared between homepage and hub page)
+   LATEST CONTENT — Tabbed Layout
    ========================================================================== */
 
-.gl-post-card {
+.gl-home-latest__top {
     display: flex;
-    flex-direction: column;
-    background-color: var(--gl-color-surface-raised);
-    border: 1px solid var(--gl-color-border);
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--gl-space-4);
+    margin-bottom: var(--gl-space-8);
+    flex-wrap: wrap;
+}
+
+/* Tab bar */
+.gl-latest-tabs {
+    display: flex;
+    gap: var(--gl-space-1);
+    background: var(--gl-color-surface);
     border-radius: var(--gl-radius-lg);
-    overflow: hidden;
-    transition: all 0.3s ease;
-    height: 100%;
-    border-bottom: 3px solid transparent;
+    padding: 4px;
+    border: 1px solid var(--gl-color-border);
 }
 
-.gl-post-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
-    border-bottom-color: var(--cat-accent, var(--gl-color-accent));
+.gl-latest-tab {
+    font-family: var(--gl-font-display);
+    font-size: var(--gl-font-size-sm);
+    font-weight: var(--gl-font-weight-semibold);
+    color: var(--gl-color-text-secondary);
+    background: transparent;
+    border: none;
+    padding: var(--gl-space-2) var(--gl-space-4);
+    border-radius: var(--gl-radius-md);
+    cursor: pointer;
+    transition: all 0.25s ease;
+    white-space: nowrap;
 }
 
-.gl-post-card__thumb {
-    aspect-ratio: 16 / 9;
-    overflow: hidden;
+.gl-latest-tab:hover {
+    color: var(--gl-color-text);
+    background: color-mix(in srgb, var(--tab-accent) 10%, transparent);
+}
+
+.gl-latest-tab--active {
+    background: var(--tab-accent) !important;
+    color: #fff !important;
+    box-shadow: 0 2px 8px color-mix(in srgb, var(--tab-accent) 30%, transparent);
+}
+
+/* Panels */
+.gl-latest-panel {
+    display: none;
+}
+
+.gl-latest-panel--active {
+    display: block;
+    animation: gl-tabFadeIn 0.35s ease;
+}
+
+@keyframes gl-tabFadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Panel grid: featured left, side cards right */
+.gl-latest-panel__grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: var(--gl-space-5);
+}
+
+/* Featured post */
+.gl-latest-featured__image {
     position: relative;
+    border-radius: var(--gl-radius-xl);
+    overflow: hidden;
+    aspect-ratio: 16 / 11;
 }
 
-.gl-post-card__thumb--placeholder {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, color-mix(in srgb, var(--cat-accent, var(--gl-color-accent)) 12%, var(--gl-color-surface)) 0%, var(--gl-color-surface) 100%);
-    color: var(--cat-accent, var(--gl-color-accent));
-    opacity: 0.7;
-}
-
-.gl-post-card__img {
+.gl-latest-featured__img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform var(--gl-transition-base);
+    transition: transform 0.5s ease;
 }
 
-.gl-post-card:hover .gl-post-card__img {
-    transform: scale(1.03);
+.gl-latest-featured:hover .gl-latest-featured__img {
+    transform: scale(1.04);
 }
 
-.gl-post-card__body {
+.gl-latest-featured__placeholder {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, color-mix(in srgb, var(--cat-accent) 15%, var(--gl-color-surface)) 0%, var(--gl-color-surface) 100%);
+    color: var(--cat-accent);
+    opacity: 0.5;
+}
+
+.gl-latest-featured__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(6, 7, 20, 0.95) 0%, rgba(6, 7, 20, 0.3) 55%, transparent 100%);
+}
+
+.gl-latest-featured__content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: var(--gl-space-6);
     display: flex;
     flex-direction: column;
     gap: var(--gl-space-2);
-    padding: var(--gl-space-4);
-    flex: 1;
 }
 
-.gl-post-card__meta {
+.gl-latest-featured__title {
+    font-family: var(--gl-font-display);
+    font-size: var(--gl-font-size-xl);
+    font-weight: var(--gl-font-weight-bold);
+    line-height: 1.25;
+    margin: 0;
+}
+
+.gl-latest-featured__title a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.gl-latest-featured__title a:hover {
+    color: var(--cat-accent);
+}
+
+.gl-latest-featured__excerpt {
+    font-size: var(--gl-font-size-sm);
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.5;
+    margin: 0;
+}
+
+.gl-latest-featured__meta {
     display: flex;
     align-items: center;
-    gap: var(--gl-space-2);
+    justify-content: space-between;
+    font-size: var(--gl-font-size-xs);
+    color: rgba(255, 255, 255, 0.45);
+    margin-top: var(--gl-space-1);
 }
 
-.gl-post-card__date {
-    font-size: var(--gl-font-size-xs);
-    color: var(--gl-color-text-lighter);
+.gl-latest-featured__read {
+    font-weight: var(--gl-font-weight-semibold);
+    color: var(--cat-accent);
+    text-decoration: none;
+}
+
+.gl-latest-featured__read:hover {
+    color: #fff;
+    text-decoration: none;
+}
+
+/* Side cards */
+.gl-latest-panel__side {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gl-space-3);
+}
+
+.gl-latest-side-card {
+    display: flex;
+    gap: var(--gl-space-3);
+    padding: var(--gl-space-3) var(--gl-space-4);
+    background: var(--gl-color-surface-raised);
+    border: 1px solid var(--gl-color-border);
+    border-radius: var(--gl-radius-lg);
+    transition: all 0.25s ease;
+    align-items: center;
+}
+
+.gl-latest-side-card:hover {
+    border-color: var(--cat-accent);
+    background: color-mix(in srgb, var(--cat-accent) 5%, var(--gl-color-surface-raised));
+    transform: translateX(4px);
+}
+
+.gl-latest-side-card__thumb {
+    width: 64px;
+    height: 64px;
+    border-radius: var(--gl-radius-md);
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.gl-latest-side-card__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.gl-latest-side-card__icon {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: color-mix(in srgb, var(--cat-accent) 10%, var(--gl-color-surface));
+    color: var(--cat-accent);
+}
+
+.gl-latest-side-card__body {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+}
+
+.gl-latest-side-card__title {
+    font-family: var(--gl-font-display);
+    font-size: var(--gl-font-size-sm);
+    font-weight: var(--gl-font-weight-bold);
+    line-height: 1.3;
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.gl-latest-side-card__title a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.gl-latest-side-card__title a:hover {
+    color: var(--cat-accent);
+}
+
+.gl-latest-side-card__date {
+    font-size: 11px;
+    color: var(--gl-color-text-tertiary);
+    font-family: var(--gl-font-mono);
+}
+
+/* Panel footer */
+.gl-latest-panel__footer {
+    margin-top: var(--gl-space-6);
+    text-align: center;
+}
+
+.gl-latest-panel__viewall {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--gl-space-2);
+    font-family: var(--gl-font-display);
+    font-size: var(--gl-font-size-sm);
+    font-weight: var(--gl-font-weight-bold);
+    color: var(--cat-accent);
+    text-decoration: none;
+    padding: var(--gl-space-3) var(--gl-space-6);
+    border: 2px solid color-mix(in srgb, var(--cat-accent) 35%, transparent);
+    border-radius: var(--gl-radius-full);
+    transition: all 0.3s ease;
+}
+
+.gl-latest-panel__viewall:hover {
+    background: var(--cat-accent);
+    color: #fff;
+    border-color: var(--cat-accent);
+    text-decoration: none;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px color-mix(in srgb, var(--cat-accent) 25%, transparent);
+}
+
+.gl-latest-panel__viewall svg {
+    transition: transform 0.2s ease;
+}
+
+.gl-latest-panel__viewall:hover svg {
+    transform: translateX(3px);
 }
 
 .gl-post-card__title {
@@ -996,21 +1358,32 @@ body {
         grid-column: 1 / -1;
     }
 
-    .gl-home-hubs__grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .gl-home-gta6__grid {
+    /* GTA 6 */
+    .gl-home-gta6__layout {
         grid-template-columns: 1fr;
     }
 
-    .gl-featured-card--hub {
-        flex-direction: column;
+    .gl-home-gta6__heading {
+        font-size: var(--gl-font-size-2xl);
     }
 
-    .gl-featured-card--hub .gl-featured-card__thumb {
-        width: 100%;
-        aspect-ratio: 16 / 9;
+    /* Hubs */
+    .gl-hubs-masonry {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .gl-hub-tile--featured {
+        grid-column: 1 / -1;
+        grid-row: auto;
+    }
+
+    /* Latest */
+    .gl-latest-panel__grid {
+        grid-template-columns: 1fr;
+    }
+
+    .gl-latest-tabs {
+        overflow-x: auto;
     }
 
     .gl-zone {
@@ -1085,8 +1458,35 @@ body {
         background: linear-gradient(135deg, rgba(6, 7, 20, 0.85) 0%, rgba(6, 7, 20, 0.6) 100%);
     }
 
-    .gl-home-hubs__grid {
+    /* Hubs */
+    .gl-hubs-masonry {
         grid-template-columns: 1fr;
+    }
+
+    .gl-hub-tile--featured .gl-hub-tile__inner {
+        padding: var(--gl-space-5) var(--gl-space-5) var(--gl-space-5) var(--gl-space-6);
+    }
+
+    /* GTA 6 */
+    .gl-home-gta6__header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .gl-gta6-hero-card__title {
+        font-size: var(--gl-font-size-lg);
+    }
+
+    /* Latest tabs */
+    .gl-home-latest__top {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .gl-latest-tabs {
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
     }
 
     .gl-card-grid--3col {

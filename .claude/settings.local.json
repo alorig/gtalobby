@@ -12,7 +12,8 @@
       "Bash(wc -l \"/d/GITHUB WEBSITE/gtalobby\"/css/*.css)",
       "Bash(find . -name \"*.css\" -type f -exec wc -l {} +)",
       "Bash(find . -name \"*.js\" -type f -exec wc -l {} +)",
-      "Bash(wc -l single-*.php index.php page-hub.php)"
+      "Bash(wc -l single-*.php index.php page-hub.php)",
+      "Bash(php -l front-page.php)"
     ]
   }
 }

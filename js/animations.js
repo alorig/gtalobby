@@ -119,10 +119,42 @@
     }
 
     /* =============================================
+       LATEST CONTENT — TAB SWITCHING
+       ============================================= */
+
+    var latestTabs = document.querySelectorAll('.gl-latest-tab');
+    var latestPanels = document.querySelectorAll('.gl-latest-panel');
+
+    if (latestTabs.length) {
+        latestTabs.forEach(function (tab) {
+            tab.addEventListener('click', function () {
+                var target = this.getAttribute('data-tab');
+
+                /* Update active tab */
+                latestTabs.forEach(function (t) {
+                    t.classList.remove('gl-latest-tab--active');
+                    t.setAttribute('aria-selected', 'false');
+                });
+                this.classList.add('gl-latest-tab--active');
+                this.setAttribute('aria-selected', 'true');
+
+                /* Update active panel */
+                latestPanels.forEach(function (p) {
+                    p.classList.remove('gl-latest-panel--active');
+                });
+                var activePanel = document.querySelector('.gl-latest-panel[data-panel="' + target + '"]');
+                if (activePanel) {
+                    activePanel.classList.add('gl-latest-panel--active');
+                }
+            });
+        });
+    }
+
+    /* =============================================
        COUNTER ANIMATION (Stats Numbers)
        ============================================= */
 
-    var statValues = document.querySelectorAll('.gl-home-hero__stat-value');
+    var statValues = document.querySelectorAll('.gl-stats-bar__num[data-count], .gl-home-hero__stat-value');
     if (statValues.length && 'IntersectionObserver' in window) {
         var countObserver = new IntersectionObserver(function (entries) {
             entries.forEach(function (entry) {
@@ -139,7 +171,7 @@
     }
 
     function animateCounter(el) {
-        var target = parseInt(el.textContent, 10);
+        var target = parseInt(el.getAttribute('data-count') || el.textContent, 10);
         if (isNaN(target)) return;
 
         var duration = 1200;
