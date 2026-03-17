@@ -194,4 +194,146 @@
         requestAnimationFrame(step);
     }
 
+    /* =============================================
+       SMOOTH SCROLL FOR ANCHOR LINKS
+       ============================================= */
+
+    document.querySelectorAll('a[href^="#"]').forEach(function (link) {
+        link.addEventListener('click', function (e) {
+            var targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+            var target = document.querySelector(targetId);
+            if (target) {
+                e.preventDefault();
+                var headerOffset = 80;
+                var elementPosition = target.getBoundingClientRect().top;
+                var offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+            }
+        });
+    });
+
+    /* =============================================
+       GALLERY LIGHTBOX (Simple Overlay)
+       ============================================= */
+
+    var galleryItems = document.querySelectorAll('.gl-gallery__item');
+    if (galleryItems.length) {
+        var lightbox = document.createElement('div');
+        lightbox.className = 'gl-lightbox';
+        lightbox.innerHTML = '<div class="gl-lightbox__backdrop"></div><div class="gl-lightbox__content"><img class="gl-lightbox__img" src="" alt=""/><button class="gl-lightbox__close" aria-label="Close">&times;</button></div>';
+        document.body.appendChild(lightbox);
+
+        var lightboxImg = lightbox.querySelector('.gl-lightbox__img');
+
+        galleryItems.forEach(function (item) {
+            item.style.cursor = 'pointer';
+            item.addEventListener('click', function () {
+                var img = this.querySelector('img');
+                if (img) {
+                    lightboxImg.src = img.src;
+                    lightboxImg.alt = img.alt;
+                    lightbox.classList.add('is-open');
+                    document.body.style.overflow = 'hidden';
+                }
+            });
+        });
+
+        lightbox.querySelector('.gl-lightbox__backdrop').addEventListener('click', closeLightbox);
+        lightbox.querySelector('.gl-lightbox__close').addEventListener('click', closeLightbox);
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && lightbox.classList.contains('is-open')) {
+                closeLightbox();
+            }
+        });
+
+        function closeLightbox() {
+            lightbox.classList.remove('is-open');
+            document.body.style.overflow = '';
+        }
+    }
+
+    /* =============================================
+       SIDEBAR STICKY DETECTION
+       ============================================= */
+
+    var sidebar = document.querySelector('.gl-sidebar');
+    if (sidebar && 'IntersectionObserver' in window) {
+        var sentinel = document.createElement('div');
+        sentinel.style.height = '1px';
+        sentinel.style.marginTop = '-1px';
+        if (sidebar.parentElement) {
+            sidebar.parentElement.insertBefore(sentinel, sidebar);
+        }
+
+        var stickyObserver = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (!entry.isIntersecting) {
+                    sidebar.classList.add('gl-sidebar--stuck');
+                } else {
+                    sidebar.classList.remove('gl-sidebar--stuck');
+                }
+            });
+        }, { threshold: 0 });
+
+        stickyObserver.observe(sentinel);
+    }
+
+    /* =============================================
+       FAQ ACCORDION SMOOTH OPEN
+       ============================================= */
+
+    document.querySelectorAll('.gl-faq__item').forEach(function (item) {
+        var question = item.querySelector('.gl-faq__question');
+        if (question) {
+            question.addEventListener('click', function (e) {
+                /* Close other open items */
+                document.querySelectorAll('.gl-faq__item[open]').forEach(function (other) {
+                    if (other !== item) {
+                        other.removeAttribute('open');
+                    }
+                });
+            });
+        }
+    });
+
+    /* =============================================
+       PARALLAX SCROLL FOR HERO BACKGROUNDS
+       ============================================= */
+
+    var heroElements = document.querySelectorAll('.gl-cat-hero__bg, .gl-hub-hero__bg, .gl-404-hero__orb, .gl-search-hero__glow');
+    if (heroElements.length) {
+        var ticking = false;
+        window.addEventListener('scroll', function () {
+            if (!ticking) {
+                requestAnimationFrame(function () {
+                    var scrolled = window.pageYOffset;
+                    heroElements.forEach(function (el) {
+                        var speed = 0.3;
+                        el.style.transform = 'translateY(' + (scrolled * speed) + 'px)';
+                    });
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }, { passive: true });
+    }
+
+    /* =============================================
+       READING PROGRESS FOR SINGLE ARTICLES
+       ============================================= */
+
+    var articleContent = document.querySelector('.gl-article__content');
+    var readingProgress = document.querySelector('.gl-scroll-progress');
+    if (articleContent && readingProgress) {
+        window.addEventListener('scroll', function () {
+            var rect = articleContent.getBoundingClientRect();
+            var articleTop = rect.top + window.pageYOffset;
+            var articleHeight = rect.height;
+            var scrollPos = window.pageYOffset - articleTop + window.innerHeight * 0.5;
+            var progress = Math.max(0, Math.min(100, (scrollPos / articleHeight) * 100));
+            readingProgress.style.width = progress + '%';
+        }, { passive: true });
+    }
+
 })();

@@ -529,6 +529,124 @@
 }
 
 /* ==========================================================================
+   ANIMATION 21: Gallery Lightbox
+   Full-screen overlay for gallery images.
+   ========================================================================== */
+
+.gl-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.gl-lightbox.is-open {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.gl-lightbox__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(6, 7, 20, 0.92);
+    backdrop-filter: blur(20px);
+}
+
+.gl-lightbox__content {
+    position: relative;
+    z-index: 1;
+    max-width: 90vw;
+    max-height: 90vh;
+    transform: scale(0.9);
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.gl-lightbox.is-open .gl-lightbox__content {
+    transform: scale(1);
+}
+
+.gl-lightbox__img {
+    max-width: 90vw;
+    max-height: 85vh;
+    object-fit: contain;
+    border-radius: var(--gl-radius-lg);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5),
+                0 0 40px rgba(255, 44, 152, 0.1);
+}
+
+.gl-lightbox__close {
+    position: absolute;
+    top: -48px;
+    right: 0;
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(8px);
+    color: #fff;
+    font-size: 24px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--gl-transition-fast);
+}
+
+.gl-lightbox__close:hover {
+    background: var(--gl-color-accent);
+    transform: rotate(90deg);
+}
+
+/* ==========================================================================
+   ANIMATION 22: Stagger animations for new page elements
+   ========================================================================== */
+
+/* 404 category pills stagger */
+.gl-404-categories[data-animate].gl-visible .gl-404-cat-pill {
+    animation: gl-staggerIn 0.4s ease-out both;
+}
+
+.gl-404-categories[data-animate].gl-visible .gl-404-cat-pill:nth-child(1) { animation-delay: 0s; }
+.gl-404-categories[data-animate].gl-visible .gl-404-cat-pill:nth-child(2) { animation-delay: 0.05s; }
+.gl-404-categories[data-animate].gl-visible .gl-404-cat-pill:nth-child(3) { animation-delay: 0.1s; }
+.gl-404-categories[data-animate].gl-visible .gl-404-cat-pill:nth-child(4) { animation-delay: 0.15s; }
+.gl-404-categories[data-animate].gl-visible .gl-404-cat-pill:nth-child(5) { animation-delay: 0.2s; }
+.gl-404-categories[data-animate].gl-visible .gl-404-cat-pill:nth-child(6) { animation-delay: 0.25s; }
+.gl-404-categories[data-animate].gl-visible .gl-404-cat-pill:nth-child(7) { animation-delay: 0.3s; }
+.gl-404-categories[data-animate].gl-visible .gl-404-cat-pill:nth-child(8) { animation-delay: 0.35s; }
+.gl-404-categories[data-animate].gl-visible .gl-404-cat-pill:nth-child(9) { animation-delay: 0.4s; }
+
+/* Search filter tabs stagger */
+.gl-search-filters[data-animate].gl-visible .gl-search-filter {
+    animation: gl-staggerIn 0.3s ease-out both;
+}
+
+.gl-search-filters[data-animate].gl-visible .gl-search-filter:nth-child(1) { animation-delay: 0s; }
+.gl-search-filters[data-animate].gl-visible .gl-search-filter:nth-child(2) { animation-delay: 0.06s; }
+.gl-search-filters[data-animate].gl-visible .gl-search-filter:nth-child(3) { animation-delay: 0.12s; }
+.gl-search-filters[data-animate].gl-visible .gl-search-filter:nth-child(4) { animation-delay: 0.18s; }
+.gl-search-filters[data-animate].gl-visible .gl-search-filter:nth-child(5) { animation-delay: 0.24s; }
+.gl-search-filters[data-animate].gl-visible .gl-search-filter:nth-child(6) { animation-delay: 0.3s; }
+.gl-search-filters[data-animate].gl-visible .gl-search-filter:nth-child(7) { animation-delay: 0.36s; }
+.gl-search-filters[data-animate].gl-visible .gl-search-filter:nth-child(8) { animation-delay: 0.42s; }
+
+/* Footer sections stagger */
+.gl-footer__top-grid[data-animate].gl-visible .gl-footer__col {
+    animation: gl-staggerIn 0.5s ease-out both;
+}
+
+.gl-footer__top-grid[data-animate].gl-visible .gl-footer__brand { animation-delay: 0s; }
+.gl-footer__top-grid[data-animate].gl-visible .gl-footer__col:nth-child(2) { animation-delay: 0.1s; }
+.gl-footer__top-grid[data-animate].gl-visible .gl-footer__col:nth-child(3) { animation-delay: 0.2s; }
+.gl-footer__top-grid[data-animate].gl-visible .gl-footer__col:nth-child(4) { animation-delay: 0.3s; }
+
+/* ==========================================================================
    REDUCED MOTION — Respect user preferences
    ========================================================================== */
 
@@ -545,5 +663,13 @@
     [data-animate] {
         opacity: 1;
         transform: none;
+    }
+
+    .gl-lightbox {
+        transition: none;
+    }
+
+    .gl-lightbox__content {
+        transition: none;
     }
 }
