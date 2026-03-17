@@ -87,13 +87,6 @@ function gtalobby_hub_grid_cols( $zone_cfg ) {
         switch ( $zone_id ) :
 
             case 'breadcrumb':
-                ?>
-                <section class="gl-zone gl-zone--breadcrumb" data-zone="breadcrumb">
-                    <div class="<?php echo esc_attr( gtalobby_hub_container_class( $zone_cfg ) ); ?>">
-                        <?php gtalobby_breadcrumbs(); ?>
-                    </div>
-                </section>
-                <?php
                 break;
 
             case 'hero':

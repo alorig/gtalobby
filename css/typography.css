@@ -246,6 +246,462 @@ hr {
 }
 
 /* ==========================================================================
+   PREMIUM CONTENT TYPOGRAPHY (.gl-typography enhancements)
+   Rich article content styling — headings, media, quotes, lists,
+   tables, code, rules, details/summary, and figures.
+   ========================================================================== */
+
+/* --- Content Headings --------------------------------------------------- */
+
+.gl-typography h2 {
+    margin-top: var(--gl-space-12);
+    margin-bottom: var(--gl-space-6);
+    padding-left: var(--gl-space-5);
+    border-left: 3px solid var(--gl-color-accent);
+    position: relative;
+}
+
+.gl-typography h2::before {
+    content: "";
+    position: absolute;
+    left: -3px;
+    top: 0;
+    width: 3px;
+    height: 100%;
+    background: linear-gradient(
+        180deg,
+        var(--gl-color-accent) 0%,
+        var(--gl-color-secondary) 100%
+    );
+    border-radius: var(--gl-radius-full);
+}
+
+/* Override the plain border-left since we use the pseudo gradient */
+.gl-typography h2 {
+    border-left-color: transparent;
+}
+
+.gl-typography h3 {
+    margin-top: var(--gl-space-10);
+    margin-bottom: var(--gl-space-5);
+    padding-bottom: var(--gl-space-3);
+    border-bottom: 2px dotted var(--gl-color-divider);
+}
+
+.gl-typography h4 {
+    margin-top: var(--gl-space-8);
+    margin-bottom: var(--gl-space-4);
+    color: var(--gl-color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: var(--gl-tracking-wide);
+    font-size: var(--gl-font-size-md);
+}
+
+/* Reduce top margin when headings follow each other */
+.gl-typography h2 + h3 { margin-top: var(--gl-space-6); }
+.gl-typography h3 + h4 { margin-top: var(--gl-space-4); }
+
+/* --- Images & Media ----------------------------------------------------- */
+
+.gl-typography img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--gl-radius-lg);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35),
+                0 0 40px rgba(var(--gl-color-accent-rgb), 0.06);
+    transition: transform var(--gl-transition-base),
+                box-shadow var(--gl-transition-base);
+}
+
+.gl-typography img:hover {
+    transform: scale(1.015);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.45),
+                0 0 60px rgba(var(--gl-color-accent-rgb), 0.1);
+}
+
+.gl-typography .aligncenter,
+.gl-typography .wp-block-image {
+    margin-top: var(--gl-space-8);
+    margin-bottom: var(--gl-space-8);
+}
+
+/* Full-bleed wide images */
+.gl-typography .alignfull,
+.gl-typography .wp-block-image.is-style-full {
+    margin-left: calc(-1 * var(--gl-space-6));
+    margin-right: calc(-1 * var(--gl-space-6));
+    max-width: calc(100% + var(--gl-space-6) * 2);
+    width: calc(100% + var(--gl-space-6) * 2);
+}
+
+.gl-typography .alignfull img,
+.gl-typography .wp-block-image.is-style-full img {
+    width: 100%;
+    border-radius: 0;
+}
+
+/* --- Premium Blockquotes ------------------------------------------------ */
+
+.gl-typography blockquote {
+    position: relative;
+    margin: var(--gl-space-8) 0;
+    padding: var(--gl-space-6) var(--gl-space-8);
+    padding-left: var(--gl-space-8);
+    border-left: 4px solid transparent;
+    background:
+        linear-gradient(var(--gl-color-surface), var(--gl-color-surface)) padding-box,
+        linear-gradient(180deg, var(--gl-color-accent), var(--gl-color-secondary)) border-box;
+    border-radius: 0 var(--gl-radius-lg) var(--gl-radius-lg) 0;
+    box-shadow: inset 0 0 40px rgba(var(--gl-color-accent-rgb), 0.04),
+                0 2px 12px rgba(0, 0, 0, 0.2);
+}
+
+.gl-typography blockquote::before {
+    content: "\201C";
+    position: absolute;
+    top: var(--gl-space-3);
+    left: var(--gl-space-4);
+    font-family: var(--gl-font-display);
+    font-size: var(--gl-font-size-5xl);
+    line-height: 1;
+    color: var(--gl-color-accent);
+    opacity: 0.25;
+    pointer-events: none;
+}
+
+.gl-typography blockquote p {
+    position: relative;
+    font-size: var(--gl-font-size-lg);
+    font-style: italic;
+    color: var(--gl-color-text-secondary);
+    line-height: var(--gl-line-height-body);
+}
+
+.gl-typography blockquote cite {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--gl-space-2);
+    margin-top: var(--gl-space-4);
+    font-size: var(--gl-font-size-sm);
+    color: var(--gl-color-text-tertiary);
+    font-style: normal;
+    font-weight: var(--gl-font-weight-medium);
+}
+
+.gl-typography blockquote cite::before {
+    content: "";
+    display: inline-block;
+    width: 24px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gl-color-accent), transparent);
+    border-radius: var(--gl-radius-full);
+}
+
+/* --- Enhanced Lists ----------------------------------------------------- */
+
+.gl-typography ul {
+    list-style: none;
+    padding-left: var(--gl-space-6);
+}
+
+.gl-typography ul > li {
+    position: relative;
+    padding-left: var(--gl-space-5);
+    margin-bottom: var(--gl-space-3);
+    line-height: var(--gl-line-height-body);
+}
+
+.gl-typography ul > li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.65em;
+    width: 6px;
+    height: 6px;
+    border-radius: var(--gl-radius-full);
+    background: var(--gl-color-accent);
+    box-shadow: 0 0 6px rgba(var(--gl-color-accent-rgb), 0.5);
+}
+
+/* Nested list bullets use secondary color */
+.gl-typography ul ul > li::before {
+    background: var(--gl-color-secondary);
+    box-shadow: 0 0 6px rgba(39, 217, 255, 0.4);
+    width: 5px;
+    height: 5px;
+    border-radius: 1px;
+    transform: rotate(45deg);
+}
+
+.gl-typography ol {
+    list-style: none;
+    padding-left: var(--gl-space-6);
+    counter-reset: gl-ol;
+}
+
+.gl-typography ol > li {
+    position: relative;
+    padding-left: var(--gl-space-6);
+    margin-bottom: var(--gl-space-3);
+    counter-increment: gl-ol;
+}
+
+.gl-typography ol > li::before {
+    content: counter(gl-ol);
+    position: absolute;
+    left: 0;
+    top: 0.1em;
+    width: 1.5em;
+    height: 1.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--gl-font-size-xs);
+    font-weight: var(--gl-font-weight-bold);
+    font-family: var(--gl-font-mono);
+    color: var(--gl-color-accent);
+    border: 1px solid var(--gl-color-accent);
+    border-radius: var(--gl-radius-full);
+    opacity: 0.75;
+}
+
+/* --- Enhanced Tables ---------------------------------------------------- */
+
+.gl-typography table {
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: var(--gl-radius-lg);
+    overflow: hidden;
+    border: 1px solid var(--gl-color-divider);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+}
+
+.gl-typography thead th {
+    background: linear-gradient(
+        135deg,
+        var(--gl-color-surface-raised) 0%,
+        var(--gl-color-surface) 100%
+    );
+    border-bottom: 2px solid var(--gl-color-accent);
+    color: var(--gl-color-text);
+    font-family: var(--gl-font-display);
+    font-size: var(--gl-font-size-sm);
+    text-transform: uppercase;
+    letter-spacing: var(--gl-tracking-wide);
+}
+
+.gl-typography tbody tr:nth-child(even) td {
+    background-color: rgba(12, 16, 48, 0.5);
+}
+
+.gl-typography tbody tr:nth-child(odd) td {
+    background-color: rgba(19, 24, 62, 0.3);
+}
+
+.gl-typography tbody tr:hover td {
+    background-color: rgba(var(--gl-color-accent-rgb), 0.07);
+    transition: background-color var(--gl-transition-fast);
+}
+
+.gl-typography td {
+    border-bottom: 1px solid var(--gl-color-divider);
+}
+
+.gl-typography tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* --- Enhanced Code Blocks ----------------------------------------------- */
+
+.gl-typography pre {
+    position: relative;
+    margin: var(--gl-space-8) 0;
+    padding: var(--gl-space-6);
+    background-color: var(--gl-color-surface);
+    color: var(--gl-color-text);
+    border: 1px solid var(--gl-color-divider);
+    border-radius: var(--gl-radius-lg);
+    box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.3),
+                0 2px 8px rgba(0, 0, 0, 0.15);
+    overflow-x: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--gl-color-accent) var(--gl-color-surface-raised);
+}
+
+.gl-typography pre::-webkit-scrollbar {
+    height: 6px;
+}
+
+.gl-typography pre::-webkit-scrollbar-track {
+    background: var(--gl-color-surface-raised);
+    border-radius: var(--gl-radius-full);
+}
+
+.gl-typography pre::-webkit-scrollbar-thumb {
+    background: var(--gl-color-accent);
+    border-radius: var(--gl-radius-full);
+}
+
+/* Top-bar decoration simulating a terminal header */
+.gl-typography pre::before {
+    content: "";
+    display: block;
+    margin-bottom: var(--gl-space-4);
+    height: 1px;
+    background: linear-gradient(90deg,
+        var(--gl-color-accent),
+        var(--gl-color-secondary),
+        transparent
+    );
+    border-radius: var(--gl-radius-full);
+    opacity: 0.5;
+}
+
+.gl-typography code {
+    padding: 0.2em 0.45em;
+    background-color: var(--gl-color-surface-raised);
+    border: 1px solid var(--gl-color-divider);
+    border-radius: var(--gl-radius-sm);
+    color: var(--gl-color-secondary);
+    font-size: 0.85em;
+}
+
+.gl-typography pre code {
+    padding: 0;
+    background: none;
+    border: none;
+    color: inherit;
+    font-size: inherit;
+}
+
+/* --- Gradient Horizontal Rules ------------------------------------------ */
+
+.gl-typography hr {
+    margin: var(--gl-space-12) 0;
+    border: 0;
+    height: 2px;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        var(--gl-color-accent) 25%,
+        var(--gl-color-secondary) 50%,
+        var(--gl-color-accent) 75%,
+        transparent 100%
+    );
+    opacity: 0.5;
+    border-radius: var(--gl-radius-full);
+}
+
+/* --- Figure & Figcaption ------------------------------------------------ */
+
+.gl-typography figure {
+    margin: var(--gl-space-8) 0;
+    padding: 0;
+}
+
+.gl-typography figure img {
+    width: 100%;
+}
+
+.gl-typography figcaption {
+    margin-top: var(--gl-space-3);
+    padding: var(--gl-space-2) var(--gl-space-4);
+    font-size: var(--gl-font-size-sm);
+    color: var(--gl-color-text-tertiary);
+    text-align: center;
+    font-style: italic;
+    border-left: 2px solid var(--gl-color-accent);
+    background-color: rgba(var(--gl-color-accent-rgb), 0.04);
+    border-radius: 0 var(--gl-radius-sm) var(--gl-radius-sm) 0;
+}
+
+/* --- Details / Summary (FAQ-style) -------------------------------------- */
+
+.gl-typography details {
+    margin: var(--gl-space-4) 0;
+    padding: 0;
+    border: 1px solid var(--gl-color-divider);
+    border-radius: var(--gl-radius-lg);
+    background-color: var(--gl-color-surface);
+    overflow: hidden;
+    transition: border-color var(--gl-transition-fast);
+}
+
+.gl-typography details:hover {
+    border-color: var(--gl-color-border);
+}
+
+.gl-typography details[open] {
+    border-color: var(--gl-color-accent);
+    box-shadow: 0 0 20px rgba(var(--gl-color-accent-rgb), 0.08);
+}
+
+.gl-typography summary {
+    display: flex;
+    align-items: center;
+    gap: var(--gl-space-3);
+    padding: var(--gl-space-4) var(--gl-space-5);
+    cursor: pointer;
+    font-family: var(--gl-font-display);
+    font-weight: var(--gl-font-weight-semibold);
+    font-size: var(--gl-font-size-md);
+    color: var(--gl-color-text);
+    background-color: var(--gl-color-surface-raised);
+    list-style: none;
+    transition: color var(--gl-transition-fast),
+                background-color var(--gl-transition-fast);
+    user-select: none;
+}
+
+.gl-typography summary::-webkit-details-marker {
+    display: none;
+}
+
+.gl-typography summary::before {
+    content: "\25B6";
+    display: inline-block;
+    font-size: 0.65em;
+    color: var(--gl-color-accent);
+    transition: transform var(--gl-transition-base);
+    flex-shrink: 0;
+}
+
+.gl-typography details[open] > summary::before {
+    transform: rotate(90deg);
+}
+
+.gl-typography summary:hover {
+    color: var(--gl-color-accent);
+    background-color: rgba(var(--gl-color-accent-rgb), 0.06);
+}
+
+.gl-typography details > *:not(summary) {
+    padding-left: var(--gl-space-5);
+    padding-right: var(--gl-space-5);
+}
+
+.gl-typography details > *:not(summary):last-child {
+    padding-bottom: var(--gl-space-5);
+}
+
+.gl-typography details > *:not(summary):first-of-type {
+    padding-top: var(--gl-space-5);
+}
+
+/* --- Spacing rhythm between content blocks ------------------------------ */
+
+.gl-typography > * + * {
+    margin-top: var(--gl-space-5);
+}
+
+.gl-typography > h2 + *,
+.gl-typography > h3 + *,
+.gl-typography > h4 + * {
+    margin-top: var(--gl-space-4);
+}
+
+/* ==========================================================================
    UTILITY CLASSES
    ========================================================================== */
 

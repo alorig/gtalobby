@@ -13,8 +13,7 @@ get_header();
 $category_slug = gtalobby_get_current_category_slug();
 $single_zones  = gtalobby_get_layout( 'single', $category_slug );
 
-// Split zones: pre-main (breadcrumb), main-content (inside article), post-article
-$pre_zones     = array( 'breadcrumb' );
+// Split zones: main-content (inside article), post-article
 $article_zones = array( 'post_header', 'featured_image', 'quick_answer_box', 'post_type_fields', 'gta6_confidence', 'toc', 'body_content', 'video_embed', 'ranked_items', 'data_table', 'stats_table', 'gallery', 'install_steps', 'download_box', 'weekly_bonuses', 'related_questions' );
 $footer_zones  = array( 'hub_link', 'social_share' );
 $post_zones    = array( 'author_box', 'related_posts', 'post_navigation', 'comments' );
@@ -52,10 +51,6 @@ foreach ( $single_zones as $zone_id => $zone_cfg ) {
                         case 'post_header':
                         ?>
                         <header class="gl-article__header" data-zone="post_header">
-                            <?php if ( gtalobby_is_zone_enabled( 'single', 'breadcrumb', $category_slug ) ) : ?>
-                                <div class="gl-article__breadcrumb"><?php gtalobby_breadcrumbs(); ?></div>
-                            <?php endif; ?>
-
                             <?php gtalobby_post_type_badge(); ?>
                             <?php gtalobby_category_badge(); ?>
 

@@ -18,8 +18,25 @@ get_header();
             <article id="page-<?php the_ID(); ?>" <?php post_class( 'gl-article gl-article--page' ); ?>>
 
                 <header class="gl-article__header">
-                    <div class="gl-article__breadcrumb"><?php gtalobby_breadcrumbs(); ?></div>
+                    <span class="gl-article__accent-bar" aria-hidden="true"></span>
                     <h1 class="gl-article__title"><?php the_title(); ?></h1>
+                    <div class="gl-article__meta">
+                        <time class="gl-article__date" datetime="<?php echo esc_attr( get_the_date( 'c' ) ); ?>">
+                            <?php echo esc_html( get_the_date() ); ?>
+                        </time>
+                        <?php if ( get_the_modified_date() !== get_the_date() ) : ?>
+                        <span class="gl-article__meta-sep">&middot;</span>
+                        <time class="gl-article__date gl-article__date--updated" datetime="<?php echo esc_attr( get_the_modified_date( 'c' ) ); ?>">
+                            <?php
+                            printf(
+                                /* translators: %s: date */
+                                esc_html__( 'Updated %s', 'gtalobby' ),
+                                esc_html( get_the_modified_date() )
+                            );
+                            ?>
+                        </time>
+                        <?php endif; ?>
+                    </div>
                 </header>
 
                 <?php if ( has_post_thumbnail() ) : ?>

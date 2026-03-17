@@ -52,10 +52,6 @@ foreach ( $single_zones as $zone_id => $zone_cfg ) {
                             case 'post_header':
                             ?>
                             <header class="gl-article__header" data-zone="post_header">
-                                <?php if ( gtalobby_is_zone_enabled( 'single', 'breadcrumb', $category_slug ) ) : ?>
-                                    <div class="gl-article__breadcrumb"><?php gtalobby_breadcrumbs(); ?></div>
-                                <?php endif; ?>
-
                                 <?php gtalobby_post_type_badge(); ?>
                                 <?php gtalobby_category_badge(); ?>
 

@@ -56,9 +56,6 @@ $cat_desc = category_description() ?: ( isset( $cat_descriptions[ $category_slug
 
         switch ( $zone_id ) :
 
-            case 'breadcrumb':
-                break;
-
             /* ==========================================================
                CATEGORY HERO HEADER
                ========================================================== */
@@ -74,10 +71,6 @@ $cat_desc = category_description() ?: ( isset( $cat_descriptions[ $category_slug
                 <div class="gl-cat-hero__glow"></div>
 
                 <div class="gl-container gl-cat-hero__inner">
-                    <?php if ( gtalobby_is_zone_enabled( 'archive', 'breadcrumb', $category_slug ) ) : ?>
-                        <div class="gl-cat-hero__breadcrumb"><?php gtalobby_breadcrumbs(); ?></div>
-                    <?php endif; ?>
-
                     <div class="gl-cat-hero__icon">
                         <?php gtalobby_icon( $category_icon, 36 ); ?>
                     </div>

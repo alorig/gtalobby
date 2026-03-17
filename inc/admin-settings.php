@@ -142,7 +142,7 @@ function gtalobby_general_defaults() {
         'site_tagline_override' => '',
         'ga_measurement_id'     => '',
         'enable_hub_pages'      => true,
-        'enable_breadcrumbs'    => true,
+        'enable_breadcrumbs'    => false,
         'enable_schema'         => true,
         'enable_interlinking'   => true,
         'enable_gta6_mode'      => true,

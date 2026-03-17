@@ -27,10 +27,6 @@ $archive_zones = gtalobby_get_layout( 'archive', $category_slug );
 
         switch ( $zone_id ) :
 
-            /* -- Breadcrumb (rendered inside archive_header) -------- */
-            case 'breadcrumb':
-                break;
-
             /* -- Archive Header — Premium Cinematic Hero ------------ */
             case 'archive_header':
             ?>
@@ -40,10 +36,6 @@ $archive_zones = gtalobby_get_layout( 'archive', $category_slug );
 
                 <div class="gl-container">
                     <div class="gl-arc-hero__inner">
-
-                        <?php if ( gtalobby_is_zone_enabled( 'archive', 'breadcrumb', $category_slug ) ) : ?>
-                            <div class="gl-arc-hero__breadcrumb" data-animate><?php gtalobby_breadcrumbs(); ?></div>
-                        <?php endif; ?>
 
                         <?php if ( is_post_type_archive() ) :
                             $pt = get_queried_object();
