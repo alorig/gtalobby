@@ -339,6 +339,13 @@ function gtalobby_get_homepage_zones_default() {
             'bg'      => 'accent',
             'style'   => 'featured-hub',
         ),
+        'stats_bar' => array(
+            'label'   => __( 'Stats Bar', 'gtalobby' ),
+            'enabled' => true,
+            'order'   => 15,
+            'width'   => 'full',
+            'bg'      => 'surface',
+        ),
         'category_grid' => array(
             'label'   => __( 'Category Grid (9 Sectors)', 'gtalobby' ),
             'enabled' => true,

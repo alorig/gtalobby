@@ -159,6 +159,48 @@ $gta6_cat   = get_category_by_slug( 'gta6' );
                 break;
 
             /* ============================================================
+               STATS BAR (between hero & categories)
+               ============================================================ */
+            case 'stats_bar':
+                $total_posts = wp_count_posts();
+                $published   = $total_posts->publish ?? 0;
+                foreach ( gtalobby_get_post_types() as $cpt ) {
+                    $cpt_count = wp_count_posts( $cpt );
+                    $published += $cpt_count->publish ?? 0;
+                }
+                $total_cats  = count( $sag_categories );
+                $total_hubs  = (int) ( new WP_Query( array(
+                    'post_type' => 'page', 'posts_per_page' => -1,
+                    'post_status' => 'publish', 'meta_key' => '_wp_page_template',
+                    'meta_value' => 'page-hub.php', 'fields' => 'ids',
+                ) ) )->found_posts;
+            ?>
+            <div class="gl-stats-bar" data-animate>
+                <div class="gl-container">
+                    <div class="gl-stats-bar__inner">
+                        <div class="gl-stats-bar__item">
+                            <span class="gl-stats-bar__num" data-count="<?php echo esc_attr( $published ); ?>"><?php echo esc_html( $published ); ?></span>
+                            <span class="gl-stats-bar__label"><?php esc_html_e( 'Articles', 'gtalobby' ); ?></span>
+                        </div>
+                        <div class="gl-stats-bar__item">
+                            <span class="gl-stats-bar__num" data-count="<?php echo esc_attr( $total_cats ); ?>"><?php echo esc_html( $total_cats ); ?></span>
+                            <span class="gl-stats-bar__label"><?php esc_html_e( 'Categories', 'gtalobby' ); ?></span>
+                        </div>
+                        <div class="gl-stats-bar__item">
+                            <span class="gl-stats-bar__num" data-count="<?php echo esc_attr( $total_hubs ); ?>"><?php echo esc_html( $total_hubs ); ?></span>
+                            <span class="gl-stats-bar__label"><?php esc_html_e( 'Topic Hubs', 'gtalobby' ); ?></span>
+                        </div>
+                        <div class="gl-stats-bar__item">
+                            <span class="gl-stats-bar__num" data-count="7">7</span>
+                            <span class="gl-stats-bar__label"><?php esc_html_e( 'Post Types', 'gtalobby' ); ?></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <?php
+                break;
+
+            /* ============================================================
                CATEGORY GRID
                ============================================================ */
             case 'category_grid':
