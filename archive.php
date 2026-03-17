@@ -1,6 +1,6 @@
 <?php
 /**
- * Generic Archive Template
+ * Generic Archive Template — Premium Design
  *
  * Used for post type archives and any taxonomy archives
  * without a dedicated template file. Zones rendered in
@@ -31,59 +31,191 @@ $archive_zones = gtalobby_get_layout( 'archive', $category_slug );
             case 'breadcrumb':
                 break;
 
-            /* -- Archive Header ------------------------------------- */
+            /* -- Archive Header — Premium Cinematic Hero ------------ */
             case 'archive_header':
             ?>
-            <section class="gl-zone gl-zone--archive-header gl-archive-header" data-zone="archive_header">
+            <section class="gl-zone gl-zone--archive-header gl-arc-hero" data-zone="archive_header" data-animate>
+                <!-- Decorative glow orb -->
+                <div class="gl-arc-hero__orb" aria-hidden="true"></div>
+
                 <div class="gl-container">
-                    <?php if ( gtalobby_is_zone_enabled( 'archive', 'breadcrumb', $category_slug ) ) : ?>
-                        <div class="gl-archive-header__breadcrumb"><?php gtalobby_breadcrumbs(); ?></div>
-                    <?php endif; ?>
+                    <div class="gl-arc-hero__inner">
 
-                    <?php if ( is_post_type_archive() ) : ?>
-                        <?php $pt = get_queried_object(); ?>
-                        <h1 class="gl-archive-header__title"><?php post_type_archive_title(); ?></h1>
-                        <?php if ( ! empty( $pt->description ) ) : ?>
-                            <p class="gl-archive-header__desc"><?php echo esc_html( $pt->description ); ?></p>
+                        <?php if ( gtalobby_is_zone_enabled( 'archive', 'breadcrumb', $category_slug ) ) : ?>
+                            <div class="gl-arc-hero__breadcrumb" data-animate><?php gtalobby_breadcrumbs(); ?></div>
                         <?php endif; ?>
 
-                    <?php elseif ( is_tax() ) : ?>
-                        <h1 class="gl-archive-header__title"><?php single_term_title(); ?></h1>
-                        <?php if ( term_description() ) : ?>
-                            <div class="gl-archive-header__desc"><?php echo wp_kses_post( term_description() ); ?></div>
-                        <?php endif; ?>
+                        <?php if ( is_post_type_archive() ) :
+                            $pt = get_queried_object();
+                            $pt_obj = get_post_type_object( $pt->name ?? '' );
+                        ?>
+                            <div class="gl-arc-hero__badge" data-animate>
+                                <span class="gl-arc-hero__badge-icon">
+                                    <?php gtalobby_icon( 'archive', 24 ); ?>
+                                </span>
+                                <span class="gl-arc-hero__badge-label">
+                                    <?php esc_html_e( 'Post Type Archive', 'gtalobby' ); ?>
+                                </span>
+                            </div>
 
-                    <?php elseif ( is_tag() ) : ?>
-                        <h1 class="gl-archive-header__title"><?php single_tag_title(); ?></h1>
-                        <?php if ( tag_description() ) : ?>
-                            <div class="gl-archive-header__desc"><?php echo wp_kses_post( tag_description() ); ?></div>
-                        <?php endif; ?>
+                            <h1 class="gl-arc-hero__title" data-animate><?php post_type_archive_title(); ?></h1>
 
-                    <?php elseif ( is_author() ) : ?>
-                        <h1 class="gl-archive-header__title">
-                            <?php printf( esc_html__( 'Posts by %s', 'gtalobby' ), get_the_author() ); ?>
-                        </h1>
-                        <?php if ( get_the_author_meta( 'description' ) ) : ?>
-                            <p class="gl-archive-header__desc"><?php echo esc_html( get_the_author_meta( 'description' ) ); ?></p>
-                        <?php endif; ?>
+                            <?php if ( ! empty( $pt->description ) ) : ?>
+                                <p class="gl-arc-hero__desc" data-animate><?php echo esc_html( $pt->description ); ?></p>
+                            <?php endif; ?>
 
-                    <?php elseif ( is_date() ) : ?>
-                        <h1 class="gl-archive-header__title">
                             <?php
-                            if ( is_day() ) {
-                                printf( esc_html__( 'Archives: %s', 'gtalobby' ), get_the_date() );
-                            } elseif ( is_month() ) {
-                                printf( esc_html__( 'Archives: %s', 'gtalobby' ), get_the_date( 'F Y' ) );
-                            } elseif ( is_year() ) {
-                                printf( esc_html__( 'Archives: %s', 'gtalobby' ), get_the_date( 'Y' ) );
-                            }
-                            ?>
-                        </h1>
+                            /* Post count for post type */
+                            $pt_count = wp_count_posts( $pt->name ?? 'post' );
+                            if ( $pt_count && isset( $pt_count->publish ) && $pt_count->publish > 0 ) : ?>
+                                <div class="gl-arc-hero__meta" data-animate>
+                                    <strong><?php echo esc_html( number_format_i18n( $pt_count->publish ) ); ?></strong>
+                                    <span><?php echo esc_html( _n( 'published post', 'published posts', $pt_count->publish, 'gtalobby' ) ); ?></span>
+                                </div>
+                            <?php endif; ?>
 
-                    <?php else : ?>
-                        <h1 class="gl-archive-header__title"><?php esc_html_e( 'Archives', 'gtalobby' ); ?></h1>
-                    <?php endif; ?>
+                        <?php elseif ( is_tax() ) : ?>
+                            <div class="gl-arc-hero__badge" data-animate>
+                                <span class="gl-arc-hero__badge-icon">
+                                    <?php gtalobby_icon( 'tag', 24 ); ?>
+                                </span>
+                                <span class="gl-arc-hero__badge-label">
+                                    <?php echo esc_html( get_taxonomy( get_queried_object()->taxonomy )->labels->singular_name ?? __( 'Taxonomy', 'gtalobby' ) ); ?>
+                                </span>
+                            </div>
+
+                            <h1 class="gl-arc-hero__title" data-animate><?php single_term_title(); ?></h1>
+
+                            <?php if ( term_description() ) : ?>
+                                <div class="gl-arc-hero__desc" data-animate><?php echo wp_kses_post( term_description() ); ?></div>
+                            <?php endif; ?>
+
+                            <?php
+                            $term_obj = get_queried_object();
+                            if ( $term_obj && $term_obj->count > 0 ) : ?>
+                                <div class="gl-arc-hero__meta" data-animate>
+                                    <strong><?php echo esc_html( number_format_i18n( $term_obj->count ) ); ?></strong>
+                                    <span><?php echo esc_html( _n( 'post', 'posts', $term_obj->count, 'gtalobby' ) ); ?></span>
+                                </div>
+                            <?php endif; ?>
+
+                        <?php elseif ( is_tag() ) : ?>
+                            <div class="gl-arc-hero__badge" data-animate>
+                                <span class="gl-arc-hero__badge-icon">
+                                    <?php gtalobby_icon( 'hash', 24 ); ?>
+                                </span>
+                                <span class="gl-arc-hero__badge-label">
+                                    <?php esc_html_e( 'Tag', 'gtalobby' ); ?>
+                                </span>
+                            </div>
+
+                            <h1 class="gl-arc-hero__title" data-animate><?php single_tag_title(); ?></h1>
+
+                            <?php if ( tag_description() ) : ?>
+                                <div class="gl-arc-hero__desc" data-animate><?php echo wp_kses_post( tag_description() ); ?></div>
+                            <?php endif; ?>
+
+                            <?php
+                            $tag_obj = get_queried_object();
+                            if ( $tag_obj && $tag_obj->count > 0 ) : ?>
+                                <div class="gl-arc-hero__meta" data-animate>
+                                    <strong><?php echo esc_html( number_format_i18n( $tag_obj->count ) ); ?></strong>
+                                    <span><?php echo esc_html( _n( 'post', 'posts', $tag_obj->count, 'gtalobby' ) ); ?></span>
+                                </div>
+                            <?php endif; ?>
+
+                        <?php elseif ( is_author() ) :
+                            $author_id = get_queried_object_id();
+                        ?>
+                            <div class="gl-arc-author" data-animate>
+                                <div class="gl-arc-author__avatar">
+                                    <?php echo get_avatar( $author_id, 96, '', '', array( 'class' => 'gl-arc-author__img' ) ); ?>
+                                    <div class="gl-arc-author__avatar-ring" aria-hidden="true"></div>
+                                </div>
+
+                                <div class="gl-arc-author__info">
+                                    <div class="gl-arc-hero__badge">
+                                        <span class="gl-arc-hero__badge-icon">
+                                            <?php gtalobby_icon( 'user', 20 ); ?>
+                                        </span>
+                                        <span class="gl-arc-hero__badge-label">
+                                            <?php esc_html_e( 'Author', 'gtalobby' ); ?>
+                                        </span>
+                                    </div>
+
+                                    <h1 class="gl-arc-hero__title"><?php echo esc_html( get_the_author() ); ?></h1>
+
+                                    <?php if ( get_the_author_meta( 'description' ) ) : ?>
+                                        <p class="gl-arc-hero__desc"><?php echo esc_html( get_the_author_meta( 'description' ) ); ?></p>
+                                    <?php endif; ?>
+
+                                    <div class="gl-arc-hero__meta">
+                                        <strong><?php echo esc_html( number_format_i18n( count_user_posts( $author_id ) ) ); ?></strong>
+                                        <span><?php echo esc_html( _n( 'post', 'posts', count_user_posts( $author_id ), 'gtalobby' ) ); ?></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        <?php elseif ( is_date() ) : ?>
+                            <div class="gl-arc-date" data-animate>
+                                <div class="gl-arc-date__calendar" aria-hidden="true">
+                                    <?php if ( is_day() ) : ?>
+                                        <span class="gl-arc-date__month"><?php echo esc_html( get_the_date( 'M' ) ); ?></span>
+                                        <span class="gl-arc-date__day"><?php echo esc_html( get_the_date( 'd' ) ); ?></span>
+                                        <span class="gl-arc-date__year"><?php echo esc_html( get_the_date( 'Y' ) ); ?></span>
+                                    <?php elseif ( is_month() ) : ?>
+                                        <span class="gl-arc-date__month"><?php echo esc_html( get_the_date( 'F' ) ); ?></span>
+                                        <span class="gl-arc-date__day">&mdash;</span>
+                                        <span class="gl-arc-date__year"><?php echo esc_html( get_the_date( 'Y' ) ); ?></span>
+                                    <?php elseif ( is_year() ) : ?>
+                                        <span class="gl-arc-date__month"><?php esc_html_e( 'Year', 'gtalobby' ); ?></span>
+                                        <span class="gl-arc-date__day"><?php echo esc_html( get_the_date( 'Y' ) ); ?></span>
+                                        <span class="gl-arc-date__year">&nbsp;</span>
+                                    <?php endif; ?>
+                                </div>
+
+                                <div class="gl-arc-date__info">
+                                    <div class="gl-arc-hero__badge">
+                                        <span class="gl-arc-hero__badge-icon">
+                                            <?php gtalobby_icon( 'calendar', 20 ); ?>
+                                        </span>
+                                        <span class="gl-arc-hero__badge-label">
+                                            <?php esc_html_e( 'Date Archive', 'gtalobby' ); ?>
+                                        </span>
+                                    </div>
+
+                                    <h1 class="gl-arc-hero__title">
+                                        <?php
+                                        if ( is_day() ) {
+                                            printf( esc_html__( 'Archives: %s', 'gtalobby' ), get_the_date() );
+                                        } elseif ( is_month() ) {
+                                            printf( esc_html__( 'Archives: %s', 'gtalobby' ), get_the_date( 'F Y' ) );
+                                        } elseif ( is_year() ) {
+                                            printf( esc_html__( 'Archives: %s', 'gtalobby' ), get_the_date( 'Y' ) );
+                                        }
+                                        ?>
+                                    </h1>
+                                </div>
+                            </div>
+
+                        <?php else : ?>
+                            <div class="gl-arc-hero__badge" data-animate>
+                                <span class="gl-arc-hero__badge-icon">
+                                    <?php gtalobby_icon( 'archive', 24 ); ?>
+                                </span>
+                                <span class="gl-arc-hero__badge-label">
+                                    <?php esc_html_e( 'Archive', 'gtalobby' ); ?>
+                                </span>
+                            </div>
+
+                            <h1 class="gl-arc-hero__title" data-animate><?php esc_html_e( 'Archives', 'gtalobby' ); ?></h1>
+                        <?php endif; ?>
+
+                    </div>
                 </div>
+
+                <!-- Bottom accent strip -->
+                <div class="gl-arc-hero__strip" aria-hidden="true"></div>
             </section>
             <?php
                 break;
@@ -168,7 +300,7 @@ $archive_zones = gtalobby_get_layout( 'archive', $category_slug );
                 <main class="gl-archive__main" id="main-content">
 
                     <?php if ( have_posts() ) : ?>
-                    <div class="gl-card-grid gl-card-grid--<?php echo esc_attr( $cols ); ?>col">
+                    <div class="gl-card-grid gl-card-grid--<?php echo esc_attr( $cols ); ?>col" data-animate>
                         <?php
                         while ( have_posts() ) :
                             the_post();

@@ -849,3 +849,777 @@
 .gl-ad-slot--header {
     background-color: var(--gl-color-surface);
 }
+
+/* ==========================================================================
+   ENHANCED FOOTER STYLES
+   ========================================================================== */
+
+/* ---- Gradient Divider ---- */
+.gl-footer__divider {
+    height: 3px;
+    background: linear-gradient(90deg, var(--gl-color-accent), var(--gl-color-secondary), var(--gl-color-accent));
+    background-size: 200% 100%;
+    animation: gl-gradient-shift 4s ease infinite;
+}
+
+@keyframes gl-gradient-shift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+/* ---- Newsletter Section ---- */
+.gl-footer__newsletter {
+    padding: var(--gl-space-10) 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.gl-footer__newsletter-card {
+    display: flex;
+    align-items: center;
+    gap: var(--gl-space-8);
+    padding: var(--gl-space-8);
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--gl-radius-xl);
+    position: relative;
+    overflow: hidden;
+}
+
+.gl-footer__newsletter-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gl-color-accent), var(--gl-color-secondary));
+}
+
+.gl-footer__newsletter-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.gl-footer__newsletter-title {
+    font-family: var(--gl-font-display);
+    font-size: var(--gl-font-size-xl);
+    font-weight: var(--gl-font-weight-bold);
+    color: var(--gl-color-text);
+    margin: 0 0 var(--gl-space-2);
+}
+
+.gl-footer__newsletter-desc {
+    font-size: var(--gl-font-size-sm);
+    color: rgba(255, 255, 255, 0.6);
+    margin: 0;
+    line-height: 1.6;
+}
+
+.gl-footer__newsletter-form {
+    flex-shrink: 0;
+    min-width: 340px;
+}
+
+.gl-footer__newsletter-field {
+    display: flex;
+    border-radius: var(--gl-radius-lg);
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    transition: border-color var(--gl-transition-fast),
+                box-shadow var(--gl-transition-fast);
+}
+
+.gl-footer__newsletter-field:focus-within {
+    border-color: var(--gl-color-accent);
+    box-shadow: 0 0 0 3px rgba(var(--gl-color-accent-rgb), 0.15);
+}
+
+.gl-footer__newsletter-input {
+    flex: 1;
+    padding: var(--gl-space-3) var(--gl-space-4);
+    background: rgba(255, 255, 255, 0.06);
+    border: none;
+    color: var(--gl-color-text);
+    font-family: var(--gl-font-body);
+    font-size: var(--gl-font-size-sm);
+    outline: none;
+}
+
+.gl-footer__newsletter-input::placeholder {
+    color: rgba(255, 255, 255, 0.35);
+}
+
+.gl-footer__newsletter-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--gl-space-2);
+    padding: var(--gl-space-3) var(--gl-space-5);
+    background: linear-gradient(135deg, var(--gl-color-accent), var(--gl-color-secondary));
+    color: #fff;
+    font-family: var(--gl-font-display);
+    font-size: var(--gl-font-size-sm);
+    font-weight: var(--gl-font-weight-semibold);
+    border: none;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: opacity var(--gl-transition-fast),
+                transform var(--gl-transition-fast);
+}
+
+.gl-footer__newsletter-btn:hover {
+    opacity: 0.9;
+    transform: translateX(2px);
+}
+
+.gl-footer__newsletter-note {
+    font-size: var(--gl-font-size-xs);
+    color: rgba(255, 255, 255, 0.3);
+    margin: var(--gl-space-2) 0 0;
+}
+
+/* ---- Brand Glow Effect ---- */
+.gl-footer__brand {
+    position: relative;
+}
+
+.gl-footer__logo-link {
+    position: relative;
+}
+
+.gl-footer__logo-icon {
+    box-shadow: 0 0 20px rgba(var(--gl-color-accent-rgb), 0.3);
+    transition: box-shadow var(--gl-transition-base);
+}
+
+.gl-footer__logo-link:hover .gl-footer__logo-icon {
+    box-shadow: 0 0 30px rgba(var(--gl-color-accent-rgb), 0.5);
+}
+
+/* ---- Social Media Icons ---- */
+.gl-footer__social {
+    display: flex;
+    align-items: center;
+    gap: var(--gl-space-3);
+    margin-top: var(--gl-space-5);
+}
+
+.gl-footer__social-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: var(--gl-radius-md);
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.6);
+    transition: color var(--gl-transition-fast),
+                background-color var(--gl-transition-fast),
+                border-color var(--gl-transition-fast),
+                box-shadow var(--gl-transition-fast),
+                transform var(--gl-transition-fast);
+}
+
+.gl-footer__social-link:hover {
+    transform: translateY(-2px);
+}
+
+.gl-footer__social-link--twitter:hover {
+    color: #fff;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 12px rgba(255, 255, 255, 0.15);
+}
+
+.gl-footer__social-link--discord:hover {
+    color: #5865F2;
+    background-color: rgba(88, 101, 242, 0.12);
+    border-color: rgba(88, 101, 242, 0.4);
+    box-shadow: 0 0 12px rgba(88, 101, 242, 0.2);
+}
+
+.gl-footer__social-link--youtube:hover {
+    color: #FF0000;
+    background-color: rgba(255, 0, 0, 0.1);
+    border-color: rgba(255, 0, 0, 0.35);
+    box-shadow: 0 0 12px rgba(255, 0, 0, 0.15);
+}
+
+.gl-footer__social-link--reddit:hover {
+    color: #FF4500;
+    background-color: rgba(255, 69, 0, 0.1);
+    border-color: rgba(255, 69, 0, 0.35);
+    box-shadow: 0 0 12px rgba(255, 69, 0, 0.15);
+}
+
+/* ---- Category Pill Dot Indicator ---- */
+.gl-footer__cat-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: var(--gl-radius-full);
+    background-color: var(--cat-color, rgba(255, 255, 255, 0.4));
+    flex-shrink: 0;
+    transition: box-shadow var(--gl-transition-fast);
+}
+
+.gl-footer__cat-link:hover .gl-footer__cat-dot {
+    box-shadow: 0 0 8px var(--cat-color, var(--gl-color-accent));
+}
+
+.gl-footer__cat-link:hover {
+    border-color: var(--cat-color, var(--gl-color-accent-light));
+    background-color: rgba(255, 255, 255, 0.06);
+    color: #fff;
+    box-shadow: 0 0 16px rgba(255, 255, 255, 0.04),
+                inset 0 0 16px rgba(255, 255, 255, 0.02);
+}
+
+/* ---- Footer Column Hover Effects ---- */
+.gl-footer__col {
+    padding: var(--gl-space-4);
+    border-radius: var(--gl-radius-lg);
+    transition: background-color var(--gl-transition-fast);
+}
+
+.gl-footer__col:hover {
+    background-color: rgba(255, 255, 255, 0.03);
+}
+
+/* ---- Wave/Gradient Separator ---- */
+.gl-footer__wave-separator {
+    position: relative;
+    height: 3px;
+    margin: var(--gl-space-4) 0;
+    overflow: hidden;
+}
+
+.gl-footer__wave-gradient {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 300%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        var(--gl-color-accent) 25%,
+        var(--gl-color-secondary) 50%,
+        var(--gl-color-accent) 75%,
+        transparent 100%
+    );
+    animation: gl-wave-slide 3s linear infinite;
+}
+
+@keyframes gl-wave-slide {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(33.33%); }
+}
+
+/* ==========================================================================
+   ENHANCED COMMENT STYLES
+   ========================================================================== */
+
+/* ---- Comments Section ---- */
+.gl-comments {
+    margin-top: var(--gl-space-10);
+}
+
+.gl-comments__title {
+    font-family: var(--gl-font-display);
+    font-size: var(--gl-font-size-2xl);
+    font-weight: var(--gl-font-weight-bold);
+    color: var(--gl-color-text);
+    display: flex;
+    align-items: center;
+    gap: var(--gl-space-3);
+    margin-bottom: var(--gl-space-6);
+}
+
+.gl-comments__count-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 32px;
+    height: 28px;
+    padding: 0 var(--gl-space-2);
+    background: linear-gradient(135deg, var(--gl-color-accent), var(--gl-color-accent-dark));
+    color: #fff;
+    font-family: var(--gl-font-mono);
+    font-size: var(--gl-font-size-xs);
+    font-weight: var(--gl-font-weight-bold);
+    border-radius: var(--gl-radius-full);
+    letter-spacing: 0.02em;
+}
+
+.gl-comments__closed {
+    padding: var(--gl-space-4);
+    background-color: var(--gl-color-surface);
+    border: 1px solid var(--gl-color-border);
+    border-radius: var(--gl-radius-md);
+    color: var(--gl-color-text-secondary);
+    font-size: var(--gl-font-size-sm);
+}
+
+/* ---- Comment List ---- */
+.gl-comment-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* ---- Individual Comment Card ---- */
+.gl-comment {
+    margin-bottom: var(--gl-space-4);
+}
+
+.gl-comment__body {
+    background-color: var(--gl-color-surface-raised);
+    border: 1px solid var(--gl-color-border);
+    border-left: 3px solid transparent;
+    border-radius: var(--gl-radius-lg);
+    padding: var(--gl-space-5);
+    transition: border-left-color var(--gl-transition-base),
+                box-shadow var(--gl-transition-base);
+}
+
+.gl-comment__body:hover {
+    border-left-color: var(--gl-color-accent);
+    box-shadow: 0 0 20px rgba(var(--gl-color-accent-rgb), 0.06);
+}
+
+/* ---- Comment Header ---- */
+.gl-comment__header {
+    display: flex;
+    align-items: center;
+    gap: var(--gl-space-3);
+    margin-bottom: var(--gl-space-3);
+}
+
+.gl-comment__avatar {
+    flex-shrink: 0;
+}
+
+.gl-comment__avatar-img {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--gl-radius-full);
+    border: 2px solid transparent;
+    transition: border-color var(--gl-transition-base),
+                box-shadow var(--gl-transition-base);
+}
+
+.gl-comment__body:hover .gl-comment__avatar-img {
+    border-color: var(--gl-color-accent);
+    box-shadow: 0 0 12px rgba(var(--gl-color-accent-rgb), 0.25);
+}
+
+.gl-comment__meta {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gl-space-1);
+}
+
+.gl-comment__author {
+    font-family: var(--gl-font-display);
+    font-size: var(--gl-font-size-sm);
+    font-weight: var(--gl-font-weight-semibold);
+    color: var(--gl-color-text);
+}
+
+.gl-comment__author a {
+    color: inherit;
+    text-decoration: none;
+    transition: color var(--gl-transition-fast);
+}
+
+.gl-comment__author a:hover {
+    color: var(--gl-color-accent);
+}
+
+.gl-comment__date {
+    font-size: var(--gl-font-size-xs);
+    color: var(--gl-color-text-tertiary);
+}
+
+/* ---- Comment Content ---- */
+.gl-comment__content {
+    font-size: var(--gl-font-size-base);
+    line-height: var(--gl-line-height-body);
+    color: var(--gl-color-text-secondary);
+    margin-bottom: var(--gl-space-3);
+}
+
+.gl-comment__content p:last-child {
+    margin-bottom: 0;
+}
+
+.gl-comment__moderation {
+    font-size: var(--gl-font-size-sm);
+    color: var(--gl-color-warning);
+    background-color: rgba(253, 203, 110, 0.08);
+    border: 1px solid rgba(253, 203, 110, 0.2);
+    border-radius: var(--gl-radius-md);
+    padding: var(--gl-space-2) var(--gl-space-3);
+    margin-bottom: var(--gl-space-3);
+}
+
+/* ---- Comment Actions ---- */
+.gl-comment__actions {
+    display: flex;
+    align-items: center;
+    gap: var(--gl-space-3);
+    padding-top: var(--gl-space-3);
+    border-top: 1px solid var(--gl-color-border);
+}
+
+.gl-comment__reply a,
+.gl-comment__edit a {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--gl-space-1);
+    padding: var(--gl-space-1) var(--gl-space-3);
+    font-family: var(--gl-font-display);
+    font-size: var(--gl-font-size-xs);
+    font-weight: var(--gl-font-weight-semibold);
+    color: var(--gl-color-text-tertiary);
+    text-decoration: none;
+    border-radius: var(--gl-radius-full);
+    border: 1px solid transparent;
+    transition: color var(--gl-transition-fast),
+                background-color var(--gl-transition-fast),
+                border-color var(--gl-transition-fast);
+}
+
+.gl-comment__reply a:hover {
+    color: var(--gl-color-accent);
+    background-color: var(--gl-color-accent-tint);
+    border-color: rgba(var(--gl-color-accent-rgb), 0.2);
+}
+
+.gl-comment__edit a:hover {
+    color: var(--gl-color-secondary);
+    background-color: var(--gl-color-secondary-tint);
+    border-color: rgba(39, 217, 255, 0.2);
+}
+
+/* ---- Comment Form ---- */
+.gl-comment-form {
+    position: relative;
+    background-color: var(--gl-color-surface-raised);
+    border: 1px solid var(--gl-color-border);
+    border-radius: var(--gl-radius-xl);
+    padding: var(--gl-space-8);
+    margin-top: var(--gl-space-8);
+    overflow: hidden;
+}
+
+.gl-comment-form::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--gl-color-accent), var(--gl-color-secondary));
+}
+
+.gl-comment-form__title {
+    font-family: var(--gl-font-display);
+    font-size: var(--gl-font-size-xl);
+    font-weight: var(--gl-font-weight-bold);
+    color: var(--gl-color-text);
+    margin: 0 0 var(--gl-space-6);
+}
+
+/* ---- Form Fields ---- */
+.gl-comment-form__field {
+    margin-bottom: var(--gl-space-5);
+}
+
+.gl-comment-form__field label {
+    display: block;
+    font-family: var(--gl-font-display);
+    font-size: var(--gl-font-size-sm);
+    font-weight: var(--gl-font-weight-medium);
+    color: var(--gl-color-text-secondary);
+    margin-bottom: var(--gl-space-2);
+}
+
+.gl-comment-form__field label .required {
+    color: var(--gl-color-accent);
+}
+
+.gl-comment-form__field input,
+.gl-comment-form__field textarea {
+    width: 100%;
+    padding: var(--gl-space-3) var(--gl-space-4);
+    background-color: var(--gl-color-surface);
+    border: 1px solid var(--gl-color-border);
+    border-radius: var(--gl-radius-md);
+    color: var(--gl-color-text);
+    font-family: var(--gl-font-body);
+    font-size: var(--gl-font-size-base);
+    line-height: var(--gl-line-height-body);
+    transition: border-color var(--gl-transition-fast),
+                box-shadow var(--gl-transition-fast);
+    box-sizing: border-box;
+}
+
+.gl-comment-form__field input::placeholder,
+.gl-comment-form__field textarea::placeholder {
+    color: var(--gl-color-text-tertiary);
+}
+
+.gl-comment-form__field input:focus,
+.gl-comment-form__field textarea:focus {
+    outline: none;
+    border-color: var(--gl-color-accent);
+    box-shadow: 0 0 0 3px rgba(var(--gl-color-accent-rgb), 0.15),
+                0 0 16px rgba(var(--gl-color-accent-rgb), 0.08);
+}
+
+.gl-comment-form__field textarea {
+    min-height: 140px;
+    resize: vertical;
+}
+
+.gl-comment-form__helper {
+    display: block;
+    font-size: var(--gl-font-size-xs);
+    color: var(--gl-color-text-tertiary);
+    margin-top: var(--gl-space-2);
+}
+
+/* ---- Submit Button ---- */
+.gl-comment-form__submit-wrap {
+    display: flex;
+    align-items: center;
+    gap: var(--gl-space-4);
+    margin-top: var(--gl-space-6);
+}
+
+.gl-comment-form__submit,
+.gl-comment-form button[type="submit"],
+.gl-comment-form input[type="submit"] {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--gl-space-3) var(--gl-space-8);
+    background: linear-gradient(135deg, var(--gl-color-accent), var(--gl-color-secondary));
+    color: #fff;
+    font-family: var(--gl-font-display);
+    font-size: var(--gl-font-size-sm);
+    font-weight: var(--gl-font-weight-bold);
+    border: none;
+    border-radius: var(--gl-radius-lg);
+    cursor: pointer;
+    letter-spacing: 0.02em;
+    transition: opacity var(--gl-transition-fast),
+                transform var(--gl-transition-fast),
+                box-shadow var(--gl-transition-fast);
+}
+
+.gl-comment-form__submit:hover,
+.gl-comment-form button[type="submit"]:hover,
+.gl-comment-form input[type="submit"]:hover {
+    opacity: 0.92;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(var(--gl-color-accent-rgb), 0.3);
+}
+
+.gl-comment-form__submit:active,
+.gl-comment-form button[type="submit"]:active,
+.gl-comment-form input[type="submit"]:active {
+    transform: translateY(0);
+}
+
+/* ==========================================================================
+   ENHANCED SIDEBAR STYLES
+   ========================================================================== */
+
+/* ---- Glassmorphism Sidebar Sections ---- */
+.gl-sidebar__section {
+    background: rgba(19, 24, 62, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    transition: border-color var(--gl-transition-base),
+                box-shadow var(--gl-transition-base);
+}
+
+.gl-sidebar__section:hover {
+    border-color: rgba(var(--gl-color-accent-rgb), 0.15);
+    box-shadow: 0 4px 24px rgba(var(--gl-color-accent-rgb), 0.06);
+}
+
+/* ---- Widget Title with Gradient Underline ---- */
+.gl-widget__title,
+.gl-sidebar__title {
+    position: relative;
+    border-bottom: none;
+    padding-bottom: var(--gl-space-3);
+}
+
+.gl-widget__title::after,
+.gl-sidebar__title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 48px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gl-color-accent), var(--gl-color-secondary));
+    border-radius: var(--gl-radius-full);
+    transition: width var(--gl-transition-base);
+}
+
+.gl-sidebar__section:hover .gl-widget__title::after,
+.gl-sidebar__section:hover .gl-sidebar__title::after {
+    width: 72px;
+}
+
+/* ---- Sidebar List Link Hover Indent ---- */
+.gl-sidebar__list li a {
+    position: relative;
+    padding-left: var(--gl-space-3);
+    transition: color var(--gl-transition-fast),
+                background-color var(--gl-transition-fast),
+                padding-left var(--gl-transition-fast);
+}
+
+.gl-sidebar__list li a:hover {
+    color: var(--gl-color-accent);
+    background-color: var(--gl-color-surface);
+    padding-left: var(--gl-space-5);
+}
+
+/* ---- Sidebar Sticky Glow ---- */
+.gl-sidebar {
+    transition: box-shadow var(--gl-transition-slow);
+}
+
+.gl-sidebar--stuck {
+    box-shadow: 0 0 40px rgba(var(--gl-color-accent-rgb), 0.04);
+}
+
+/* ==========================================================================
+   RESPONSIVE — FOOTER, COMMENTS, SIDEBAR ENHANCEMENTS
+   ========================================================================== */
+
+@media (max-width: 991px) {
+    /* Footer newsletter stacks vertically */
+    .gl-footer__newsletter-card {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .gl-footer__newsletter-form {
+        min-width: 0;
+        width: 100%;
+        max-width: 420px;
+    }
+
+    /* Footer top grid adjusts */
+    .gl-footer__top-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: var(--gl-space-6);
+    }
+
+    .gl-footer__brand {
+        grid-column: 1 / -1;
+        padding-right: 0;
+        text-align: center;
+    }
+
+    .gl-footer__social {
+        justify-content: center;
+    }
+
+    /* Comments form padding */
+    .gl-comment-form {
+        padding: var(--gl-space-6);
+    }
+}
+
+@media (max-width: 767px) {
+    /* Footer: single column */
+    .gl-footer__top-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .gl-footer__newsletter-card {
+        padding: var(--gl-space-5);
+    }
+
+    .gl-footer__newsletter-field {
+        flex-direction: column;
+    }
+
+    .gl-footer__newsletter-btn {
+        justify-content: center;
+        padding: var(--gl-space-3) var(--gl-space-4);
+    }
+
+    /* Footer social icons */
+    .gl-footer__social-link {
+        width: 36px;
+        height: 36px;
+    }
+
+    /* Footer columns lose hover padding */
+    .gl-footer__col {
+        padding: var(--gl-space-2) 0;
+    }
+
+    /* Category pills */
+    .gl-footer__cat-grid {
+        gap: var(--gl-space-2);
+    }
+
+    .gl-footer__cat-link {
+        font-size: var(--gl-font-size-xs);
+        padding: var(--gl-space-1) var(--gl-space-2);
+    }
+
+    /* Comments adjustments */
+    .gl-comments__title {
+        font-size: var(--gl-font-size-xl);
+    }
+
+    .gl-comment__body {
+        padding: var(--gl-space-4);
+    }
+
+    .gl-comment__header {
+        gap: var(--gl-space-2);
+    }
+
+    .gl-comment__avatar-img {
+        width: 36px;
+        height: 36px;
+    }
+
+    .gl-comment-form {
+        padding: var(--gl-space-4);
+        border-radius: var(--gl-radius-lg);
+    }
+
+    .gl-comment-form__submit-wrap {
+        flex-direction: column;
+    }
+
+    .gl-comment-form__submit,
+    .gl-comment-form button[type="submit"],
+    .gl-comment-form input[type="submit"] {
+        width: 100%;
+    }
+
+    /* Sidebar resets for mobile (below sidebar) */
+    .gl-sidebar__section {
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+    }
+}

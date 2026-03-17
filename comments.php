@@ -1,6 +1,6 @@
 <?php
 /**
- * Comments Template
+ * Comments Template — Enhanced
  *
  * @package GtaLobby
  */
@@ -58,18 +58,13 @@ function gtalobby_comment_callback( $comment, $args, $depth ) {
 endif;
 ?>
 
-<section id="comments" class="gl-comments">
+<section id="comments" class="gl-comments" data-animate="fade-up">
 
     <?php if ( have_comments() ) : ?>
 
         <h2 class="gl-comments__title">
-            <?php
-            printf(
-                esc_html( _nx( '%1$s Comment on &ldquo;%2$s&rdquo;', '%1$s Comments on &ldquo;%2$s&rdquo;', get_comments_number(), 'comments title', 'gtalobby' ) ),
-                number_format_i18n( get_comments_number() ),
-                get_the_title()
-            );
-            ?>
+            <?php esc_html_e( 'Comments', 'gtalobby' ); ?>
+            <span class="gl-comments__count-badge"><?php echo number_format_i18n( get_comments_number() ); ?></span>
         </h2>
 
         <ol class="gl-comment-list">
@@ -100,32 +95,38 @@ endif;
     $commenter = wp_get_current_commenter();
 
     comment_form( array(
-        'class_form'    => 'gl-comment-form',
-        'title_reply'   => esc_html__( 'Leave a Comment', 'gtalobby' ),
+        'class_form'           => 'gl-comment-form',
+        'title_reply'          => esc_html__( 'Leave a Comment', 'gtalobby' ),
+        'title_reply_before'   => '<h3 id="reply-title" class="gl-comment-form__title">',
+        'title_reply_after'    => '</h3>',
+        'submit_button'        => '<button name="%1$s" type="submit" id="%2$s" class="%3$s gl-comment-form__submit">%4$s</button>',
+        'submit_field'         => '<div class="gl-comment-form__submit-wrap">%1$s %2$s</div>',
+        'label_submit'         => esc_html__( 'Post Comment', 'gtalobby' ),
 
         'comment_field' =>
             '<div class="gl-comment-form__field gl-comment-form__field--textarea">'
             . '<label for="comment">' . esc_html__( 'Comment', 'gtalobby' ) . '</label>'
-            . '<textarea id="comment" name="comment" cols="45" rows="6" required></textarea>'
+            . '<textarea id="comment" name="comment" cols="45" rows="6" required placeholder="' . esc_attr__( 'Share your thoughts...', 'gtalobby' ) . '"></textarea>'
+            . '<span class="gl-comment-form__helper">' . esc_html__( 'Be respectful and constructive. HTML is not allowed.', 'gtalobby' ) . '</span>'
             . '</div>',
 
         'fields' => array(
             'author' =>
                 '<div class="gl-comment-form__field">'
                 . '<label for="author">' . esc_html__( 'Name', 'gtalobby' ) . ' <span class="required">*</span></label>'
-                . '<input id="author" name="author" type="text" value="' . esc_attr( $commenter['comment_author'] ?? '' ) . '" required />'
+                . '<input id="author" name="author" type="text" value="' . esc_attr( $commenter['comment_author'] ?? '' ) . '" required placeholder="' . esc_attr__( 'Your name', 'gtalobby' ) . '" />'
                 . '</div>',
 
             'email' =>
                 '<div class="gl-comment-form__field">'
                 . '<label for="email">' . esc_html__( 'Email', 'gtalobby' ) . ' <span class="required">*</span></label>'
-                . '<input id="email" name="email" type="email" value="' . esc_attr( $commenter['comment_author_email'] ?? '' ) . '" required />'
+                . '<input id="email" name="email" type="email" value="' . esc_attr( $commenter['comment_author_email'] ?? '' ) . '" required placeholder="' . esc_attr__( 'your@email.com', 'gtalobby' ) . '" />'
                 . '</div>',
 
             'url' =>
                 '<div class="gl-comment-form__field">'
                 . '<label for="url">' . esc_html__( 'Website', 'gtalobby' ) . '</label>'
-                . '<input id="url" name="url" type="url" value="' . esc_attr( $commenter['comment_author_url'] ?? '' ) . '" />'
+                . '<input id="url" name="url" type="url" value="' . esc_attr( $commenter['comment_author_url'] ?? '' ) . '" placeholder="' . esc_attr__( 'https://', 'gtalobby' ) . '" />'
                 . '</div>',
         ),
     ) );
