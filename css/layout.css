@@ -235,6 +235,7 @@
 /* Pulsing glow animation on the brand container */
 .gl-logo-glow {
     position: relative;
+    overflow: hidden;
 }
 
 .gl-logo-glow::before {
@@ -244,11 +245,11 @@
     left: 50%;
     transform: translate(-50%, -50%);
     width: 120%;
-    height: 200%;
+    height: 100%;
     background: radial-gradient(
         ellipse at center,
-        rgba(255, 44, 152, 0.08) 0%,
-        rgba(39, 217, 255, 0.04) 40%,
+        rgba(255, 44, 152, 0.06) 0%,
+        rgba(39, 217, 255, 0.03) 40%,
         transparent 70%
     );
     border-radius: 50%;
@@ -524,21 +525,30 @@
    ========================================================================== */
 
 .gl-mobile-nav {
-    display: none;
     position: fixed;
     top: var(--gl-header-height, 72px);
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: var(--gl-color-surface-raised);
+    background: rgba(5, 8, 16, 0.96);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
     overflow-y: auto;
     z-index: var(--gl-z-modal, 500);
     padding: var(--gl-space-4);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-12px);
+    transition: opacity 0.35s cubic-bezier(0.25, 0.8, 0.25, 1),
+                transform 0.35s cubic-bezier(0.25, 0.8, 0.25, 1),
+                visibility 0.35s ease;
 }
 
 .gl-mobile-nav[aria-hidden="false"],
 .gl-mobile-nav.is-open {
-    display: block;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
 }
 
 .gl-mobile-nav__inner {
@@ -552,23 +562,50 @@
     padding: 0;
 }
 
+.gl-mobile-nav__list li {
+    opacity: 0;
+    transform: translateX(-16px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.gl-mobile-nav.is-open .gl-mobile-nav__list li {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Staggered entrance for each menu item */
+.gl-mobile-nav.is-open .gl-mobile-nav__list li:nth-child(1) { transition-delay: 0.05s; }
+.gl-mobile-nav.is-open .gl-mobile-nav__list li:nth-child(2) { transition-delay: 0.1s; }
+.gl-mobile-nav.is-open .gl-mobile-nav__list li:nth-child(3) { transition-delay: 0.15s; }
+.gl-mobile-nav.is-open .gl-mobile-nav__list li:nth-child(4) { transition-delay: 0.2s; }
+.gl-mobile-nav.is-open .gl-mobile-nav__list li:nth-child(5) { transition-delay: 0.25s; }
+.gl-mobile-nav.is-open .gl-mobile-nav__list li:nth-child(6) { transition-delay: 0.3s; }
+.gl-mobile-nav.is-open .gl-mobile-nav__list li:nth-child(7) { transition-delay: 0.35s; }
+.gl-mobile-nav.is-open .gl-mobile-nav__list li:nth-child(8) { transition-delay: 0.4s; }
+.gl-mobile-nav.is-open .gl-mobile-nav__list li:nth-child(9) { transition-delay: 0.45s; }
+
 .gl-mobile-nav__list li a {
-    display: block;
+    display: flex;
+    align-items: center;
+    gap: var(--gl-space-3);
     padding: var(--gl-space-3) var(--gl-space-4);
     font-family: var(--gl-font-display);
     font-size: var(--gl-font-size-lg);
     font-weight: var(--gl-font-weight-medium);
     color: var(--gl-color-text);
     text-decoration: none;
-    border-bottom: 1px solid var(--gl-color-border);
-    transition: color var(--gl-transition-fast),
-                background-color var(--gl-transition-fast);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--gl-radius-md);
+    transition: color 0.25s ease,
+                background-color 0.25s ease,
+                padding-left 0.25s ease;
 }
 
 .gl-mobile-nav__list li a:hover,
 .gl-mobile-nav__list li.current-menu-item > a {
     color: var(--gl-color-accent);
-    background-color: var(--gl-color-surface);
+    background-color: rgba(255, 60, 164, 0.06);
+    padding-left: var(--gl-space-6);
 }
 
 .gl-mobile-nav__list .sub-menu {
@@ -639,6 +676,11 @@
 
 .gl-main {
     padding: var(--gl-space-5) 0 var(--gl-space-8);
+}
+
+/* Ensure anchor links clear the sticky header */
+[id] {
+    scroll-margin-top: calc(var(--gl-header-height, 72px) + var(--gl-space-4));
 }
 
 /* Content + sidebar layout grid */
@@ -1423,13 +1465,13 @@
 .gl-footer__logo-icon {
     background: linear-gradient(135deg, #FF2C98, #6C5CE7, #27D9FF);
     background-size: 200% 200%;
-    animation: gl-logo-pulse 3s ease-in-out infinite, gl-icon-gradient 3s ease infinite;
+    animation: gl-footer-logo-pulse 3s ease-in-out infinite, gl-icon-gradient 3s ease infinite;
     box-shadow: 0 0 24px rgba(255, 44, 152, 0.4),
                 0 0 48px rgba(108, 92, 231, 0.2);
     transition: box-shadow var(--gl-transition-base), transform 0.3s ease;
 }
 
-@keyframes gl-logo-pulse {
+@keyframes gl-footer-logo-pulse {
     0%, 100% {
         box-shadow: 0 0 24px rgba(255, 44, 152, 0.4),
                     0 0 48px rgba(108, 92, 231, 0.2);

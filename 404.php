@@ -16,7 +16,7 @@ get_header();
     <!-- ============================================================
          Cinematic 404 Hero
          ============================================================ -->
-    <section class="gl-404-hero" data-animate>
+    <section class="gl-404-hero" data-animate="fade-up">
         <!-- Decorative background orbs -->
         <div class="gl-404-hero__orb gl-404-hero__orb--accent" aria-hidden="true"></div>
         <div class="gl-404-hero__orb gl-404-hero__orb--secondary" aria-hidden="true"></div>
@@ -28,16 +28,16 @@ get_header();
                 <!-- Glitch 404 number -->
                 <div class="gl-404-hero__code" aria-hidden="true" data-text="404">404</div>
 
-                <h1 class="gl-404-hero__title" data-animate>
+                <h1 class="gl-404-hero__title" data-animate="fade-up" data-delay="100">
                     <?php esc_html_e( 'Page Not Found', 'gtalobby' ); ?>
                 </h1>
 
-                <p class="gl-404-hero__desc" data-animate>
+                <p class="gl-404-hero__desc" data-animate="fade-up" data-delay="200">
                     <?php esc_html_e( 'The page you\'re looking for doesn\'t exist or has been moved. Try searching below or browse our categories.', 'gtalobby' ); ?>
                 </p>
 
                 <!-- Glassmorphism search -->
-                <div class="gl-404-hero__search" data-animate>
+                <div class="gl-404-hero__search" data-animate="fade-up" data-delay="300">
                     <?php get_search_form(); ?>
                 </div>
 

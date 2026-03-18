@@ -515,6 +515,58 @@ body {
     }
 }
 
+/* Hero accordion mobile: vertical stack */
+@media (max-width: 767px) {
+    .gl-hero-accordion__panels {
+        flex-direction: column;
+        height: auto;
+        min-height: auto;
+        max-height: none;
+    }
+
+    .gl-hero-panel {
+        min-height: 200px;
+        flex: none !important;
+    }
+
+    .gl-hero-panel__label {
+        writing-mode: horizontal-tb;
+        transform: none;
+        position: relative;
+        bottom: auto;
+        left: auto;
+        margin-left: 0;
+        padding: var(--gl-space-4) var(--gl-space-5);
+        font-size: var(--gl-text-lg);
+    }
+
+    .gl-hero-panel:hover .gl-hero-panel__label {
+        opacity: 0;
+    }
+
+    .gl-hero-panel__expanded {
+        opacity: 1;
+        transform: none;
+    }
+
+    .gl-hero-panel__image {
+        opacity: 0.35;
+        filter: none;
+    }
+
+    .gl-hero-panel__image::after {
+        opacity: 1;
+    }
+
+    .gl-hero-panel__content {
+        padding: var(--gl-space-5) var(--gl-space-4);
+    }
+
+    .gl-hero-panel__title {
+        font-size: var(--gl-text-xl);
+    }
+}
+
 @media (max-width: 767px) {
     .gl-stats-bar__inner {
         grid-template-columns: repeat(2, 1fr);
