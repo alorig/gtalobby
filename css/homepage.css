@@ -321,9 +321,24 @@ body {
 }
 
 .gl-home-newsletter {
-    background: linear-gradient(180deg, var(--gl-color-bg) 0%, var(--gl-color-bg-alt) 100%);
+    background: linear-gradient(180deg, var(--gl-color-bg) 0%, rgba(13, 18, 48, 0.95) 50%, var(--gl-color-bg-alt) 100%);
     padding-top: var(--gl-space-8);
     padding-bottom: var(--gl-space-10);
+    position: relative;
+}
+
+.gl-home-newsletter::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 60, 164, 0.06) 0%, rgba(43, 224, 255, 0.04) 40%, transparent 70%);
+    pointer-events: none;
+    filter: blur(40px);
 }
 
 /* Neon section dividers — glowing lines between homepage zones */
@@ -332,7 +347,7 @@ body {
 .gl-home-latest::after {
     content: '';
     display: block;
-    height: 1px;
+    height: 2px;
     margin-top: var(--gl-space-10);
     background: linear-gradient(90deg, transparent 0%, rgba(255, 44, 152, 0.4) 20%, rgba(39, 217, 255, 0.6) 50%, rgba(108, 92, 231, 0.4) 80%, transparent 100%);
     box-shadow: 0 0 8px rgba(39, 217, 255, 0.3), 0 0 16px rgba(255, 44, 152, 0.15);
@@ -1267,7 +1282,7 @@ body {
     display: flex;
     gap: var(--gl-space-1);
     background: var(--gl-color-surface);
-    border-radius: var(--gl-radius-lg);
+    border-radius: var(--gl-radius-full);
     padding: 4px;
     border: 1px solid var(--gl-color-border);
 }
@@ -1280,7 +1295,7 @@ body {
     background: transparent;
     border: none;
     padding: var(--gl-space-2) var(--gl-space-4);
-    border-radius: var(--gl-radius-md);
+    border-radius: var(--gl-radius-full);
     cursor: pointer;
     transition: all 0.25s ease;
     white-space: nowrap;

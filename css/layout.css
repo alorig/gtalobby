@@ -1232,7 +1232,7 @@
 /* ---- Gradient Divider ---- */
 .gl-footer__divider {
     height: 3px;
-    background: linear-gradient(90deg, #FF2C98, #27D9FF, #6C5CE7, #FF2C98);
+    background: linear-gradient(90deg, #FF3CA4, #a855f7, #2BE0FF);
     background-size: 300% 100%;
     animation: gl-gradient-shift 4s ease infinite;
     box-shadow: 0 0 12px rgba(255, 44, 152, 0.4),
