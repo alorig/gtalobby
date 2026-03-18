@@ -564,10 +564,15 @@
 }
 
 .gl-sidebar__section {
-    background: rgba(12, 16, 48, 0.8);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: 12px;
-    padding: 24px;
+    background: linear-gradient(145deg, rgba(12, 16, 48, 0.85) 0%, rgba(19, 24, 62, 0.7) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--gl-radius-xl);
+    padding: var(--gl-space-6);
+    resize: vertical;
+    overflow: auto;
+    min-height: 80px;
+    max-height: 600px;
+    container-type: inline-size;
 }
 
 .gl-sidebar__title {
@@ -617,7 +622,12 @@
    ========================================================================== */
 
 .gl-widget {
-    margin-bottom: var(--gl-space-6);
+    margin-bottom: var(--gl-space-5);
+    resize: vertical;
+    overflow: auto;
+    min-height: 60px;
+    max-height: 800px;
+    container-type: inline-size;
 }
 
 .gl-widget:last-child {
@@ -626,14 +636,14 @@
 
 .gl-widget__title {
     font-family: var(--gl-font-display);
-    font-size: var(--gl-font-size-sm);
+    font-size: var(--gl-text-sm);
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
-    margin-bottom: 16px;
-    padding-bottom: var(--gl-space-2);
+    letter-spacing: 0.1em;
+    margin-bottom: var(--gl-space-4);
+    padding-bottom: var(--gl-space-3);
     border-bottom: none;
-    background: linear-gradient(135deg, #FF2C98, #27D9FF);
+    background: linear-gradient(135deg, #FF2C98 0%, #27D9FF 60%, #6C5CE7 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -647,7 +657,7 @@
 
 .gl-widget ul li {
     padding: 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     font-size: var(--gl-font-size-sm);
     margin-bottom: 2px;
 }
@@ -659,10 +669,19 @@
 .gl-widget ul li a {
     color: var(--gl-color-text);
     text-decoration: none;
+    transition: color 0.25s ease, padding-left 0.25s ease;
 }
 
 .gl-widget ul li a:hover {
     color: #FF2C98;
+    padding-left: var(--gl-space-2);
+}
+
+/* Resize handle indicator */
+.gl-widget::-webkit-resizer,
+.gl-sidebar__section::-webkit-resizer {
+    background: linear-gradient(135deg, rgba(255, 44, 152, 0.3), rgba(39, 217, 255, 0.3));
+    border-radius: 2px;
 }
 
 /* ==========================================================================
@@ -855,9 +874,16 @@
 
 /* Widget titles in footer */
 .gl-footer__col .gl-widget__title {
-    color: rgba(255, 255, 255, 0.45);
+    color: rgba(255, 255, 255, 0.5);
     border-bottom-color: rgba(255, 255, 255, 0.1);
     font-size: var(--gl-font-size-xs);
+}
+
+.gl-footer__col .gl-widget {
+    resize: vertical;
+    overflow: auto;
+    min-height: 40px;
+    max-height: 400px;
 }
 
 .gl-footer__col .gl-widget ul li {
@@ -1780,25 +1806,29 @@
 /* ---- Glassmorphism Sidebar Sections ---- */
 .gl-sidebar__section,
 .gl-widget {
-    background: rgba(12, 16, 48, 0.8);
-    backdrop-filter: blur(16px) saturate(150%);
-    -webkit-backdrop-filter: blur(16px) saturate(150%);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: linear-gradient(145deg, rgba(12, 16, 48, 0.85) 0%, rgba(19, 24, 62, 0.65) 100%);
+    backdrop-filter: blur(20px) saturate(160%);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     border-left: 3px solid;
     border-image: linear-gradient(
         to bottom,
         #FF2C98,
-        #6C5CE7
+        #6C5CE7,
+        #27D9FF
     ) 1;
     border-image-slice: 0 0 0 3;
-    border-radius: 12px;
-    padding: 24px;
+    border-radius: var(--gl-radius-xl);
+    padding: var(--gl-space-6);
     box-shadow: 0 4px 24px rgba(255, 44, 152, 0.06),
                 0 0 40px rgba(108, 92, 231, 0.04),
-                inset 0 1px 0 rgba(255, 255, 255, 0.04);
-    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
     position: relative;
-    overflow: hidden;
+    overflow: auto;
+    resize: vertical;
+    min-height: 60px;
+    max-height: 800px;
 }
 
 /* Subtle inner glow overlay */
@@ -1809,24 +1839,21 @@
     top: 0;
     left: 0;
     right: 0;
-    bottom: 0;
-    background: radial-gradient(
-        ellipse at 0% 0%,
-        rgba(255, 44, 152, 0.05) 0%,
-        transparent 60%
-    );
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(255, 44, 152, 0.4), rgba(39, 217, 255, 0.4), transparent);
     pointer-events: none;
     opacity: 0;
-    transition: opacity 0.35s ease;
+    transition: opacity 0.4s ease;
 }
 
 .gl-sidebar__section:hover,
 .gl-widget:hover {
-    border-color: rgba(255, 44, 152, 0.2);
+    border-color: rgba(255, 44, 152, 0.25);
     box-shadow: 0 8px 40px rgba(255, 44, 152, 0.12),
                 0 0 60px rgba(108, 92, 231, 0.08),
-                inset 0 1px 0 rgba(255, 255, 255, 0.06);
-    transform: translateY(-2px);
+                0 0 80px rgba(39, 217, 255, 0.04),
+                inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    transform: translateY(-3px) scale(1.005);
 }
 
 .gl-sidebar__section:hover::before,
@@ -1841,12 +1868,13 @@
     position: relative;
     border-bottom: none;
     padding-bottom: var(--gl-space-3);
-    padding-left: 20px;
-    margin-bottom: 16px;
+    padding-left: 22px;
+    margin-bottom: var(--gl-space-4);
     text-transform: uppercase;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.1em;
     font-weight: 700;
-    background: linear-gradient(135deg, #FF2C98, #27D9FF);
+    font-size: var(--gl-text-sm);
+    background: linear-gradient(135deg, #FF2C98 0%, #27D9FF 60%, #6C5CE7 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -1860,23 +1888,25 @@
     left: 0;
     top: 50%;
     transform: translateY(-50%);
-    width: 8px;
-    height: 8px;
+    width: 10px;
+    height: 10px;
     border-radius: 50%;
-    background: #FF2C98;
+    background: linear-gradient(135deg, #FF2C98, #6C5CE7);
     box-shadow: 0 0 10px rgba(255, 44, 152, 0.6),
                 0 0 20px rgba(255, 44, 152, 0.3);
-    animation: gl-dot-pulse 2s ease-in-out infinite;
+    animation: gl-dot-pulse 2.5s ease-in-out infinite;
 }
 
 @keyframes gl-dot-pulse {
     0%, 100% {
         box-shadow: 0 0 10px rgba(255, 44, 152, 0.6),
                     0 0 20px rgba(255, 44, 152, 0.3);
+        transform: translateY(-50%) scale(1);
     }
     50% {
         box-shadow: 0 0 16px rgba(255, 44, 152, 0.8),
                     0 0 32px rgba(255, 44, 152, 0.4);
+        transform: translateY(-50%) scale(1.15);
     }
 }
 
@@ -1889,11 +1919,11 @@
     left: 0;
     width: 48px;
     height: 2px;
-    background: linear-gradient(90deg, #FF2C98, #27D9FF, #6C5CE7);
-    background-size: 200% 100%;
+    background: linear-gradient(90deg, #FF2C98, #27D9FF, #6C5CE7, #FF2C98);
+    background-size: 300% 100%;
     border-radius: 2px;
-    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    animation: gl-underline-shift 3s ease infinite;
+    transition: width 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+    animation: gl-underline-shift 4s ease infinite;
 }
 
 @keyframes gl-underline-shift {
@@ -1914,9 +1944,9 @@
     position: relative;
     display: block;
     padding: 10px 16px;
-    padding-left: 24px;
-    border-radius: 8px;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    padding-left: 26px;
+    border-radius: var(--gl-radius-md);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .gl-sidebar__list li a::before,
@@ -1929,15 +1959,15 @@
     width: 3px;
     height: 60%;
     border-radius: 2px;
-    background: linear-gradient(to bottom, #FF2C98, #6C5CE7);
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background: linear-gradient(to bottom, #FF2C98, #27D9FF);
+    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .gl-sidebar__list li a:hover,
 .gl-widget ul li a:hover {
     color: #FF2C98;
-    background: rgba(255, 44, 152, 0.08);
-    transform: translateX(4px);
+    background: linear-gradient(135deg, rgba(255, 44, 152, 0.08), rgba(108, 92, 231, 0.04));
+    transform: translateX(6px);
     text-shadow: 0 0 12px rgba(255, 44, 152, 0.3);
 }
 
@@ -2072,6 +2102,8 @@
     .gl-widget {
         backdrop-filter: none;
         -webkit-backdrop-filter: none;
+        resize: none;
+        max-height: none;
     }
 }
 
@@ -2082,19 +2114,19 @@
 .gl-sidebar .search-form,
 .gl-widget .search-form {
     display: flex;
-    gap: 8px;
+    gap: var(--gl-space-2);
 }
 
 .gl-sidebar .search-form input[type="search"],
 .gl-widget .search-form input[type="search"] {
     flex: 1;
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0.04);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 8px;
-    padding: 10px 16px;
+    border-radius: var(--gl-radius-lg);
+    padding: 12px 16px;
     color: #fff;
-    font-size: 14px;
-    transition: all 0.3s ease;
+    font-size: var(--gl-text-sm);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .gl-sidebar .search-form input[type="search"]:focus,
@@ -2102,7 +2134,7 @@
     border-color: #FF2C98;
     box-shadow: 0 0 20px rgba(255, 44, 152, 0.2), 0 0 40px rgba(255, 44, 152, 0.1);
     outline: none;
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.06);
 }
 
 .gl-sidebar .search-form button,
