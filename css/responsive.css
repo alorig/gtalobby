@@ -372,14 +372,13 @@
 
 @media (max-width: 767px) {
     /* Smaller brand on mobile */
-    .gl-header__site-icon {
-        width: 32px;
-        height: 32px;
-        font-size: 0.7rem;
+    .gl-logo-glow__text {
+        font-size: 1.25rem;
+        letter-spacing: 0.08em;
     }
 
-    .gl-header__site-text {
-        font-size: var(--gl-font-size-lg);
+    .gl-logo-glow__text::before {
+        filter: blur(10px) brightness(1.3);
     }
 }
 
