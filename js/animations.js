@@ -34,12 +34,18 @@
                 }
             });
         }, {
-            threshold: 0.08,
-            rootMargin: '0px 0px -60px 0px'
+            threshold: 0.01,
+            rootMargin: '50px 0px 0px 0px'
         });
 
         animateElements.forEach(function (el) {
-            revealObserver.observe(el);
+            /* Immediately reveal elements already in the viewport */
+            var rect = el.getBoundingClientRect();
+            if (rect.top < window.innerHeight && rect.bottom > 0) {
+                el.classList.add('gl-visible');
+            } else {
+                revealObserver.observe(el);
+            }
         });
     } else {
         animateElements.forEach(function (el) {
