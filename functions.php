@@ -153,6 +153,7 @@ require_once GTALOBBY_INC . '/admin-settings.php';
 
 // Content seeders
 require_once GTALOBBY_INC . '/seed-hub-pages.php';
+require_once GTALOBBY_INC . '/seed-bulk-content.php';
 require_once GTALOBBY_INC . '/seed-content.php';
 require_once GTALOBBY_INC . '/seed-vehicles.php';
 
