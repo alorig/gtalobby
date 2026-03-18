@@ -20,7 +20,7 @@ $current_type  = isset( $_GET['post_type'] ) ? sanitize_key( $_GET['post_type'] 
     <!-- ============================================================
          Search Hero Header
          ============================================================ -->
-    <section class="gl-search-hero" data-animate>
+    <section class="gl-search-hero" data-animate="fade-up">
         <!-- Decorative glow -->
         <div class="gl-search-hero__orb" aria-hidden="true"></div>
 

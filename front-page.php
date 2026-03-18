@@ -335,11 +335,11 @@ $gta6_cat   = get_category_by_slug( 'gta6' );
                 </div>
 
                 <div class="gl-container">
-                    <div class="gl-home-gta6__header">
+                    <div class="gl-home-gta6__header" data-animate="fade-up">
                         <div class="gl-home-gta6__header-left">
-                            <span class="gl-home-gta6__badge"><?php esc_html_e( 'Exclusive Coverage', 'gtalobby' ); ?></span>
-                            <h2 class="gl-home-gta6__heading">GTA 6 <span><?php esc_html_e( 'Coverage', 'gtalobby' ); ?></span></h2>
-                            <p class="gl-home-gta6__tagline"><?php esc_html_e( 'The latest confirmed details, leaks, and analysis from Vice City', 'gtalobby' ); ?></p>
+                            <span class="gl-home-gta6__badge" data-animate="fade-up" data-delay="100"><?php esc_html_e( 'Exclusive Coverage', 'gtalobby' ); ?></span>
+                            <h2 class="gl-home-gta6__heading" data-animate="fade-up" data-delay="200">GTA 6 <span><?php esc_html_e( 'Coverage', 'gtalobby' ); ?></span></h2>
+                            <p class="gl-home-gta6__tagline" data-animate="fade-up" data-delay="300"><?php esc_html_e( 'The latest confirmed details, leaks, and analysis from Vice City', 'gtalobby' ); ?></p>
                         </div>
                         <?php if ( $gta6_cat ) : ?>
                         <a href="<?php echo esc_url( get_category_link( $gta6_cat->term_id ) ); ?>" class="gl-home-gta6__cta">
