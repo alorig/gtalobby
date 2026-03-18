@@ -19,15 +19,15 @@ $archive_zones  = gtalobby_get_layout( 'archive', $category_slug );
 
 /* Category hero images */
 $cat_hero_images = array(
-    'gta6'       => 'https://images.unsplash.com/photo-1514565131-fce0801e5785?w=1600&h=600&fit=crop&q=80',
-    'cheats'     => 'https://images.unsplash.com/photo-1600861194942-f883de0dfe96?w=1600&h=600&fit=crop&q=80',
-    'online'     => 'https://images.unsplash.com/photo-1511882150382-421056c89033?w=1600&h=600&fit=crop&q=80',
-    'mods'       => 'https://images.unsplash.com/photo-1593305841991-05c297ba4575?w=1600&h=600&fit=crop&q=80',
-    'cars'       => 'https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=1600&h=600&fit=crop&q=80',
-    'characters' => 'https://images.unsplash.com/photo-1559386484-97dfc0e15539?w=1600&h=600&fit=crop&q=80',
-    'locations'  => 'https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=1600&h=600&fit=crop&q=80',
-    'money'      => 'https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?w=1600&h=600&fit=crop&q=80',
-    'news'       => 'https://images.unsplash.com/photo-1504711434969-e33886168d5c?w=1600&h=600&fit=crop&q=80',
+    'gta6'       => 'https://images.pexels.com/photos/31002084/pexels-photo-31002084.jpeg?auto=compress&cs=tinysrgb&w=1600&h=600&dpr=1',
+    'cheats'     => 'https://images.pexels.com/photos/5380642/pexels-photo-5380642.jpeg?auto=compress&cs=tinysrgb&w=1600&h=600&dpr=1',
+    'online'     => 'https://images.pexels.com/photos/30469967/pexels-photo-30469967.jpeg?auto=compress&cs=tinysrgb&w=1600&h=600&dpr=1',
+    'mods'       => 'https://images.pexels.com/photos/7915357/pexels-photo-7915357.jpeg?auto=compress&cs=tinysrgb&w=1600&h=600&dpr=1',
+    'cars'       => 'https://images.pexels.com/photos/5880077/pexels-photo-5880077.jpeg?auto=compress&cs=tinysrgb&w=1600&h=600&dpr=1',
+    'characters' => 'https://images.pexels.com/photos/2773521/pexels-photo-2773521.jpeg?auto=compress&cs=tinysrgb&w=1600&h=600&dpr=1',
+    'locations'  => 'https://images.pexels.com/photos/2706750/pexels-photo-2706750.jpeg?auto=compress&cs=tinysrgb&w=1600&h=600&dpr=1',
+    'money'      => 'https://images.pexels.com/photos/4386431/pexels-photo-4386431.jpeg?auto=compress&cs=tinysrgb&w=1600&h=600&dpr=1',
+    'news'       => 'https://images.pexels.com/photos/3944454/pexels-photo-3944454.jpeg?auto=compress&cs=tinysrgb&w=1600&h=600&dpr=1',
 );
 $hero_img = isset( $cat_hero_images[ $category_slug ] ) ? $cat_hero_images[ $category_slug ] : '';
 

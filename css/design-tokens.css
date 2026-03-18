@@ -9,11 +9,12 @@
     /* -------------------------------------------------------
        COLOR SYSTEM — Base (Dark Vice Streets Theme)
        ------------------------------------------------------- */
-    --gl-color-bg:              #060714;
-    --gl-color-bg-alt:          #0f1328;
-    --gl-color-surface:         #0c1030;
-    --gl-color-surface-raised:  #13183e;
-    --gl-color-border:          #2b3180;
+    --gl-color-bg:              #050810;
+    --gl-color-bg-alt:          #0a0f24;
+    --gl-color-surface:         #0d1230;
+    --gl-color-surface-glass:   rgba(13, 18, 48, 0.65);
+    --gl-color-surface-raised:  #151a42;
+    --gl-color-border:          #252b6e;
     --gl-color-divider:         #1b214f;
     --gl-color-overlay:         rgba(17, 22, 53, 0.6);
 
@@ -26,14 +27,14 @@
     --gl-color-text-link-hover: var(--gl-color-accent-dark);
 
     /* Primary Accent — Neon Magenta */
-    --gl-color-accent:          #FF2C98;
+    --gl-color-accent:          #FF3CA4;
     --gl-color-accent-light:    #FF88C3;
     --gl-color-accent-dark:     #A41869;
     --gl-color-accent-tint:     #371C4B;
-    --gl-color-accent-rgb:      255, 44, 152;
+    --gl-color-accent-rgb:      255, 60, 164;
 
     /* Secondary Accent — Cyber Cyan */
-    --gl-color-secondary:       #27D9FF;
+    --gl-color-secondary:       #2BE0FF;
     --gl-color-secondary-light: #8CE9FF;
     --gl-color-secondary-dark:  #00A6C8;
     --gl-color-secondary-tint:  #1B4056;
@@ -191,6 +192,8 @@
 
     --gl-border-width: 1px;
     --gl-border:       var(--gl-border-width) solid var(--gl-color-border);
+    --gl-border-glow:  1px solid rgba(255, 60, 164, 0.15);
+    --gl-border-glass: 1px solid rgba(255, 255, 255, 0.06);
 
     /* -------------------------------------------------------
        SHADOWS
@@ -203,6 +206,12 @@
     --gl-shadow-card:  0 2px 8px rgba(0, 0, 0, 0.06);
     --gl-shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.1);
 
+    /* Neon Shadows */
+    --gl-shadow-neon-sm:     0 0 10px rgba(255, 44, 152, 0.15), 0 0 20px rgba(108, 92, 231, 0.08);
+    --gl-shadow-neon-md:     0 0 20px rgba(255, 44, 152, 0.2), 0 0 40px rgba(39, 217, 255, 0.1);
+    --gl-shadow-neon-lg:     0 0 30px rgba(255, 44, 152, 0.25), 0 0 60px rgba(39, 217, 255, 0.15), 0 0 80px rgba(108, 92, 231, 0.1);
+    --gl-shadow-card-hover:  0 20px 50px rgba(0, 0, 0, 0.4), 0 0 30px rgba(255, 44, 152, 0.12);
+
     /* -------------------------------------------------------
        TRANSITIONS & ANIMATION
        ------------------------------------------------------- */
@@ -210,6 +219,23 @@
     --gl-transition-base:    250ms ease;
     --gl-transition-slow:    400ms ease;
     --gl-transition-spring:  400ms cubic-bezier(0.34, 1.56, 0.64, 1);
+    --gl-transition-bounce:  400ms cubic-bezier(0.34, 1.56, 0.64, 1);
+    --gl-transition-smooth:  500ms cubic-bezier(0.25, 0.8, 0.25, 1);
+
+    /* Gradient Presets */
+    --gl-gradient-accent:    linear-gradient(135deg, #FF2C98 0%, #a855f7 50%, #27D9FF 100%);
+    --gl-gradient-surface:   linear-gradient(145deg, rgba(13, 18, 48, 0.8) 0%, rgba(21, 26, 66, 0.6) 100%);
+    --gl-gradient-glass:     linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+    --gl-gradient-hero:      linear-gradient(160deg, #050810 0%, #0d1230 40%, #151a42 100%);
+    --gl-gradient-card-shine: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, transparent 40%, transparent 60%, rgba(255, 255, 255, 0.03) 100%);
+    --gl-gradient-text-glow: linear-gradient(135deg, #fff 0%, #FF3CA4 50%, #27D9FF 100%);
+
+    /* Glass Morphism Presets */
+    --gl-glass-bg:           rgba(13, 18, 48, 0.55);
+    --gl-glass-bg-heavy:     rgba(13, 18, 48, 0.75);
+    --gl-glass-border:       rgba(255, 255, 255, 0.08);
+    --gl-glass-blur:         blur(20px) saturate(180%);
+    --gl-glass-blur-heavy:   blur(40px) saturate(200%);
 
     /* -------------------------------------------------------
        Z-INDEX SCALE

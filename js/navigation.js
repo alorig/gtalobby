@@ -223,18 +223,57 @@
 
     const backToTop = document.querySelector('.gl-back-to-top');
     if (backToTop) {
-        window.addEventListener('scroll', function () {
-            if (window.pageYOffset > 400) {
-                backToTop.classList.add('is-visible');
-            } else {
-                backToTop.classList.remove('is-visible');
-            }
-        }, { passive: true });
-
         backToTop.addEventListener('click', function (e) {
             e.preventDefault();
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
     }
+
+    /* =============================================
+       SCROLL: Header state + Progress bar + Back to top
+       Combined into single scroll listener for performance
+       ============================================= */
+
+    var header         = document.querySelector('.gl-header');
+    var scrollProgress = document.querySelector('.gl-scroll-progress');
+    var ticking        = false;
+
+    function onScroll() {
+        var scrollY    = window.pageYOffset;
+        var docHeight  = document.documentElement.scrollHeight - window.innerHeight;
+
+        // Header scroll state
+        if (header) {
+            if (scrollY > 50) {
+                header.classList.add('gl-header--scrolled');
+            } else {
+                header.classList.remove('gl-header--scrolled');
+            }
+        }
+
+        // Scroll progress bar
+        if (scrollProgress && docHeight > 0) {
+            var progress = Math.min((scrollY / docHeight) * 100, 100);
+            scrollProgress.style.width = progress + '%';
+        }
+
+        // Back to top visibility
+        if (backToTop) {
+            if (scrollY > 400) {
+                backToTop.classList.add('is-visible');
+            } else {
+                backToTop.classList.remove('is-visible');
+            }
+        }
+
+        ticking = false;
+    }
+
+    window.addEventListener('scroll', function () {
+        if (!ticking) {
+            requestAnimationFrame(onScroll);
+            ticking = true;
+        }
+    }, { passive: true });
 
 })();
