@@ -783,7 +783,7 @@
 
 .gl-cat-empty {
     text-align: center;
-    padding: var(--gl-space-16) var(--gl-space-6);
+    padding: var(--gl-space-10) var(--gl-space-6);
     background: var(--gl-color-surface-raised);
     border: 1px dashed var(--gl-color-border);
     border-radius: var(--gl-radius-xl);

@@ -341,8 +341,8 @@ function gtalobby_hub_grid_cols( $zone_cfg ) {
                                 <?php the_post_thumbnail( 'gl-feature', array( 'class' => 'gl-featured-card__img' ) ); ?>
                             </div>
                             <?php else : ?>
-                            <div class="gl-featured-card__thumb gl-featured-card__thumb--placeholder" style="--cat-accent: <?php echo esc_attr( $cat_color ); ?>">
-                                <?php gtalobby_icon( gtalobby_get_category_icon( $hub_sector ), 48 ); ?>
+                            <div class="gl-featured-card__thumb">
+                                <?php gtalobby_stock_image( $hub_sector, 'feature', 'gl-featured-card__img' ); ?>
                             </div>
                             <?php endif; ?>
                             <div class="gl-featured-card__body">
@@ -411,8 +411,8 @@ function gtalobby_hub_grid_cols( $zone_cfg ) {
                                         <?php the_post_thumbnail( 'gl-card', array( 'class' => 'gl-post-card__img' ) ); ?>
                                     </div>
                                     <?php else : ?>
-                                    <div class="gl-post-card__thumb gl-post-card__thumb--placeholder" style="--cat-accent: <?php echo esc_attr( $cat_color ); ?>">
-                                        <?php gtalobby_icon( gtalobby_get_category_icon( $hub_sector ), 28 ); ?>
+                                    <div class="gl-post-card__thumb">
+                                        <?php gtalobby_stock_image( $hub_sector, 'card', 'gl-post-card__img' ); ?>
                                     </div>
                                     <?php endif; ?>
                                     <div class="gl-post-card__body">

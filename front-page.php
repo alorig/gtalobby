@@ -365,9 +365,7 @@ $gta6_cat   = get_category_by_slug( 'gta6' );
                                 <?php if ( has_post_thumbnail() ) : ?>
                                     <?php the_post_thumbnail( 'gl-feature', array( 'class' => 'gl-gta6-hero-card__img' ) ); ?>
                                 <?php else : ?>
-                                    <div class="gl-gta6-hero-card__placeholder">
-                                        <?php gtalobby_icon( 'gamepad', 64 ); ?>
-                                    </div>
+                                    <?php gtalobby_stock_image( 'gta6', 'feature', 'gl-gta6-hero-card__img' ); ?>
                                 <?php endif; ?>
                                 <div class="gl-gta6-hero-card__overlay"></div>
                                 <div class="gl-gta6-hero-card__content">
@@ -559,9 +557,7 @@ $gta6_cat   = get_category_by_slug( 'gta6' );
                                     <?php if ( has_post_thumbnail() ) : ?>
                                         <?php the_post_thumbnail( 'gl-feature', array( 'class' => 'gl-latest-featured__img' ) ); ?>
                                     <?php else : ?>
-                                        <div class="gl-latest-featured__placeholder" style="--cat-accent: <?php echo esc_attr( $cat_color ); ?>">
-                                            <?php gtalobby_icon( $cat_icon, 48 ); ?>
-                                        </div>
+                                        <?php gtalobby_stock_image( $cat_slug, 'feature', 'gl-latest-featured__img' ); ?>
                                     <?php endif; ?>
                                     <div class="gl-latest-featured__overlay"></div>
                                     <div class="gl-latest-featured__content">
@@ -584,9 +580,7 @@ $gta6_cat   = get_category_by_slug( 'gta6' );
                                         <?php if ( has_post_thumbnail() ) : ?>
                                             <?php the_post_thumbnail( 'thumbnail', array( 'class' => 'gl-latest-side-card__img' ) ); ?>
                                         <?php else : ?>
-                                            <div class="gl-latest-side-card__icon" style="--cat-accent: <?php echo esc_attr( $cat_color ); ?>">
-                                                <?php gtalobby_icon( $cat_icon, 20 ); ?>
-                                            </div>
+                                            <?php gtalobby_stock_image( $cat_slug, 'thumb', 'gl-latest-side-card__img' ); ?>
                                         <?php endif; ?>
                                     </div>
                                     <div class="gl-latest-side-card__body">

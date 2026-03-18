@@ -13,13 +13,15 @@ $cat_color = $cat ? gtalobby_get_category_color( $cat->slug ) : '';
 ?>
 <article <?php post_class( 'gl-card gl-card--compact gl-card--' . esc_attr( $post_type ) ); ?> style="<?php echo $cat_color ? '--cat-accent:' . esc_attr( $cat_color ) : ''; ?>">
 
-    <?php if ( has_post_thumbnail() ) : ?>
     <div class="gl-card__image gl-card__image--compact">
         <a href="<?php the_permalink(); ?>">
-            <?php the_post_thumbnail( 'gl-thumb', array( 'class' => 'gl-card__img', 'loading' => 'lazy' ) ); ?>
+            <?php if ( has_post_thumbnail() ) : ?>
+                <?php the_post_thumbnail( 'gl-thumb', array( 'class' => 'gl-card__img', 'loading' => 'lazy' ) ); ?>
+            <?php else : ?>
+                <?php gtalobby_stock_image( $cat ? $cat->slug : 'gta6', 'thumb', 'gl-card__img' ); ?>
+            <?php endif; ?>
         </a>
     </div>
-    <?php endif; ?>
 
     <div class="gl-card__body">
         <h3 class="gl-card__title">

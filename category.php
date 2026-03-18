@@ -210,9 +210,7 @@ $cat_desc = category_description() ?: ( isset( $cat_descriptions[ $category_slug
                                 <?php if ( has_post_thumbnail() ) : ?>
                                     <?php the_post_thumbnail( 'gl-feature', array( 'class' => 'gl-cat-featured__img' ) ); ?>
                                 <?php else : ?>
-                                    <div class="gl-cat-featured__placeholder">
-                                        <?php gtalobby_icon( $category_icon, 56 ); ?>
-                                    </div>
+                                    <?php gtalobby_stock_image( $category_slug, 'feature', 'gl-cat-featured__img' ); ?>
                                 <?php endif; ?>
                                 <div class="gl-cat-featured__overlay"></div>
                                 <div class="gl-cat-featured__content">
@@ -248,8 +246,8 @@ $cat_desc = category_description() ?: ( isset( $cat_descriptions[ $category_slug
                                             <?php the_post_thumbnail( 'gl-card', array( 'class' => 'gl-cat-card__img' ) ); ?>
                                         </a>
                                     <?php else : ?>
-                                        <a href="<?php the_permalink(); ?>" class="gl-cat-card__placeholder">
-                                            <?php gtalobby_icon( $category_icon, 28 ); ?>
+                                        <a href="<?php the_permalink(); ?>">
+                                            <?php gtalobby_stock_image( $category_slug, 'card', 'gl-cat-card__img' ); ?>
                                         </a>
                                     <?php endif; ?>
                                     <?php gtalobby_post_type_badge( null, false ); ?>
