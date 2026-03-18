@@ -60,6 +60,55 @@ function gtalobby_manual_seed_content() {
 add_action( 'admin_post_gtalobby_seed_content', 'gtalobby_manual_seed_content' );
 
 /* ==========================================================================
+   HELPER: Set featured image from external URL
+   ========================================================================== */
+
+/**
+ * Download an image from URL and set it as a post's featured image.
+ *
+ * @param int    $post_id  Post to attach the image to.
+ * @param string $url      External image URL.
+ * @param string $desc     Image description / alt text.
+ * @return int|false Attachment ID on success, false on failure.
+ */
+function gtalobby_set_featured_image_from_url( $post_id, $url, $desc = '' ) {
+    if ( ! function_exists( 'media_sideload_image' ) ) {
+        require_once ABSPATH . 'wp-admin/includes/media.php';
+        require_once ABSPATH . 'wp-admin/includes/file.php';
+        require_once ABSPATH . 'wp-admin/includes/image.php';
+    }
+
+    $attachment_id = media_sideload_image( $url, $post_id, $desc, 'id' );
+    if ( is_wp_error( $attachment_id ) ) {
+        return false;
+    }
+
+    set_post_thumbnail( $post_id, $attachment_id );
+    return $attachment_id;
+}
+
+/**
+ * Get the Pexels image URL for a given category slug.
+ *
+ * @param string $category_slug Category slug.
+ * @return string Pexels image URL.
+ */
+function gtalobby_get_seed_image_url( $category_slug ) {
+    $images = array(
+        'gta6'       => 'https://images.pexels.com/photos/31002084/pexels-photo-31002084.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&dpr=1',
+        'cheats'     => 'https://images.pexels.com/photos/5380642/pexels-photo-5380642.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&dpr=1',
+        'online'     => 'https://images.pexels.com/photos/30469967/pexels-photo-30469967.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&dpr=1',
+        'mods'       => 'https://images.pexels.com/photos/7915357/pexels-photo-7915357.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&dpr=1',
+        'cars'       => 'https://images.pexels.com/photos/5880077/pexels-photo-5880077.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&dpr=1',
+        'characters' => 'https://images.pexels.com/photos/2773521/pexels-photo-2773521.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&dpr=1',
+        'locations'  => 'https://images.pexels.com/photos/2706750/pexels-photo-2706750.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&dpr=1',
+        'money'      => 'https://images.pexels.com/photos/4386431/pexels-photo-4386431.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&dpr=1',
+        'news'       => 'https://images.pexels.com/photos/3944454/pexels-photo-3944454.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&dpr=1',
+    );
+    return isset( $images[ $category_slug ] ) ? $images[ $category_slug ] : '';
+}
+
+/* ==========================================================================
    HELPER: Get or create category by slug
    ========================================================================== */
 
@@ -115,6 +164,12 @@ function gtalobby_seed_sample_post() {
     }
 
     wp_set_post_terms( $sample_id, array( $gta6_cat->term_id ), 'category', false );
+
+    // Set featured image from Pexels
+    $img_url = gtalobby_get_seed_image_url( 'gta6' );
+    if ( $img_url ) {
+        gtalobby_set_featured_image_from_url( $sample_id, $img_url, 'GTA 6 Release Date Update' );
+    }
 
     $hub = get_page_by_path( 'gta-6-release-date' );
     if ( $hub && $hub->ID ) {
@@ -662,6 +717,12 @@ function gtalobby_seed_additional_hubs() {
         $cat_id = gtalobby_get_cat_id( $hub['sector'] );
         if ( $cat_id ) {
             wp_set_post_categories( $page_id, array( $cat_id ), true );
+        }
+
+        // Set featured image based on hub sector.
+        $hub_img_url = gtalobby_get_seed_image_url( $hub['sector'] );
+        if ( $hub_img_url ) {
+            gtalobby_set_featured_image_from_url( $page_id, $hub_img_url, $hub['title'] );
         }
 
         $hub_ids[ $hub['slug'] ] = $page_id;
@@ -2203,6 +2264,14 @@ function gtalobby_seed_posts() {
         $cat_id = gtalobby_get_cat_id( $post_data['category'] );
         if ( $cat_id ) {
             wp_set_post_categories( $post_id, array( $cat_id ), true );
+        }
+
+        // Set featured image based on category.
+        if ( ! empty( $post_data['category'] ) ) {
+            $seed_img = gtalobby_get_seed_image_url( $post_data['category'] );
+            if ( $seed_img ) {
+                gtalobby_set_featured_image_from_url( $post_id, $seed_img, $post_data['title'] );
+            }
         }
 
         // Set custom meta fields.

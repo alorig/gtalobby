@@ -581,6 +581,12 @@ function gtalobby_seed_vehicle_content() {
 
     if ( ! is_wp_error( $database_id ) && $database_id ) {
         wp_set_post_terms( $database_id, array( $cars_cat_id ), 'category', false );
+        if ( function_exists( 'gtalobby_get_seed_image_url' ) ) {
+            $cars_img = gtalobby_get_seed_image_url( 'cars' );
+            if ( $cars_img ) {
+                gtalobby_set_featured_image_from_url( $database_id, $cars_img, 'GTA 5 Vehicle Database' );
+            }
+        }
         update_post_meta( $database_id, 'data_source', 'Broughy1322 testing data + GTA Wiki + in-game testing' );
         update_post_meta( $database_id, 'data_last_updated', gmdate( 'Y-m-d' ) );
         update_post_meta( $database_id, 'column_headers', $table_headers );

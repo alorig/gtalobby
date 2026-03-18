@@ -69,6 +69,15 @@ function gtalobby_seed_hub_pages() {
         if ( $gta6_cat ) {
             wp_set_post_categories( $page_id, array( $gta6_cat->term_id ), true );
         }
+
+        // Set featured image from Pexels (GTA 6 category).
+        if ( function_exists( 'gtalobby_get_seed_image_url' ) ) {
+            $hub_sector = isset( $hub['sector'] ) ? $hub['sector'] : 'gta6';
+            $img_url = gtalobby_get_seed_image_url( $hub_sector );
+            if ( $img_url ) {
+                gtalobby_set_featured_image_from_url( $page_id, $img_url, $hub['title'] );
+            }
+        }
     }
 
     // Second pass: resolve cross-cluster links between the hub pages.
