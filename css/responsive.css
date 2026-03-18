@@ -50,11 +50,18 @@
     /* Feature card stacks */
     .gl-card--feature {
         flex-direction: column;
+        resize: vertical;
+        min-width: unset;
     }
 
     .gl-card--feature .gl-card__thumb {
         width: 100%;
         aspect-ratio: 16 / 9;
+    }
+
+    /* Limit resize to vertical on tablet */
+    .gl-card {
+        resize: vertical;
     }
 
     /* Hub hero */
@@ -292,6 +299,17 @@
         margin-bottom: var(--gl-space-4);
     }
 
+    /* Disable resize on mobile — touch devices can't drag resize handles */
+    .gl-card,
+    .gl-card--feature,
+    .gl-card--compact,
+    .gl-widget,
+    .gl-sidebar__section,
+    .gl-newsletter {
+        resize: none;
+        max-height: none;
+    }
+
     /* 404 */
     .gl-404__code {
         font-size: 5rem;
@@ -354,14 +372,13 @@
 
 @media (max-width: 767px) {
     /* Smaller brand on mobile */
-    .gl-header__site-icon {
-        width: 32px;
-        height: 32px;
-        font-size: 0.7rem;
+    .gl-logo-glow__text {
+        font-size: 1.25rem;
+        letter-spacing: 0.08em;
     }
 
-    .gl-header__site-text {
-        font-size: var(--gl-font-size-lg);
+    .gl-logo-glow__text::before {
+        filter: blur(10px) brightness(1.3);
     }
 }
 

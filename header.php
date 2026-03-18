@@ -168,16 +168,9 @@ if ( gtalobby_is_enabled( 'enable_gta6_mode' ) && gtalobby_get_gta6_option( 'gta
 
         <!-- Logo / Site Identity -->
         <div class="gl-header__brand">
-            <?php if ( has_custom_logo() ) : ?>
-                <div class="gl-header__logo">
-                    <?php the_custom_logo(); ?>
-                </div>
-            <?php else : ?>
-                <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="gl-header__site-name" rel="home">
-                    <span class="gl-header__site-icon">GL</span>
-                    <span class="gl-header__site-text"><?php bloginfo( 'name' ); ?></span>
-                </a>
-            <?php endif; ?>
+            <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="gl-header__site-name gl-logo-glow" rel="home">
+                <span class="gl-logo-glow__text" data-text="GTALOBBY">GTALOBBY</span>
+            </a>
         </div>
 
         <!-- Primary Navigation -->
