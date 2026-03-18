@@ -383,7 +383,7 @@
     left: 0;
     right: 0;
     height: 2px;
-    background: linear-gradient(90deg, var(--gl-color-accent), var(--gl-color-secondary), transparent);
+    background: linear-gradient(90deg, #FF3CA4, #a855f7, #2BE0FF, transparent);
     border-radius: var(--gl-radius-full);
 }
 
@@ -433,7 +433,9 @@
     align-items: center;
     gap: var(--gl-space-2);
     padding: 6px 14px;
-    background: rgba(255, 255, 255, 0.04);
+    background: rgba(13, 18, 48, 0.6);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     border: 1px solid rgba(255, 255, 255, 0.06);
     border-radius: var(--gl-radius-full);
     transition: all 0.3s ease;

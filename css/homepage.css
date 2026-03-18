@@ -1637,8 +1637,8 @@ body {
     }
 
     .gl-zone {
-        padding-top: var(--gl-space-12);
-        padding-bottom: var(--gl-space-12);
+        padding-top: var(--gl-space-10);
+        padding-bottom: var(--gl-space-10);
     }
 }
 
@@ -1696,6 +1696,12 @@ body {
 
     .gl-category-grid {
         grid-template-columns: 1fr;
+    }
+
+    .gl-category-tile:nth-child(2),
+    .gl-category-tile:nth-child(3) {
+        grid-column: auto;
+        min-height: 140px;
     }
 
     .gl-category-tile:first-child {
