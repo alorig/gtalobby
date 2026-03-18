@@ -728,13 +728,17 @@
                     imgObserver.unobserve(entry.target);
                 }
             });
-        }, { threshold: 0.2 });
+        }, { threshold: 0.02, rootMargin: '0px 0px -30px 0px' });
 
         revealImages.forEach(function (img) {
             img.style.clipPath = 'inset(0 100% 0 0)';
             img.style.transform = 'scale(1.1)';
             img.style.transition = 'clip-path 0.8s cubic-bezier(0.25,0.46,0.45,0.94), transform 0.8s cubic-bezier(0.25,0.46,0.45,0.94)';
-            imgObserver.observe(img);
+            /* Defer observe to next frame so initial clip-path is painted first,
+               then the observer can fire reliably for elements already in view */
+            requestAnimationFrame(function () {
+                imgObserver.observe(img);
+            });
         });
     }
 
