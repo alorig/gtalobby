@@ -2236,6 +2236,12 @@ function gtalobby_seed_posts() {
 
     );
 
+    // Merge additional bulk content.
+    $extra = gtalobby_get_bulk_seed_posts();
+    if ( is_array( $extra ) ) {
+        $posts = array_merge( $posts, $extra );
+    }
+
     foreach ( $posts as $post_data ) {
         // Skip if post with this slug already exists.
         $existing = get_page_by_path( $post_data['slug'], OBJECT, $post_data['post_type'] );
