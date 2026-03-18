@@ -90,11 +90,12 @@ select:focus-visible {
     background: linear-gradient(145deg, rgba(12, 16, 48, 0.8) 0%, rgba(19, 24, 62, 0.65) 100%);
     backdrop-filter: blur(20px) saturate(150%);
     -webkit-backdrop-filter: blur(20px) saturate(150%);
-    border: 1px solid rgba(255, 44, 152, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: var(--gl-radius-2xl);
     padding: var(--gl-space-8) var(--gl-space-6);
     margin: var(--gl-space-8) 0;
     box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.3),
         0 0 20px rgba(255, 44, 152, 0.08),
         0 0 60px rgba(108, 92, 231, 0.06),
         inset 0 1px 0 rgba(255, 255, 255, 0.06);
@@ -148,7 +149,7 @@ select:focus-visible {
     font-weight: var(--gl-weight-bold);
     color: var(--gl-color-text);
     margin: 0 0 var(--gl-space-2);
-    background: linear-gradient(135deg, #fff 0%, #FF2C98 100%);
+    background: linear-gradient(135deg, #fff 0%, #FF3CA4 60%, #a855f7 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -201,7 +202,7 @@ select:focus-visible {
     align-items: center;
     gap: var(--gl-space-2);
     padding: var(--gl-space-3) var(--gl-space-5);
-    background: linear-gradient(135deg, #FF2C98, #6C5CE7);
+    background: linear-gradient(135deg, #FF3CA4, #a855f7);
     color: #fff;
     border: none;
     font-family: var(--gl-font-display);
@@ -308,18 +309,18 @@ select:focus-visible {
 }
 
 .gl-btn--primary {
-    background: linear-gradient(135deg, #FF2C98, #6C5CE7);
+    background: linear-gradient(135deg, #FF3CA4, #a855f7, #6C5CE7);
     color: #fff;
     border-color: transparent;
 }
 
 .gl-btn--primary:hover {
     background: linear-gradient(135deg, #e0247f, #5a4bd6);
-    transform: translateY(-2px);
+    transform: translateY(-3px);
     box-shadow:
-        0 0 15px rgba(255, 44, 152, 0.4),
-        0 0 30px rgba(108, 92, 231, 0.2),
-        0 4px 15px rgba(0, 0, 0, 0.3);
+        0 0 20px rgba(255, 60, 164, 0.5),
+        0 0 40px rgba(108, 92, 231, 0.25),
+        0 6px 20px rgba(0, 0, 0, 0.35);
 }
 
 .gl-btn--outline {
@@ -365,7 +366,7 @@ select:focus-visible {
     background: linear-gradient(145deg, rgba(12, 16, 48, 0.7) 0%, rgba(19, 24, 62, 0.5) 100%);
     backdrop-filter: blur(12px) saturate(140%);
     -webkit-backdrop-filter: blur(12px) saturate(140%);
-    border: 1px solid rgba(108, 92, 231, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.06);
     border-radius: var(--gl-radius-xl);
     overflow: hidden;
     transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
@@ -378,12 +379,12 @@ select:focus-visible {
 }
 
 .gl-card:hover {
-    transform: translateY(-6px) scale(1.01);
-    border-color: rgba(255, 44, 152, 0.3);
+    transform: translateY(-10px) scale(1.02);
+    border-color: rgba(255, 60, 164, 0.25);
     box-shadow:
-        0 0 20px rgba(255, 44, 152, 0.12),
-        0 0 40px rgba(108, 92, 231, 0.08),
-        0 12px 40px rgba(0, 0, 0, 0.35);
+        0 0 24px rgba(255, 60, 164, 0.15),
+        0 0 48px rgba(108, 92, 231, 0.1),
+        0 20px 50px rgba(0, 0, 0, 0.4);
 }
 
 .gl-card__thumb {
@@ -435,8 +436,8 @@ select:focus-visible {
 }
 
 .gl-card__title a:hover {
-    color: #FF2C98;
-    text-shadow: 0 0 12px rgba(255, 44, 152, 0.4);
+    color: #FF3CA4;
+    text-shadow: 0 0 16px rgba(255, 60, 164, 0.5);
 }
 
 .gl-card__excerpt {
@@ -497,7 +498,7 @@ select:focus-visible {
 
 .gl-card-grid {
     display: grid;
-    gap: var(--gl-space-6);
+    gap: var(--gl-space-5);
     container-type: inline-size;
 }
 
@@ -554,7 +555,7 @@ select:focus-visible {
 .gl-badge--category {
     background: linear-gradient(135deg, #FF2C98, #6C5CE7);
     color: #fff;
-    box-shadow: 0 0 8px rgba(255, 44, 152, 0.25);
+    box-shadow: 0 0 12px rgba(255, 60, 164, 0.3), 0 0 24px rgba(108, 92, 231, 0.15);
 }
 
 .gl-badge--confidence {
@@ -632,11 +633,11 @@ input:focus,
 textarea:focus,
 select:focus {
     outline: none;
-    border-color: #FF2C98;
+    border-color: #2BE0FF;
     box-shadow:
-        0 0 0 3px rgba(255, 44, 152, 0.15),
-        0 0 15px rgba(255, 44, 152, 0.1),
-        0 0 30px rgba(108, 92, 231, 0.06);
+        0 0 0 3px rgba(43, 224, 255, 0.12),
+        0 0 20px rgba(43, 224, 255, 0.08),
+        0 0 40px rgba(255, 60, 164, 0.04);
 }
 
 /* ==========================================================================
@@ -723,7 +724,7 @@ select:focus {
     align-items: center;
     justify-content: center;
     padding: var(--gl-space-3) var(--gl-space-4);
-    background: linear-gradient(135deg, #27D9FF, #6C5CE7);
+    background: linear-gradient(135deg, #2BE0FF, #a855f7);
     color: #fff;
     border: none;
     cursor: pointer;
@@ -732,7 +733,7 @@ select:focus {
 
 .gl-search-form__btn:hover {
     background: linear-gradient(135deg, #1fc4e6, #5a4bd6);
-    box-shadow: 0 0 15px rgba(39, 217, 255, 0.3);
+    box-shadow: 0 0 20px rgba(43, 224, 255, 0.35), 0 0 40px rgba(168, 85, 247, 0.15);
 }
 
 /* ==========================================================================
