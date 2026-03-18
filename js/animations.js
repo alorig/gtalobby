@@ -715,32 +715,11 @@
 
 
     /* ==========================================================================
-       24. IMAGE REVEAL ON SCROLL — Clip-path animation for images
+       24. IMAGE REVEAL ON SCROLL — removed clip-path animation
+       The data-animate scroll reveal system already handles fade/scale reveals.
+       The clip-path layer was redundant and caused images to stay invisible
+       when the IntersectionObserver failed to fire on already-visible elements.
        ========================================================================== */
-
-    var revealImages = document.querySelectorAll('.gl-article__hero, .gl-cat-featured__image, .gl-cat-card__image');
-    if (revealImages.length && 'IntersectionObserver' in window) {
-        var imgObserver = new IntersectionObserver(function (entries) {
-            entries.forEach(function (entry) {
-                if (entry.isIntersecting) {
-                    entry.target.style.clipPath = 'inset(0 0 0 0)';
-                    entry.target.style.transform = 'scale(1)';
-                    imgObserver.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.02, rootMargin: '0px 0px -30px 0px' });
-
-        revealImages.forEach(function (img) {
-            img.style.clipPath = 'inset(0 100% 0 0)';
-            img.style.transform = 'scale(1.1)';
-            img.style.transition = 'clip-path 0.8s cubic-bezier(0.25,0.46,0.45,0.94), transform 0.8s cubic-bezier(0.25,0.46,0.45,0.94)';
-            /* Defer observe to next frame so initial clip-path is painted first,
-               then the observer can fire reliably for elements already in view */
-            requestAnimationFrame(function () {
-                imgObserver.observe(img);
-            });
-        });
-    }
 
 
     /* ==========================================================================
