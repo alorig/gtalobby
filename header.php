@@ -279,3 +279,9 @@ gtalobby_render_ad_slot( 'ad_header_banner', 'gl-ad-slot gl-ad-slot--header' );
 
 <div class="gl-main">
 <div class="gl-page-transition" aria-hidden="true"></div>
+<div class="gl-ambient-bg" aria-hidden="true">
+    <div class="gl-ambient-bg__orb gl-ambient-bg__orb--1"></div>
+    <div class="gl-ambient-bg__orb gl-ambient-bg__orb--2"></div>
+    <div class="gl-ambient-bg__orb gl-ambient-bg__orb--3"></div>
+    <div class="gl-ambient-bg__orb gl-ambient-bg__orb--4"></div>
+</div>
