@@ -453,7 +453,7 @@ body {
 
 .gl-stats-bar__num {
     font-family: var(--gl-font-display);
-    font-size: var(--gl-font-size-3xl);
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
     font-weight: var(--gl-font-weight-extrabold);
     background: linear-gradient(135deg, #FF2C98, #27D9FF);
     -webkit-background-clip: text;
@@ -462,6 +462,7 @@ body {
     line-height: 1;
     letter-spacing: var(--gl-tracking-tight);
     filter: drop-shadow(0 2px 8px rgba(255,44,152,0.2));
+    text-shadow: 0 0 20px rgba(255, 60, 164, 0.3);
 }
 
 .gl-stats-bar__label {
@@ -515,14 +516,21 @@ body {
 .gl-category-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: var(--gl-space-5);
+    gap: var(--gl-space-4);
     container-type: inline-size;
+}
+
+/* Make 2nd and 3rd category tiles span 2 columns for bento box feel */
+.gl-category-tile:nth-child(2),
+.gl-category-tile:nth-child(3) {
+    grid-column: span 2;
+    min-height: 180px;
 }
 
 /* Make the first category tile (GTA 6) span full width as a featured tile */
 .gl-category-tile:first-child {
     grid-column: 1 / -1;
-    min-height: 200px;
+    min-height: 240px;
     flex-direction: row;
     align-items: center;
     padding: var(--gl-space-6) var(--gl-space-8);
@@ -616,6 +624,25 @@ body {
 
 .gl-category-tile:hover::after {
     transform: scaleX(1);
+}
+
+.gl-category-tile::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, color-mix(in srgb, var(--cat-accent) 40%, transparent), transparent 60%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 4;
+    pointer-events: none;
+}
+.gl-category-tile:hover::before {
+    opacity: 1;
 }
 
 .gl-category-tile__icon-wrap {
@@ -1069,7 +1096,7 @@ body {
     text-decoration: none;
     color: inherit;
     transition: all 0.45s cubic-bezier(0.25,0.8,0.25,1);
-    box-shadow: 0 4px 24px rgba(0,0,0,0.25);
+    box-shadow: 0 4px 24px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255, 255, 255, 0.04);
     resize: both;
     min-width: 200px;
     min-height: 150px;
@@ -1088,7 +1115,7 @@ body {
 }
 
 .gl-hub-tile:hover {
-    transform: translateY(-8px) scale(1.01);
+    transform: translateY(-8px) scale(1.02) rotate(-0.3deg);
     box-shadow: 0 24px 60px rgba(0,0,0,0.45), 0 0 50px color-mix(in srgb, var(--hub-accent) 18%, transparent);
     text-decoration: none;
     color: inherit;

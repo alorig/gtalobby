@@ -78,13 +78,13 @@
     position: sticky;
     top: 0;
     z-index: var(--gl-z-header, 300);
-    background: rgba(6, 7, 20, 0.85);
+    background: rgba(5, 8, 16, 0.88);
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
     border-bottom: none;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4),
-                0 0 60px rgba(255, 44, 152, 0.04),
-                inset 0 -1px 0 rgba(255, 255, 255, 0.05);
+    box-shadow: 0 4px 40px rgba(0, 0, 0, 0.5),
+                0 0 80px rgba(255, 60, 164, 0.03),
+                inset 0 -1px 0 rgba(255, 255, 255, 0.04);
 }
 
 /* Animated neon gradient bottom border */
@@ -95,7 +95,7 @@
     left: 0;
     right: 0;
     height: 2px;
-    background: linear-gradient(90deg, #FF2C98, #27D9FF, #6C5CE7, #FF2C98);
+    background: linear-gradient(90deg, #FF3CA4, #a855f7, #2BE0FF, #FF3CA4);
     background-size: 300% 100%;
     animation: gl-header-border-glow 4s ease infinite;
 }
@@ -141,12 +141,12 @@
     /* Animated gradient fill */
     background: linear-gradient(
         135deg,
-        #FF2C98 0%,
+        #FF3CA4 0%,
         #FF6EB4 15%,
-        #27D9FF 35%,
-        #6C5CE7 55%,
-        #FF2C98 75%,
-        #27D9FF 100%
+        #2BE0FF 35%,
+        #a855f7 55%,
+        #FF3CA4 75%,
+        #2BE0FF 100%
     );
     background-size: 300% 300%;
     -webkit-background-clip: text;
@@ -155,9 +155,9 @@
     animation: gl-logo-gradient-flow 4s ease infinite;
 
     /* Neon glow via filter */
-    filter: drop-shadow(0 0 6px rgba(255, 44, 152, 0.6))
-            drop-shadow(0 0 12px rgba(39, 217, 255, 0.4))
-            drop-shadow(0 0 24px rgba(108, 92, 231, 0.3));
+    filter: drop-shadow(0 0 8px rgba(255, 60, 164, 0.7))
+            drop-shadow(0 0 16px rgba(43, 224, 255, 0.5))
+            drop-shadow(0 0 32px rgba(168, 85, 247, 0.35));
 
     transition: filter 0.4s ease, transform 0.4s ease;
 }
@@ -310,7 +310,7 @@
 .gl-nav__list li.current-menu-item > a,
 .gl-nav__list li.current_page_item > a,
 .gl-nav__list li.current-cat > a {
-    color: #FF2C98;
+    color: #FF3CA4;
     background-color: rgba(255, 44, 152, 0.08);
     text-shadow: 0 0 12px rgba(255, 44, 152, 0.4);
     box-shadow: 0 0 15px rgba(255, 44, 152, 0.06);
@@ -780,7 +780,7 @@
    ========================================================================== */
 
 .gl-footer {
-    background-color: #060714;
+    background: linear-gradient(180deg, #0a0f24 0%, #050810 100%);
     background-image:
         radial-gradient(ellipse at 10% 0%, rgba(255, 44, 152, 0.1) 0%, transparent 50%),
         radial-gradient(ellipse at 90% 100%, rgba(39, 217, 255, 0.07) 0%, transparent 50%),

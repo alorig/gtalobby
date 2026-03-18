@@ -130,7 +130,7 @@
 
 .gl-cat-hero {
     position: relative;
-    min-height: 360px;
+    min-height: 400px;
     display: flex;
     align-items: flex-end;
     overflow: hidden;
@@ -211,8 +211,8 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 64px;
-    height: 64px;
+    width: 72px;
+    height: 72px;
     border-radius: var(--gl-radius-xl);
     background: color-mix(in srgb, var(--cat-accent) 15%, rgba(6, 7, 20, 0.6));
     border: 2px solid color-mix(in srgb, var(--cat-accent) 30%, transparent);
@@ -222,16 +222,23 @@
     box-shadow:
         0 0 20px color-mix(in srgb, var(--cat-accent) 20%, transparent),
         0 0 40px color-mix(in srgb, var(--cat-accent) 8%, transparent);
+    animation: gl-icon-float 3s ease-in-out infinite;
+}
+
+@keyframes gl-icon-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
 }
 
 .gl-cat-hero__title {
     font-family: var(--gl-font-display);
-    font-size: var(--gl-font-size-4xl);
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
     font-weight: var(--gl-font-weight-extrabold);
     color: #fff;
     margin: 0 0 var(--gl-space-3);
     letter-spacing: var(--gl-tracking-tight);
     line-height: 1.1;
+    text-shadow: 0 4px 24px rgba(0, 0, 0, 0.5), 0 0 40px color-mix(in srgb, var(--cat-accent) 20%, transparent);
 }
 
 .gl-cat-hero__desc {
@@ -583,11 +590,12 @@
     padding: 3px 10px;
     border-radius: var(--gl-radius-full);
     border: 1px solid color-mix(in srgb, var(--cat-accent) 25%, transparent);
+    animation: gl-badge-pulse 2.5s ease-in-out infinite;
 }
 
 .gl-cat-featured__title {
     font-family: var(--gl-font-display);
-    font-size: var(--gl-font-size-2xl);
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
     font-weight: var(--gl-font-weight-extrabold);
     line-height: 1.15;
     margin: 0;
@@ -647,13 +655,15 @@
 }
 
 .gl-cat-card {
-    background: var(--gl-color-surface-raised);
-    border: 1px solid var(--gl-color-border);
+    background: linear-gradient(145deg, rgba(13, 18, 48, 0.8) 0%, rgba(21, 26, 66, 0.55) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.06);
     border-radius: var(--gl-radius-xl);
     overflow: hidden;
     transition: all 0.35s ease;
     display: flex;
     flex-direction: column;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
 }
 
 .gl-cat-card:hover {
