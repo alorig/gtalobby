@@ -226,6 +226,16 @@
     --gl-gradient-accent:    linear-gradient(135deg, #FF2C98 0%, #a855f7 50%, #27D9FF 100%);
     --gl-gradient-surface:   linear-gradient(145deg, rgba(13, 18, 48, 0.8) 0%, rgba(21, 26, 66, 0.6) 100%);
     --gl-gradient-glass:     linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+    --gl-gradient-hero:      linear-gradient(160deg, #050810 0%, #0d1230 40%, #151a42 100%);
+    --gl-gradient-card-shine: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, transparent 40%, transparent 60%, rgba(255, 255, 255, 0.03) 100%);
+    --gl-gradient-text-glow: linear-gradient(135deg, #fff 0%, #FF3CA4 50%, #27D9FF 100%);
+
+    /* Glass Morphism Presets */
+    --gl-glass-bg:           rgba(13, 18, 48, 0.55);
+    --gl-glass-bg-heavy:     rgba(13, 18, 48, 0.75);
+    --gl-glass-border:       rgba(255, 255, 255, 0.08);
+    --gl-glass-blur:         blur(20px) saturate(180%);
+    --gl-glass-blur-heavy:   blur(40px) saturate(200%);
 
     /* -------------------------------------------------------
        Z-INDEX SCALE
