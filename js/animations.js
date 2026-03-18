@@ -20,6 +20,51 @@
     }
 
     /* ==========================================================================
+       SHARED: RAF-throttled mousemove tracker
+       ========================================================================== */
+
+    var mouseX = 0, mouseY = 0, mouseMoveCallbacks = [];
+    var mouseMoveTicking = false;
+
+    document.addEventListener('mousemove', function (e) {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        if (!mouseMoveTicking) {
+            requestAnimationFrame(function () {
+                for (var i = 0; i < mouseMoveCallbacks.length; i++) {
+                    mouseMoveCallbacks[i](mouseX, mouseY);
+                }
+                mouseMoveTicking = false;
+            });
+            mouseMoveTicking = true;
+        }
+    });
+
+    /* Helper: check if element is in viewport */
+    function isInViewport(el) {
+        var rect = el.getBoundingClientRect();
+        return rect.top < window.innerHeight && rect.bottom > 0;
+    }
+
+
+    /* ==========================================================================
+       SHARED: Inject all missing keyframes at once
+       ========================================================================== */
+
+    var keyframeSheet = document.createElement('style');
+    keyframeSheet.textContent = [
+        '@keyframes gl-ripple{0%{transform:scale(0);opacity:0.6;}100%{transform:scale(4);opacity:0;}}',
+        '@keyframes gl-charReveal{from{opacity:0;transform:translateY(100%) rotateX(-80deg);}to{opacity:1;transform:translateY(0) rotateX(0);}}',
+        '@keyframes gl-countGlow{0%{text-shadow:0 0 20px rgba(255,44,152,0.6);}100%{text-shadow:none;}}',
+        '@keyframes gl-cursorBlink{0%,100%{border-color:transparent;}50%{border-color:var(--gl-color-accent,#FF2C98);}}',
+        '@keyframes gl-neonBoxPulse{0%,100%{box-shadow:0 0 4px rgba(255,44,152,0.2);}50%{box-shadow:0 0 12px rgba(255,44,152,0.4);}}',
+        '@keyframes gl-gradientShift{0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}',
+        '@keyframes gl-glowOrbFloat{0%,100%{transform:translateY(0) scale(1);}50%{transform:translateY(-20px) scale(1.05);}}'
+    ].join('');
+    document.head.appendChild(keyframeSheet);
+
+
+    /* ==========================================================================
        1. SCROLL-TRIGGERED REVEALS (IntersectionObserver)
        ========================================================================== */
 
@@ -40,8 +85,7 @@
 
         animateElements.forEach(function (el) {
             /* Immediately reveal elements already in the viewport */
-            var rect = el.getBoundingClientRect();
-            if (rect.top < window.innerHeight && rect.bottom > 0) {
+            if (isInViewport(el)) {
                 el.classList.add('gl-visible');
             } else {
                 revealObserver.observe(el);
@@ -59,11 +103,24 @@
        ========================================================================== */
 
     var progressBar = document.querySelector('.gl-scroll-progress');
+    var articleContent = document.querySelector('.gl-article__content');
+
     if (progressBar) {
         window.addEventListener('scroll', function () {
-            var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-            var scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            var progress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+            var progress;
+            if (articleContent) {
+                /* Article-aware progress: tracks reading position */
+                var rect = articleContent.getBoundingClientRect();
+                var articleTop = rect.top + window.pageYOffset;
+                var articleHeight = rect.height;
+                var scrollPos = window.pageYOffset - articleTop + window.innerHeight * 0.5;
+                progress = Math.max(0, Math.min(100, (scrollPos / articleHeight) * 100));
+            } else {
+                /* Generic page progress */
+                var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+                var scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                progress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+            }
             progressBar.style.width = progress + '%';
         }, { passive: true });
     }
@@ -109,8 +166,11 @@
         window.addEventListener('resize', resize);
 
         var particles = [];
-        var particleCount = Math.min(60, Math.floor(window.innerWidth / 25));
+        /* Cap particle count for better performance */
+        var particleCount = Math.min(35, Math.floor(window.innerWidth / 40));
         var colors = ['#FF2C98', '#27D9FF', '#6C5CE7', '#FF2C98'];
+        var connectionDistance = 100;
+        var connectionDistSq = connectionDistance * connectionDistance;
 
         for (var i = 0; i < particleCount; i++) {
             particles.push({
@@ -125,11 +185,7 @@
             });
         }
 
-        var mouseX = 0, mouseY = 0;
-        document.addEventListener('mousemove', function (e) {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-        });
+        /* Use shared mouse tracker (no extra listener) */
 
         var rafId;
         function animate() {
@@ -143,8 +199,9 @@
                 /* Mouse interaction — particles drift away from cursor */
                 var dx = p.x - mouseX;
                 var dy = p.y - mouseY;
-                var dist = Math.sqrt(dx * dx + dy * dy);
-                if (dist < 150 && dist > 0) {
+                var distSq = dx * dx + dy * dy;
+                if (distSq < 22500 && distSq > 0) { /* 150^2 */
+                    var dist = Math.sqrt(distSq);
                     var force = (150 - dist) / 150;
                     p.vx += (dx / dist) * force * 0.03;
                     p.vy += (dy / dist) * force * 0.03;
@@ -168,16 +225,19 @@
                 ctx.globalAlpha = opacity;
                 ctx.fill();
 
-                /* Draw connections */
+                /* Draw connections — use squared distance to avoid sqrt */
                 for (var j = idx + 1; j < particles.length; j++) {
                     var p2 = particles[j];
-                    var d = Math.sqrt(Math.pow(p.x - p2.x, 2) + Math.pow(p.y - p2.y, 2));
-                    if (d < 120) {
+                    var cdx = p.x - p2.x;
+                    var cdy = p.y - p2.y;
+                    var cdSq = cdx * cdx + cdy * cdy;
+                    if (cdSq < connectionDistSq) {
+                        var cd = Math.sqrt(cdSq);
                         ctx.beginPath();
                         ctx.moveTo(p.x, p.y);
                         ctx.lineTo(p2.x, p2.y);
                         ctx.strokeStyle = p.color;
-                        ctx.globalAlpha = (1 - d / 120) * 0.15;
+                        ctx.globalAlpha = (1 - cd / connectionDistance) * 0.15;
                         ctx.lineWidth = 0.5;
                         ctx.stroke();
                     }
@@ -207,22 +267,22 @@
 
 
     /* ==========================================================================
-       5. CURSOR GLOW TRAIL — Neon glow follows cursor
+       5. CURSOR GLOW TRAIL — Neon glow follows cursor (RAF-throttled)
        ========================================================================== */
 
     if (window.innerWidth > 768) {
         var cursorGlow = document.createElement('div');
-        cursorGlow.style.cssText = 'position:fixed;width:400px;height:400px;border-radius:50%;pointer-events:none;z-index:0;background:radial-gradient(circle,rgba(255,44,152,0.06) 0%,rgba(39,217,255,0.03) 40%,transparent 70%);transition:transform 0.15s ease-out;will-change:transform;';
+        cursorGlow.style.cssText = 'position:fixed;width:400px;height:400px;border-radius:50%;pointer-events:none;z-index:0;background:radial-gradient(circle,rgba(255,44,152,0.06) 0%,rgba(39,217,255,0.03) 40%,transparent 70%);will-change:transform;';
         document.body.appendChild(cursorGlow);
 
-        document.addEventListener('mousemove', function (e) {
-            cursorGlow.style.transform = 'translate(' + (e.clientX - 200) + 'px, ' + (e.clientY - 200) + 'px)';
+        mouseMoveCallbacks.push(function (mx, my) {
+            cursorGlow.style.transform = 'translate(' + (mx - 200) + 'px, ' + (my - 200) + 'px)';
         });
     }
 
 
     /* ==========================================================================
-       6. PARALLAX TILT ON CARDS — 3D perspective on hover
+       6. PARALLAX TILT ON CARDS — 3D perspective on hover (RAF-throttled)
        ========================================================================== */
 
     var tiltCards = document.querySelectorAll('.gl-cat-card, .gl-gta6-card, .gl-hub-tile, .gl-category-tile, .gl-cat-hub-card, .gl-post-card, .gl-featured-card, .gl-hub-card-v2, .gl-sidebar__section, .gl-widget');
@@ -230,19 +290,25 @@
         tiltCards.forEach(function (card) {
             card.style.transition = 'transform 0.3s ease';
             card.style.willChange = 'transform';
+            var tiltRaf = null;
 
             card.addEventListener('mousemove', function (e) {
-                var rect = card.getBoundingClientRect();
-                var x = e.clientX - rect.left;
-                var y = e.clientY - rect.top;
-                var centerX = rect.width / 2;
-                var centerY = rect.height / 2;
-                var rotateX = ((y - centerY) / centerY) * -4;
-                var rotateY = ((x - centerX) / centerX) * 4;
-                card.style.transform = 'perspective(800px) rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg) translateY(-6px) scale(1.02)';
+                if (tiltRaf) return;
+                tiltRaf = requestAnimationFrame(function () {
+                    var rect = card.getBoundingClientRect();
+                    var x = e.clientX - rect.left;
+                    var y = e.clientY - rect.top;
+                    var centerX = rect.width / 2;
+                    var centerY = rect.height / 2;
+                    var rotateX = ((y - centerY) / centerY) * -4;
+                    var rotateY = ((x - centerX) / centerX) * 4;
+                    card.style.transform = 'perspective(800px) rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg) translateY(-6px) scale(1.02)';
+                    tiltRaf = null;
+                });
             });
 
             card.addEventListener('mouseleave', function () {
+                if (tiltRaf) { cancelAnimationFrame(tiltRaf); tiltRaf = null; }
                 card.style.transform = '';
             });
         });
@@ -250,20 +316,27 @@
 
 
     /* ==========================================================================
-       7. MAGNETIC BUTTON EFFECT — Buttons follow cursor
+       7. MAGNETIC BUTTON EFFECT — Buttons follow cursor (RAF-throttled)
        ========================================================================== */
 
     var magneticBtns = document.querySelectorAll('.gl-btn, .gl-btn--primary, .gl-hero-panel__cta, .gl-404-hero__cta, .gl-cat-featured__read, .gl-cat-card__link, .gl-back-to-top');
     if (magneticBtns.length && window.innerWidth > 991) {
         magneticBtns.forEach(function (btn) {
+            var btnRaf = null;
+
             btn.addEventListener('mousemove', function (e) {
-                var rect = btn.getBoundingClientRect();
-                var x = e.clientX - rect.left - rect.width / 2;
-                var y = e.clientY - rect.top - rect.height / 2;
-                btn.style.transform = 'translate(' + (x * 0.2) + 'px, ' + (y * 0.2) + 'px) scale(1.05)';
+                if (btnRaf) return;
+                btnRaf = requestAnimationFrame(function () {
+                    var rect = btn.getBoundingClientRect();
+                    var x = e.clientX - rect.left - rect.width / 2;
+                    var y = e.clientY - rect.top - rect.height / 2;
+                    btn.style.transform = 'translate(' + (x * 0.2) + 'px, ' + (y * 0.2) + 'px) scale(1.05)';
+                    btnRaf = null;
+                });
             });
 
             btn.addEventListener('mouseleave', function () {
+                if (btnRaf) { cancelAnimationFrame(btnRaf); btnRaf = null; }
                 btn.style.transform = '';
             });
         });
@@ -296,11 +369,6 @@
             if (originalPosition === 'static') target.style.position = '';
         }, 600);
     });
-
-    /* Inject ripple animation */
-    var rippleStyle = document.createElement('style');
-    rippleStyle.textContent = '@keyframes gl-ripple{0%{transform:scale(0);opacity:0.6;}100%{transform:scale(4);opacity:0;}}';
-    document.head.appendChild(rippleStyle);
 
 
     /* ==========================================================================
@@ -344,11 +412,6 @@
         textRevealEls.forEach(function (el) { textObserver.observe(el); });
     }
 
-    /* Inject char reveal animation */
-    var charStyle = document.createElement('style');
-    charStyle.textContent = '@keyframes gl-charReveal{from{opacity:0;transform:translateY(100%) rotateX(-80deg);}to{opacity:1;transform:translateY(0) rotateX(0);}}';
-    document.head.appendChild(charStyle);
-
 
     /* ==========================================================================
        10. PARALLAX SCROLL FOR BACKGROUNDS
@@ -389,7 +452,7 @@
                     countObserver.unobserve(entry.target);
                 }
             });
-        }, { threshold: 0.5 });
+        }, { threshold: 0.3 });
 
         allCounters.forEach(function (el) { countObserver.observe(el); });
     }
@@ -579,15 +642,18 @@
 
     /* ==========================================================================
        18. TYPEWRITER EFFECT — For hero/404 code elements
+       Preserves original text for accessibility/SEO, types over it visually.
        ========================================================================== */
 
     var typewriterEls = document.querySelectorAll('.gl-404-hero__code, [data-typewriter]');
     if (typewriterEls.length) {
         typewriterEls.forEach(function (el) {
             var text = el.textContent;
+            if (!text.trim()) return;
+
             el.textContent = '';
             el.style.visibility = 'visible';
-            el.style.borderRight = '2px solid var(--gl-color-accent, #FF2C98)';
+            el.style.borderRight = '2px solid transparent';
             el.style.animation = 'gl-cursorBlink 0.8s infinite';
             var i = 0;
             function typeChar() {
@@ -609,6 +675,7 @@
 
     /* ==========================================================================
        19. STAGGER ANIMATION FOR GRID CHILDREN
+       Uses single RAF instead of double, with visibility safety net.
        ========================================================================== */
 
     var staggerGrids = document.querySelectorAll('.gl-cat-grid, .gl-guide-meta__grid, .gl-install-steps__list, .gl-gallery__grid, .gl-recap-grid, .gl-404-cats__grid, .gl-cat-hubs__grid, .gl-cat-filters__bar');
@@ -624,35 +691,54 @@
                             child.style.transition = 'opacity 0.6s cubic-bezier(0.25,0.46,0.45,0.94), transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94)';
                             child.style.transitionDelay = (index * 0.1) + 's';
                             requestAnimationFrame(function () {
-                                requestAnimationFrame(function () {
-                                    child.style.opacity = '1';
-                                    child.style.transform = 'translateY(0) scale(1)';
-                                });
+                                child.style.opacity = '1';
+                                child.style.transform = 'translateY(0) scale(1)';
                             });
                         })(children[i], i);
                     }
                     staggerObserver.unobserve(entry.target);
                 }
             });
-        }, { threshold: 0.1 });
+        }, { threshold: 0.05 });
 
-        staggerGrids.forEach(function (grid) { staggerObserver.observe(grid); });
+        staggerGrids.forEach(function (grid) {
+            /* Immediately trigger for grids already in viewport */
+            if (isInViewport(grid)) {
+                var children = grid.children;
+                for (var i = 0; i < children.length; i++) {
+                    (function (child, index) {
+                        child.style.opacity = '0';
+                        child.style.transform = 'translateY(30px) scale(0.95)';
+                        child.style.transition = 'opacity 0.6s cubic-bezier(0.25,0.46,0.45,0.94), transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94)';
+                        child.style.transitionDelay = (index * 0.1) + 's';
+                        requestAnimationFrame(function () {
+                            child.style.opacity = '1';
+                            child.style.transform = 'translateY(0) scale(1)';
+                        });
+                    })(children[i], i);
+                }
+            } else {
+                staggerObserver.observe(grid);
+            }
+        });
     }
 
 
     /* ==========================================================================
-       20. GLOW FOLLOW CURSOR ON HERO SECTIONS
+       20. GLOW FOLLOW CURSOR ON HERO SECTIONS (uses shared mousemove)
        ========================================================================== */
 
     var heroSections = document.querySelectorAll('.gl-cat-hero, .gl-arc-hero, .gl-search-hero, .gl-404-hero, .gl-hub-hero, .gl-article__header');
     if (heroSections.length && window.innerWidth > 767) {
-        heroSections.forEach(function (hero) {
-            hero.addEventListener('mousemove', function (e) {
+        mouseMoveCallbacks.push(function (mx, my) {
+            heroSections.forEach(function (hero) {
                 var rect = hero.getBoundingClientRect();
-                var x = ((e.clientX - rect.left) / rect.width) * 100;
-                var y = ((e.clientY - rect.top) / rect.height) * 100;
-                hero.style.setProperty('--glow-x', x + '%');
-                hero.style.setProperty('--glow-y', y + '%');
+                if (rect.bottom > 0 && rect.top < window.innerHeight) {
+                    var x = ((mx - rect.left) / rect.width) * 100;
+                    var y = ((my - rect.top) / rect.height) * 100;
+                    hero.style.setProperty('--glow-x', x + '%');
+                    hero.style.setProperty('--glow-y', y + '%');
+                }
             });
         });
     }
@@ -671,57 +757,42 @@
                     stepObserver.unobserve(entry.target);
                 }
             });
-        }, { threshold: 0.2, rootMargin: '0px 0px -30px 0px' });
-
-        installSteps.forEach(function (step, index) {
-            step.style.opacity = '0';
-            step.style.transform = 'translateX(-30px)';
-            step.style.transition = 'opacity 0.6s ease ' + (index * 0.12) + 's, transform 0.6s ease ' + (index * 0.12) + 's';
-            stepObserver.observe(step);
-        });
+        }, { threshold: 0.1 });
 
         var stepStyle = document.createElement('style');
         stepStyle.textContent = '.gl-install-step.gl-visible{opacity:1!important;transform:translateX(0)!important;}';
         document.head.appendChild(stepStyle);
+
+        installSteps.forEach(function (step, index) {
+            /* Skip initial hiding for steps already in viewport */
+            if (isInViewport(step)) {
+                step.classList.add('gl-visible');
+            } else {
+                step.style.opacity = '0';
+                step.style.transform = 'translateX(-30px)';
+                step.style.transition = 'opacity 0.6s ease ' + (index * 0.12) + 's, transform 0.6s ease ' + (index * 0.12) + 's';
+                stepObserver.observe(step);
+            }
+        });
     }
 
 
     /* ==========================================================================
-       22. READING PROGRESS FOR SINGLE ARTICLES
-       ========================================================================== */
-
-    var articleContent = document.querySelector('.gl-article__content');
-    var readingProgress = document.querySelector('.gl-scroll-progress');
-    if (articleContent && readingProgress) {
-        window.addEventListener('scroll', function () {
-            var rect = articleContent.getBoundingClientRect();
-            var articleTop = rect.top + window.pageYOffset;
-            var articleHeight = rect.height;
-            var scrollPos = window.pageYOffset - articleTop + window.innerHeight * 0.5;
-            var progress = Math.max(0, Math.min(100, (scrollPos / articleHeight) * 100));
-            readingProgress.style.width = progress + '%';
-        }, { passive: true });
-    }
-
-
-    /* ==========================================================================
-       23. PAGE TRANSITION EFFECT
+       22. PAGE TRANSITION EFFECT
        ========================================================================== */
 
     var pageTransition = document.querySelector('.gl-page-transition');
     if (pageTransition) {
         pageTransition.style.opacity = '1';
         requestAnimationFrame(function () {
-            requestAnimationFrame(function () {
-                pageTransition.style.transition = 'opacity 0.5s ease';
-                pageTransition.style.opacity = '0';
-            });
+            pageTransition.style.transition = 'opacity 0.5s ease';
+            pageTransition.style.opacity = '0';
         });
     }
 
 
     /* ==========================================================================
-       24. IMAGE REVEAL ON SCROLL — removed clip-path animation
+       23. IMAGE REVEAL ON SCROLL — removed clip-path animation
        The data-animate scroll reveal system already handles fade/scale reveals.
        The clip-path layer was redundant and caused images to stay invisible
        when the IntersectionObserver failed to fire on already-visible elements.
@@ -729,7 +800,7 @@
 
 
     /* ==========================================================================
-       25. HOVER GLOW EFFECT ON SIDEBAR WIDGETS
+       24. HOVER GLOW EFFECT ON SIDEBAR WIDGETS
        ========================================================================== */
 
     var sidebarSections = document.querySelectorAll('.gl-sidebar__section, .gl-widget, .gl-single__sidebar > *');
@@ -748,7 +819,7 @@
 
 
     /* ==========================================================================
-       26. ANIMATED GRADIENT BORDERS — Rotating gradient on focused elements
+       25. ANIMATED GRADIENT BORDERS — Rotating gradient on focused elements
        ========================================================================== */
 
     var gradientBorderEls = document.querySelectorAll('.gl-article__toc, .gl-cat-featured, .gl-author-box');
@@ -765,7 +836,7 @@
 
 
     /* ==========================================================================
-       27. SCROLL-LINKED HEADER SHADOW
+       26. SCROLL-LINKED HEADER SHADOW
        ========================================================================== */
 
     var header = document.querySelector('.gl-header');
@@ -783,7 +854,7 @@
 
 
     /* ==========================================================================
-       28. TYPING INDICATOR ON SEARCH INPUT
+       27. TYPING INDICATOR ON SEARCH INPUT
        ========================================================================== */
 
     var searchInputs = document.querySelectorAll('.gl-search-form__input, .gl-search-overlay input');
@@ -800,7 +871,7 @@
 
 
     /* ==========================================================================
-       29. AUTO-ADD ANIMATION CLASSES TO ELEMENTS
+       28. AUTO-ADD ANIMATION CLASSES TO ELEMENTS
        Apply animation attributes to elements that should animate
        ========================================================================== */
 
@@ -837,7 +908,7 @@
 
 
     /* ==========================================================================
-       30. SMOOTH SCROLL SNAP ON SECTIONS
+       29. SMOOTH SCROLL SNAP ON SECTIONS
        ========================================================================== */
 
     /* Add scroll margin to all sections for smooth scrolling */
@@ -847,7 +918,7 @@
 
 
     /* ==========================================================================
-       31. INTERSECTION ANIMATIONS FOR SIDEBAR ITEMS
+       30. INTERSECTION ANIMATIONS FOR SIDEBAR ITEMS
        ========================================================================== */
 
     var sidebarItems = document.querySelectorAll('.gl-sidebar__section, .gl-widget, .gl-single__sidebar > div, .gl-single__sidebar > section, .gl-archive__sidebar > div');
@@ -865,15 +936,21 @@
         }, { threshold: 0.1 });
 
         sidebarItems.forEach(function (item) {
-            item.style.opacity = '0';
-            item.style.transform = 'translateX(30px)';
-            sidebarObserver.observe(item);
+            /* Don't hide sidebar items already in viewport */
+            if (isInViewport(item)) {
+                item.style.opacity = '1';
+                item.style.transform = 'translateX(0)';
+            } else {
+                item.style.opacity = '0';
+                item.style.transform = 'translateX(30px)';
+                sidebarObserver.observe(item);
+            }
         });
     }
 
 
     /* ==========================================================================
-       32. HEADER NAV HOVER EFFECTS
+       31. HEADER NAV HOVER EFFECTS
        ========================================================================== */
 
     document.querySelectorAll('.gl-nav__list > li > a').forEach(function (link) {

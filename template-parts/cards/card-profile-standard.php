@@ -7,7 +7,8 @@
  * @package GtaLobby
  */
 
-$cat_color  = gtalobby_get_category_color( 'characters' );
+$cat       = gtalobby_get_primary_category();
+$cat_color = $cat ? gtalobby_get_category_color( $cat->slug ) : gtalobby_get_category_color( 'characters' );
 $game_title = get_the_terms( get_the_ID(), 'game_title' );
 $game_label = ( $game_title && ! is_wp_error( $game_title ) ) ? $game_title[0]->name : '';
 ?>
@@ -17,6 +18,13 @@ $game_label = ( $game_title && ! is_wp_error( $game_title ) ) ? $game_title[0]->
     <div class="gl-card__image gl-card__image--profile">
         <a href="<?php the_permalink(); ?>">
             <?php the_post_thumbnail( 'gl-card-square', array( 'class' => 'gl-card__img', 'loading' => 'lazy' ) ); ?>
+        </a>
+        <?php gtalobby_post_type_badge( null, false ); ?>
+    </div>
+    <?php else : ?>
+    <div class="gl-card__image gl-card__image--profile gl-card__image--placeholder" style="background: linear-gradient(135deg, <?php echo esc_attr( $cat_color ); ?>22, transparent)">
+        <a href="<?php the_permalink(); ?>">
+            <?php gtalobby_icon( 'icon-cat-characters', 36 ); ?>
         </a>
         <?php gtalobby_post_type_badge( null, false ); ?>
     </div>

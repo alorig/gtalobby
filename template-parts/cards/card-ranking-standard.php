@@ -24,6 +24,16 @@ $count     = is_array( $items ) ? count( $items ) : 0;
         <span class="gl-card__rank-count"><?php echo esc_html( $count ); ?> <?php esc_html_e( 'items', 'gtalobby' ); ?></span>
         <?php endif; ?>
     </div>
+    <?php else : ?>
+    <div class="gl-card__image gl-card__image--placeholder" style="<?php echo $cat_color ? 'background: linear-gradient(135deg, ' . esc_attr( $cat_color ) . '22, transparent)' : ''; ?>">
+        <a href="<?php the_permalink(); ?>">
+            <?php
+            $icon = $cat ? gtalobby_get_category_icon( $cat->slug ) : 'icon-grid';
+            gtalobby_icon( $icon, 36 );
+            ?>
+        </a>
+        <?php gtalobby_post_type_badge( null, false ); ?>
+    </div>
     <?php endif; ?>
 
     <div class="gl-card__body">

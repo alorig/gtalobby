@@ -88,7 +88,7 @@ body {
     z-index: 5;
     background-size: cover;
     background-position: center;
-    opacity: 0.12;
+    opacity: 0.25;
     transition: opacity 0.5s ease;
 }
 .gl-hero-panel:hover .gl-hero-panel__image {
@@ -280,6 +280,13 @@ body {
     height: 3px;
     background: var(--gl-color-accent);
     border-radius: 2px;
+}
+
+.gl-zone__empty {
+    color: var(--gl-color-text-tertiary);
+    font-size: var(--gl-font-size-base);
+    text-align: center;
+    padding: var(--gl-space-8) 0;
 }
 
 /* Alternating section backgrounds for visual rhythm */

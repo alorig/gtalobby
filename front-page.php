@@ -176,7 +176,7 @@ $gta6_cat   = get_category_by_slug( 'gta6' );
                     $vehicles_count = $v_query->found_posts;
                     wp_reset_postdata();
                 }
-                if ( $vehicles_count < 1 ) $vehicles_count = 723;
+                if ( $vehicles_count < 1 ) $vehicles_count = 0;
 
                 // Count mods
                 $mods_cat_obj = get_category_by_slug( 'mods' );
@@ -192,7 +192,7 @@ $gta6_cat   = get_category_by_slug( 'gta6' );
                     $mods_count = $m_query->found_posts;
                     wp_reset_postdata();
                 }
-                if ( $mods_count < 1 ) $mods_count = 350;
+                if ( $mods_count < 1 ) $mods_count = 0;
 
                 // Count cheats
                 $cheats_cat_obj = get_category_by_slug( 'cheats' );
@@ -208,7 +208,7 @@ $gta6_cat   = get_category_by_slug( 'gta6' );
                     $cheats_count = $ch_query->found_posts;
                     wp_reset_postdata();
                 }
-                if ( $cheats_count < 1 ) $cheats_count = 87;
+                if ( $cheats_count < 1 ) $cheats_count = 0;
 
                 // Count online guides
                 $online_cat_obj_stats = get_category_by_slug( 'online' );
@@ -224,7 +224,7 @@ $gta6_cat   = get_category_by_slug( 'gta6' );
                     $online_count = $o_query->found_posts;
                     wp_reset_postdata();
                 }
-                if ( $online_count < 1 ) $online_count = 215;
+                if ( $online_count < 1 ) $online_count = 0;
             ?>
             <div class="gl-stats-bar" data-animate="fade-scale">
                 <div class="gl-stats-bar__glow" aria-hidden="true"></div>
@@ -438,7 +438,7 @@ $gta6_cat   = get_category_by_slug( 'gta6' );
                     </div>
 
                     <?php if ( $hubs_query->have_posts() ) : ?>
-                    <div class="gl-hubs-masonry" data-animate="zoom" data-delay="200">
+                    <div class="gl-hubs-masonry" data-animate="fade-up" data-delay="200">
                         <?php
                         $hub_i = 0;
                         while ( $hubs_query->have_posts() ) :
@@ -479,6 +479,8 @@ $gta6_cat   = get_category_by_slug( 'gta6' );
                             wp_reset_postdata();
                         ?>
                     </div>
+                    <?php else : ?>
+                    <p class="gl-zone__empty"><?php esc_html_e( 'Topic hubs are being created. Check back soon!', 'gtalobby' ); ?></p>
                     <?php endif; ?>
                 </div>
             </section>

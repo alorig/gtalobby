@@ -192,10 +192,16 @@
         grid-template-columns: 1fr;
     }
 
-    /* Category grid: 2 col on mobile */
+    /* Category grid: 2 col on mobile, 1 col on very small screens */
     .gl-category-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: var(--gl-space-3);
+    }
+
+    @media (max-width: 479px) {
+        .gl-category-grid {
+            grid-template-columns: 1fr;
+        }
     }
 
     .gl-category-grid--compact {

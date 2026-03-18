@@ -7,7 +7,8 @@
  * @package GtaLobby
  */
 
-$cat_color  = gtalobby_get_category_color( 'mods' );
+$cat       = gtalobby_get_primary_category();
+$cat_color = $cat ? gtalobby_get_category_color( $cat->slug ) : gtalobby_get_category_color( 'mods' );
 $mod_ver    = get_post_meta( get_the_ID(), 'mod_version', true );
 $mod_compat = get_post_meta( get_the_ID(), 'mod_compatibility', true );
 ?>
@@ -17,6 +18,13 @@ $mod_compat = get_post_meta( get_the_ID(), 'mod_compatibility', true );
     <div class="gl-card__image">
         <a href="<?php the_permalink(); ?>">
             <?php the_post_thumbnail( 'gl-card', array( 'class' => 'gl-card__img', 'loading' => 'lazy' ) ); ?>
+        </a>
+        <?php gtalobby_post_type_badge( null, false ); ?>
+    </div>
+    <?php else : ?>
+    <div class="gl-card__image gl-card__image--placeholder" style="background: linear-gradient(135deg, <?php echo esc_attr( $cat_color ); ?>22, transparent)">
+        <a href="<?php the_permalink(); ?>">
+            <?php gtalobby_icon( 'icon-cat-mods', 36 ); ?>
         </a>
         <?php gtalobby_post_type_badge( null, false ); ?>
     </div>
