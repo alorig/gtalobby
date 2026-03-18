@@ -254,7 +254,7 @@
     .gl-home-gta6,
     .gl-home-hubs,
     .gl-home-latest {
-        padding: var(--gl-space-8) 0;
+        padding: var(--gl-space-6) 0;
     }
 
     /* Cross-cluster grid */
@@ -290,8 +290,8 @@
 
     /* Zone spacing tighter */
     .gl-zone {
-        padding-top: var(--gl-space-6);
-        padding-bottom: var(--gl-space-6);
+        padding-top: var(--gl-space-5);
+        padding-bottom: var(--gl-space-5);
     }
 
     .gl-zone__title {

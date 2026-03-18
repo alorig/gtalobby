@@ -22,12 +22,9 @@ $cat_color = $cat ? gtalobby_get_category_color( $cat->slug ) : '';
         <?php gtalobby_post_type_badge( null, false ); ?>
     </div>
     <?php else : ?>
-    <div class="gl-card__image gl-card__image--placeholder" style="<?php echo $cat_color ? 'background: linear-gradient(135deg, ' . esc_attr( $cat_color ) . '22, transparent)' : ''; ?>">
+    <div class="gl-card__image">
         <a href="<?php the_permalink(); ?>">
-            <?php
-            $icon = $cat ? gtalobby_get_category_icon( $cat->slug ) : 'icon-grid';
-            gtalobby_icon( $icon, 36 );
-            ?>
+            <?php gtalobby_stock_image( $cat ? $cat->slug : 'gta6', 'card', 'gl-card__img' ); ?>
         </a>
         <?php gtalobby_post_type_badge( null, false ); ?>
     </div>

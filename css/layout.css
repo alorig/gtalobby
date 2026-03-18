@@ -1285,7 +1285,7 @@
 
 /* ---- Newsletter Section ---- */
 .gl-footer__newsletter {
-    padding: var(--gl-space-10) 0;
+    padding: var(--gl-space-8) 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 

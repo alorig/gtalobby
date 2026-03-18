@@ -456,6 +456,65 @@ function gtalobby_lazy_load_thumbnails( $attr, $attachment, $size ) {
 add_filter( 'wp_get_attachment_image_attributes', 'gtalobby_lazy_load_thumbnails', 10, 3 );
 
 /**
+ * Get a free stock image URL for a given category slug.
+ *
+ * Returns a Pexels CDN URL sized to the requested dimensions.
+ * Used as fallback when posts have no featured image.
+ *
+ * @param string $slug   Category slug (gta6, cheats, online, etc.)
+ * @param int    $width  Desired width.
+ * @param int    $height Desired height.
+ * @return string Pexels image URL.
+ */
+function gtalobby_get_stock_image_url( $slug = '', $width = 800, $height = 450 ) {
+    $images = array(
+        'gta6'       => 31002084,
+        'cheats'     => 5380642,
+        'online'     => 30469967,
+        'mods'       => 7915357,
+        'cars'       => 5880077,
+        'characters' => 2773521,
+        'locations'  => 2706750,
+        'money'      => 4386431,
+        'news'       => 3944454,
+    );
+
+    $id = isset( $images[ $slug ] ) ? $images[ $slug ] : 31002084;
+    return sprintf(
+        'https://images.pexels.com/photos/%d/pexels-photo-%d.jpeg?auto=compress&cs=tinysrgb&w=%d&h=%d&dpr=1',
+        $id, $id, $width, $height
+    );
+}
+
+/**
+ * Output a stock image <img> tag as placeholder for missing thumbnails.
+ *
+ * @param string $slug  Category slug.
+ * @param string $size  Size keyword: 'feature', 'card', 'thumb', 'square'.
+ * @param string $class CSS class for the img element.
+ */
+function gtalobby_stock_image( $slug = '', $size = 'card', $class = '' ) {
+    $sizes = array(
+        'hero'    => array( 1440, 600 ),
+        'feature' => array( 800, 450 ),
+        'card'    => array( 400, 260 ),
+        'square'  => array( 400, 400 ),
+        'thumb'   => array( 200, 130 ),
+    );
+    $dim = isset( $sizes[ $size ] ) ? $sizes[ $size ] : $sizes['card'];
+    $url = gtalobby_get_stock_image_url( $slug, $dim[0], $dim[1] );
+
+    printf(
+        '<img src="%s" alt="%s" width="%d" height="%d" class="%s" loading="lazy" />',
+        esc_url( $url ),
+        esc_attr( ucfirst( str_replace( '-', ' ', $slug ) ) . ' stock image' ),
+        $dim[0],
+        $dim[1],
+        esc_attr( $class )
+    );
+}
+
+/**
  * Add lazy loading to content images.
  */
 function gtalobby_lazy_load_content_images( $content ) {

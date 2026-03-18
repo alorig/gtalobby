@@ -13,14 +13,16 @@ $mod_compat = get_post_meta( get_the_ID(), 'mod_compatibility', true );
 ?>
 <article <?php post_class( 'gl-card gl-card--standard gl-card--mod' ); ?> style="--cat-accent: <?php echo esc_attr( $cat_color ); ?>">
 
-    <?php if ( has_post_thumbnail() ) : ?>
     <div class="gl-card__image">
         <a href="<?php the_permalink(); ?>">
-            <?php the_post_thumbnail( 'gl-card', array( 'class' => 'gl-card__img', 'loading' => 'lazy' ) ); ?>
+            <?php if ( has_post_thumbnail() ) : ?>
+                <?php the_post_thumbnail( 'gl-card', array( 'class' => 'gl-card__img', 'loading' => 'lazy' ) ); ?>
+            <?php else : ?>
+                <?php gtalobby_stock_image( 'mods', 'card', 'gl-card__img' ); ?>
+            <?php endif; ?>
         </a>
         <?php gtalobby_post_type_badge( null, false ); ?>
     </div>
-    <?php endif; ?>
 
     <div class="gl-card__body">
         <?php gtalobby_category_badge(); ?>
