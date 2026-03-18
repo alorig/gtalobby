@@ -328,6 +328,38 @@
 
 .gl-article__content {
     margin-bottom: var(--gl-space-8);
+    position: relative;
+}
+
+/* Decorative left border on article content */
+.gl-article__content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -20px;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(
+        to bottom,
+        rgba(255, 44, 152, 0.4) 0%,
+        rgba(39, 217, 255, 0.3) 30%,
+        rgba(108, 92, 231, 0.2) 60%,
+        transparent 100%
+    );
+    border-radius: 2px;
+    opacity: 0.5;
+}
+
+/* Smooth quote block styling within article */
+.gl-article__content blockquote {
+    border-left: 3px solid;
+    border-image: linear-gradient(to bottom, #FF2C98, #6C5CE7) 1;
+    padding: var(--gl-space-4) var(--gl-space-5);
+    margin: var(--gl-space-6) 0;
+    background: linear-gradient(135deg, rgba(255, 44, 152, 0.04) 0%, rgba(108, 92, 231, 0.04) 100%);
+    border-radius: 0 var(--gl-radius-md) var(--gl-radius-md) 0;
+    font-style: italic;
+    color: var(--gl-color-text-secondary);
 }
 
 /* --- Article Footer ------------------------------------------------------ */
@@ -2349,6 +2381,31 @@
     pointer-events: none;
     filter: blur(60px);
     z-index: 0;
+}
+
+/* --- Post-article zone spacing with decorative separators --- */
+.gl-author-box-wrapper,
+.gl-related-posts-wrapper,
+.gl-post-navigation-wrapper,
+.gl-comments-wrapper {
+    margin-top: var(--gl-space-8);
+    padding-top: var(--gl-space-8);
+    position: relative;
+}
+
+.gl-author-box-wrapper::before,
+.gl-related-posts-wrapper::before,
+.gl-post-navigation-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(255, 44, 152, 0.5), rgba(39, 217, 255, 0.5), transparent);
+    border-radius: 2px;
+    box-shadow: 0 0 8px rgba(255, 44, 152, 0.2);
 }
 
 /* --- Zone wrapper data-animate stagger for post zones --- */

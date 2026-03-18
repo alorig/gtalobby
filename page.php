@@ -17,7 +17,8 @@ get_header();
 
             <article id="page-<?php the_ID(); ?>" <?php post_class( 'gl-article gl-article--page' ); ?>>
 
-                <header class="gl-article__header">
+                <header class="gl-article__header gl-article__header--page" data-animate="blur">
+                    <div class="gl-article__header-glow" aria-hidden="true"></div>
                     <span class="gl-article__accent-bar" aria-hidden="true"></span>
                     <h1 class="gl-article__title"><?php the_title(); ?></h1>
                     <div class="gl-article__meta">

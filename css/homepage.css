@@ -269,6 +269,12 @@ body {
     margin: 0 0 var(--gl-space-2);
     position: relative;
     display: inline-block;
+    background: linear-gradient(135deg, #fff 0%, rgba(255, 255, 255, 0.85) 50%, var(--gl-color-secondary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: none;
+    filter: drop-shadow(0 0 12px rgba(39, 217, 255, 0.15));
 }
 
 .gl-zone__title::after {
@@ -280,6 +286,7 @@ body {
     height: 3px;
     background: linear-gradient(90deg, var(--gl-color-accent), var(--gl-color-secondary));
     border-radius: 2px;
+    box-shadow: 0 0 8px rgba(255, 44, 152, 0.4), 0 0 16px rgba(39, 217, 255, 0.2);
     transition: width 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
@@ -290,10 +297,12 @@ body {
 /* Alternating section backgrounds for visual rhythm */
 .gl-home-categories {
     background: var(--gl-color-bg-alt);
+    padding-bottom: 0;
 }
 
 .gl-home-hubs {
-    background: var(--gl-color-bg);
+    background: var(--gl-color-bg-alt);
+    padding-top: var(--gl-space-6);
 }
 
 .gl-home-latest {
@@ -304,6 +313,38 @@ body {
     background: linear-gradient(180deg, var(--gl-color-bg) 0%, var(--gl-color-bg-alt) 100%);
     padding-top: var(--gl-space-8);
     padding-bottom: var(--gl-space-10);
+}
+
+/* Neon section dividers — glowing lines between homepage zones */
+.gl-home-categories::after,
+.gl-home-gta6::after,
+.gl-home-latest::after {
+    content: '';
+    display: block;
+    height: 1px;
+    margin-top: var(--gl-space-10);
+    background: linear-gradient(90deg, transparent 0%, rgba(255, 44, 152, 0.4) 20%, rgba(39, 217, 255, 0.6) 50%, rgba(108, 92, 231, 0.4) 80%, transparent 100%);
+    box-shadow: 0 0 8px rgba(39, 217, 255, 0.3), 0 0 16px rgba(255, 44, 152, 0.15);
+}
+
+/* Subtle ambient glow behind each zone header */
+.gl-home-categories__header,
+.gl-home-hubs__header,
+.gl-home-latest__top {
+    position: relative;
+}
+
+.gl-home-categories__header::before,
+.gl-home-hubs__header::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: -40px;
+    width: 200px;
+    height: 100px;
+    background: radial-gradient(ellipse, rgba(255, 44, 152, 0.06) 0%, transparent 70%);
+    pointer-events: none;
+    filter: blur(20px);
 }
 
 /* ==========================================================================
@@ -455,6 +496,9 @@ body {
     color: var(--gl-color-text-light);
     margin-top: var(--gl-space-2);
     margin-bottom: var(--gl-space-6);
+    letter-spacing: 0.01em;
+    line-height: 1.6;
+    max-width: 600px;
 }
 
 .gl-category-grid {
@@ -571,10 +615,19 @@ body {
     height: 44px;
     border-radius: var(--gl-radius-md);
     background-color: color-mix(in srgb, var(--cat-accent) 10%, transparent);
+    border: 1px solid color-mix(in srgb, var(--cat-accent) 20%, transparent);
     color: var(--cat-accent);
     flex-shrink: 0;
     position: relative;
     z-index: 2;
+    transition: all 0.35s ease;
+    box-shadow: 0 0 12px color-mix(in srgb, var(--cat-accent) 10%, transparent);
+}
+
+.gl-category-tile:hover .gl-category-tile__icon-wrap {
+    background-color: var(--cat-accent);
+    color: #fff;
+    box-shadow: 0 0 20px color-mix(in srgb, var(--cat-accent) 40%, transparent);
 }
 
 .gl-category-tile__text {
@@ -686,6 +739,13 @@ body {
     border-radius: var(--gl-radius-full);
     border: 1px solid color-mix(in srgb, var(--gl-color-cat-gta6) 25%, transparent);
     margin-bottom: var(--gl-space-3);
+    box-shadow: 0 0 12px color-mix(in srgb, var(--gl-color-cat-gta6) 20%, transparent);
+    animation: gl-badge-pulse 2.5s ease-in-out infinite;
+}
+
+@keyframes gl-badge-pulse {
+    0%, 100% { box-shadow: 0 0 12px color-mix(in srgb, var(--gl-color-cat-gta6) 20%, transparent); }
+    50% { box-shadow: 0 0 20px color-mix(in srgb, var(--gl-color-cat-gta6) 35%, transparent), 0 0 40px color-mix(in srgb, var(--gl-color-cat-gta6) 10%, transparent); }
 }
 
 .gl-home-gta6__heading {
@@ -699,7 +759,11 @@ body {
 }
 
 .gl-home-gta6__heading span {
-    color: var(--gl-color-cat-gta6);
+    background: linear-gradient(135deg, var(--gl-color-cat-gta6) 0%, #9b8aff 50%, var(--gl-color-secondary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 0 8px color-mix(in srgb, var(--gl-color-cat-gta6) 30%, transparent));
 }
 
 .gl-home-gta6__tagline {
