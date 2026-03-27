@@ -162,94 +162,90 @@ $gta6_cat   = get_category_by_slug( 'gta6' );
                STATS BAR (between hero & categories)
                ============================================================ */
             case 'stats_bar':
-                // Count vehicles in cars category
-                $cars_cat_obj = get_category_by_slug( 'cars' );
-                $vehicles_count = 0;
-                if ( $cars_cat_obj ) {
-                    $v_query = new WP_Query( array(
-                        'post_type'      => array_merge( array( 'post' ), gtalobby_get_post_types() ),
-                        'cat'            => $cars_cat_obj->term_id,
-                        'posts_per_page' => -1,
-                        'post_status'    => 'publish',
-                        'fields'         => 'ids',
-                    ) );
-                    $vehicles_count = $v_query->found_posts;
-                    wp_reset_postdata();
-                }
-                if ( $vehicles_count < 1 ) $vehicles_count = 723;
+                // Fetch the 12 most recent published posts for the trending strip.
+                $trending_types = array_merge( array( 'post' ), function_exists( 'gtalobby_get_post_types' ) ? gtalobby_get_post_types() : array() );
+                $trending_query = new WP_Query( array(
+                    'post_type'      => $trending_types,
+                    'posts_per_page' => 12,
+                    'post_status'    => 'publish',
+                    'orderby'        => 'date',
+                    'order'          => 'DESC',
+                ) );
 
-                // Count mods
-                $mods_cat_obj = get_category_by_slug( 'mods' );
-                $mods_count = 0;
-                if ( $mods_cat_obj ) {
-                    $m_query = new WP_Query( array(
-                        'post_type'      => array_merge( array( 'post' ), gtalobby_get_post_types() ),
-                        'cat'            => $mods_cat_obj->term_id,
-                        'posts_per_page' => -1,
-                        'post_status'    => 'publish',
-                        'fields'         => 'ids',
-                    ) );
-                    $mods_count = $m_query->found_posts;
-                    wp_reset_postdata();
-                }
-                if ( $mods_count < 1 ) $mods_count = 350;
+                $trending_cards = array();
+                if ( $trending_query->have_posts() ) {
+                    while ( $trending_query->have_posts() ) {
+                        $trending_query->the_post();
+                        $cats       = get_the_category();
+                        $cat_label  = ! empty( $cats ) ? $cats[0]->name : 'GTA';
+                        $cat_slug   = ! empty( $cats ) ? $cats[0]->slug : '';
+                        $cat_color  = function_exists( 'gtalobby_get_category_color' ) ? gtalobby_get_category_color( $cat_slug ) : '#FF2C98';
+                        $thumb_url  = get_the_post_thumbnail_url( get_the_ID(), 'medium_large' );
+                        $type_obj   = get_post_type_object( get_post_type() );
+                        $type_label = ( $type_obj && $type_obj->name !== 'post' ) ? $type_obj->labels->singular_name : '';
 
-                // Count cheats
-                $cheats_cat_obj = get_category_by_slug( 'cheats' );
-                $cheats_count = 0;
-                if ( $cheats_cat_obj ) {
-                    $ch_query = new WP_Query( array(
-                        'post_type'      => array_merge( array( 'post' ), gtalobby_get_post_types() ),
-                        'cat'            => $cheats_cat_obj->term_id,
-                        'posts_per_page' => -1,
-                        'post_status'    => 'publish',
-                        'fields'         => 'ids',
-                    ) );
-                    $cheats_count = $ch_query->found_posts;
+                        $trending_cards[] = array(
+                            'title'     => get_the_title(),
+                            'url'       => get_permalink(),
+                            'thumb'     => $thumb_url,
+                            'cat_label' => $cat_label,
+                            'cat_color' => $cat_color,
+                            'type'      => $type_label,
+                            'date'      => get_the_date( 'M j' ),
+                        );
+                    }
                     wp_reset_postdata();
                 }
-                if ( $cheats_count < 1 ) $cheats_count = 87;
 
-                // Count online guides
-                $online_cat_obj_stats = get_category_by_slug( 'online' );
-                $online_count = 0;
-                if ( $online_cat_obj_stats ) {
-                    $o_query = new WP_Query( array(
-                        'post_type'      => array_merge( array( 'post' ), gtalobby_get_post_types() ),
-                        'cat'            => $online_cat_obj_stats->term_id,
-                        'posts_per_page' => -1,
-                        'post_status'    => 'publish',
-                        'fields'         => 'ids',
-                    ) );
-                    $online_count = $o_query->found_posts;
-                    wp_reset_postdata();
+                // Fallback trending items when no posts exist yet.
+                if ( empty( $trending_cards ) ) {
+                    $trending_cards = array(
+                        array( 'title' => 'GTA 6 — Everything We Know So Far in 2026', 'url' => '#', 'thumb' => '', 'cat_label' => 'GTA 6', 'cat_color' => '#6C5CE7', 'type' => 'Guide', 'date' => 'Mar 27' ),
+                        array( 'title' => 'Top 20 Fastest Supercars in GTA Online 2026', 'url' => '#', 'thumb' => '', 'cat_label' => 'Cars', 'cat_color' => '#27D9FF', 'type' => 'Ranking', 'date' => 'Mar 26' ),
+                        array( 'title' => 'Cayo Perico Heist Solo Guide — $1.5M Per Hour', 'url' => '#', 'thumb' => '', 'cat_label' => 'Online', 'cat_color' => '#FF2C98', 'type' => 'Guide', 'date' => 'Mar 25' ),
+                        array( 'title' => 'All GTA 5 Cheats for PS5 and PS4 — Complete List', 'url' => '#', 'thumb' => '', 'cat_label' => 'Cheats', 'cat_color' => '#6C5CE7', 'type' => 'Guide', 'date' => 'Mar 25' ),
+                        array( 'title' => 'GTA 6 Map Size — How Big Compared to GTA 5?', 'url' => '#', 'thumb' => '', 'cat_label' => 'GTA 6', 'cat_color' => '#6C5CE7', 'type' => 'Answer', 'date' => 'Mar 24' ),
+                        array( 'title' => 'Best Cars for Racing in Every Class 2026', 'url' => '#', 'thumb' => '', 'cat_label' => 'Cars', 'cat_color' => '#27D9FF', 'type' => 'Guide', 'date' => 'Mar 24' ),
+                        array( 'title' => 'NaturalVision Evolved — GTA 5 Graphics Mod Review', 'url' => '#', 'thumb' => '', 'cat_label' => 'Mods', 'cat_color' => '#FF2C98', 'type' => 'Mod', 'date' => 'Mar 23' ),
+                        array( 'title' => 'GTA Online Nightclub AFK Guide — $800K+ Per Day', 'url' => '#', 'thumb' => '', 'cat_label' => 'Money', 'cat_color' => '#FF2C98', 'type' => 'Guide', 'date' => 'Mar 23' ),
+                        array( 'title' => 'Michael De Santa — Full Character Profile', 'url' => '#', 'thumb' => '', 'cat_label' => 'Characters', 'cat_color' => '#27D9FF', 'type' => 'Profile', 'date' => 'Mar 22' ),
+                        array( 'title' => 'GTA 5 Hidden Locations — 25 Secret Spots', 'url' => '#', 'thumb' => '', 'cat_label' => 'Locations', 'cat_color' => '#6C5CE7', 'type' => 'Guide', 'date' => 'Mar 22' ),
+                        array( 'title' => 'Top 10 Fastest Motorcycles in GTA Online', 'url' => '#', 'thumb' => '', 'cat_label' => 'Cars', 'cat_color' => '#27D9FF', 'type' => 'Ranking', 'date' => 'Mar 21' ),
+                        array( 'title' => 'GTA 6 Pre-Order Guide — All Editions & Bonuses', 'url' => '#', 'thumb' => '', 'cat_label' => 'News', 'cat_color' => '#FF2C98', 'type' => 'News', 'date' => 'Mar 21' ),
+                    );
                 }
-                if ( $online_count < 1 ) $online_count = 215;
             ?>
-            <div class="gl-stats-bar" data-animate="fade-scale">
-                <div class="gl-stats-bar__glow" aria-hidden="true"></div>
-                <div class="gl-container">
-                    <div class="gl-stats-bar__inner">
-                        <div class="gl-stats-bar__item" data-accent="var(--gl-color-secondary)">
-                            <span class="gl-stats-bar__icon"><?php gtalobby_icon( 'icon-cat-cars', 24 ); ?></span>
-                            <span class="gl-stats-bar__num" data-count="<?php echo esc_attr( $vehicles_count ); ?>"><?php echo esc_html( $vehicles_count ); ?></span>
-                            <span class="gl-stats-bar__label"><?php esc_html_e( 'GTA 5 Vehicles', 'gtalobby' ); ?></span>
-                        </div>
-                        <div class="gl-stats-bar__item" data-accent="var(--gl-color-accent)">
-                            <span class="gl-stats-bar__icon"><?php gtalobby_icon( 'icon-cat-mods', 24 ); ?></span>
-                            <span class="gl-stats-bar__num" data-count="<?php echo esc_attr( $mods_count ); ?>"><?php echo esc_html( $mods_count ); ?></span>
-                            <span class="gl-stats-bar__label"><?php esc_html_e( 'GTA 5 Mods', 'gtalobby' ); ?></span>
-                        </div>
-                        <div class="gl-stats-bar__item" data-accent="var(--gl-color-cat-gta6)">
-                            <span class="gl-stats-bar__icon"><?php gtalobby_icon( 'icon-cat-cheats', 24 ); ?></span>
-                            <span class="gl-stats-bar__num" data-count="<?php echo esc_attr( $cheats_count ); ?>"><?php echo esc_html( $cheats_count ); ?></span>
-                            <span class="gl-stats-bar__label"><?php esc_html_e( 'Cheat Codes', 'gtalobby' ); ?></span>
-                        </div>
-                        <div class="gl-stats-bar__item" data-accent="var(--gl-color-confirmed)">
-                            <span class="gl-stats-bar__icon"><?php gtalobby_icon( 'icon-cat-online', 24 ); ?></span>
-                            <span class="gl-stats-bar__num" data-count="<?php echo esc_attr( $online_count ); ?>"><?php echo esc_html( $online_count ); ?></span>
-                            <span class="gl-stats-bar__label"><?php esc_html_e( 'Online Guides', 'gtalobby' ); ?></span>
-                        </div>
+            <div class="gl-trending" data-zone="stats_bar" data-animate="fade-scale">
+                <div class="gl-trending__header">
+                    <span class="gl-trending__badge"><?php esc_html_e( 'Trending Now', 'gtalobby' ); ?></span>
+                    <span class="gl-trending__rule" aria-hidden="true"></span>
+                </div>
+                <div class="gl-trending__track">
+                    <div class="gl-trending__scroll" data-autoscroll="true">
+                        <?php
+                        // Render cards twice for seamless infinite loop.
+                        for ( $loop = 0; $loop < 2; $loop++ ) :
+                            foreach ( $trending_cards as $card ) :
+                                $gradient_fallback = 'linear-gradient(135deg, ' . esc_attr( $card['cat_color'] ) . '22, ' . esc_attr( $card['cat_color'] ) . '08)';
+                                $bg_style = ! empty( $card['thumb'] )
+                                    ? 'background-image:url(' . esc_url( $card['thumb'] ) . ')'
+                                    : 'background:' . $gradient_fallback;
+                        ?>
+                        <a href="<?php echo esc_url( $card['url'] ); ?>" class="gl-trending__card" aria-label="<?php echo esc_attr( $card['title'] ); ?>">
+                            <div class="gl-trending__thumb" style="<?php echo $bg_style; ?>"></div>
+                            <span class="gl-trending__cat" style="border-color: <?php echo esc_attr( $card['cat_color'] ); ?>33"><?php echo esc_html( $card['cat_label'] ); ?></span>
+                            <div class="gl-trending__body">
+                                <h3 class="gl-trending__title"><?php echo esc_html( $card['title'] ); ?></h3>
+                                <div class="gl-trending__meta">
+                                    <?php if ( $card['type'] ) : ?>
+                                        <span><?php echo esc_html( $card['type'] ); ?></span>
+                                        <span>&middot;</span>
+                                    <?php endif; ?>
+                                    <span><?php echo esc_html( $card['date'] ); ?></span>
+                                </div>
+                            </div>
+                        </a>
+                        <?php endforeach; endfor; ?>
                     </div>
                 </div>
             </div>
