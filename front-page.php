@@ -159,100 +159,77 @@ $gta6_cat   = get_category_by_slug( 'gta6' );
                 break;
 
             /* ============================================================
-               STATS BAR (between hero & categories)
+               TRENDING NOW — Horizontal scroll strip
+               Replaces the static stats bar with engaging content cards
                ============================================================ */
             case 'stats_bar':
-                // Count vehicles in cars category
-                $cars_cat_obj = get_category_by_slug( 'cars' );
-                $vehicles_count = 0;
-                if ( $cars_cat_obj ) {
-                    $v_query = new WP_Query( array(
-                        'post_type'      => array_merge( array( 'post' ), gtalobby_get_post_types() ),
-                        'cat'            => $cars_cat_obj->term_id,
-                        'posts_per_page' => -1,
-                        'post_status'    => 'publish',
-                        'fields'         => 'ids',
-                    ) );
-                    $vehicles_count = $v_query->found_posts;
-                    wp_reset_postdata();
-                }
-                if ( $vehicles_count < 1 ) $vehicles_count = 723;
-
-                // Count mods
-                $mods_cat_obj = get_category_by_slug( 'mods' );
-                $mods_count = 0;
-                if ( $mods_cat_obj ) {
-                    $m_query = new WP_Query( array(
-                        'post_type'      => array_merge( array( 'post' ), gtalobby_get_post_types() ),
-                        'cat'            => $mods_cat_obj->term_id,
-                        'posts_per_page' => -1,
-                        'post_status'    => 'publish',
-                        'fields'         => 'ids',
-                    ) );
-                    $mods_count = $m_query->found_posts;
-                    wp_reset_postdata();
-                }
-                if ( $mods_count < 1 ) $mods_count = 350;
-
-                // Count cheats
-                $cheats_cat_obj = get_category_by_slug( 'cheats' );
-                $cheats_count = 0;
-                if ( $cheats_cat_obj ) {
-                    $ch_query = new WP_Query( array(
-                        'post_type'      => array_merge( array( 'post' ), gtalobby_get_post_types() ),
-                        'cat'            => $cheats_cat_obj->term_id,
-                        'posts_per_page' => -1,
-                        'post_status'    => 'publish',
-                        'fields'         => 'ids',
-                    ) );
-                    $cheats_count = $ch_query->found_posts;
-                    wp_reset_postdata();
-                }
-                if ( $cheats_count < 1 ) $cheats_count = 87;
-
-                // Count online guides
-                $online_cat_obj_stats = get_category_by_slug( 'online' );
-                $online_count = 0;
-                if ( $online_cat_obj_stats ) {
-                    $o_query = new WP_Query( array(
-                        'post_type'      => array_merge( array( 'post' ), gtalobby_get_post_types() ),
-                        'cat'            => $online_cat_obj_stats->term_id,
-                        'posts_per_page' => -1,
-                        'post_status'    => 'publish',
-                        'fields'         => 'ids',
-                    ) );
-                    $online_count = $o_query->found_posts;
-                    wp_reset_postdata();
-                }
-                if ( $online_count < 1 ) $online_count = 215;
+                // Fetch 8 most recent/popular posts across all categories
+                $trending_args = array(
+                    'post_type'      => array_merge( array( 'post' ), gtalobby_get_post_types() ),
+                    'posts_per_page' => 8,
+                    'post_status'    => 'publish',
+                    'orderby'        => 'modified',
+                    'order'          => 'DESC',
+                    'no_found_rows'  => true,
+                );
+                $trending_query = new WP_Query( $trending_args );
             ?>
-            <div class="gl-stats-bar" data-animate="fade-scale">
-                <div class="gl-stats-bar__glow" aria-hidden="true"></div>
-                <div class="gl-container">
-                    <div class="gl-stats-bar__inner">
-                        <div class="gl-stats-bar__item" data-accent="var(--gl-color-secondary)">
-                            <span class="gl-stats-bar__icon"><?php gtalobby_icon( 'icon-cat-cars', 24 ); ?></span>
-                            <span class="gl-stats-bar__num" data-count="<?php echo esc_attr( $vehicles_count ); ?>"><?php echo esc_html( $vehicles_count ); ?></span>
-                            <span class="gl-stats-bar__label"><?php esc_html_e( 'GTA 5 Vehicles', 'gtalobby' ); ?></span>
-                        </div>
-                        <div class="gl-stats-bar__item" data-accent="var(--gl-color-accent)">
-                            <span class="gl-stats-bar__icon"><?php gtalobby_icon( 'icon-cat-mods', 24 ); ?></span>
-                            <span class="gl-stats-bar__num" data-count="<?php echo esc_attr( $mods_count ); ?>"><?php echo esc_html( $mods_count ); ?></span>
-                            <span class="gl-stats-bar__label"><?php esc_html_e( 'GTA 5 Mods', 'gtalobby' ); ?></span>
-                        </div>
-                        <div class="gl-stats-bar__item" data-accent="var(--gl-color-cat-gta6)">
-                            <span class="gl-stats-bar__icon"><?php gtalobby_icon( 'icon-cat-cheats', 24 ); ?></span>
-                            <span class="gl-stats-bar__num" data-count="<?php echo esc_attr( $cheats_count ); ?>"><?php echo esc_html( $cheats_count ); ?></span>
-                            <span class="gl-stats-bar__label"><?php esc_html_e( 'Cheat Codes', 'gtalobby' ); ?></span>
-                        </div>
-                        <div class="gl-stats-bar__item" data-accent="var(--gl-color-confirmed)">
-                            <span class="gl-stats-bar__icon"><?php gtalobby_icon( 'icon-cat-online', 24 ); ?></span>
-                            <span class="gl-stats-bar__num" data-count="<?php echo esc_attr( $online_count ); ?>"><?php echo esc_html( $online_count ); ?></span>
-                            <span class="gl-stats-bar__label"><?php esc_html_e( 'Online Guides', 'gtalobby' ); ?></span>
+            <section class="gl-trending" data-zone="trending" data-animate="fade-up" aria-label="<?php esc_attr_e( 'Trending Now', 'gtalobby' ); ?>">
+                <div class="gl-trending__header">
+                    <div class="gl-container gl-trending__header-inner">
+                        <h2 class="gl-trending__title">
+                            <span class="gl-trending__pulse" aria-hidden="true"></span>
+                            <?php esc_html_e( 'Trending Now', 'gtalobby' ); ?>
+                        </h2>
+                        <div class="gl-trending__nav" aria-label="<?php esc_attr_e( 'Scroll trending posts', 'gtalobby' ); ?>">
+                            <button class="gl-trending__arrow gl-trending__arrow--prev" aria-label="<?php esc_attr_e( 'Scroll left', 'gtalobby' ); ?>" data-dir="prev">
+                                <svg class="gl-icon" width="18" height="18"><use href="#icon-chevron-left"></use></svg>
+                            </button>
+                            <button class="gl-trending__arrow gl-trending__arrow--next" aria-label="<?php esc_attr_e( 'Scroll right', 'gtalobby' ); ?>" data-dir="next">
+                                <svg class="gl-icon" width="18" height="18"><use href="#icon-chevron-right"></use></svg>
+                            </button>
                         </div>
                     </div>
                 </div>
-            </div>
+
+                <div class="gl-trending__track-wrapper">
+                    <div class="gl-trending__track" data-trending-track>
+                        <?php if ( $trending_query->have_posts() ) : while ( $trending_query->have_posts() ) : $trending_query->the_post();
+                            // Determine category for accent color
+                            $t_cats  = get_the_category();
+                            $t_slug  = ! empty( $t_cats ) ? $t_cats[0]->slug : 'news';
+                            $t_color = gtalobby_get_category_color( $t_slug );
+                            $t_icon  = gtalobby_get_category_icon( $t_slug );
+                            $t_name  = ! empty( $t_cats ) ? $t_cats[0]->name : __( 'News', 'gtalobby' );
+                        ?>
+                        <a href="<?php the_permalink(); ?>" class="gl-trending__card" style="--card-accent: <?php echo esc_attr( $t_color ); ?>">
+                            <?php if ( has_post_thumbnail() ) : ?>
+                                <div class="gl-trending__card-image">
+                                    <?php the_post_thumbnail( 'medium', array( 'loading' => 'lazy' ) ); ?>
+                                </div>
+                            <?php else : ?>
+                                <div class="gl-trending__card-image gl-trending__card-image--placeholder">
+                                    <?php gtalobby_icon( $t_icon, 32 ); ?>
+                                </div>
+                            <?php endif; ?>
+                            <div class="gl-trending__card-body">
+                                <span class="gl-trending__card-badge" style="--badge-color: <?php echo esc_attr( $t_color ); ?>">
+                                    <?php echo esc_html( $t_name ); ?>
+                                </span>
+                                <h3 class="gl-trending__card-title"><?php the_title(); ?></h3>
+                                <time class="gl-trending__card-date" datetime="<?php echo esc_attr( get_the_modified_date( 'c' ) ); ?>">
+                                    <?php echo esc_html( human_time_diff( get_the_modified_time( 'U' ), current_time( 'timestamp' ) ) ); ?> <?php esc_html_e( 'ago', 'gtalobby' ); ?>
+                                </time>
+                            </div>
+                        </a>
+                        <?php endwhile; wp_reset_postdata(); endif; ?>
+                    </div>
+                </div>
+
+                <!-- Gradient fade edges -->
+                <div class="gl-trending__fade gl-trending__fade--left" aria-hidden="true"></div>
+                <div class="gl-trending__fade gl-trending__fade--right" aria-hidden="true"></div>
+            </section>
             <?php
                 break;
 

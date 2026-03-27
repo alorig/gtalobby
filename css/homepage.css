@@ -45,9 +45,9 @@ body {
 .gl-hero-accordion__panels {
     display: flex;
     width: 100%;
-    height: 75vh;
-    min-height: 520px;
-    max-height: 800px;
+    height: 55vh;
+    min-height: 400px;
+    max-height: 560px;
 }
 
 /* — Individual Panel — */
@@ -394,124 +394,247 @@ body {
 }
 
 /* ==========================================================================
-   STATS BAR
+   TRENDING NOW — Horizontal Scroll Strip
+   Replaces static stats bar with engaging, scrollable content cards.
    ========================================================================== */
 
-/* Stats bar — premium glassmorphism cards */
-.gl-stats-bar {
+.gl-trending {
     position: relative;
-    padding: var(--gl-space-6) 0;
-    background: linear-gradient(180deg, rgba(6,7,20,0.9) 0%, rgba(12,16,48,0.6) 50%, rgba(6,7,20,0.9) 100%);
+    padding: var(--gl-space-5) 0 var(--gl-space-6);
+    background: linear-gradient(180deg, rgba(6,7,20,0.95) 0%, rgba(12,16,48,0.5) 50%, rgba(6,7,20,0.95) 100%);
     overflow: hidden;
 }
 
-.gl-stats-bar__glow {
-    position: absolute;
-    inset: 0;
-    background:
-        radial-gradient(ellipse 40% 80% at 15% 50%, rgba(255,44,152,0.06) 0%, transparent 60%),
-        radial-gradient(ellipse 40% 80% at 85% 50%, rgba(39,217,255,0.06) 0%, transparent 60%);
-    pointer-events: none;
+/* — Header row: title + nav arrows — */
+.gl-trending__header {
+    margin-bottom: var(--gl-space-4);
 }
 
-.gl-stats-bar__inner {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: var(--gl-space-4);
-    position: relative;
-    z-index: 1;
-}
-
-.gl-stats-bar__item {
+.gl-trending__header-inner {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: var(--gl-space-2);
-    padding: var(--gl-space-5) var(--gl-space-4);
-    background: linear-gradient(145deg, rgba(12,16,48,0.8) 0%, rgba(19,24,62,0.55) 100%);
-    backdrop-filter: blur(16px) saturate(140%);
-    -webkit-backdrop-filter: blur(16px) saturate(140%);
-    border: 1px solid rgba(255,44,152,0.1);
-    border-radius: var(--gl-radius-xl);
-    position: relative;
-    overflow: hidden;
-    transition: all 0.4s cubic-bezier(0.25,0.8,0.25,1);
-    resize: both;
-    min-width: 120px;
-    min-height: 100px;
-    container-type: inline-size;
+    justify-content: space-between;
 }
 
-.gl-stats-bar__item::before {
+.gl-trending__title {
+    font-family: var(--gl-font-display);
+    font-size: var(--gl-font-size-lg);
+    font-weight: 700;
+    color: var(--gl-color-text);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+    letter-spacing: -0.01em;
+}
+
+/* Animated live pulse dot */
+.gl-trending__pulse {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--gl-color-accent);
+    display: inline-block;
+    position: relative;
+    flex-shrink: 0;
+}
+
+.gl-trending__pulse::after {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, var(--gl-color-accent), var(--gl-color-secondary), transparent);
-    opacity: 0.5;
-    transition: opacity 0.3s ease;
+    inset: -4px;
+    border-radius: 50%;
+    border: 2px solid var(--gl-color-accent);
+    opacity: 0;
+    animation: gl-pulse-ring 2s ease-out infinite;
 }
 
-.gl-stats-bar__item:hover {
-    transform: translateY(-6px) scale(1.02);
-    border-color: rgba(255,44,152,0.3);
-    box-shadow: 0 16px 50px rgba(0,0,0,0.35), 0 0 40px rgba(255,44,152,0.1), 0 0 60px rgba(39,217,255,0.05);
+@keyframes gl-pulse-ring {
+    0%   { transform: scale(0.8); opacity: 0.6; }
+    100% { transform: scale(1.8); opacity: 0; }
 }
 
-.gl-stats-bar__item:hover::before {
-    opacity: 1;
+/* — Navigation arrows — */
+.gl-trending__nav {
+    display: flex;
+    gap: 8px;
 }
 
-.gl-stats-bar__icon {
+.gl-trending__arrow {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 44px;
-    height: 44px;
-    border-radius: var(--gl-radius-lg);
-    background: linear-gradient(135deg, rgba(255,44,152,0.12), rgba(108,92,231,0.08));
-    color: var(--gl-color-accent);
-    transition: all 0.3s ease;
-}
-
-.gl-stats-bar__item:hover .gl-stats-bar__icon {
-    background: linear-gradient(135deg, rgba(255,44,152,0.2), rgba(108,92,231,0.15));
-    box-shadow: 0 0 20px rgba(255,44,152,0.15);
-}
-
-.gl-stats-bar__icon svg {
-    width: 22px;
-    height: 22px;
-}
-
-.gl-stats-bar__num {
-    font-family: var(--gl-font-display);
-    font-size: clamp(1.75rem, 3vw, 2.5rem);
-    font-weight: var(--gl-font-weight-extrabold);
-    background: linear-gradient(135deg, #FF2C98, #27D9FF);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    line-height: 1;
-    letter-spacing: var(--gl-tracking-tight);
-    filter: drop-shadow(0 2px 8px rgba(255,44,152,0.2));
-    text-shadow: 0 0 20px rgba(255, 60, 164, 0.3);
-}
-
-.gl-stats-bar__label {
-    font-family: var(--gl-font-mono);
-    font-size: var(--gl-font-size-xs);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
+    width: 36px;
+    height: 36px;
+    border-radius: var(--gl-radius-md);
+    border: 1px solid var(--gl-color-border);
+    background: var(--gl-color-surface);
     color: var(--gl-color-text-secondary);
-    font-weight: var(--gl-font-weight-semibold);
+    cursor: pointer;
+    transition: all 0.2s ease;
 }
 
+.gl-trending__arrow:hover {
+    border-color: var(--gl-color-accent);
+    color: var(--gl-color-accent);
+    background: rgba(255, 44, 152, 0.08);
+}
+
+.gl-trending__arrow:disabled {
+    opacity: 0.3;
+    cursor: default;
+    pointer-events: none;
+}
+
+/* — Scrollable track — */
+.gl-trending__track-wrapper {
+    position: relative;
+    overflow: hidden;
+}
+
+.gl-trending__track {
+    display: flex;
+    gap: var(--gl-space-4);
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding: 4px var(--gl-space-5) var(--gl-space-2);
+    /* Hide scrollbar but keep scroll */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.gl-trending__track::-webkit-scrollbar {
+    display: none;
+}
+
+/* — Individual trending card — */
+.gl-trending__card {
+    flex: 0 0 280px;
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    border-radius: var(--gl-radius-xl);
+    overflow: hidden;
+    background: linear-gradient(145deg, rgba(12,16,48,0.85) 0%, rgba(19,24,62,0.55) 100%);
+    backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+    border: 1px solid rgba(255,255,255,0.06);
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+.gl-trending__card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(255,255,255,0.12);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.4), 0 0 30px color-mix(in srgb, var(--card-accent, #FF2C98) 12%, transparent);
+    text-decoration: none;
+}
+
+/* Card image */
+.gl-trending__card-image {
+    width: 100%;
+    height: 160px;
+    overflow: hidden;
+    position: relative;
+}
+
+.gl-trending__card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.gl-trending__card:hover .gl-trending__card-image img {
+    transform: scale(1.06);
+}
+
+/* Placeholder when no thumbnail */
+.gl-trending__card-image--placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--gl-color-surface) 0%, var(--gl-color-surface-raised) 100%);
+    color: var(--gl-color-text-tertiary);
+}
+
+/* Card body */
+.gl-trending__card-body {
+    padding: var(--gl-space-3) var(--gl-space-4) var(--gl-space-4);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+}
+
+/* Category badge chip */
+.gl-trending__card-badge {
+    display: inline-flex;
+    align-self: flex-start;
+    padding: 2px 8px;
+    border-radius: var(--gl-radius-sm);
+    font-family: var(--gl-font-mono);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    background: color-mix(in srgb, var(--badge-color, var(--gl-color-accent)) 15%, transparent);
+    color: var(--badge-color, var(--gl-color-accent));
+}
+
+.gl-trending__card-title {
+    font-family: var(--gl-font-display);
+    font-size: var(--gl-font-size-sm);
+    font-weight: 700;
+    line-height: 1.35;
+    color: var(--gl-color-text);
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.gl-trending__card-date {
+    font-family: var(--gl-font-mono);
+    font-size: 11px;
+    color: var(--gl-color-text-tertiary);
+    letter-spacing: 0.02em;
+    margin-top: auto;
+}
+
+/* — Gradient fade edges — */
+.gl-trending__fade {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 60px;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.gl-trending__fade--left {
+    left: 0;
+    background: linear-gradient(to right, rgba(6,7,20,0.95), transparent);
+}
+
+.gl-trending__fade--right {
+    right: 0;
+    background: linear-gradient(to left, rgba(6,7,20,0.95), transparent);
+}
+
+/* — Responsive — */
 @media (max-width: 991px) {
-    .gl-stats-bar__inner {
-        grid-template-columns: repeat(2, 1fr);
+    .gl-trending__card {
+        flex: 0 0 240px;
+    }
+
+    .gl-trending__card-image {
+        height: 130px;
     }
 }
 
@@ -568,17 +691,26 @@ body {
 }
 
 @media (max-width: 767px) {
-    .gl-stats-bar__inner {
-        grid-template-columns: repeat(2, 1fr);
+    .gl-trending__card {
+        flex: 0 0 220px;
+    }
+
+    .gl-trending__card-image {
+        height: 110px;
+    }
+
+    .gl-trending__track {
+        padding-left: var(--gl-space-3);
+        padding-right: var(--gl-space-3);
         gap: var(--gl-space-3);
     }
 
-    .gl-stats-bar__num {
-        font-size: var(--gl-font-size-2xl);
+    .gl-trending__nav {
+        display: none;
     }
 
-    .gl-stats-bar__item {
-        padding: var(--gl-space-4) var(--gl-space-3);
+    .gl-trending__fade {
+        width: 32px;
     }
 }
 
@@ -1831,7 +1963,7 @@ body {
     }
 
     /* Disable resize on mobile — touch devices can't drag resize handles */
-    .gl-stats-bar__item,
+    .gl-trending__card,
     .gl-category-tile,
     .gl-hub-tile,
     .gl-gta6-card,

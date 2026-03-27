@@ -276,4 +276,77 @@
         }
     }, { passive: true });
 
+    /* =============================================
+       TRENDING NOW — Scroll Strip
+       ============================================= */
+
+    const trendingTrack = document.querySelector('[data-trending-track]');
+    if (trendingTrack) {
+        const prevBtn = document.querySelector('.gl-trending__arrow--prev');
+        const nextBtn = document.querySelector('.gl-trending__arrow--next');
+        const scrollAmount = 300; // px per click
+        let autoScrollTimer = null;
+        let autoScrollPaused = false;
+
+        // Arrow navigation
+        function scrollTrack(direction) {
+            const offset = direction === 'next' ? scrollAmount : -scrollAmount;
+            trendingTrack.scrollBy({ left: offset, behavior: 'smooth' });
+        }
+
+        if (prevBtn) prevBtn.addEventListener('click', function () { scrollTrack('prev'); });
+        if (nextBtn) nextBtn.addEventListener('click', function () { scrollTrack('next'); });
+
+        // Update arrow disabled states
+        function updateArrows() {
+            if (!prevBtn || !nextBtn) return;
+            const { scrollLeft, scrollWidth, clientWidth } = trendingTrack;
+            prevBtn.disabled = scrollLeft <= 2;
+            nextBtn.disabled = scrollLeft + clientWidth >= scrollWidth - 2;
+        }
+
+        trendingTrack.addEventListener('scroll', updateArrows, { passive: true });
+        updateArrows();
+
+        // Auto-scroll every 4 seconds, pause on hover / touch
+        function startAutoScroll() {
+            if (autoScrollTimer) return;
+            autoScrollTimer = setInterval(function () {
+                if (autoScrollPaused) return;
+                const { scrollLeft, scrollWidth, clientWidth } = trendingTrack;
+                if (scrollLeft + clientWidth >= scrollWidth - 2) {
+                    // Wrap back to start
+                    trendingTrack.scrollTo({ left: 0, behavior: 'smooth' });
+                } else {
+                    trendingTrack.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+                }
+            }, 4000);
+        }
+
+        function pauseAutoScroll() { autoScrollPaused = true; }
+        function resumeAutoScroll() { autoScrollPaused = false; }
+
+        trendingTrack.addEventListener('mouseenter', pauseAutoScroll);
+        trendingTrack.addEventListener('mouseleave', resumeAutoScroll);
+        trendingTrack.addEventListener('touchstart', pauseAutoScroll, { passive: true });
+        trendingTrack.addEventListener('touchend', function () {
+            // Resume after a brief delay so the user can finish scrolling
+            setTimeout(resumeAutoScroll, 3000);
+        });
+
+        // Respect reduced motion
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            startAutoScroll();
+        }
+
+        // Pause when tab is not visible
+        document.addEventListener('visibilitychange', function () {
+            if (document.hidden) {
+                pauseAutoScroll();
+            } else {
+                resumeAutoScroll();
+            }
+        });
+    }
+
 })();
