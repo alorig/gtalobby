@@ -45,9 +45,9 @@ body {
 .gl-hero-accordion__panels {
     display: flex;
     width: 100%;
-    height: 55vh;
-    min-height: 420px;
-    max-height: 620px;
+    height: 60vh;
+    min-height: 440px;
+    max-height: 600px;
 }
 
 /* — Individual Panel — */
@@ -62,10 +62,10 @@ body {
 }
 
 .gl-hero-accordion__panels:hover .gl-hero-panel {
-    flex: 0.6;
+    flex: 0.5;
 }
 .gl-hero-accordion__panels:hover .gl-hero-panel:hover {
-    flex: 3.5;
+    flex: 4;
 }
 
 /* — Color Background — */
@@ -99,7 +99,7 @@ body {
     z-index: 5;
     background-size: cover;
     background-position: center;
-    opacity: 0.12;
+    opacity: 0.18;
     transition: opacity 0.7s cubic-bezier(0.25, 0.8, 0.25, 1),
                 transform 0.7s cubic-bezier(0.25, 0.8, 0.25, 1),
                 filter 0.7s ease;
@@ -147,12 +147,12 @@ body {
 /* — Panel Number — */
 .gl-hero-panel__num {
     font-family: var(--gl-font-mono);
-    font-size: 96px;
+    font-size: 120px;
     font-weight: 600;
     color: rgba(255, 255, 255, 0.04);
     position: absolute;
-    top: 48px;
-    right: 16px;
+    top: 80px;
+    right: 20px;
     z-index: 6;
     line-height: 1;
     transition: all 0.5s ease;
@@ -160,7 +160,7 @@ body {
 }
 .gl-hero-panel:hover .gl-hero-panel__num {
     color: rgba(255, 255, 255, 0.08);
-    font-size: 120px;
+    font-size: 160px;
 }
 
 /* — Collapsed Label — */
@@ -175,7 +175,7 @@ body {
     letter-spacing: 2px;
     text-transform: uppercase;
     position: absolute;
-    bottom: 28px;
+    bottom: 40px;
     left: 50%;
     margin-left: -10px;
     z-index: 10;
@@ -192,7 +192,7 @@ body {
     bottom: 0;
     left: 0;
     right: 0;
-    padding: 28px 28px;
+    padding: 40px 32px;
     z-index: 10;
     display: flex;
     flex-direction: column;
@@ -248,7 +248,7 @@ body {
     letter-spacing: 1px;
     text-transform: uppercase;
     text-decoration: none;
-    padding: 12px 28px;
+    padding: 13px 32px;
     border-radius: var(--gl-radius-md);
     transition: all 0.25s ease;
     width: fit-content;
@@ -288,8 +288,8 @@ body {
    ========================================================================== */
 
 .gl-zone {
-    padding-top: var(--gl-space-8);
-    padding-bottom: var(--gl-space-8);
+    padding-top: var(--gl-space-12);
+    padding-bottom: var(--gl-space-12);
 }
 
 .gl-zone__title {
@@ -313,8 +313,8 @@ body {
     position: absolute;
     bottom: -6px;
     left: 0;
-    width: 72px;
-    height: 4px;
+    width: 80px;
+    height: 3px;
     background: linear-gradient(90deg, var(--gl-color-accent), var(--gl-color-secondary));
     border-radius: 2px;
     box-shadow: 0 0 12px rgba(255, 60, 164, 0.5), 0 0 24px rgba(43, 224, 255, 0.25);
@@ -328,12 +328,10 @@ body {
 /* Alternating section backgrounds for visual rhythm */
 .gl-home-categories {
     background: var(--gl-color-bg-alt);
-    padding-bottom: 0;
 }
 
 .gl-home-hubs {
-    background: var(--gl-color-bg-alt);
-    padding-top: var(--gl-space-6);
+    background: var(--gl-color-bg);
 }
 
 .gl-home-latest {
@@ -394,296 +392,247 @@ body {
 }
 
 /* ==========================================================================
-   TRENDING NOW — AUTO-SCROLLING HORIZONTAL STRIP
+   TRENDING NOW — Horizontal Scroll Strip
+   Replaces static stats bar with engaging, scrollable content cards.
    ========================================================================== */
 
 .gl-trending {
     position: relative;
-    padding: var(--gl-space-6) 0 var(--gl-space-5);
-    background: linear-gradient(
-        180deg,
-        rgba(5, 8, 16, 0.95) 0%,
-        rgba(10, 14, 42, 0.7) 50%,
-        rgba(5, 8, 16, 0.95) 100%
-    );
+    padding: var(--gl-space-5) 0 var(--gl-space-6);
+    background: linear-gradient(180deg, rgba(6,7,20,0.95) 0%, rgba(12,16,48,0.5) 50%, rgba(6,7,20,0.95) 100%);
     overflow: hidden;
 }
 
-/* Ambient glow behind strip */
-.gl-trending::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background:
-        radial-gradient(ellipse 50% 120% at 20% 50%, rgba(255, 44, 152, 0.04) 0%, transparent 60%),
-        radial-gradient(ellipse 50% 120% at 80% 50%, rgba(39, 217, 255, 0.04) 0%, transparent 60%);
-    pointer-events: none;
-}
-
-/* Header row */
+/* — Header row: title + nav arrows — */
 .gl-trending__header {
-    display: flex;
-    align-items: center;
-    gap: var(--gl-space-3);
-    padding: 0 var(--gl-space-5);
     margin-bottom: var(--gl-space-4);
-    position: relative;
-    z-index: 2;
 }
 
-.gl-trending__badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-family: var(--gl-font-mono);
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: #fff;
-    background: linear-gradient(135deg, rgba(255, 44, 152, 0.2), rgba(108, 92, 231, 0.15));
-    border: 1px solid rgba(255, 44, 152, 0.25);
-    border-radius: var(--gl-radius-full);
-    padding: 6px 16px;
-    white-space: nowrap;
-}
-
-.gl-trending__badge::before {
-    content: '';
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: #FF2C98;
-    box-shadow: 0 0 8px #FF2C98, 0 0 16px rgba(255, 44, 152, 0.4);
-    animation: gl-pulse-dot 2s ease-in-out infinite;
-}
-
-@keyframes gl-pulse-dot {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50%      { opacity: 0.5; transform: scale(0.7); }
-}
-
-.gl-trending__rule {
-    flex: 1;
-    height: 1px;
-    background: linear-gradient(90deg, rgba(255, 44, 152, 0.3), rgba(39, 217, 255, 0.1), transparent);
-}
-
-/* Scroll track */
-.gl-trending__track {
-    position: relative;
-    z-index: 1;
-}
-
-/* Fade masks on left / right edges */
-.gl-trending__track::before,
-.gl-trending__track::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 80px;
-    z-index: 3;
-    pointer-events: none;
-}
-.gl-trending__track::before {
-    left: 0;
-    background: linear-gradient(90deg, rgba(5, 8, 16, 0.95), transparent);
-}
-.gl-trending__track::after {
-    right: 0;
-    background: linear-gradient(270deg, rgba(5, 8, 16, 0.95), transparent);
-}
-
-/* Scrolling inner */
-.gl-trending__scroll {
+.gl-trending__header-inner {
     display: flex;
-    gap: 20px;
-    padding: 0 var(--gl-space-5);
-    overflow-x: auto;
-    scroll-behavior: smooth;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-}
-.gl-trending__scroll::-webkit-scrollbar {
-    display: none;
-}
-
-/* Individual card */
-.gl-trending__card {
-    flex: 0 0 280px;
-    height: 160px;
-    position: relative;
-    border-radius: var(--gl-radius-lg);
-    overflow: hidden;
-    text-decoration: none;
-    color: #fff;
-    transition: transform 0.35s cubic-bezier(0.25, 0.8, 0.25, 1),
-                box-shadow 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
-    will-change: transform;
-    border: 1px solid rgba(255, 255, 255, 0.06);
-}
-
-/* Glow border ring on hover */
-.gl-trending__card::before {
-    content: '';
-    position: absolute;
-    inset: -1px;
-    border-radius: inherit;
-    padding: 1px;
-    background: linear-gradient(
-        135deg,
-        rgba(255, 44, 152, 0) 0%,
-        rgba(255, 44, 152, 0) 100%
-    );
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    z-index: 4;
-    transition: background 0.4s ease;
-    pointer-events: none;
-}
-
-.gl-trending__card:hover::before {
-    background: linear-gradient(
-        135deg,
-        rgba(255, 44, 152, 0.6) 0%,
-        rgba(39, 217, 255, 0.4) 50%,
-        rgba(108, 92, 231, 0.6) 100%
-    );
-}
-
-.gl-trending__card:hover {
-    transform: translateY(-4px) scale(1.02);
-    box-shadow:
-        0 12px 40px rgba(0, 0, 0, 0.5),
-        0 0 30px rgba(255, 44, 152, 0.08),
-        0 0 60px rgba(39, 217, 255, 0.05);
-    border-color: transparent;
-}
-
-/* Thumbnail image */
-.gl-trending__thumb {
-    position: absolute;
-    inset: 0;
-    background-size: cover;
-    background-position: center;
-    transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
-}
-.gl-trending__card:hover .gl-trending__thumb {
-    transform: scale(1.08);
-}
-
-/* Dark gradient overlay for text */
-.gl-trending__thumb::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background:
-        linear-gradient(to top, rgba(5, 8, 16, 0.92) 0%, rgba(5, 8, 16, 0.35) 50%, rgba(5, 8, 16, 0.15) 100%),
-        linear-gradient(to right, rgba(5, 8, 16, 0.3) 0%, transparent 70%);
-}
-
-/* Category chip */
-.gl-trending__cat {
-    position: absolute;
-    top: 12px;
-    left: 12px;
-    z-index: 5;
-    font-family: var(--gl-font-mono);
-    font-size: 9px;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: #fff;
-    padding: 4px 10px;
-    border-radius: var(--gl-radius-md);
-    background: rgba(0, 0, 0, 0.55);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-/* Card text content */
-.gl-trending__body {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 14px 16px;
-    z-index: 5;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .gl-trending__title {
     font-family: var(--gl-font-display);
-    font-size: 14px;
+    font-size: var(--gl-font-size-lg);
     font-weight: 700;
-    line-height: 1.3;
-    color: #fff;
+    color: var(--gl-color-text);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+    letter-spacing: -0.01em;
+}
+
+/* Animated live pulse dot */
+.gl-trending__pulse {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--gl-color-accent);
+    display: inline-block;
+    position: relative;
+    flex-shrink: 0;
+}
+
+.gl-trending__pulse::after {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    border: 2px solid var(--gl-color-accent);
+    opacity: 0;
+    animation: gl-pulse-ring 2s ease-out infinite;
+}
+
+@keyframes gl-pulse-ring {
+    0%   { transform: scale(0.8); opacity: 0.6; }
+    100% { transform: scale(1.8); opacity: 0; }
+}
+
+/* — Navigation arrows — */
+.gl-trending__nav {
+    display: flex;
+    gap: 8px;
+}
+
+.gl-trending__arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: var(--gl-radius-md);
+    border: 1px solid var(--gl-color-border);
+    background: var(--gl-color-surface);
+    color: var(--gl-color-text-secondary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.gl-trending__arrow:hover {
+    border-color: var(--gl-color-accent);
+    color: var(--gl-color-accent);
+    background: rgba(255, 44, 152, 0.08);
+}
+
+.gl-trending__arrow:disabled {
+    opacity: 0.3;
+    cursor: default;
+    pointer-events: none;
+}
+
+/* — Scrollable track — */
+.gl-trending__track-wrapper {
+    position: relative;
+    overflow: hidden;
+}
+
+.gl-trending__track {
+    display: flex;
+    gap: var(--gl-space-4);
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding: 4px var(--gl-space-5) var(--gl-space-2);
+    /* Hide scrollbar but keep scroll */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.gl-trending__track::-webkit-scrollbar {
+    display: none;
+}
+
+/* — Individual trending card — */
+.gl-trending__card {
+    flex: 0 0 300px;
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    border-radius: var(--gl-radius-xl);
+    overflow: hidden;
+    background: linear-gradient(145deg, rgba(12,16,48,0.85) 0%, rgba(19,24,62,0.55) 100%);
+    backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+    border: 1px solid rgba(255,255,255,0.06);
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+.gl-trending__card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(255,255,255,0.12);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.4), 0 0 30px color-mix(in srgb, var(--card-accent, #FF2C98) 12%, transparent);
+    text-decoration: none;
+}
+
+/* Card image */
+.gl-trending__card-image {
+    width: 100%;
+    height: 170px;
+    overflow: hidden;
+    position: relative;
+}
+
+.gl-trending__card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.gl-trending__card:hover .gl-trending__card-image img {
+    transform: scale(1.06);
+}
+
+/* Placeholder when no thumbnail */
+.gl-trending__card-image--placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--gl-color-surface) 0%, var(--gl-color-surface-raised) 100%);
+    color: var(--gl-color-text-tertiary);
+}
+
+/* Card body */
+.gl-trending__card-body {
+    padding: var(--gl-space-4) var(--gl-space-5) var(--gl-space-5);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+}
+
+/* Category badge chip */
+.gl-trending__card-badge {
+    display: inline-flex;
+    align-self: flex-start;
+    padding: 2px 8px;
+    border-radius: var(--gl-radius-sm);
+    font-family: var(--gl-font-mono);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    background: color-mix(in srgb, var(--badge-color, var(--gl-color-accent)) 15%, transparent);
+    color: var(--badge-color, var(--gl-color-accent));
+}
+
+.gl-trending__card-title {
+    font-family: var(--gl-font-display);
+    font-size: var(--gl-font-size-sm);
+    font-weight: 700;
+    line-height: 1.35;
+    color: var(--gl-color-text);
     margin: 0;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
-    letter-spacing: -0.01em;
 }
 
-.gl-trending__meta {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-top: 6px;
+.gl-trending__card-date {
     font-family: var(--gl-font-mono);
-    font-size: 10px;
-    color: rgba(255, 255, 255, 0.5);
-    letter-spacing: 0.5px;
+    font-size: 11px;
+    color: var(--gl-color-text-tertiary);
+    letter-spacing: 0.02em;
+    margin-top: auto;
 }
 
-.gl-trending__meta span {
-    display: flex;
-    align-items: center;
-    gap: 4px;
+/* — Gradient fade edges — */
+.gl-trending__fade {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 60px;
+    pointer-events: none;
+    z-index: 2;
 }
 
-/* Auto-scroll animation */
-@keyframes gl-trending-scroll {
-    0%   { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
+.gl-trending__fade--left {
+    left: 0;
+    background: linear-gradient(to right, rgba(6,7,20,0.95), transparent);
 }
 
-.gl-trending__scroll[data-autoscroll="true"] {
-    animation: gl-trending-scroll 45s linear infinite;
-    overflow: hidden;
+.gl-trending__fade--right {
+    right: 0;
+    background: linear-gradient(to left, rgba(6,7,20,0.95), transparent);
 }
 
-.gl-trending__scroll[data-autoscroll="true"]:hover {
-    animation-play-state: paused;
-}
-
-/* Responsive — mobile */
-@media (max-width: 767px) {
-    .gl-trending {
-        padding: var(--gl-space-4) 0;
-    }
-
-    .gl-trending__header {
-        padding: 0 var(--gl-space-4);
-        margin-bottom: var(--gl-space-3);
-    }
-
-    .gl-trending__scroll {
-        gap: 14px;
-        padding: 0 var(--gl-space-4);
-    }
-
+/* — Responsive — */
+@media (max-width: 991px) {
     .gl-trending__card {
         flex: 0 0 240px;
-        height: 140px;
     }
 
-    .gl-trending__track::before,
-    .gl-trending__track::after {
-        width: 40px;
+    .gl-trending__card-image {
+        height: 130px;
     }
 }
 
@@ -697,7 +646,7 @@ body {
     }
 
     .gl-hero-panel {
-        min-height: 200px;
+        min-height: 160px;
         flex: none !important;
     }
 
@@ -712,8 +661,8 @@ body {
         font-size: var(--gl-text-lg);
     }
 
-    .gl-hero-panel:hover .gl-hero-panel__label {
-        opacity: 0;
+    .gl-hero-panel__label {
+        display: none;
     }
 
     .gl-hero-panel__expanded {
@@ -731,7 +680,7 @@ body {
     }
 
     .gl-hero-panel__content {
-        padding: var(--gl-space-5) var(--gl-space-4);
+        padding: var(--gl-space-6) var(--gl-space-5);
     }
 
     .gl-hero-panel__title {
@@ -739,21 +688,43 @@ body {
     }
 }
 
-/* (Legacy .gl-stats-bar removed — replaced by .gl-trending) */
+@media (max-width: 767px) {
+    .gl-trending__card {
+        flex: 0 0 220px;
+    }
+
+    .gl-trending__card-image {
+        height: 110px;
+    }
+
+    .gl-trending__track {
+        padding-left: var(--gl-space-3);
+        padding-right: var(--gl-space-3);
+        gap: var(--gl-space-3);
+    }
+
+    .gl-trending__nav {
+        display: none;
+    }
+
+    .gl-trending__fade {
+        width: 32px;
+    }
+}
 
 /* ==========================================================================
    CATEGORY GRID
    ========================================================================== */
 
 .gl-home-categories__header {
-    margin-bottom: var(--gl-space-2);
+    margin-bottom: var(--gl-space-6);
 }
 
 .gl-zone__subtitle {
     font-size: var(--gl-font-size-base);
     color: var(--gl-color-text-light);
-    margin-top: var(--gl-space-2);
-    margin-bottom: var(--gl-space-6);
+    margin-top: var(--gl-space-3);
+    margin-bottom: var(--gl-space-8);
     letter-spacing: 0.01em;
     line-height: 1.6;
     max-width: 600px;
@@ -762,21 +733,59 @@ body {
 .gl-category-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-auto-flow: row dense;
     gap: var(--gl-space-4);
     container-type: inline-size;
 }
 
-/* Make 2nd and 3rd category tiles span 2 columns for bento box feel */
-.gl-category-tile:nth-child(2),
-.gl-category-tile:nth-child(3) {
+/*
+   BENTO LAYOUT (9 categories, 3-col grid):
+   Row 1: GTA6 — full width (featured)
+   Row 2: Cheats (2 cols left) | Online (1 col right)
+   Row 3: Mods (1 col left)   | Cars   (2 cols right)
+   Row 4: Characters | Locations | Money  (equal thirds)
+   Row 5: News — full width (closer)
+*/
+
+/* Row 2 left: Cheats spans 2 cols */
+.gl-category-tile:nth-child(2) {
     grid-column: span 2;
-    min-height: 180px;
+    min-height: 200px;
+}
+
+/* Row 2 right: Online fills 1 col (dense fills the gap) */
+.gl-category-tile:nth-child(3) {
+    min-height: 200px;
+}
+
+/* Row 3 left: Mods — 1 col */
+.gl-category-tile:nth-child(4) {
+    min-height: 190px;
+}
+
+/* Row 3 right: Cars spans 2 cols (alternating bento pattern) */
+.gl-category-tile:nth-child(5) {
+    grid-column: span 2;
+    min-height: 190px;
+}
+
+/* Row 5: News spans full width */
+.gl-category-tile:nth-child(9) {
+    grid-column: 1 / -1;
+    min-height: 140px;
+    flex-direction: row;
+    align-items: center;
+    padding: var(--gl-space-5) var(--gl-space-8);
+}
+
+.gl-category-tile:nth-child(9) .gl-category-tile__overlay {
+    background: linear-gradient(90deg, rgba(6, 7, 20, 0.88) 0%, rgba(6, 7, 20, 0.5) 60%, rgba(6, 7, 20, 0.2) 100%);
 }
 
 /* Make the first category tile (GTA 6) span full width as a featured tile */
 .gl-category-tile:first-child {
     grid-column: 1 / -1;
-    min-height: 240px;
+    min-height: 260px;
     flex-direction: row;
     align-items: center;
     padding: var(--gl-space-6) var(--gl-space-8);
@@ -816,9 +825,8 @@ body {
     position: relative;
     overflow: hidden;
     min-width: 0;
-    min-height: 140px;
+    min-height: 160px;
     box-shadow: 0 4px 24px rgba(0,0,0,0.25);
-    resize: both;
     container-type: inline-size;
 }
 
@@ -895,8 +903,8 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 44px;
-    height: 44px;
+    width: 48px;
+    height: 48px;
     border-radius: var(--gl-radius-md);
     background-color: color-mix(in srgb, var(--cat-accent) 10%, transparent);
     border: 1px solid color-mix(in srgb, var(--cat-accent) 20%, transparent);
@@ -1092,7 +1100,7 @@ body {
 /* GTA 6 Layout */
 .gl-home-gta6__layout {
     display: grid;
-    grid-template-columns: 1.6fr 1fr;
+    grid-template-columns: 1.55fr 1fr;
     gap: var(--gl-space-6);
     position: relative;
     z-index: 1;
@@ -1391,7 +1399,7 @@ body {
 .gl-hub-tile__inner {
     display: flex;
     flex-direction: column;
-    padding: var(--gl-space-5) var(--gl-space-5) var(--gl-space-5) var(--gl-space-6);
+    padding: var(--gl-space-6) var(--gl-space-6) var(--gl-space-6) calc(var(--gl-space-6) + 4px);
     flex: 1;
 }
 
@@ -1540,7 +1548,9 @@ body {
 .gl-latest-tab--active {
     background: var(--tab-accent) !important;
     color: #fff !important;
-    box-shadow: 0 2px 8px color-mix(in srgb, var(--tab-accent) 30%, transparent);
+    font-weight: var(--gl-font-weight-bold) !important;
+    box-shadow: 0 2px 12px color-mix(in srgb, var(--tab-accent) 40%, transparent), 0 0 24px color-mix(in srgb, var(--tab-accent) 15%, transparent);
+    letter-spacing: 0.01em;
 }
 
 /* Panels */
@@ -1835,8 +1845,15 @@ body {
         grid-template-columns: repeat(2, 1fr);
     }
 
-    .gl-category-tile:first-child {
+    /* On tablet: tile 1 and tile 9 span full, others span 1 col each */
+    .gl-category-tile:first-child,
+    .gl-category-tile:nth-child(9) {
         grid-column: 1 / -1;
+    }
+
+    .gl-category-tile:nth-child(2),
+    .gl-category-tile:nth-child(5) {
+        grid-column: span 1;
     }
 
     /* GTA 6 */
@@ -1929,15 +1946,24 @@ body {
         grid-template-columns: 1fr;
     }
 
+    /* Reset all bento spans to single column on mobile */
     .gl-category-tile:nth-child(2),
-    .gl-category-tile:nth-child(3) {
+    .gl-category-tile:nth-child(3),
+    .gl-category-tile:nth-child(4),
+    .gl-category-tile:nth-child(5),
+    .gl-category-tile:nth-child(9) {
         grid-column: auto;
         min-height: 140px;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: var(--gl-space-4) var(--gl-space-4);
     }
 
     .gl-category-tile:first-child {
         grid-column: auto;
         min-height: 140px;
+        flex-direction: column;
+        align-items: flex-start;
         padding: var(--gl-space-4) var(--gl-space-5);
     }
 
@@ -1990,7 +2016,7 @@ body {
     }
 
     /* Disable resize on mobile — touch devices can't drag resize handles */
-    .gl-stats-bar__item,
+    .gl-trending__card,
     .gl-category-tile,
     .gl-hub-tile,
     .gl-gta6-card,

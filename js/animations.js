@@ -10,6 +10,9 @@
 (function () {
     'use strict';
 
+    /* Mark document as JS-capable — animations only hide content when this class exists */
+    document.documentElement.classList.add('gl-js');
+
     /* Respect reduced motion preferences */
     var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (reducedMotion) {

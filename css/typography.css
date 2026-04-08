@@ -22,7 +22,7 @@ body {
     font-family: var(--gl-font-body);
     font-size: 1rem;
     font-weight: var(--gl-font-weight-regular);
-    line-height: var(--gl-line-height-body);
+    line-height: var(--gl-leading-relaxed);
     color: var(--gl-color-text);
     background-color: var(--gl-color-bg);
 }
@@ -43,12 +43,12 @@ h1, h2, h3, h4, h5, h6,
 
 h1, .gl-h1 {
     font-size: var(--gl-font-size-5xl);
-    letter-spacing: -0.02em;
+    letter-spacing: -0.025em;
 }
 
 h2, .gl-h2 {
     font-size: var(--gl-font-size-4xl);
-    letter-spacing: -0.015em;
+    letter-spacing: -0.02em;
 }
 
 h3, .gl-h3 {
@@ -119,7 +119,7 @@ a:focus {
 .gl-typography a {
     text-decoration: underline;
     text-decoration-thickness: 1px;
-    text-underline-offset: 2px;
+    text-underline-offset: 3px;
 }
 
 .gl-typography a:hover {
@@ -197,8 +197,9 @@ pre {
     overflow-x: auto;
     font-size: var(--gl-font-size-sm);
     line-height: 1.6;
-    background-color: var(--gl-color-text);
-    color: var(--gl-color-bg);
+    background-color: var(--gl-color-surface);
+    color: var(--gl-color-text);
+    border: 1px solid var(--gl-color-divider);
     border-radius: var(--gl-radius-md);
 }
 

@@ -10,11 +10,12 @@
        COLOR SYSTEM — Base (Dark Vice Streets Theme)
        ------------------------------------------------------- */
     --gl-color-bg:              #050810;
-    --gl-color-bg-alt:          #0a0f24;
-    --gl-color-surface:         #0d1230;
+    --gl-color-bg-alt:          #080c1e;
+    --gl-color-surface:         #0e1635;
     --gl-color-surface-glass:   rgba(13, 18, 48, 0.65);
-    --gl-color-surface-raised:  #151a42;
+    --gl-color-surface-raised:  #16204a;
     --gl-color-border:          #252b6e;
+    --gl-color-border-bright:   rgba(255,255,255,0.12);
     --gl-color-divider:         #1b214f;
     --gl-color-overlay:         rgba(17, 22, 53, 0.6);
 
@@ -172,12 +173,12 @@
     --gl-sidebar-left-width: 240px;
     --gl-gutter:            var(--gl-space-8);
 
-    --gl-header-height:     72px;
+    --gl-header-height:     76px;
     --gl-header-height-mobile: 60px;
     --gl-bottom-bar-height: 56px;
 
     /* Grid */
-    --gl-grid-gap:          var(--gl-space-6);
+    --gl-grid-gap:          var(--gl-space-8);
     --gl-card-gap:          var(--gl-space-6);
 
     /* -------------------------------------------------------
@@ -188,6 +189,7 @@
     --gl-radius-lg:    12px;
     --gl-radius-xl:    16px;
     --gl-radius-2xl:   24px;
+    --gl-radius-3xl:   32px;
     --gl-radius-full:  9999px;
 
     --gl-border-width: 1px;
@@ -203,8 +205,8 @@
     --gl-shadow-md:    0 4px 6px rgba(0, 0, 0, 0.05), 0 2px 4px rgba(0, 0, 0, 0.04);
     --gl-shadow-lg:    0 10px 15px rgba(0, 0, 0, 0.06), 0 4px 6px rgba(0, 0, 0, 0.04);
     --gl-shadow-xl:    0 20px 25px rgba(0, 0, 0, 0.08), 0 8px 10px rgba(0, 0, 0, 0.04);
-    --gl-shadow-card:  0 2px 8px rgba(0, 0, 0, 0.06);
-    --gl-shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.1);
+    --gl-shadow-card:  0 4px 20px rgba(0,0,0,0.4), 0 1px 4px rgba(0,0,0,0.3);
+    --gl-shadow-hover: 0 12px 40px rgba(0,0,0,0.5), 0 4px 12px rgba(0,0,0,0.3);
 
     /* Neon Shadows */
     --gl-shadow-neon-sm:     0 0 10px rgba(255, 44, 152, 0.15), 0 0 20px rgba(108, 92, 231, 0.08);
