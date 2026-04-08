@@ -38,8 +38,31 @@ body {
     inset: 0;
     z-index: 2;
     pointer-events: none;
-    opacity: 0.03;
-    background: repeating-conic-gradient(rgba(255,255,255,0.08) 0% 25%, transparent 0% 50%) 0 0 / 4px 4px;
+    opacity: 0.025;
+    background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(255,255,255,0.06) 2px,
+        rgba(255,255,255,0.06) 4px
+    );
+    animation: gl-scanlines 8s linear infinite;
+}
+
+/* Subtle scanline scroll */
+@keyframes gl-scanlines {
+    from { background-position: 0 0; }
+    to   { background-position: 0 40px; }
+}
+
+/* Vignette frame — darkens edges for cinematic depth */
+.gl-hero-accordion::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    background: radial-gradient(ellipse at center, transparent 50%, rgba(5, 8, 16, 0.55) 100%);
 }
 
 .gl-hero-accordion__panels {
@@ -250,22 +273,51 @@ body {
     text-decoration: none;
     padding: 13px 32px;
     border-radius: var(--gl-radius-md);
-    transition: all 0.25s ease;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     width: fit-content;
+    position: relative;
+    overflow: hidden;
+    /* Pulse ring animation */
+    animation: gl-hero-cta-pulse 3s ease-in-out infinite;
 }
+
+/* Shine sweep */
+.gl-hero-panel__cta::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+    transition: left 0.6s ease;
+    pointer-events: none;
+}
+
+.gl-hero-panel:hover .gl-hero-panel__cta::before,
+.gl-hero-panel__cta:hover::before {
+    left: 150%;
+}
+
+@keyframes gl-hero-cta-pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(255,255,255,0.25); }
+    50%       { box-shadow: 0 0 0 8px rgba(255,255,255,0); }
+}
+
 .gl-hero-panel__cta:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 20px rgba(255, 60, 164, 0.2);
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45), 0 0 24px rgba(255, 60, 164, 0.25);
     text-decoration: none;
-    filter: brightness(1.1);
+    filter: brightness(1.12);
+    animation: none;
 }
 .gl-hero-panel__cta svg {
     width: 14px;
     height: 14px;
-    transition: transform 0.2s;
+    transition: transform 0.25s ease;
 }
 .gl-hero-panel__cta:hover svg {
-    transform: translateX(3px);
+    transform: translateX(4px);
 }
 
 /* Per-panel CTA colors */
@@ -300,12 +352,26 @@ body {
     margin: 0 0 var(--gl-space-2);
     position: relative;
     display: inline-block;
-    background: linear-gradient(135deg, #fff 0%, rgba(255, 255, 255, 0.8) 40%, #2BE0FF 80%, #FF3CA4 100%);
+    background: linear-gradient(
+        110deg,
+        #fff 0%,
+        rgba(255,255,255,0.9) 25%,
+        #2BE0FF 55%,
+        #a855f7 75%,
+        #FF3CA4 100%
+    );
+    background-size: 200% 100%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     text-shadow: none;
-    filter: drop-shadow(0 0 12px rgba(39, 217, 255, 0.15));
+    animation: gl-zone-title-shimmer 6s ease-in-out infinite;
+    filter: drop-shadow(0 0 16px rgba(39, 217, 255, 0.2));
+}
+
+@keyframes gl-zone-title-shimmer {
+    0%, 100% { background-position: 0% 50%; }
+    50%       { background-position: 100% 50%; }
 }
 
 .gl-zone__title::after {
@@ -313,16 +379,22 @@ body {
     position: absolute;
     bottom: -6px;
     left: 0;
-    width: 80px;
+    width: 0;
     height: 3px;
-    background: linear-gradient(90deg, var(--gl-color-accent), var(--gl-color-secondary));
+    background: linear-gradient(90deg, var(--gl-color-accent), #a855f7, var(--gl-color-secondary));
     border-radius: 2px;
-    box-shadow: 0 0 12px rgba(255, 60, 164, 0.5), 0 0 24px rgba(43, 224, 255, 0.25);
-    transition: width 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0 0 12px rgba(255, 60, 164, 0.6), 0 0 24px rgba(43, 224, 255, 0.3);
+    transition: width 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* Animate underline in when section enters viewport */
+.gl-zone__title.gl-visible::after,
+.gl-visible .gl-zone__title::after {
+    width: 80px;
 }
 
 .gl-zone:hover .gl-zone__title::after {
-    width: 100px;
+    width: 110px;
 }
 
 /* Alternating section backgrounds for visual rhythm */
@@ -396,11 +468,69 @@ body {
    Replaces static stats bar with engaging, scrollable content cards.
    ========================================================================== */
 
+/* ==========================================================================
+   SEE ALL / VIEW MORE LINK
+   ========================================================================== */
+
+.gl-zone__see-all,
+.gl-home-hubs__see-all,
+.gl-home-latest__see-all {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--gl-font-display);
+    font-size: var(--gl-font-size-sm);
+    font-weight: 600;
+    color: var(--gl-color-secondary);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    position: relative;
+    padding: var(--gl-space-2) var(--gl-space-3);
+    border: 1px solid rgba(43, 224, 255, 0.2);
+    border-radius: var(--gl-radius-full);
+    background: rgba(43, 224, 255, 0.04);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    white-space: nowrap;
+}
+
+.gl-zone__see-all::after,
+.gl-home-hubs__see-all::after,
+.gl-home-latest__see-all::after {
+    content: '→';
+    transition: transform 0.3s ease;
+    display: inline-block;
+}
+
+.gl-zone__see-all:hover,
+.gl-home-hubs__see-all:hover,
+.gl-home-latest__see-all:hover {
+    color: #fff;
+    background: rgba(43, 224, 255, 0.12);
+    border-color: rgba(43, 224, 255, 0.5);
+    box-shadow: 0 0 16px rgba(43, 224, 255, 0.2), 0 0 32px rgba(43, 224, 255, 0.08);
+    text-decoration: none;
+    transform: translateY(-1px);
+}
+
+.gl-zone__see-all:hover::after,
+.gl-home-hubs__see-all:hover::after,
+.gl-home-latest__see-all:hover::after {
+    transform: translateX(3px);
+}
+
 .gl-trending {
     position: relative;
     padding: var(--gl-space-5) 0 var(--gl-space-6);
-    background: linear-gradient(180deg, rgba(6,7,20,0.95) 0%, rgba(12,16,48,0.5) 50%, rgba(6,7,20,0.95) 100%);
+    background: linear-gradient(180deg,
+        rgba(5, 8, 16, 1) 0%,
+        rgba(11, 14, 40, 0.7) 30%,
+        rgba(14, 18, 52, 0.5) 50%,
+        rgba(11, 14, 40, 0.7) 70%,
+        rgba(5, 8, 16, 1) 100%
+    );
     overflow: hidden;
+    border-top: 1px solid rgba(255, 255, 255, 0.04);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
 }
 
 /* — Header row: title + nav arrows — */
@@ -525,10 +655,31 @@ body {
     box-shadow: 0 4px 20px rgba(0,0,0,0.3);
 }
 
+.gl-trending__card {
+    position: relative;
+}
+
+.gl-trending__card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--card-accent, #FF2C98), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 2;
+}
+
+.gl-trending__card:hover::before {
+    opacity: 1;
+}
+
 .gl-trending__card:hover {
-    transform: translateY(-4px);
-    border-color: rgba(255,255,255,0.12);
-    box-shadow: 0 12px 40px rgba(0,0,0,0.4), 0 0 30px color-mix(in srgb, var(--card-accent, #FF2C98) 12%, transparent);
+    transform: translateY(-5px);
+    border-color: color-mix(in srgb, var(--card-accent, #FF2C98) 25%, rgba(255,255,255,0.1));
+    box-shadow: 0 16px 48px rgba(0,0,0,0.45), 0 0 40px color-mix(in srgb, var(--card-accent, #FF2C98) 15%, transparent);
     text-decoration: none;
 }
 
@@ -826,7 +977,9 @@ body {
     overflow: hidden;
     min-width: 0;
     min-height: 160px;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.25);
+    box-shadow: 0 4px 24px rgba(0,0,0,0.3),
+                0 0 0 1px rgba(0,0,0,0.2),
+                0 0 40px color-mix(in srgb, var(--cat-accent, #FF2C98) 5%, transparent);
     container-type: inline-size;
 }
 
@@ -862,15 +1015,18 @@ body {
     left: 0;
     right: 0;
     height: 3px;
-    background-color: var(--cat-accent);
-    transform: scaleX(0);
-    transition: transform var(--gl-transition-fast);
+    background: linear-gradient(90deg, transparent 0%, var(--cat-accent) 30%, color-mix(in srgb, var(--cat-accent) 80%, #fff) 50%, var(--cat-accent) 70%, transparent 100%);
+    box-shadow: 0 0 12px var(--cat-accent), 0 0 24px color-mix(in srgb, var(--cat-accent) 50%, transparent);
+    transform: scaleX(0.3);
+    opacity: 0.5;
+    transition: transform 0.45s cubic-bezier(0.25, 0.8, 0.25, 1),
+                opacity 0.45s ease;
     z-index: 3;
 }
 
 .gl-category-tile:hover {
     transform: translateY(-8px) scale(1.01);
-    box-shadow: 0 20px 60px rgba(0,0,0,0.45), 0 0 50px color-mix(in srgb, var(--cat-accent) 18%, transparent);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.45), 0 0 60px color-mix(in srgb, var(--cat-accent) 22%, transparent);
     text-decoration: none;
     color: inherit;
     border-color: color-mix(in srgb, var(--cat-accent) 40%, transparent);
@@ -878,6 +1034,7 @@ body {
 
 .gl-category-tile:hover::after {
     transform: scaleX(1);
+    opacity: 1;
 }
 
 .gl-category-tile::before {
