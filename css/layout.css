@@ -78,7 +78,7 @@
     position: sticky;
     top: 0;
     z-index: var(--gl-z-header, 300);
-    background: rgba(5, 8, 16, 0.88);
+    background: rgba(4, 6, 16, 0.94);
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
     border-bottom: none;
@@ -118,7 +118,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: var(--gl-header-height, 72px);
+    height: var(--gl-header-height, 76px);
     gap: var(--gl-space-6);
 }
 
@@ -295,7 +295,7 @@
     list-style: none;
     margin: 0;
     padding: 0;
-    gap: var(--gl-space-1);
+    gap: var(--gl-space-2);
 }
 
 .gl-nav__list li {
@@ -304,9 +304,9 @@
 
 .gl-nav__list li a {
     display: block;
-    padding: var(--gl-space-2) var(--gl-space-3);
+    padding: var(--gl-space-2) var(--gl-space-4);
     font-family: var(--gl-font-display);
-    font-size: var(--gl-font-size-sm);
+    font-size: 0.875rem;
     font-weight: var(--gl-font-weight-medium);
     color: var(--gl-color-text-secondary);
     text-decoration: none;
@@ -675,7 +675,7 @@
    ========================================================================== */
 
 .gl-main {
-    padding: var(--gl-space-5) 0 var(--gl-space-8);
+    padding: var(--gl-space-6) 0 var(--gl-space-12);
 }
 
 /* Ensure anchor links clear the sticky header */
@@ -865,7 +865,7 @@
     color: rgba(255, 255, 255, 0.92);
     margin-top: auto;
     position: relative;
-    border-top: 1px solid rgba(255, 44, 152, 0.1);
+    border-top: 1px solid var(--gl-color-divider);
 }
 
 .gl-footer a {
@@ -1116,6 +1116,7 @@
 /* ---- Footer Bottom ---- */
 .gl-footer__bottom {
     padding: var(--gl-space-5) 0 var(--gl-space-6);
+    border-top: 1px solid rgba(255,255,255,0.06);
 }
 
 .gl-footer__bottom-inner {
