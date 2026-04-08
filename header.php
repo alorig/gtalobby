@@ -9,6 +9,7 @@
     <link rel="apple-touch-icon" href="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/apple-touch-icon.png">
     <link rel="manifest" href="<?php echo esc_url( get_template_directory_uri() ); ?>/manifest.json">
     <meta name="theme-color" content="#060714">
+    <meta name="google-site-verification" content="6cOJniW20H_PjmW9lmRpH15flJ50x-yeGEGaHzcZYxk" />
     <?php gtalobby_open_graph_meta(); ?>
     <?php wp_head(); ?>
 </head>
