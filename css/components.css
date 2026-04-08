@@ -330,6 +330,24 @@ select:focus-visible {
         0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
+/* CTA pulse ring — for hero / featured action buttons */
+.gl-btn--cta {
+    animation: gl-cta-pulse 2.8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes gl-cta-pulse {
+    0%, 100% {
+        box-shadow:
+            0 0 0 0 rgba(255, 60, 164, 0.45),
+            0 0 20px rgba(255, 60, 164, 0.2);
+    }
+    50% {
+        box-shadow:
+            0 0 0 10px rgba(255, 60, 164, 0),
+            0 0 30px rgba(255, 60, 164, 0.35);
+    }
+}
+
 .gl-btn:disabled,
 .gl-btn[aria-disabled="true"] {
     opacity: 0.45;
@@ -386,7 +404,6 @@ select:focus-visible {
     transition: transform 0.45s cubic-bezier(0.25, 0.8, 0.25, 1),
                 box-shadow 0.45s cubic-bezier(0.25, 0.8, 0.25, 1),
                 border-color 0.45s cubic-bezier(0.25, 0.8, 0.25, 1);
-    resize: both;
     min-width: 200px;
     min-height: 150px;
     container-type: inline-size;
@@ -413,9 +430,9 @@ select:focus-visible {
 
 .gl-card:hover {
     transform: translateY(-8px) scale(1.015);
-    border-color: rgba(255, 60, 164, 0.25);
+    border-color: color-mix(in srgb, var(--gl-color-accent) 30%, rgba(255,255,255,0.08));
     box-shadow:
-        0 0 24px rgba(255, 60, 164, 0.16),
+        0 0 24px color-mix(in srgb, var(--gl-color-accent) 20%, transparent),
         0 0 50px rgba(108, 92, 231, 0.1),
         0 28px 56px rgba(0, 0, 0, 0.55);
 }
