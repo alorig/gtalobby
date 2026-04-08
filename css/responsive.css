@@ -50,18 +50,12 @@
     /* Feature card stacks */
     .gl-card--feature {
         flex-direction: column;
-        resize: vertical;
         min-width: unset;
     }
 
     .gl-card--feature .gl-card__thumb {
         width: 100%;
         aspect-ratio: 16 / 9;
-    }
-
-    /* Limit resize to vertical on tablet */
-    .gl-card {
-        resize: vertical;
     }
 
     /* Hub hero */
@@ -116,6 +110,11 @@
     .gl-post-nav__item--next {
         text-align: left;
     }
+
+    /* Category grid: 2 columns on tablet */
+    .gl-category-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 /* ==========================================================================
@@ -125,8 +124,13 @@
 @media (max-width: 767px) {
     /* Container padding */
     .gl-container {
-        padding-left: var(--gl-space-3);
-        padding-right: var(--gl-space-3);
+        padding-left: var(--gl-space-4);
+        padding-right: var(--gl-space-4);
+    }
+
+    /* Body line-height improvement */
+    body {
+        line-height: 1.65;
     }
 
     /* Typography */
@@ -254,7 +258,7 @@
     .gl-home-gta6,
     .gl-home-hubs,
     .gl-home-latest {
-        padding: var(--gl-space-6) 0;
+        padding: var(--gl-space-8) 0;
     }
 
     /* Cross-cluster grid */
@@ -299,14 +303,11 @@
         margin-bottom: var(--gl-space-4);
     }
 
-    /* Disable resize on mobile — touch devices can't drag resize handles */
+    /* Ensure cards don't constrain height on mobile */
     .gl-card,
     .gl-card--feature,
     .gl-card--compact,
-    .gl-widget,
-    .gl-sidebar__section,
     .gl-newsletter {
-        resize: none;
         max-height: none;
     }
 

@@ -93,7 +93,7 @@ select:focus-visible {
     -webkit-backdrop-filter: blur(20px) saturate(150%);
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: var(--gl-radius-2xl);
-    padding: var(--gl-space-8) var(--gl-space-6);
+    padding: var(--gl-space-10) var(--gl-space-8);
     margin: var(--gl-space-8) 0;
     box-shadow:
         0 20px 60px rgba(0, 0, 0, 0.3),
@@ -103,7 +103,6 @@ select:focus-visible {
     position: relative;
     overflow: hidden;
     transition: box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-    resize: vertical;
     min-height: 120px;
     container-type: inline-size;
 }
@@ -281,7 +280,7 @@ select:focus-visible {
     padding: var(--gl-space-3) var(--gl-space-5);
     font-family: var(--gl-font-display);
     font-size: var(--gl-font-size-sm);
-    font-weight: var(--gl-font-weight-semibold);
+    font-weight: 600;
     line-height: 1;
     text-decoration: none;
     border: 2px solid transparent;
@@ -382,7 +381,7 @@ select:focus-visible {
     backdrop-filter: blur(12px) saturate(140%);
     -webkit-backdrop-filter: blur(12px) saturate(140%);
     border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: var(--gl-radius-xl);
+    border-radius: var(--gl-radius-2xl);
     overflow: hidden;
     transition: transform 0.45s cubic-bezier(0.25, 0.8, 0.25, 1),
                 box-shadow 0.45s cubic-bezier(0.25, 0.8, 0.25, 1),
@@ -414,11 +413,11 @@ select:focus-visible {
 
 .gl-card:hover {
     transform: translateY(-8px) scale(1.015);
-    border-color: rgba(255, 60, 164, 0.2);
+    border-color: rgba(255, 60, 164, 0.25);
     box-shadow:
-        0 0 20px rgba(255, 60, 164, 0.12),
-        0 0 40px rgba(108, 92, 231, 0.08),
-        0 24px 48px rgba(0, 0, 0, 0.45);
+        0 0 24px rgba(255, 60, 164, 0.16),
+        0 0 50px rgba(108, 92, 231, 0.1),
+        0 28px 56px rgba(0, 0, 0, 0.55);
 }
 
 .gl-card__thumb {
